@@ -1,0 +1,35 @@
+{
+    "--experimental-ternaries": true,
+    "--experimental-operator-position": "end",
+    "--print-width": 80,
+    "tabWidth": 4,
+    "--use-tabs": true,
+    "--no-semi": false,
+    "--single-quote": true,
+    "--quote-props": "as-needed",
+    "--trailing-comma": "all",
+    "--no-bracket-spacing": true,
+    "--object-wrap": "preserve",
+    "--bracket-same-line": false,
+    "--arrow-parens": "always",
+    "--require-pragma": false,
+    "--check-ignore-pragma": true,
+    "--end-of-line": "lf",
+    "--single-attribute-per-line": false,
+    "--semi": true,
+    "": "",
+    "overrides": [
+        {
+            "files": ".prettierrc",
+            "options": {
+                "parser": "json"
+            }
+        },
+        {
+            "files": "*.ts",
+            "options": {
+                "parser": "typescript"
+            }
+        }
+    ]
+}

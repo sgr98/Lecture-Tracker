@@ -1,0 +1,139 @@
+<section id="add-subject-modal" class="add-subject-modal modal">
+    <div
+        id="add-subject-modal-container"
+        class="add-subject-modal-container modal-container"
+    >
+        <div id="add-subject-modal-titlebar" class="modal-titlebar">
+            <h2 id="add-subject-modal-title" class="modal-title">
+                Add New Subject
+            </h2>
+            <span
+                id="close-add-subject-modal"
+                class="modal-close-button"
+                >&times;</span
+            >
+        </div>
+
+        <div
+            id="add-subject-modal-description"
+            class="modal-description"
+        >
+            Placeholder description for adding a new subject. Please
+            fill in the required fields and any additional
+            information as needed.
+        </div>
+
+        <form
+            id="add-subject-modal-form"
+            class="add-subject-modal-form modal-form"
+        >
+            <div
+                id="add-subject-modal-subject-name-field"
+                class="modal-field"
+            >
+                <label
+                    id="add-subject-modal-subject-name-label"
+                    for="add-subject-modal-subject-name-input"
+                    class="modal-field-label"
+                    >Subject Name&#x2a;</label
+                >
+                <input
+                    id="add-subject-modal-subject-name-input"
+                    type="text"
+                    required
+                    placeholder="Enter name of the subject"
+                    class="modal-field-text-input"
+                />
+            </div>
+            <div
+                id="add-subject-modal-subject-code-field"
+                class="modal-field"
+            >
+                <label
+                    id="add-subject-modal-subject-code-label"
+                    class="modal-field-label"
+                    >Subject Code</label
+                >
+                <input
+                    id="add-subject-modal-subject-code-input"
+                    type="text"
+                    required
+                    placeholder="Enter subject code"
+                    class="modal-field-text-input"
+                />
+            </div>
+            <div
+                id="add-subject-modal-subject-description-field"
+                class="modal-field"
+            >
+                <label
+                    id="add-subject-modal-subject-description-label"
+                    class="modal-field-label"
+                    >Subject Description</label
+                >
+                <textarea
+                    id="add-subject-modal-subject-description-input"
+                    name="add-subject-modal-subject-description-input"
+                    rows="5"
+                    maxlength="200"
+                    placeholder="Enter subject description"
+                    class="modal-field-text-textarea"
+                ></textarea>
+            </div>
+            <input
+                id="add-subject-modal-add-button"
+                form="add-subject-modal-form"
+                type="submit"
+                value="Add &#x2b;"
+                class="modal-add-button"
+            />
+        </form>
+    </div>
+</section>
+
+<section id="add-subject-modal" class="{{module_name}}-modal modal"><div id="add-subject-modal-container" class="{{module_name}}-modal-container modal-container"><div id="add-subject-modal-titlebar" class="modal-titlebar">
+    <h2 id="{{module_name}}-modal-title" class="modal-title">
+        Add New Subject 
+    </h2>
+    <span id="close-{{module_name}}-modal" class="modal-close-button">&times;</span>
+</div><div id="add-subject-modal-description" class="modal-description">Fill in the details below to add a new subject.</div><form id="add-subject-modal-form" class="{{module_name}}-modal-form modal-form"><div id="add-subject-modal-subject-name-field" class="modal-field"><label 
+    id="add-subject-modal-subject-name-label"
+    for="{{module_name}}-modal-{{field_name}}-input"
+    class="modal-field-label"
+>Subject Name&#x2a;
+</label><input
+    id="add-subject-modal-subject-name-input"
+    type="text"
+    required
+    placeholder="Enter subject name"
+    class="modal-field-{{field_input_type}}-input"
+/></div><div id="add-subject-modal-subject-code-field" class="modal-field"><label 
+    id="add-subject-modal-subject-code-label"
+    for="{{module_name}}-modal-{{field_name}}-input"
+    class="modal-field-label"
+>Subject Code&#x2a;
+</label><input
+    id="add-subject-modal-subject-code-input"
+    type="text"
+    required
+    placeholder="Enter subject code"
+    class="modal-field-{{field_input_type}}-input"
+/></div><div id="add-subject-modal-subject-description-field" class="modal-field"><label 
+    id="add-subject-modal-subject-description-label"
+    for="{{module_name}}-modal-{{field_name}}-input"
+    class="modal-field-label"
+>Subject Description
+</label><textarea
+    id="add-subject-modal-subject-description-input"
+    name="{{module_name}}-modal-{{field_name}}-input"
+    rows="5"
+    maxlength="400"
+    placeholder="Enter subject description"
+    class="modal-field-text-textarea"
+></textarea></div><input
+    id="add-subject-modal-add-button"
+    form="{{module_name}}-modal-form"
+    type="submit"
+    value="Add &#x2b;"
+    class="modal-add-button"
+/></form></div></section>

@@ -1,0 +1,8 @@
+TODO:
+
+[ ] Decide whether to add event listeners before it attaches to the DOM or not
+[ ] Try to decouple the modules as much as follow
+[ ] Create control flow diagram for the latest functionality
+[✓] Add try catch to necessary functions
+[✓] Change LocalStorageConstants to DBConstants
+[✓] Change insertAdjacentHTML() to appendChild()
