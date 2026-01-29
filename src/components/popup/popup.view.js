@@ -1,24 +1,24 @@
 import {
-    HTMLAttributesConstants,
-    HTMLPopupAttributesConstants,
+	HTMLAttributesConstants,
+	HTMLPopupAttributesConstants,
 } from "../../constants/HTMLConstants.js";
 
 const { BUTTON } = HTMLAttributesConstants;
 
 const {
-    POPUP,
-    POPUP_CONTAINER,
-    POPUP_TITLEBAR,
-    POPUP_TITLE,
-    POPUP_DESCRIPTION,
-    CLOSE,
-    POPUP_CLOSE_BUTTON,
-    CLOSE_TEXT,
+	POPUP,
+	POPUP_CONTAINER,
+	POPUP_TITLEBAR,
+	POPUP_TITLE,
+	POPUP_DESCRIPTION,
+	CLOSE,
+	POPUP_CLOSE_BUTTON,
+	CLOSE_TEXT,
 } = HTMLPopupAttributesConstants;
 
 export const popupView = {
-    generatePopupHTML: (moduleName, index, title, description) => {
-        const popupHTML = `
+	generatePopupHTML: (moduleName, index, title, description) => {
+		const popupHTML = `
             <section id="${moduleName}-${index}-${POPUP}" class="${moduleName}-${POPUP} ${POPUP}">
                 <div
                     id="${moduleName}-${index}-${POPUP_CONTAINER}"
@@ -52,6 +52,6 @@ export const popupView = {
                 </div>
             </section>
         `;
-        return popupHTML;
-    },
+		return popupHTML;
+	},
 };

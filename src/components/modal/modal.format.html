@@ -1,87 +1,87 @@
 <section id="{{module_name}}-modal" class="{{module_name}}-modal modal">
-    <div
-        id="{{module_name}}-modal-container"
-        class="{{module_name}}-modal-container modal-container"
-    >
-        <div id="{{module_name}}-modal-titlebar" class="modal-titlebar">
-            <h2 id="{{module_name}}-modal-title" class="modal-title">
-                {{modal_title}}
-            </h2>
-            <span id="close-{{module_name}}-modal" class="modal-close-button"
-                >&times;</span
-            >
-        </div>
+	<div
+		id="{{module_name}}-modal-container"
+		class="{{module_name}}-modal-container modal-container"
+	>
+		<div id="{{module_name}}-modal-titlebar" class="modal-titlebar">
+			<h2 id="{{module_name}}-modal-title" class="modal-title">
+				{{modal_title}}
+			</h2>
+			<span id="close-{{module_name}}-modal" class="modal-close-button"
+				>&times;</span
+			>
+		</div>
 
-        <div id="{{module_name}}-modal-description" class="modal-description">
-            {{module_description}}
-        </div>
+		<div id="{{module_name}}-modal-description" class="modal-description">
+			{{module_description}}
+		</div>
 
-        <form
-            id="{{module_name}}-modal-form"
-            class="{{module_name}}-modal-form modal-form"
-        >
-            <div
-                id="{{module_name}}-modal-{{field_name}}-field"
-                class="modal-field"
-            >
-                <label
-                    id="{{module_name}}-modal-{{field_name}}-label"
-                    for="{{module_name}}-modal-{{field_name}}-input"
-                    class="modal-field-label"
-                    >{{field_label}}&#x2a;</label
-                >
-                <input
-                    id="{{module_name}}-modal-{{field_name}}-input"
-                    type="{{field_input_type}}"
-                    required
-                    placeholder="{{field_placeholder}}"
-                    class="modal-field-{{field_input_type}}-input"
-                />
-            </div>
-            <!-- example starts -->
-            <div
-                id="{{module_name}}-modal-subject-code-field"
-                class="modal-field"
-            >
-                <label
-                    id="{{module_name}}-modal-subject-code-label"
-                    class="modal-field-label"
-                    >Subject Code</label
-                >
-                <input
-                    id="{{module_name}}-modal-subject-code-input"
-                    type="text"
-                    required
-                    placeholder="Enter subject code"
-                    class="modal-field-text-input"
-                />
-            </div>
-            <!-- example end -->
-            <div
-                id="{{module_name}}-modal-{{field_name}}-field"
-                class="modal-field"
-            >
-                <label
-                    id="{{module_name}}-modal-{{field_name}}-label"
-                    class="modal-field-label"
-                    >Subject Description</label
-                >
-                <textarea
-                    id="{{module_name}}-modal-{{field_name}}-input"
-                    name="{{module_name}}-modal-{{field_name}}-input"
-                    rows="5"
-                    maxlength="200"
-                    placeholder="{{field_placeholder}}"
-                    class="modal-field-text-textarea"
-                ></textarea>
-            </div>
-            <input
-                id="{{module_name}}-modal-add-button"
-                form="{{module_name}}-modal-form"
-                type="submit"
-                value="Add &#x2b;"
-                class="modal-add-button"
-            />
-        </form>
-    </div>
+		<form
+			id="{{module_name}}-modal-form"
+			class="{{module_name}}-modal-form modal-form"
+		>
+			<div
+				id="{{module_name}}-modal-{{field_name}}-field"
+				class="modal-field"
+			>
+				<label
+					id="{{module_name}}-modal-{{field_name}}-label"
+					for="{{module_name}}-modal-{{field_name}}-input"
+					class="modal-field-label"
+					>{{field_label}}&#x2a;</label
+				>
+				<input
+					id="{{module_name}}-modal-{{field_name}}-input"
+					type="{{field_input_type}}"
+					required
+					placeholder="{{field_placeholder}}"
+					class="modal-field-{{field_input_type}}-input"
+				/>
+			</div>
+			<!-- example starts -->
+			<div
+				id="{{module_name}}-modal-subject-code-field"
+				class="modal-field"
+			>
+				<label
+					id="{{module_name}}-modal-subject-code-label"
+					class="modal-field-label"
+					>Subject Code</label
+				>
+				<input
+					id="{{module_name}}-modal-subject-code-input"
+					type="text"
+					required
+					placeholder="Enter subject code"
+					class="modal-field-text-input"
+				/>
+			</div>
+			<!-- example end -->
+			<div
+				id="{{module_name}}-modal-{{field_name}}-field"
+				class="modal-field"
+			>
+				<label
+					id="{{module_name}}-modal-{{field_name}}-label"
+					class="modal-field-label"
+					>Subject Description</label
+				>
+				<textarea
+					id="{{module_name}}-modal-{{field_name}}-input"
+					name="{{module_name}}-modal-{{field_name}}-input"
+					rows="5"
+					maxlength="200"
+					placeholder="{{field_placeholder}}"
+					class="modal-field-text-textarea"
+				></textarea>
+			</div>
+			<input
+				id="{{module_name}}-modal-add-button"
+				form="{{module_name}}-modal-form"
+				type="submit"
+				value="Add &#x2b;"
+				class="modal-add-button"
+			/>
+		</form>
+	</div>
 </section>

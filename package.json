@@ -1,17 +1,17 @@
 {
-    "name": "lecture-tracker",
-    "version": "0.0.1",
-    "description": "Track all your lectures, courses and progress from various sites on one platform.",
-    "main": "index.js",
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
-        "devcss": "sass --watch src/index.scss index.css",
-        "buildcss": "sass src/index.scss index.css"
-    },
-    "author": "Sagar Singh",
-    "license": "MIT",
-    "devDependencies": {
-        "prettier": "3.6.2",
-        "sass": "^1.69.4"
-    }
+	"name": "lecture-tracker",
+	"version": "0.0.1",
+	"description": "Track all your lectures, courses and progress from various sites on one platform.",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"devcss": "sass --watch src/index.scss index.css",
+		"buildcss": "sass src/index.scss index.css"
+	},
+	"author": "Sagar Singh",
+	"license": "MIT",
+	"devDependencies": {
+		"prettier": "3.6.2",
+		"sass": "^1.69.4"
+	}
 }

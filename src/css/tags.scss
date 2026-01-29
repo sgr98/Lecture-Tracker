@@ -7,7 +7,7 @@ HEADERS
 */
 
 * {
-    box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 /* *, *::before, *::after {
@@ -19,32 +19,49 @@ HEADERS
 // }
 
 html {
-  padding: 0;
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-  font-weight: 400;
+	padding: 0;
+	font-family:
+		"Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+		"Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+	font-weight: 400;
 }
 
-body, section, div, span, h1, h2, h3, h4, h5, h6, p, button, form, input, textarea, label {
-    justify-content: center;
-    align-items: center;
-    display: flex;
-    margin: 0;
-    padding: 0;
-    /* z-index: -2; */
+body,
+section,
+div,
+span,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+button,
+form,
+input,
+textarea,
+label {
+	justify-content: center;
+	align-items: center;
+	display: flex;
+	margin: 0;
+	padding: 0;
+	/* z-index: -2; */
 }
 
 body {
-    margin: 0;
-    width: 100vw;
-    height: 100vh;
-    background: red;
+	margin: 0;
+	width: 100vw;
+	height: 100vh;
+	background: red;
 }
 
 .root {
-    flex-direction: column;
-    margin: 0;
-    width: 100vw;
-    height: 100vh;
-    padding: 0;
-    background: darkred;
+	flex-direction: column;
+	margin: 0;
+	width: 100vw;
+	height: 100vh;
+	padding: 0;
+	background: darkred;
 }
