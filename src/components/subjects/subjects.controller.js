@@ -113,18 +113,23 @@ export const subjectModalController = {
 
 	addAddSubjectModalEventListeners: () => {
 		try {
-			const addSubjectButton =
-				document.getElementById(ADD_SUBJECT_BUTTON);
+			subjectModalController.addAddSubjectModalFormSubmitEventListeners();
+			subjectModalController.addAddSubjectButtonEventListener();
+		} catch (error) {
+			console.error(error);
+			console.trace("Current stack trace:");
+			errorPopupController.open(error);
+		}
+	},
+
+	addAddSubjectModalFormSubmitEventListeners: () => {
+		try {
 			const addSubjectModal = document.getElementById(
 				`${ADD_SUBJECT}-${MODAL}`,
 			);
 			const addSubjectForm = document.getElementById(
 				`${ADD_SUBJECT}-${MODAL_FORM}`,
 			);
-
-			addSubjectButton.addEventListener("click", () => {
-				addSubjectModal.style.display = "flex";
-			});
 
 			addSubjectForm.addEventListener("submit", (event) => {
 				event.preventDefault();
@@ -145,6 +150,22 @@ export const subjectModalController = {
 				});
 				addSubjectModal.style.display = "none";
 				addSubjectForm.reset();
+			});
+		} catch (error) {
+			console.error(error);
+			errorPopupController.open(error);
+		}
+	},
+
+	addAddSubjectButtonEventListener: () => {
+		try {
+			const addSubjectButton =
+				document.getElementById(ADD_SUBJECT_BUTTON);
+			const addSubjectModal = document.getElementById(
+				`${ADD_SUBJECT}-${MODAL}`,
+			);
+			addSubjectButton.addEventListener("click", () => {
+				addSubjectModal.style.display = "flex";
 			});
 		} catch (error) {
 			console.error(error);
