@@ -4,7 +4,7 @@ import {
 	HTMLModalAttributesConstants,
 } from "../../constants/HTMLConstants.js";
 import { HTMLInputTagEnum, HTMLInputTypeEnum } from "../../utils/enum.js";
-import { addHTMLStringToDOM } from "../../utils/domManipulation.js";
+import { addHTMLStringToDomById } from "../../utils/domManipulation.js";
 import { modalController } from "../modal/modal.controller.js";
 import { subjectModel } from "./subjects.model.js";
 import { subjectView } from "./subjects.view.js";
@@ -41,7 +41,7 @@ export const subjectController = {
 	addSubjectSectionToStageDOM: () => {
 		try {
 			const subjectSectionHTML = subjectView.generateSubjectSectionHTML();
-			addHTMLStringToDOM(STAGE, subjectSectionHTML);
+			addHTMLStringToDomById(STAGE, subjectSectionHTML);
 		} catch (error) {
 			console.error(error);
 			errorPopupController.open(error);
@@ -54,7 +54,7 @@ export const subjectController = {
 			const subjectListHTML =
 				subjectView.generateSubjectListHTML(subjects);
 			const subjectListContainerId = `${SUBJECT}-${LIST_CONTAINER}`;
-			addHTMLStringToDOM(subjectListContainerId, subjectListHTML);
+			addHTMLStringToDomById(subjectListContainerId, subjectListHTML);
 		} catch (error) {
 			console.error(error);
 			errorPopupController.open(error);

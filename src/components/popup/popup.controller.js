@@ -7,7 +7,7 @@ import {
 	getStringValueOrDefault,
 } from "../../utils/common.js";
 import { HTMLPopupTypeEnum } from "../../utils/enum.js";
-import { addHTMLStringToDOM } from "../../utils/domManipulation.js";
+import { addHTMLStringToDomById } from "../../utils/domManipulation.js";
 import { popupView } from "./popup.view.js";
 
 const { ROOT } = HTMLAttributesConstants;
@@ -32,7 +32,7 @@ export const popupController = {
 		try {
 			index = getStringValueOrDefault(index);
 			popupController.addPopupToRootDOM(
-				`${moduleName}`,
+				moduleName,
 				index,
 				title,
 				description,
@@ -52,7 +52,7 @@ export const popupController = {
 				title,
 				description,
 			);
-			addHTMLStringToDOM(ROOT, alertPopupHTML);
+			addHTMLStringToDomById(ROOT, alertPopupHTML);
 		} catch (error) {
 			console.error(error);
 			errorPopupController.open(error);

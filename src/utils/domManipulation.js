@@ -9,7 +9,7 @@ export const generateElementFromHTMLString = (htmlString) => {
 	}
 };
 
-export const addHTMLElementToDOM = (sourceElementId, element) => {
+export const addHTMLElementToDomById = (sourceElementId, element) => {
 	try {
 		const sourceElement = document.getElementById(sourceElementId);
 		sourceElement.appendChild(element);
@@ -19,10 +19,10 @@ export const addHTMLElementToDOM = (sourceElementId, element) => {
 	}
 };
 
-export const addHTMLStringToDOM = (sourceElementId, htmlString) => {
+export const addHTMLStringToDomById = (sourceElementId, htmlString) => {
 	try {
 		const elementToAdd = generateElementFromHTMLString(htmlString);
-		addHTMLElementToDOM(sourceElementId, elementToAdd);
+		addHTMLElementToDomById(sourceElementId, elementToAdd);
 	} catch (error) {
 		console.error(error);
 		errorPopupController.open(error);

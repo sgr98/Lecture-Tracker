@@ -2,7 +2,7 @@ import {
 	HTMLAttributesConstants,
 	HTMLModalAttributesConstants,
 } from "../../constants/HTMLConstants.js";
-import { addHTMLStringToDOM } from "../../utils/domManipulation.js";
+import { addHTMLStringToDomById } from "../../utils/domManipulation.js";
 import { modalView } from "./modal.view.js";
 
 const { MODAL, CLOSE } = HTMLModalAttributesConstants;
@@ -17,7 +17,7 @@ export const modalController = {
 				description,
 				fields,
 			);
-			addHTMLStringToDOM(ROOT, modalHTML);
+			addHTMLStringToDomById(ROOT, modalHTML);
 			modalController.addCommonModalEventListeners(moduleName);
 		} catch (error) {
 			console.error(error);

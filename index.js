@@ -1,3 +1,7 @@
 import { app } from "./src/app.js";
 
-app.start();
+const startUp = () => {
+	app.start();
+};
+
+startUp();
