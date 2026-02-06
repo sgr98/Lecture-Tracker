@@ -4,7 +4,7 @@ import {
 	getStringValueOrDefault,
 	getArrayValueOrDefault,
 } from "../../utils/common.js";
-import { errorPopupController } from "../popup/popup.controller.js";
+import { handler } from "../../utils/handler.js";
 
 const checkSubject = (subject) => {};
 
@@ -35,8 +35,7 @@ const getCurrentSubjectId = () => {
 			DBSubjectConstants.CURRENT_SUBJECT,
 		);
 	} catch (error) {
-		console.error(error);
-		errorPopupController.open(error);
+		handler.errorWithPopup(error);
 		return null;
 	}
 };
@@ -48,8 +47,7 @@ const setCurrentSubjectId = (id) => {
 			id,
 		);
 	} catch (error) {
-		console.error(error);
-		errorPopupController.open(error);
+		handler.errorWithPopup(error);
 	}
 };
 
@@ -61,8 +59,7 @@ const getSubjects = () => {
 		subjectList = getArrayValueOrDefault(subjectList);
 		return subjectList;
 	} catch (error) {
-		console.error(error);
-		errorPopupController.open(error);
+		handler.errorWithPopup(error);
 		return [];
 	}
 };
@@ -89,8 +86,7 @@ const addSubject = (subject) => {
 		subjects.push(formedSubject);
 		localStorageDB.setJSON(DBSubjectConstants.SUBJECT_LIST, subjects);
 	} catch (error) {
-		console.error(error);
-		errorPopupController.open(error);
+		handler.errorWithPopup(error);
 	}
 };
 

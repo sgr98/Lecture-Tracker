@@ -8,7 +8,7 @@ import { addHTMLStringToDomById } from "../../utils/domManipulation.js";
 import { modalController } from "../modal/modal.controller.js";
 import { subjectModel } from "./subjects.model.js";
 import { subjectView } from "./subjects.view.js";
-import { errorPopupController } from "../popup/popup.controller.js";
+import { handler } from "../../utils/handler.js";
 
 const { STAGE, LIST_CONTAINER } = HTMLAttributesConstants;
 
@@ -43,8 +43,7 @@ export const subjectController = {
 			const subjectSectionHTML = subjectView.generateSubjectSectionHTML();
 			addHTMLStringToDomById(STAGE, subjectSectionHTML);
 		} catch (error) {
-			console.error(error);
-			errorPopupController.open(error);
+			handler.errorWithPopup(error);
 		}
 	},
 
@@ -56,8 +55,7 @@ export const subjectController = {
 			const subjectListContainerId = `${SUBJECT}-${LIST_CONTAINER}`;
 			addHTMLStringToDomById(subjectListContainerId, subjectListHTML);
 		} catch (error) {
-			console.error(error);
-			errorPopupController.open(error);
+			handler.errorWithPopup(error);
 		}
 	},
 };
@@ -106,8 +104,7 @@ export const subjectModalController = {
 			);
 			subjectModalController.addAddSubjectModalEventListeners();
 		} catch (error) {
-			console.error(error);
-			errorPopupController.open(error);
+			handler.errorWithPopup(error);
 		}
 	},
 
@@ -116,9 +113,7 @@ export const subjectModalController = {
 			subjectModalController.addAddSubjectModalFormSubmitEventListeners();
 			subjectModalController.addAddSubjectButtonEventListener();
 		} catch (error) {
-			console.error(error);
-			console.trace("Current stack trace:");
-			errorPopupController.open(error);
+			handler.errorWithPopup(error);
 		}
 	},
 
@@ -152,8 +147,7 @@ export const subjectModalController = {
 				addSubjectForm.reset();
 			});
 		} catch (error) {
-			console.error(error);
-			errorPopupController.open(error);
+			handler.errorWithPopup(error);
 		}
 	},
 
@@ -168,8 +162,7 @@ export const subjectModalController = {
 				addSubjectModal.style.display = "flex";
 			});
 		} catch (error) {
-			console.error(error);
-			errorPopupController.open(error);
+			handler.errorWithPopup(error);
 		}
 	},
 };

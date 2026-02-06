@@ -8,6 +8,7 @@ import {
 } from "../../utils/common.js";
 import { HTMLPopupTypeEnum } from "../../utils/enum.js";
 import { addHTMLStringToDomById } from "../../utils/domManipulation.js";
+import { handler } from "../../utils/handler.js";
 import { popupView } from "./popup.view.js";
 
 const { ROOT } = HTMLAttributesConstants;
@@ -39,8 +40,7 @@ export const popupController = {
 			);
 			popupController.addPopupCloseEventListener(moduleName, index);
 		} catch (error) {
-			console.error(error);
-			errorPopupController.open(error);
+			handler.error(error);
 		}
 	},
 
@@ -54,8 +54,7 @@ export const popupController = {
 			);
 			addHTMLStringToDomById(ROOT, alertPopupHTML);
 		} catch (error) {
-			console.error(error);
-			errorPopupController.open(error);
+			handler.error(error);
 		}
 	},
 
@@ -77,8 +76,7 @@ export const popupController = {
 				}
 			});
 		} catch (error) {
-			console.error(error);
-			errorPopupController.open(error);
+			handler.error(error);
 		}
 	},
 };

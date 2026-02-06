@@ -50,7 +50,7 @@ export const modalView = {
 		}
 		const descriptionHTML = `
             <div
-                id="${moduleName}-${MODAL_DESCRIPTION}" 
+                id="${moduleName}-${MODAL_DESCRIPTION}"
                 class="${MODAL_DESCRIPTION}"
             >
                 ${description}
@@ -136,7 +136,7 @@ export const modalView = {
                 id="${moduleName}-${MODAL}-${name}-${FIELD}"
                 class="${MODAL_FIELD}"
             >
-                <label 
+                <label
                     id="${moduleName}-${MODAL}-${name}-${LABEL}"
                     for="${moduleName}-${MODAL}-${name}-${INPUT}"
                     class="${MODAL_FIELD_LABEL}"
@@ -168,7 +168,7 @@ export const modalView = {
                 class="${moduleName}-${MODAL_FORM} ${MODAL_FORM}"
             >
                 ${formFieldsHTML}
-                
+
                 <input
                     id="${moduleName}-${MODAL_ADD_BUTTON}"
                     form="${moduleName}-${MODAL_FORM}"
@@ -190,7 +190,7 @@ export const modalView = {
 
 		const modalHTML = `
             <section
-                id="${moduleName}-${MODAL}" 
+                id="${moduleName}-${MODAL}"
                 class="${moduleName}-${MODAL} ${MODAL}"
             >
                 <div
@@ -216,7 +216,7 @@ export const modalView = {
                     </div>
                     ${descriptionHTML}
                     ${formHTML}
-                    
+
                 </div>
             </section>
 

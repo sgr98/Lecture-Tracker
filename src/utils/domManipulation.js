@@ -1,11 +1,12 @@
+import { handler } from "./handler.js";
+
 export const generateElementFromHTMLString = (htmlString) => {
 	try {
 		const template = document.createElement("template");
 		template.insertAdjacentHTML("beforeend", htmlString.trim());
 		return template.firstElementChild;
 	} catch (error) {
-		console.error(error);
-		errorPopupController.open(error);
+		handler.errorWithPopup(error);
 	}
 };
 
@@ -14,8 +15,7 @@ export const addHTMLElementToDomById = (sourceElementId, element) => {
 		const sourceElement = document.getElementById(sourceElementId);
 		sourceElement.appendChild(element);
 	} catch (error) {
-		console.error(error);
-		errorPopupController.open(error);
+		handler.errorWithPopup(error);
 	}
 };
 
@@ -24,7 +24,6 @@ export const addHTMLStringToDomById = (sourceElementId, htmlString) => {
 		const elementToAdd = generateElementFromHTMLString(htmlString);
 		addHTMLElementToDomById(sourceElementId, elementToAdd);
 	} catch (error) {
-		console.error(error);
-		errorPopupController.open(error);
+		handler.errorWithPopup(error);
 	}
 };

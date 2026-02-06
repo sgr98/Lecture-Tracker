@@ -4,6 +4,7 @@ import {
 } from "../../constants/HTMLConstants.js";
 import { addHTMLStringToDomById } from "../../utils/domManipulation.js";
 import { modalView } from "./modal.view.js";
+import { handler } from "../../utils/handler.js";
 
 const { MODAL, CLOSE } = HTMLModalAttributesConstants;
 const { ROOT } = HTMLAttributesConstants;
@@ -20,8 +21,7 @@ export const modalController = {
 			addHTMLStringToDomById(ROOT, modalHTML);
 			modalController.addCommonModalEventListeners(moduleName);
 		} catch (error) {
-			console.error(error);
-			errorPopupController.open(error);
+			handler.errorWithPopup(error);
 		}
 	},
 
@@ -42,8 +42,7 @@ export const modalController = {
 				}
 			});
 		} catch (error) {
-			console.error(error);
-			errorPopupController.open(error);
+			handler.errorWithPopup(error);
 		}
 	},
 };

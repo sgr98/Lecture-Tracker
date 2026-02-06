@@ -1,3 +1,5 @@
+import { handler } from "./handler.js";
+
 // NOTE: Will not add getValueOrDefault functions here because
 // getting the actual values is much important and getting null
 // should be handled properly by the caller by having errors thrown to
@@ -8,7 +10,7 @@ export const localStorageDB = {
 			const value = window.localStorage.getItem(key);
 			return value;
 		} catch (error) {
-			console.error(error);
+			handler.errorWithPopup(error);
 			return null;
 		}
 	},
@@ -17,7 +19,7 @@ export const localStorageDB = {
 		try {
 			window.localStorage.setItem(key, value);
 		} catch (error) {
-			console.error(error);
+			handler.errorWithPopup(error);
 		}
 	},
 
@@ -27,7 +29,7 @@ export const localStorageDB = {
 			const value = JSON.parse(valueStr);
 			return value;
 		} catch (error) {
-			console.error(error);
+			handler.errorWithPopup(error);
 			return null;
 		}
 	},
@@ -37,7 +39,7 @@ export const localStorageDB = {
 			const valueStr = JSON.stringify(value);
 			window.localStorage.setItem(key, valueStr);
 		} catch (error) {
-			console.error(error);
+			handler.errorWithPopup(error);
 		}
 	},
 
@@ -46,7 +48,7 @@ export const localStorageDB = {
 			const n = window.localStorage.length;
 			return n;
 		} catch (error) {
-			console.error(error);
+			handler.errorWithPopup(error);
 			return 0;
 		}
 	},
@@ -56,7 +58,7 @@ export const localStorageDB = {
 			const key = window.localStorage.key(i);
 			return key;
 		} catch (error) {
-			console.error(error);
+			handler.errorWithPopup(error);
 			return null;
 		}
 	},
@@ -69,7 +71,7 @@ export const localStorageDB = {
 			}
 			return keys;
 		} catch (error) {
-			console.error(error);
+			handler.errorWithPopup(error);
 			return [];
 		}
 	},
