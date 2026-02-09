@@ -54,6 +54,19 @@ export const HTMLSubjectAttributesConstants = {
 		"Enter subject description",
 };
 
+export const HTMLFieldAttributesConstants = {
+	FIELD: "field",
+	INPUT: "input",
+	LABEL: "label",
+	ADD: "add",
+	CLOSE: "close",
+	FORM: "form",
+	TEXT: "text",
+	TEXTAREA: "textarea",
+	DEFAULT: "default",
+	SYSTEM_DEFAULT: "system-default",
+}
+
 export const HTMLModalAttributesConstants = {
 	MODAL: "modal",
 	MODAL_CONTAINER: "modal-container",
