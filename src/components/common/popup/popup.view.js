@@ -1,7 +1,7 @@
 import {
 	HTMLAttributesConstants,
 	HTMLPopupAttributesConstants,
-} from "../../constants/HTMLConstants.js";
+} from "../../../constants/HTMLConstants.js";
 
 const { BUTTON } = HTMLAttributesConstants;
 

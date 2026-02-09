@@ -1,4 +1,4 @@
-import { errorPopupController } from "../components/popup/popup.controller.js";
+import { errorPopupController } from "../components/common/popup/popup.controller.js";
 
 const STACK_TRACE = "Current stack trace:";
 

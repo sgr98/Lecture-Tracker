@@ -1,14 +1,14 @@
 import {
 	HTMLAttributesConstants,
 	HTMLPopupAttributesConstants,
-} from "../../constants/HTMLConstants.js";
+} from "../../../constants/HTMLConstants.js";
 import {
 	getArrayValueOrDefault,
 	getStringValueOrDefault,
-} from "../../utils/common.js";
-import { HTMLPopupTypeEnum } from "../../utils/enum.js";
-import { addHTMLStringToDomById } from "../../utils/domManipulation.js";
-import { handler } from "../../utils/handler.js";
+} from "../../../utils/common.js";
+import { HTMLPopupTypeEnum } from "../../../utils/enum.js";
+import { addHTMLStringToDomById } from "../../../utils/domManipulation.js";
+import { handler } from "../../../utils/handler.js";
 import { popupView } from "./popup.view.js";
 
 const { ROOT } = HTMLAttributesConstants;

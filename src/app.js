@@ -7,7 +7,7 @@ import {
 	errorPopupController,
 	successPopupController,
 	multiplePopupsController,
-} from "./components/popup/popup.controller.js";
+} from "./components/common/popup/popup.controller.js";
 
 export const app = {
 	init: () => {

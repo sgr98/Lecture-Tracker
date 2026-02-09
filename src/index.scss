@@ -2,8 +2,12 @@
 @import "./css/theme.scss";
 @import "./css/tags.scss";
 @import "./css/common.scss";
-@import "./components/modal/modal.scss";
-@import "./components/popup/popup.scss";
+
+@import "./components/common/input/input.scss";
+@import "./components/common/field/field.scss";
+@import "./components/common/modal/modal.scss";
+@import "./components/common/popup/popup.scss";
+
 @import "./components/topbar/topbar.scss";
 @import "./components/stage/stage.scss";
 @import "./components/subjects/subjects.scss";

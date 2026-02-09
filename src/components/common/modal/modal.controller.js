@@ -1,10 +1,10 @@
 import {
 	HTMLAttributesConstants,
 	HTMLModalAttributesConstants,
-} from "../../constants/HTMLConstants.js";
-import { addHTMLStringToDomById } from "../../utils/domManipulation.js";
-import { modalView } from "./modal.view.js";
-import { handler } from "../../utils/handler.js";
+} from "../../../constants/HTMLConstants.js";
+import { addHTMLStringToDomById } from "../../../utils/domManipulation.js";
+import { handler } from "../../../utils/handler.js";
+import { ModalView } from "./modal.view.js";
 
 const { MODAL, CLOSE } = HTMLModalAttributesConstants;
 const { ROOT } = HTMLAttributesConstants;
@@ -12,12 +12,13 @@ const { ROOT } = HTMLAttributesConstants;
 export const modalController = {
 	addModal: (moduleName, title, description = "", fields = []) => {
 		try {
-			const modalHTML = modalView.generateModalHTML(
+			const modalView = new ModalView(
 				moduleName,
 				title,
 				description,
 				fields,
 			);
+			const modalHTML = modalView.generateHTML();
 			addHTMLStringToDomById(ROOT, modalHTML);
 			modalController.addCommonModalEventListeners(moduleName);
 		} catch (error) {
