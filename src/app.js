@@ -9,28 +9,19 @@ import {
 	multiplePopupsController,
 } from "./components/common/popup/popup.controller.js";
 import { TopbarController } from "./components/topbar/topbar.controller.js";
+import { StageController } from "./components/stage/stage.controller.js";
 
 export class App {
 	constructor() {
-		this._topbarController = new TopbarController("topbar")
+		this._topbarController = new TopbarController("topbar");
+		this._stageController = new StageController("stage");
 	}
 
 	start() {
 		console.log("App started");
 		this._topbarController.addComponent();
+		this._stageController.addComponent();
 		subjectController.init();
-	}
-}
-
-export const app = {
-	init: () => {
-		// To be performed when the app is run for the very first time and no data exists in local storage
-		// Initialize the local storage data
-		// set a flag to indicate first time run
-	},
-
-	start: () => {
-
 
 		// alertPopupController.open(
 		//     "Placeholder test description added here for testing 1",
@@ -75,5 +66,5 @@ export const app = {
 		//             "Placeholder test description added here for testing 5",
 		//     },
 		// ]);
-	},
-};
+	}
+}

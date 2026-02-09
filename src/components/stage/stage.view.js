@@ -1,0 +1,35 @@
+import { View } from "../view.js";
+
+export class StageView extends View {
+	constructor(moduleName) {
+		super(moduleName)
+	}
+
+	generateHTML() {
+		const stageHTML = `
+			<section id="stage" class="stage">
+				<section id="course-container" class="course-container section-container">
+					<div id="add-course-button" class="add-course-button add-button button">
+						Add Course
+					</div>
+					<div
+						id="course-list-container"
+						class="course-list-container list-container"
+					>
+						<div id="course1" class="course-button list-button button">
+							Course 1
+						</div>
+						<div id="course2" class="course-button list-button button">
+							Course 2
+						</div>
+					</div>
+				</section>
+				<section
+					id="lecture-container"
+					class="lecture-container section-container"
+				></section>
+			</section>
+		`;
+		return stageHTML;
+	}
+}
