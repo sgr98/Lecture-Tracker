@@ -23,8 +23,8 @@ export class ModalView extends View {
 	constructor(moduleName, title, description, fields) {
 		super(moduleName);
 		this._title = title;
-		this._description = description;
-		this._fields = fields;
+		this._description = description ?? "";
+		this._fields = fields ?? [];
 	}
 
 	generateHTML() {

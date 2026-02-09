@@ -5,8 +5,8 @@ import {
 } from "../../constants/HTMLConstants.js";
 import { HTMLInputTagEnum, HTMLInputTypeEnum } from "../../utils/enum.js";
 import { addHTMLStringToDomById } from "../../utils/domManipulation.js";
-// import { modalController } from "../modal/modal.controller.js";
-import { modalController } from "../common/modal/modal.controller.js";
+import { ModalController } from "../common/modal/modal.controller.js";
+
 import { subjectModel } from "./subjects.model.js";
 import { subjectView } from "./subjects.view.js";
 import { handler } from "../../utils/handler.js";
@@ -97,12 +97,14 @@ export const subjectModalController = {
 					isRequired: false,
 				},
 			];
-			modalController.addModal(
+
+			const modalController = new ModalController(
 				ADD_SUBJECT,
 				ADD_SUBJECT_MODAL_TITLE,
 				ADD_SUBJECT_MODAL_DESCRIPTION,
 				addSubjectModalFields,
 			);
+			modalController.addComponent();
 			subjectModalController.addAddSubjectModalEventListeners();
 		} catch (error) {
 			handler.errorWithPopup(error);

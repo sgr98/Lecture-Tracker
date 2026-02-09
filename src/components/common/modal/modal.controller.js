@@ -5,29 +5,38 @@ import {
 import { addHTMLStringToDomById } from "../../../utils/domManipulation.js";
 import { handler } from "../../../utils/handler.js";
 import { ModalView } from "./modal.view.js";
+import { Controller } from "../../controller.js";
 
 const { MODAL, CLOSE } = HTMLModalAttributesConstants;
 const { ROOT } = HTMLAttributesConstants;
 
-export const modalController = {
-	addModal: (moduleName, title, description = "", fields = []) => {
+export class ModalController extends Controller {
+	constructor(moduleName, title, description, fields = []) {
+		super(moduleName);
+		this._title = title;
+		this._description = description ?? "";
+		this._fields = fields ?? [];
+	}
+
+	addComponent() {
 		try {
 			const modalView = new ModalView(
-				moduleName,
-				title,
-				description,
-				fields,
+				this._moduleName,
+				this._title,
+				this._description,
+				this._fields,
 			);
 			const modalHTML = modalView.generateHTML();
 			addHTMLStringToDomById(ROOT, modalHTML);
-			modalController.addCommonModalEventListeners(moduleName);
+			this.addEventListeners(this._moduleName);
 		} catch (error) {
 			handler.errorWithPopup(error);
 		}
-	},
+	}
 
-	addCommonModalEventListeners: (moduleName) => {
+	addEventListeners() {
 		try {
+			const moduleName = this._moduleName;
 			const modal = document.getElementById(`${moduleName}-${MODAL}`);
 			const closeModalButton = document.getElementById(
 				`${CLOSE}-${moduleName}-${MODAL}`,
@@ -45,5 +54,5 @@ export const modalController = {
 		} catch (error) {
 			handler.errorWithPopup(error);
 		}
-	},
-};
+	}
+}
