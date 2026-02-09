@@ -1,6 +1,7 @@
-import { app } from "./src/app.js";
+import { App } from "./src/app.js";
 
 const startUp = () => {
+	const app = new App();
 	app.start();
 };
 

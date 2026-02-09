@@ -8,6 +8,19 @@ import {
 	successPopupController,
 	multiplePopupsController,
 } from "./components/common/popup/popup.controller.js";
+import { TopbarController } from "./components/topbar/topbar.controller.js";
+
+export class App {
+	constructor() {
+		this._topbarController = new TopbarController("topbar")
+	}
+
+	start() {
+		console.log("App started");
+		this._topbarController.addComponent();
+		subjectController.init();
+	}
+}
 
 export const app = {
 	init: () => {
@@ -17,8 +30,7 @@ export const app = {
 	},
 
 	start: () => {
-		console.log("App started");
-		subjectController.init();
+
 
 		// alertPopupController.open(
 		//     "Placeholder test description added here for testing 1",
