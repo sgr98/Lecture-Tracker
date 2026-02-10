@@ -17,7 +17,7 @@ export class App {
 	constructor() {
 		this._topbarController = new TopbarController("topbar");
 		this._stageController = new StageController("stage");
-		this._subjectController = new SubjectController("subject")
+		this._subjectController = new SubjectController("subject");
 		this._courseController = new CourseController("course");
 		this._lectureController = new LectureController("lecture");
 	}

@@ -40,24 +40,35 @@ export class SubjectController extends Controller {
 	constructor(moduleName) {
 		super(moduleName);
 		this._subjectSectionView = new SubjectSectionView(moduleName);
-		this._subjectListContainerView = new SubjectListContainerView(
-			moduleName,
-			[],
-		);
+		this._initData();
+
+		this._addSubjectModalController = new AddSubjectModalController();
+		this.addEventListeners();
 	}
 
-	addComponent() {
+	_initData() {
 		try {
-			this._addSubjectSectionComponent();
-			this._addSubjectListContainerComponent();
+			this._subjects = subjectModel.getSubjects();
+			this._subjectListContainerView = new SubjectListContainerView(
+				this._moduleName,
+				this._subjects,
+			);
 		} catch (error) {
 			handler.errorWithPopup(error);
 		}
 	}
 
-	addEventListeners() {
+	// ////////////////////////////////////////////////////////////////////////////////
+	// ////////////////////////////////////////////////////////////////////////////////
+	// Components
+	// ////////////////////////////////////////////////////////////////////////////////
+	// ////////////////////////////////////////////////////////////////////////////////
+
+	addComponent() {
 		try {
-			// ...
+			this._addSubjectSectionComponent();
+			this._addSubjectListContainerComponent();
+			this._addSubjectModalController.addComponent();
 		} catch (error) {
 			handler.errorWithPopup(error);
 		}
@@ -74,8 +85,6 @@ export class SubjectController extends Controller {
 
 	_addSubjectListContainerComponent() {
 		try {
-			const subjects = subjectModel.getSubjects();
-			this._subjectListContainerView.items = subjects;
 			const subjectListHTML =
 				this._subjectListContainerView.generateHTML();
 			const subjectListContainerId = `${SUBJECT}-${LIST_CONTAINER}`;
@@ -84,18 +93,28 @@ export class SubjectController extends Controller {
 			handler.errorWithPopup(error);
 		}
 	}
+
+	// ////////////////////////////////////////////////////////////////////////////////
+	// ////////////////////////////////////////////////////////////////////////////////
+	// Event Listeners
+	// ////////////////////////////////////////////////////////////////////////////////
+	// ////////////////////////////////////////////////////////////////////////////////
+
+	addEventListeners() {
+		try {
+			// ...
+		} catch (error) {
+			handler.errorWithPopup(error);
+		}
+	}
 }
 
-// export class AddSubjectModalController extends ModalController {
+export class AddSubjectModalController extends Controller {
+	constructor(moduleName) {
+		super(moduleName);
+	}
 
-// }
-
-export const subjectModalController = {
-	init: () => {
-		subjectModalController.addAddSubjectModal();
-	},
-
-	addAddSubjectModal: () => {
+	addComponent() {
 		try {
 			const addSubjectModalFields = [
 				{
@@ -126,7 +145,6 @@ export const subjectModalController = {
 					isRequired: false,
 				},
 			];
-
 			const modalController = new ModalController(
 				ADD_SUBJECT,
 				ADD_SUBJECT_MODAL_TITLE,
@@ -134,22 +152,22 @@ export const subjectModalController = {
 				addSubjectModalFields,
 			);
 			modalController.addComponent();
-			subjectModalController.addAddSubjectModalEventListeners();
+			this.addEventListeners();
 		} catch (error) {
 			handler.errorWithPopup(error);
 		}
-	},
+	}
 
-	addAddSubjectModalEventListeners: () => {
+	addEventListeners() {
 		try {
-			subjectModalController.addAddSubjectModalFormSubmitEventListeners();
-			subjectModalController.addAddSubjectButtonEventListener();
+			this._modalFormSubmitEventListeners();
+			this._openAddSubjectModalEventListener();
 		} catch (error) {
 			handler.errorWithPopup(error);
 		}
-	},
+	}
 
-	addAddSubjectModalFormSubmitEventListeners: () => {
+	_modalFormSubmitEventListeners() {
 		try {
 			const addSubjectModal = document.getElementById(
 				`${ADD_SUBJECT}-${MODAL}`,
@@ -181,9 +199,9 @@ export const subjectModalController = {
 		} catch (error) {
 			handler.errorWithPopup(error);
 		}
-	},
+	}
 
-	addAddSubjectButtonEventListener: () => {
+	_openAddSubjectModalEventListener() {
 		try {
 			const addSubjectButton =
 				document.getElementById(ADD_SUBJECT_BUTTON);
@@ -196,5 +214,5 @@ export const subjectModalController = {
 		} catch (error) {
 			handler.errorWithPopup(error);
 		}
-	},
-};
+	}
+}
