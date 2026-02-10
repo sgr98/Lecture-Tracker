@@ -1,5 +1,4 @@
 import { HTMLPopupTypeEnum } from "./utils/enum.js";
-import { subjectController } from "./components/subjects/subjects.controller.js";
 import {
 	alertPopupController,
 	infoPopupController,
@@ -10,11 +9,14 @@ import {
 } from "./components/common/popup/popup.controller.js";
 import { TopbarController } from "./components/topbar/topbar.controller.js";
 import { StageController } from "./components/stage/stage.controller.js";
+import { subjectController } from "./components/subjects/subjects.controller.js";
+import { CourseController } from "./components/courses/courses.controller.js";
 
 export class App {
 	constructor() {
 		this._topbarController = new TopbarController("topbar");
 		this._stageController = new StageController("stage");
+		this._courseController = new CourseController("course");
 	}
 
 	start() {
@@ -22,6 +24,7 @@ export class App {
 		this._topbarController.addComponent();
 		this._stageController.addComponent();
 		subjectController.init();
+		this._courseController.addComponent();
 
 		// alertPopupController.open(
 		//     "Placeholder test description added here for testing 1",
