@@ -8,8 +8,12 @@ import { addHTMLStringToDomById } from "../../utils/domManipulation.js";
 import { ModalController } from "../common/modal/modal.controller.js";
 
 import { subjectModel } from "./subjects.api.js";
-import { subjectView } from "./subjects.view.js";
+import {
+	SubjectSectionView,
+	SubjectListContainerView,
+} from "./subjects.view.js";
 import { handler } from "../../utils/handler.js";
+import { Controller } from "../controller.js";
 
 const { STAGE, LIST_CONTAINER } = HTMLAttributesConstants;
 
@@ -32,34 +36,59 @@ const {
 
 const { MODAL, MODAL_FORM, INPUT } = HTMLModalAttributesConstants;
 
-export const subjectController = {
-	init: () => {
-		subjectController.addSubjectSectionToStageDOM();
-		subjectController.addSubjectListToSubjectSectionDOM();
-		subjectModalController.init();
-	},
+export class SubjectController extends Controller {
+	constructor(moduleName) {
+		super(moduleName);
+		this._subjectSectionView = new SubjectSectionView(moduleName);
+		this._subjectListContainerView = new SubjectListContainerView(
+			moduleName,
+			[],
+		);
+	}
 
-	addSubjectSectionToStageDOM: () => {
+	addComponent() {
 		try {
-			const subjectSectionHTML = subjectView.generateSubjectSectionHTML();
+			this._addSubjectSectionComponent();
+			this._addSubjectListContainerComponent();
+		} catch (error) {
+			handler.errorWithPopup(error);
+		}
+	}
+
+	addEventListeners() {
+		try {
+			// ...
+		} catch (error) {
+			handler.errorWithPopup(error);
+		}
+	}
+
+	_addSubjectSectionComponent() {
+		try {
+			const subjectSectionHTML = this._subjectSectionView.generateHTML();
 			addHTMLStringToDomById(STAGE, subjectSectionHTML);
 		} catch (error) {
 			handler.errorWithPopup(error);
 		}
-	},
+	}
 
-	addSubjectListToSubjectSectionDOM: () => {
+	_addSubjectListContainerComponent() {
 		try {
 			const subjects = subjectModel.getSubjects();
+			this._subjectListContainerView.items = subjects;
 			const subjectListHTML =
-				subjectView.generateSubjectListHTML(subjects);
+				this._subjectListContainerView.generateHTML();
 			const subjectListContainerId = `${SUBJECT}-${LIST_CONTAINER}`;
 			addHTMLStringToDomById(subjectListContainerId, subjectListHTML);
 		} catch (error) {
 			handler.errorWithPopup(error);
 		}
-	},
-};
+	}
+}
+
+// export class AddSubjectModalController extends ModalController {
+
+// }
 
 export const subjectModalController = {
 	init: () => {

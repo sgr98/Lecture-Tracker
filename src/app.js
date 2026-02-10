@@ -9,7 +9,7 @@ import {
 } from "./components/common/popup/popup.controller.js";
 import { TopbarController } from "./components/topbar/topbar.controller.js";
 import { StageController } from "./components/stage/stage.controller.js";
-import { subjectController } from "./components/subjects/subjects.controller.js";
+import { SubjectController } from "./components/subjects/subjects.controller.js";
 import { CourseController } from "./components/courses/courses.controller.js";
 import { LectureController } from "./components/lectures/lectures.controller.js";
 
@@ -17,6 +17,7 @@ export class App {
 	constructor() {
 		this._topbarController = new TopbarController("topbar");
 		this._stageController = new StageController("stage");
+		this._subjectController = new SubjectController("subject")
 		this._courseController = new CourseController("course");
 		this._lectureController = new LectureController("lecture");
 	}
@@ -25,7 +26,7 @@ export class App {
 		console.log("App started");
 		this._topbarController.addComponent();
 		this._stageController.addComponent();
-		subjectController.init();
+		this._subjectController.addComponent();
 		this._courseController.addComponent();
 		this._lectureController.addComponent();
 
