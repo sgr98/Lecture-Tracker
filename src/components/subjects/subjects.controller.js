@@ -7,7 +7,7 @@ import { HTMLInputTagEnum, HTMLInputTypeEnum } from "../../utils/enum.js";
 import { addHTMLStringToDomById } from "../../utils/domManipulation.js";
 import { ModalController } from "../common/modal/modal.controller.js";
 
-import { subjectModel } from "./subjects.model.js";
+import { subjectModel } from "./subjects.api.js";
 import { subjectView } from "./subjects.view.js";
 import { handler } from "../../utils/handler.js";
 
