@@ -11,12 +11,14 @@ import { TopbarController } from "./components/topbar/topbar.controller.js";
 import { StageController } from "./components/stage/stage.controller.js";
 import { subjectController } from "./components/subjects/subjects.controller.js";
 import { CourseController } from "./components/courses/courses.controller.js";
+import { LectureController } from "./components/lectures/lectures.controller.js";
 
 export class App {
 	constructor() {
 		this._topbarController = new TopbarController("topbar");
 		this._stageController = new StageController("stage");
 		this._courseController = new CourseController("course");
+		this._lectureController = new LectureController("lecture");
 	}
 
 	start() {
@@ -25,6 +27,7 @@ export class App {
 		this._stageController.addComponent();
 		subjectController.init();
 		this._courseController.addComponent();
+		this._lectureController.addComponent();
 
 		// alertPopupController.open(
 		//     "Placeholder test description added here for testing 1",
