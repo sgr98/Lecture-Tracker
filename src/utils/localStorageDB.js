@@ -75,4 +75,16 @@ export const localStorageDB = {
 			return [];
 		}
 	},
+
+	deleteKeys: (keys) => {
+		try {
+			for (let i = 0; i < keys.length; i++) {
+				window.localStorage.removeItem(keys[i]);
+			}
+			return keys;
+		} catch (error) {
+			handler.errorWithPopup(error);
+			return [];
+		}
+	},
 };
