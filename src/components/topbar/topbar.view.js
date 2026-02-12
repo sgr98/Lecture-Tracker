@@ -2,7 +2,7 @@ import { View } from "../view.js";
 
 export class TopbarView extends View {
 	constructor(moduleName) {
-		super(moduleName)
+		super(moduleName);
 	}
 
 	generateHTML() {
@@ -16,6 +16,13 @@ export class TopbarView extends View {
 					class="top-title"
 				>
 					Lecture Tracker
+				</div>
+
+				<div
+					id="clear-subjects"
+					class="top-title"
+				>
+					Clear Subjects
 				</div>
 			</section>
 		`;

@@ -57,6 +57,9 @@ const getSubjects = () => {
 			DBSubjectConstants.SUBJECT_LIST,
 		);
 		subjectList = getArrayValueOrDefault(subjectList);
+		subjectList.sort(
+			(a, b) => a[DBSubjectConstants.ORDER] - b[DBSubjectConstants.ORDER],
+		);
 		return subjectList;
 	} catch (error) {
 		handler.errorWithPopup(error);
@@ -85,9 +88,15 @@ const addSubject = (subject) => {
 		);
 		subjects.push(formedSubject);
 		localStorageDB.setJSON(DBSubjectConstants.SUBJECT_LIST, subjects);
+		return formedSubject;
 	} catch (error) {
 		handler.errorWithPopup(error);
+		return null;
 	}
+};
+
+const deleteAll = () => {
+	localStorageDB.deleteKeys([DBSubjectConstants.SUBJECT_LIST]);
 };
 
 export const subjectModel = {
@@ -96,4 +105,5 @@ export const subjectModel = {
 	getSubjects,
 	getSubjectById,
 	addSubject,
+	deleteAll,
 };
