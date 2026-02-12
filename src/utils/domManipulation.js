@@ -1,7 +1,7 @@
 import { isValueNull } from "./common.js";
 import { handler } from "./handler.js";
 
-export const generateElementFromHTMLString = (htmlString) => {
+const generateElementFromHTMLString = (htmlString) => {
 	try {
 		const template = document.createElement("template");
 		template.insertAdjacentHTML("beforeend", htmlString.trim());
@@ -11,7 +11,7 @@ export const generateElementFromHTMLString = (htmlString) => {
 	}
 };
 
-export const addHTMLElementToDomById = (sourceElementId, element) => {
+const addHTMLElementToDomById = (sourceElementId, element) => {
 	try {
 		const sourceElement = document.getElementById(sourceElementId);
 		sourceElement.appendChild(element);
@@ -48,4 +48,10 @@ export const removeElementById = (elementId) => {
 	} catch (error) {
 		handler.errorWithPopup(error);
 	}
+};
+
+export const domManipulation = {
+	addHTMLStringToDomById,
+	isElementInDOM,
+	removeElementById,
 };

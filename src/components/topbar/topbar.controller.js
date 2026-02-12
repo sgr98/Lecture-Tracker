@@ -1,7 +1,7 @@
 import { HTMLAttributesConstants } from "../../constants/HTMLConstants.js";
 import { Controller } from "../controller.js";
 import { TopbarView } from "./topbar.view.js";
-import { addHTMLStringToDomById } from "../../utils/domManipulation.js";
+import { domManipulation } from "../../utils/domManipulation.js";
 import { handler } from "../../utils/handler.js";
 import { subjectAPI } from "../subjects/subjects.api.js";
 
@@ -16,7 +16,7 @@ export class TopbarController extends Controller {
 	addComponent() {
 		try {
 			const topbarHTML = this._topbarView.generateHTML();
-			addHTMLStringToDomById(ROOT, topbarHTML);
+			domManipulation.addHTMLStringToDomById(ROOT, topbarHTML);
 			this.addEventListeners();
 		} catch (error) {
 			handler.errorWithPopup(error);

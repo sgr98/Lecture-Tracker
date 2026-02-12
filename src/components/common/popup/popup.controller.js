@@ -7,7 +7,7 @@ import {
 	getStringValueOrDefault,
 } from "../../../utils/common.js";
 import { HTMLPopupTypeEnum } from "../../../utils/enum.js";
-import { addHTMLStringToDomById } from "../../../utils/domManipulation.js";
+import { domManipulation } from "../../../utils/domManipulation.js";
 import { handler } from "../../../utils/handler.js";
 import { popupView } from "./popup.view.js";
 
@@ -52,7 +52,7 @@ export const popupController = {
 				title,
 				description,
 			);
-			addHTMLStringToDomById(ROOT, alertPopupHTML);
+			domManipulation.addHTMLStringToDomById(ROOT, alertPopupHTML);
 		} catch (error) {
 			handler.error(error);
 		}

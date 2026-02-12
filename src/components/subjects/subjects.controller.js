@@ -5,10 +5,7 @@ import {
 } from "../../constants/HTMLConstants.js";
 import { DBSubjectConstants } from "../../constants/DBConstants.js";
 import { HTMLInputTagEnum, HTMLInputTypeEnum } from "../../utils/enum.js";
-import {
-	addHTMLStringToDomById,
-	removeElementById,
-} from "../../utils/domManipulation.js";
+import { domManipulation } from "../../utils/domManipulation.js";
 import { ModalController } from "../common/modal/modal.controller.js";
 
 import { subjectAPI } from "./subjects.api.js";
@@ -75,8 +72,10 @@ export class SubjectController extends Controller {
 
 	addNewSubjectComponent(subject) {
 		try {
-			removeElementById(NO_SUBJECTS_MESSAGE_ID);
-			removeElementById(`${SUBJECT}-${LIST_INNER_CONTAINER}`);
+			domManipulation.removeElementById(NO_SUBJECTS_MESSAGE_ID);
+			domManipulation.removeElementById(
+				`${SUBJECT}-${LIST_INNER_CONTAINER}`,
+			);
 			this._addSubjectListContainerComponent();
 		} catch (error) {
 			handler.errorWithPopup(error);
@@ -86,7 +85,7 @@ export class SubjectController extends Controller {
 	_addSubjectSectionComponent() {
 		try {
 			const subjectSectionHTML = this._subjectSectionView.generateHTML();
-			addHTMLStringToDomById(STAGE, subjectSectionHTML);
+			domManipulation.addHTMLStringToDomById(STAGE, subjectSectionHTML);
 		} catch (error) {
 			handler.errorWithPopup(error);
 		}
@@ -99,7 +98,10 @@ export class SubjectController extends Controller {
 				this._subjects,
 			);
 			const subjectListContainerId = `${SUBJECT}-${LIST_CONTAINER}`;
-			addHTMLStringToDomById(subjectListContainerId, subjectListHTML);
+			domManipulation.addHTMLStringToDomById(
+				subjectListContainerId,
+				subjectListHTML,
+			);
 		} catch (error) {
 			handler.errorWithPopup(error);
 		}

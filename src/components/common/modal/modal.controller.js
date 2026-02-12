@@ -4,7 +4,7 @@ import {
 } from "../../../constants/HTMLConstants.js";
 import { ModalView } from "./modal.view.js";
 import { Controller } from "../../controller.js";
-import { addHTMLStringToDomById } from "../../../utils/domManipulation.js";
+import { domManipulation } from "../../../utils/domManipulation.js";
 import { handler } from "../../../utils/handler.js";
 import {
 	isInputValueNullOrEmpty,
@@ -32,7 +32,7 @@ export class ModalController extends Controller {
 				this._fields,
 			);
 			const modalHTML = modalView.generateHTML();
-			addHTMLStringToDomById(ROOT, modalHTML);
+			domManipulation.addHTMLStringToDomById(ROOT, modalHTML);
 			this.addEventListeners(this._moduleName);
 		} catch (error) {
 			handler.errorWithPopup(error);
