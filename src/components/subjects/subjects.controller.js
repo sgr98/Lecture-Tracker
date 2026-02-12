@@ -3,11 +3,15 @@ import {
 	HTMLSubjectAttributesConstants,
 	HTMLModalAttributesConstants,
 } from "../../constants/HTMLConstants.js";
+import { DBSubjectConstants } from "../../constants/DBConstants.js";
 import { HTMLInputTagEnum, HTMLInputTypeEnum } from "../../utils/enum.js";
-import { addHTMLStringToDomById } from "../../utils/domManipulation.js";
+import {
+	addHTMLStringToDomById,
+	removeElementById,
+} from "../../utils/domManipulation.js";
 import { ModalController } from "../common/modal/modal.controller.js";
 
-import { subjectModel } from "./subjects.api.js";
+import { subjectAPI } from "./subjects.api.js";
 import {
 	SubjectSectionView,
 	SubjectListContainerView,
@@ -15,7 +19,7 @@ import {
 import { handler } from "../../utils/handler.js";
 import { Controller } from "../controller.js";
 
-const { STAGE, LIST_CONTAINER } = HTMLAttributesConstants;
+const { STAGE, LIST_CONTAINER, LIST_INNER_CONTAINER } = HTMLAttributesConstants;
 
 const {
 	SUBJECT,
@@ -32,30 +36,25 @@ const {
 	ADD_SUBJECT_MODAL_SUBJECT_CODE_FIELD_PLACEHOLDER,
 	ADD_SUBJECT_MODAL_SUBJECT_DESCRIPTION_FIELD_LABEL,
 	ADD_SUBJECT_MODAL_SUBJECT_DESCRIPTION_FIELD_PLACEHOLDER,
+	NO_SUBJECTS_MESSAGE_ID,
 } = HTMLSubjectAttributesConstants;
 
-const { MODAL, MODAL_FORM, INPUT } = HTMLModalAttributesConstants;
+const { MODAL } = HTMLModalAttributesConstants;
 
 export class SubjectController extends Controller {
 	constructor(moduleName) {
 		super(moduleName);
 		this._subjectSectionView = new SubjectSectionView(moduleName);
-		this._initData();
-
-		this._addSubjectModalController = new AddSubjectModalController();
-		this.addEventListeners();
-	}
-
-	_initData() {
-		try {
-			this._subjects = subjectModel.getSubjects();
-			this._subjectListContainerView = new SubjectListContainerView(
-				this._moduleName,
-				this._subjects,
-			);
-		} catch (error) {
-			handler.errorWithPopup(error);
-		}
+		this._subjects = subjectAPI.getSubjects();
+		this._subjectListContainerView = new SubjectListContainerView(
+			this._moduleName,
+		);
+		this._addSubjectModalController = new AddSubjectModalController(
+			"AddSubjectModal",
+			(subject) => {
+				this._addSubjectCallback(subject);
+			},
+		);
 	}
 
 	// ////////////////////////////////////////////////////////////////////////////////
@@ -74,6 +73,16 @@ export class SubjectController extends Controller {
 		}
 	}
 
+	addNewSubjectComponent(subject) {
+		try {
+			removeElementById(NO_SUBJECTS_MESSAGE_ID);
+			removeElementById(`${SUBJECT}-${LIST_INNER_CONTAINER}`);
+			this._addSubjectListContainerComponent();
+		} catch (error) {
+			handler.errorWithPopup(error);
+		}
+	}
+
 	_addSubjectSectionComponent() {
 		try {
 			const subjectSectionHTML = this._subjectSectionView.generateHTML();
@@ -85,10 +94,22 @@ export class SubjectController extends Controller {
 
 	_addSubjectListContainerComponent() {
 		try {
-			const subjectListHTML =
-				this._subjectListContainerView.generateHTML();
+			this._subjects = subjectAPI.getSubjects();
+			const subjectListHTML = this._subjectListContainerView.generateHTML(
+				this._subjects,
+			);
 			const subjectListContainerId = `${SUBJECT}-${LIST_CONTAINER}`;
 			addHTMLStringToDomById(subjectListContainerId, subjectListHTML);
+		} catch (error) {
+			handler.errorWithPopup(error);
+		}
+	}
+
+	_addSubjectCallback(newSubject) {
+		try {
+			const subject = subjectAPI.addSubject(newSubject);
+			this._subjects = subjectAPI.getSubjects();
+			this.addNewSubjectComponent(subject);
 		} catch (error) {
 			handler.errorWithPopup(error);
 		}
@@ -109,10 +130,17 @@ export class SubjectController extends Controller {
 	}
 }
 
-export class AddSubjectModalController extends Controller {
-	constructor(moduleName) {
+class AddSubjectModalController extends Controller {
+	constructor(moduleName, addSubjectCallback) {
 		super(moduleName);
+		this._addSubjectCallback = addSubjectCallback;
 	}
+
+	// ////////////////////////////////////////////////////////////////////////////////
+	// ////////////////////////////////////////////////////////////////////////////////
+	// Components
+	// ////////////////////////////////////////////////////////////////////////////////
+	// ////////////////////////////////////////////////////////////////////////////////
 
 	addComponent() {
 		try {
@@ -125,6 +153,7 @@ export class AddSubjectModalController extends Controller {
 					inputTag: HTMLInputTagEnum.Input,
 					inputType: HTMLInputTypeEnum.Text,
 					isRequired: true,
+					mapTo: DBSubjectConstants.SUBJECT_NAME,
 				},
 				{
 					name: ADD_SUBJECT_MODAL_SUBJECT_CODE_FIELD,
@@ -134,6 +163,7 @@ export class AddSubjectModalController extends Controller {
 					inputTag: HTMLInputTagEnum.Input,
 					inputType: HTMLInputTypeEnum.Text,
 					isRequired: true,
+					mapTo: DBSubjectConstants.SUBJECT_CODE,
 				},
 				{
 					name: ADD_SUBJECT_MODAL_SUBJECT_DESCRIPTION_FIELD,
@@ -143,6 +173,7 @@ export class AddSubjectModalController extends Controller {
 					inputTag: HTMLInputTagEnum.Textarea,
 					inputType: HTMLInputTypeEnum.Text,
 					isRequired: false,
+					mapTo: DBSubjectConstants.SUBJECT_DESCRIPTION,
 				},
 			];
 			const modalController = new ModalController(
@@ -150,6 +181,9 @@ export class AddSubjectModalController extends Controller {
 				ADD_SUBJECT_MODAL_TITLE,
 				ADD_SUBJECT_MODAL_DESCRIPTION,
 				addSubjectModalFields,
+				(fields) => {
+					this._addSubjectModalCallback(fields);
+				},
 			);
 			modalController.addComponent();
 			this.addEventListeners();
@@ -158,44 +192,29 @@ export class AddSubjectModalController extends Controller {
 		}
 	}
 
-	addEventListeners() {
+	_addSubjectModalCallback(formFields) {
 		try {
-			this._modalFormSubmitEventListeners();
-			this._openAddSubjectModalEventListener();
+			let newSubject = {};
+			formFields.forEach((field) => {
+				const { value, mapTo } = field;
+				newSubject[mapTo] = value;
+			});
+			newSubject[DBSubjectConstants.COURSE_LIST] = [];
+			this._addSubjectCallback(newSubject);
 		} catch (error) {
 			handler.errorWithPopup(error);
 		}
 	}
 
-	_modalFormSubmitEventListeners() {
-		try {
-			const addSubjectModal = document.getElementById(
-				`${ADD_SUBJECT}-${MODAL}`,
-			);
-			const addSubjectForm = document.getElementById(
-				`${ADD_SUBJECT}-${MODAL_FORM}`,
-			);
+	// ////////////////////////////////////////////////////////////////////////////////
+	// ////////////////////////////////////////////////////////////////////////////////
+	// Event Listeners
+	// ////////////////////////////////////////////////////////////////////////////////
+	// ////////////////////////////////////////////////////////////////////////////////
 
-			addSubjectForm.addEventListener("submit", (event) => {
-				event.preventDefault();
-				const subjectName = document.getElementById(
-					`${ADD_SUBJECT}-${MODAL}-${ADD_SUBJECT_MODAL_SUBJECT_NAME_FIELD}-${INPUT}`,
-				).value;
-				const subjectCode = document.getElementById(
-					`${ADD_SUBJECT}-${MODAL}-${ADD_SUBJECT_MODAL_SUBJECT_CODE_FIELD}-${INPUT}`,
-				).value;
-				const subjectDescription = document.getElementById(
-					`${ADD_SUBJECT}-${MODAL}-${ADD_SUBJECT_MODAL_SUBJECT_DESCRIPTION_FIELD}-${INPUT}`,
-				).value;
-				subjectModel.addSubject({
-					subjectName,
-					subjectCode,
-					subjectDescription,
-					courseList: [],
-				});
-				addSubjectModal.style.display = "none";
-				addSubjectForm.reset();
-			});
+	addEventListeners() {
+		try {
+			this._openAddSubjectModalEventListener();
 		} catch (error) {
 			handler.errorWithPopup(error);
 		}

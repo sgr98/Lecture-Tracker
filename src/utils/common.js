@@ -1,3 +1,5 @@
+import { HTMLInputTypeEnum } from "./enum.js";
+
 export const isValueNull = (value) => {
 	return value === null || value === undefined;
 };
@@ -40,4 +42,45 @@ export const getArrayValueOrDefault = (arr) => {
 export const getObjectValueOrDefault = (obj) => {
 	const val = isObjectNullOrEmpty(obj) ? DEFAULT_OBJECT : obj;
 	return { ...val };
+};
+
+export const isInputValueNullOrEmpty = (value, inputType) => {
+	if (isValueNull(value)) return true;
+	switch (inputType) {
+		case HTMLInputTypeEnum.Text:
+		case HTMLInputTypeEnum.Password:
+		case HTMLInputTypeEnum.Email:
+		case HTMLInputTypeEnum.Month:
+		case HTMLInputTypeEnum.Week:
+		case HTMLInputTypeEnum.Url:
+		case HTMLInputTypeEnum.Search:
+		case HTMLInputTypeEnum.Tel:
+		case HTMLInputTypeEnum.Color:
+			return value === "";
+		default:
+			return false;
+	}
+};
+
+export const getDefaultInputValue = (inputType) => {
+	switch (inputType) {
+		case HTMLInputTypeEnum.Text:
+		case HTMLInputTypeEnum.Password:
+		case HTMLInputTypeEnum.Email:
+		case HTMLInputTypeEnum.Month:
+		case HTMLInputTypeEnum.Week:
+		case HTMLInputTypeEnum.Url:
+		case HTMLInputTypeEnum.Search:
+		case HTMLInputTypeEnum.Tel:
+		case HTMLInputTypeEnum.Color:
+			return "";
+		case HTMLInputTypeEnum.Number:
+			return -1;
+		case HTMLInputTypeEnum.Date:
+		case HTMLInputTypeEnum.Datetime_Local:
+		case HTMLInputTypeEnum.Time:
+			return new Date();
+		default:
+			return "";
+	}
 };

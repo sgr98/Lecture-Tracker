@@ -4,7 +4,7 @@ import {
 } from "../../constants/HTMLConstants.js";
 import { isArrayNullOrEmpty } from "../../utils/common.js";
 import { DBSubjectConstants } from "../../constants/DBConstants.js";
-import { View, ListView } from "../view.js";
+import { View } from "../view.js";
 
 const {
 	SECTION_CONTAINER,
@@ -53,22 +53,27 @@ export class SubjectSectionView extends View {
 	}
 }
 
-export class SubjectListContainerView extends ListView {
-	constructor(modulueName, subjectList) {
-		super(modulueName, subjectList);
+export class SubjectListContainerView extends View {
+	constructor(modulueName) {
+		super(modulueName);
 	}
 
-	generateHTML() {
-		if (isArrayNullOrEmpty(this._items)) {
+	generateHTML(subjects) {
+		if (isArrayNullOrEmpty(subjects)) {
 			return this._generateNoSubjectsMessageHTML();
 		}
-		const subjectItemsHTML = this._generateSubjectItemsHTML();
+		const subjectItemsHTML = this._generateSubjectItemsHTML(subjects);
 		const subjectListHTML = this._generateSubjectListHTML(subjectItemsHTML);
 		return subjectListHTML;
 	}
 
-	_generateSubjectItemsHTML() {
-		const subjectItemsHTML = this._items
+	// NOT BEING USED CURRENTLY
+	generateNewSubjectItemHTML(newSubject) {
+		return this._generateSubjectListItemHTML(newSubject);
+	}
+
+	_generateSubjectItemsHTML(subjects) {
+		const subjectItemsHTML = subjects
 			.map(this._generateSubjectListItemHTML)
 			.join("");
 		return subjectItemsHTML;

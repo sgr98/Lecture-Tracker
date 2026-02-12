@@ -1,3 +1,4 @@
+import { isValueNull } from "./common.js";
 import { handler } from "./handler.js";
 
 export const generateElementFromHTMLString = (htmlString) => {
@@ -23,6 +24,27 @@ export const addHTMLStringToDomById = (sourceElementId, htmlString) => {
 	try {
 		const elementToAdd = generateElementFromHTMLString(htmlString);
 		addHTMLElementToDomById(sourceElementId, elementToAdd);
+	} catch (error) {
+		handler.errorWithPopup(error);
+	}
+};
+
+export const isElementInDOM = (elementId) => {
+	try {
+		const element = document.getElementById(elementId);
+		return !isValueNull(element);
+	} catch (error) {
+		handler.errorWithPopup(error);
+		return false;
+	}
+};
+
+export const removeElementById = (elementId) => {
+	try {
+		const element = document.getElementById(elementId);
+		if (!isValueNull(element)) {
+			element.remove();
+		}
 	} catch (error) {
 		handler.errorWithPopup(error);
 	}

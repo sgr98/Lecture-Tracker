@@ -99,7 +99,7 @@ const deleteAll = () => {
 	localStorageDB.deleteKeys([DBSubjectConstants.SUBJECT_LIST]);
 };
 
-export const subjectModel = {
+export const subjectAPI = {
 	getCurrentSubjectId,
 	setCurrentSubjectId,
 	getSubjects,

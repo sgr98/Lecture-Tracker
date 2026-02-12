@@ -2,20 +2,25 @@ import {
 	HTMLAttributesConstants,
 	HTMLModalAttributesConstants,
 } from "../../../constants/HTMLConstants.js";
-import { addHTMLStringToDomById } from "../../../utils/domManipulation.js";
-import { handler } from "../../../utils/handler.js";
 import { ModalView } from "./modal.view.js";
 import { Controller } from "../../controller.js";
+import { addHTMLStringToDomById } from "../../../utils/domManipulation.js";
+import { handler } from "../../../utils/handler.js";
+import {
+	isInputValueNullOrEmpty,
+	getDefaultInputValue,
+} from "../../../utils/common.js";
 
-const { MODAL, CLOSE } = HTMLModalAttributesConstants;
+const { MODAL, MODAL_FORM, CLOSE, INPUT } = HTMLModalAttributesConstants;
 const { ROOT } = HTMLAttributesConstants;
 
 export class ModalController extends Controller {
-	constructor(moduleName, title, description, fields = []) {
+	constructor(moduleName, title, description, fields, formSubmitCallback) {
 		super(moduleName);
 		this._title = title;
 		this._description = description ?? "";
 		this._fields = fields ?? [];
+		this._formSubmitCallback = formSubmitCallback;
 	}
 
 	addComponent() {
@@ -36,6 +41,15 @@ export class ModalController extends Controller {
 
 	addEventListeners() {
 		try {
+			this._closeModalEventListener();
+			this._modalFormSubmitEventListeners();
+		} catch (error) {
+			handler.errorWithPopup(error);
+		}
+	}
+
+	_closeModalEventListener() {
+		try {
 			const moduleName = this._moduleName;
 			const modal = document.getElementById(`${moduleName}-${MODAL}`);
 			const closeModalButton = document.getElementById(
@@ -51,6 +65,54 @@ export class ModalController extends Controller {
 					modal.style.display = "none";
 				}
 			});
+		} catch (error) {
+			handler.errorWithPopup(error);
+		}
+	}
+
+	_modalFormSubmitEventListeners() {
+		try {
+			const moduleName = this._moduleName;
+			const modal = document.getElementById(`${moduleName}-${MODAL}`);
+			const modalForm = document.getElementById(
+				`${moduleName}-${MODAL_FORM}`,
+			);
+
+			modalForm.addEventListener("submit", (event) => {
+				event.preventDefault();
+				let formFields = this._fields.map((field) => {
+					return this._extractFormValues(field);
+				});
+				this._formSubmitCallback(formFields);
+
+				modal.style.display = "none";
+				modalForm.reset();
+			});
+		} catch (error) {
+			handler.errorWithPopup(error);
+		}
+	}
+
+	_extractFormValues(field) {
+		try {
+			const moduleName = this._moduleName;
+			const { name, inputType, isRequired, mapTo } = field;
+			const fieldElement = document.getElementById(
+				`${moduleName}-${MODAL}-${name}-${INPUT}`,
+			);
+
+			let value = fieldElement?.value;
+			if (isRequired && isInputValueNullOrEmpty(value, inputType)) {
+				throw new Error("Some of the required fields are empty.");
+			}
+			value = value ?? getDefaultInputValue(inputType);
+
+			const formField = {
+				name,
+				value,
+				mapTo,
+			};
+			return formField;
 		} catch (error) {
 			handler.errorWithPopup(error);
 		}

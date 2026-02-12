@@ -7,9 +7,8 @@ export class View {
 }
 
 export class ListView extends View {
-	constructor(moduleName, items) {
+	constructor(moduleName) {
 		super(moduleName);
-		this._items = items;
 	}
 
 	get items() {
@@ -22,9 +21,9 @@ export class ListView extends View {
 
 	generateHTML() {}
 
-	addItem() {}
+	addItemHTML() {}
 
-	modifyItem() {}
+	editItemHTML() {}
 
-	deleteItem() {}
+	deleteItemHTML() {}
 }
