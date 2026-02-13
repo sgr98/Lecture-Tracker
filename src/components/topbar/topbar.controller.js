@@ -3,7 +3,7 @@ import { Controller } from "../controller.js";
 import { TopbarView } from "./topbar.view.js";
 import { domManipulation } from "../../utils/domManipulation.js";
 import { handler } from "../../utils/handler.js";
-import { subjectAPI } from "../subjects/subjects.api.js";
+import { SubjectAPI } from "../subjects/subjects.api.js";
 
 const { ROOT } = HTMLAttributesConstants;
 
@@ -33,11 +33,10 @@ export class TopbarController extends Controller {
 
 	_clearSubjectsEventListener() {
 		try {
-			console.log("Clearin All Subjects");
 			const clearSubjectsButton =
 				document.getElementById("clear-subjects");
 			clearSubjectsButton.addEventListener("click", () => {
-				subjectAPI.deleteAll();
+				SubjectAPI.deleteAllSubjects();
 			});
 		} catch (error) {
 			handler.errorWithPopup(error);

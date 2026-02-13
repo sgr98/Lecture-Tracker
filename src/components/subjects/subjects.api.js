@@ -1,101 +1,93 @@
 import { DBSubjectConstants } from "../../constants/DBConstants.js";
 import { localStorageDB } from "../../utils/localStorageDB.js";
 import { handler } from "../../utils/handler.js";
+import { Subject } from "../../models/subject.js";
 
-const checkSubject = (subject) => {};
+export class SubjectAPI {
+	constructor() {}
 
-const createSubject = (
-	subjectName,
-	subjectCode,
-	subjectDescription = "",
-	courseList = [],
-	order,
-) => {
-	const subject = {};
-	subject[DBSubjectConstants.ID] = crypto.randomUUID();
-	subject[DBSubjectConstants.SUBJECT_NAME] = subjectName ?? "";
-	subject[DBSubjectConstants.SUBJECT_CODE] = subjectCode ?? "";
-	subject[DBSubjectConstants.SUBJECT_DESCRIPTION] = subjectDescription ?? "";
-	subject[DBSubjectConstants.COURSE_LIST] = courseList ?? [];
-	subject[DBSubjectConstants.ORDER] = order;
-	return subject;
-};
-
-const getCurrentSubjectId = () => {
-	try {
-		return localStorageDB.getNumberOrString(
-			DBSubjectConstants.CURRENT_SUBJECT,
-		);
-	} catch (error) {
-		handler.errorWithPopup(error);
-		return null;
+	getSubjects() {
+		try {
+			let subjectList = localStorageDB.getCustom(
+				DBSubjectConstants.SUBJECT_LIST,
+				this._convertDBtoObj,
+				// (subjectsStr) => {
+				// 	this._convertDBtoObj(subjectsStr);
+				// },
+			);
+			subjectList.sort(
+				(a, b) =>
+					a[DBSubjectConstants.ORDER] - b[DBSubjectConstants.ORDER],
+			);
+			// this._subjects = subjectList;
+			return [...subjectList];
+		} catch (error) {
+			handler.errorWithPopup(error);
+			return [];
+		}
 	}
-};
 
-const setCurrentSubjectId = (id) => {
-	try {
-		localStorageDB.setNumberOrString(
-			DBSubjectConstants.CURRENT_SUBJECT,
-			id,
-		);
-	} catch (error) {
-		handler.errorWithPopup(error);
+	getSubjectById(id) {
+		const subject =
+			this._subjects.find((subject) => subject.id === id) ?? {};
+		return { ...subject };
 	}
-};
 
-const getSubjects = () => {
-	try {
-		let subjectList = localStorageDB.getJSON(
-			DBSubjectConstants.SUBJECT_LIST,
-		);
-		subjectList = subjectList ?? [];
-		subjectList.sort(
-			(a, b) => a[DBSubjectConstants.ORDER] - b[DBSubjectConstants.ORDER],
-		);
-		return subjectList;
-	} catch (error) {
-		handler.errorWithPopup(error);
-		return [];
+	addSubject(subject) {
+		try {
+			const isValidSubject = this._validateSubject(subject);
+			const { subjectName, subjectCode, subjectDescription, courseList } =
+				subject;
+			const subjects = this.getSubjects();
+			const numberOfExistingSubjects = this._subjects.length;
+
+			const newSubject = new Subject({
+				id: null,
+				subjectName,
+				subjectCode,
+				subjectDescription,
+				courseList,
+				order: numberOfExistingSubjects,
+			});
+			subjects.push(newSubject);
+			localStorageDB.setJSON(DBSubjectConstants.SUBJECT_LIST, subjects);
+			// this._subjects = this.getSubjects();
+			return newSubject;
+		} catch (error) {
+			handler.errorWithPopup(error);
+			return null;
+		}
 	}
-};
 
-const getSubjectById = (id) => {
-	const subjects = getSubjects();
-	return subjects.find((subject) => subject.id === id);
-};
-
-const addSubject = (subject) => {
-	try {
-		const { subjectName, subjectCode, subjectDescription, courseList } =
-			subject;
-		const subjects = getSubjects();
-		const numberOfExistingSubjects = subjects.length;
-
-		const formedSubject = createSubject(
-			subjectName,
-			subjectCode,
-			subjectDescription,
-			courseList,
-			numberOfExistingSubjects,
-		);
-		subjects.push(formedSubject);
-		localStorageDB.setJSON(DBSubjectConstants.SUBJECT_LIST, subjects);
-		return formedSubject;
-	} catch (error) {
-		handler.errorWithPopup(error);
-		return null;
+	static deleteAllSubjects() {
+		try {
+			localStorageDB.deleteKeys([DBSubjectConstants.SUBJECT_LIST]);
+		} catch (error) {
+			handler.errorWithPopup(error);
+			return [];
+		}
 	}
-};
 
-const deleteAll = () => {
-	localStorageDB.deleteKeys([DBSubjectConstants.SUBJECT_LIST]);
-};
+	_validateSubject(subject) {
+		try {
+			// ...
+		} catch (error) {
+			handler.errorWithPopup(error);
+			return [];
+		}
+	}
 
-export const subjectAPI = {
-	getCurrentSubjectId,
-	setCurrentSubjectId,
-	getSubjects,
-	getSubjectById,
-	addSubject,
-	deleteAll,
-};
+	_convertDBtoObj(subjectsStr) {
+		try {
+			subjectsStr = subjectsStr ?? "[]";
+			const subjDBArray = JSON.parse(subjectsStr) ?? [];
+			let subjects = subjDBArray.map((subDB) => {
+				return new Subject(subDB);
+			});
+			return subjects;
+		} catch (error) {
+			handler.errorWithPopup(error);
+			return [];
+		}
+	}
+}

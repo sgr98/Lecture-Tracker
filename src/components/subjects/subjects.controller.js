@@ -8,7 +8,7 @@ import { HTMLInputTagEnum, HTMLInputTypeEnum } from "../../utils/enum.js";
 import { domManipulation } from "../../utils/domManipulation.js";
 import { ModalController } from "../common/modal/modal.controller.js";
 
-import { subjectAPI } from "./subjects.api.js";
+import { SubjectAPI } from "./subjects.api.js";
 import {
 	SubjectSectionView,
 	SubjectListContainerView,
@@ -42,10 +42,14 @@ export class SubjectController extends Controller {
 	constructor(moduleName) {
 		super(moduleName);
 		this._subjectSectionView = new SubjectSectionView(moduleName);
-		this._subjects = subjectAPI.getSubjects();
 		this._subjectListContainerView = new SubjectListContainerView(
 			this._moduleName,
 		);
+
+		this._subjectAPI = new SubjectAPI();
+		this._subjects = this._subjectAPI.getSubjects();
+		this._currentSubject = null;
+
 		this._addSubjectModalController = new AddSubjectModalController(
 			"AddSubjectModal",
 			(subject) => {
@@ -93,7 +97,7 @@ export class SubjectController extends Controller {
 
 	_addSubjectListContainerComponent() {
 		try {
-			this._subjects = subjectAPI.getSubjects();
+			this._subjects = this._subjectAPI.getSubjects();
 			const subjectListHTML = this._subjectListContainerView.generateHTML(
 				this._subjects,
 			);
@@ -109,8 +113,7 @@ export class SubjectController extends Controller {
 
 	_addSubjectCallback(newSubject) {
 		try {
-			const subject = subjectAPI.addSubject(newSubject);
-			this._subjects = subjectAPI.getSubjects();
+			const subject = this._subjectAPI.addSubject(newSubject);
 			this.addNewSubjectComponent(subject);
 		} catch (error) {
 			handler.errorWithPopup(error);

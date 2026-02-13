@@ -1,4 +1,5 @@
 import { DBSubjectConstants } from "../constants/DBConstants.js";
+import { isStringNullOrEmpty } from "../utils/common.js";
 
 // id
 // subjectName
@@ -8,14 +9,18 @@ import { DBSubjectConstants } from "../constants/DBConstants.js";
 // order
 
 export class Subject {
-	constructor(
-		subjectName,
-		subjectCode,
-		subjectDescription,
-		courseList,
-		order,
-	) {
-		this[DBSubjectConstants.ID] = crypto.randomUUID();
+	constructor(sub) {
+		const {
+			id,
+			subjectName,
+			subjectCode,
+			subjectDescription,
+			courseList,
+			order,
+		} = sub;
+		this[DBSubjectConstants.ID] = isStringNullOrEmpty(id)
+			? crypto.randomUUID()
+			: id;
 		this[DBSubjectConstants.SUBJECT_NAME] = subjectName ?? "";
 		this[DBSubjectConstants.SUBJECT_CODE] = subjectCode ?? "";
 		this[DBSubjectConstants.SUBJECT_DESCRIPTION] = subjectDescription ?? "";
@@ -33,4 +38,3 @@ export class Subject {
 		console.log(this[DBSubjectConstants.ORDER]);
 	};
 }
-

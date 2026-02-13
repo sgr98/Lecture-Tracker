@@ -43,6 +43,17 @@ export const localStorageDB = {
 		}
 	},
 
+	getCustom: (key, converter) => {
+		try {
+			const valueStr = window.localStorage.getItem(key);
+			const value = converter(valueStr);
+			return value;
+		} catch (error) {
+			handler.errorWithPopup(error);
+			return null;
+		}
+	},
+
 	getStorageLength: () => {
 		try {
 			const n = window.localStorage.length;
