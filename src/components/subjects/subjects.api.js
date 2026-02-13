@@ -1,9 +1,5 @@
 import { DBSubjectConstants } from "../../constants/DBConstants.js";
 import { localStorageDB } from "../../utils/localStorageDB.js";
-import {
-	getStringValueOrDefault,
-	getArrayValueOrDefault,
-} from "../../utils/common.js";
 import { handler } from "../../utils/handler.js";
 
 const checkSubject = (subject) => {};
@@ -17,14 +13,10 @@ const createSubject = (
 ) => {
 	const subject = {};
 	subject[DBSubjectConstants.ID] = crypto.randomUUID();
-	subject[DBSubjectConstants.SUBJECT_NAME] =
-		getStringValueOrDefault(subjectName);
-	subject[DBSubjectConstants.SUBJECT_CODE] =
-		getStringValueOrDefault(subjectCode);
-	subject[DBSubjectConstants.SUBJECT_DESCRIPTION] =
-		getStringValueOrDefault(subjectDescription);
-	subject[DBSubjectConstants.COURSE_LIST] =
-		getArrayValueOrDefault(courseList);
+	subject[DBSubjectConstants.SUBJECT_NAME] = subjectName ?? "";
+	subject[DBSubjectConstants.SUBJECT_CODE] = subjectCode ?? "";
+	subject[DBSubjectConstants.SUBJECT_DESCRIPTION] = subjectDescription ?? "";
+	subject[DBSubjectConstants.COURSE_LIST] = courseList ?? [];
 	subject[DBSubjectConstants.ORDER] = order;
 	return subject;
 };
@@ -56,7 +48,7 @@ const getSubjects = () => {
 		let subjectList = localStorageDB.getJSON(
 			DBSubjectConstants.SUBJECT_LIST,
 		);
-		subjectList = getArrayValueOrDefault(subjectList);
+		subjectList = subjectList ?? [];
 		subjectList.sort(
 			(a, b) => a[DBSubjectConstants.ORDER] - b[DBSubjectConstants.ORDER],
 		);

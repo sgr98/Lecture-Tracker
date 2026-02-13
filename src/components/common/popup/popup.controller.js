@@ -2,10 +2,6 @@ import {
 	HTMLAttributesConstants,
 	HTMLPopupAttributesConstants,
 } from "../../../constants/HTMLConstants.js";
-import {
-	getArrayValueOrDefault,
-	getStringValueOrDefault,
-} from "../../../utils/common.js";
 import { HTMLPopupTypeEnum } from "../../../utils/enum.js";
 import { domManipulation } from "../../../utils/domManipulation.js";
 import { handler } from "../../../utils/handler.js";
@@ -31,7 +27,7 @@ const {
 export const popupController = {
 	open: (moduleName, title, description, index = "") => {
 		try {
-			index = getStringValueOrDefault(index);
+			index = index ?? "";
 			popupController.addPopupToRootDOM(
 				moduleName,
 				index,
@@ -113,7 +109,7 @@ export const successPopupController = {
 
 export const multiplePopupsController = {
 	open: (popupDetails) => {
-		popupDetails = getArrayValueOrDefault(popupDetails);
+		popupDetails = popupDetails ?? [];
 		popupDetails.forEach((popup, index) => {
 			const { popupType, description } = popup;
 			const id = (index + 1).toString();
