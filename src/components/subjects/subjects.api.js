@@ -11,15 +11,11 @@ export class SubjectAPI {
 			let subjectList = localStorageDB.getCustom(
 				DBSubjectConstants.SUBJECT_LIST,
 				this._convertDBtoObj,
-				// (subjectsStr) => {
-				// 	this._convertDBtoObj(subjectsStr);
-				// },
 			);
 			subjectList.sort(
 				(a, b) =>
 					a[DBSubjectConstants.ORDER] - b[DBSubjectConstants.ORDER],
 			);
-			// this._subjects = subjectList;
 			return [...subjectList];
 		} catch (error) {
 			handler.errorWithPopup(error);
@@ -28,8 +24,8 @@ export class SubjectAPI {
 	}
 
 	getSubjectById(id) {
-		const subject =
-			this._subjects.find((subject) => subject.id === id) ?? {};
+		const subjects = this.getSubjects();
+		const subject = subjects.find((subject) => subject.id === id) ?? {};
 		return { ...subject };
 	}
 
@@ -39,7 +35,7 @@ export class SubjectAPI {
 			const { subjectName, subjectCode, subjectDescription, courseList } =
 				subject;
 			const subjects = this.getSubjects();
-			const numberOfExistingSubjects = this._subjects.length;
+			const numberOfExistingSubjects = subjects.length;
 
 			const newSubject = new Subject({
 				id: null,
@@ -51,7 +47,6 @@ export class SubjectAPI {
 			});
 			subjects.push(newSubject);
 			localStorageDB.setJSON(DBSubjectConstants.SUBJECT_LIST, subjects);
-			// this._subjects = this.getSubjects();
 			return newSubject;
 		} catch (error) {
 			handler.errorWithPopup(error);
