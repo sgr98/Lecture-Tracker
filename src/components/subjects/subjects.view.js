@@ -80,11 +80,12 @@ export class SubjectListContainerView extends View {
 	}
 
 	_generateSubjectListItemHTML(subject) {
-		const subjectOrder = subject[DBSubjectConstants.ORDER] ?? 0;
+		const id = subject[DBSubjectConstants.ID] ?? "";
+		const order = subject[DBSubjectConstants.ORDER] ?? 0;
 		const subjectName = subject[DBSubjectConstants.SUBJECT_NAME] ?? "";
 		const subjectListItemHTML = `
 			<div
-				id="${SUBJECT}-${subjectOrder}"
+				id="${SUBJECT}-${order}__${id}"
 				class="${SUBJECT_BUTTON} ${LIST_BUTTON} ${BUTTON}"
 			>
 				${subjectName}

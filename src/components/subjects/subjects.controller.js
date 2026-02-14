@@ -15,6 +15,7 @@ import {
 } from "./subjects.view.js";
 import { handler } from "../../utils/handler.js";
 import { Controller } from "../controller.js";
+import { isValueNull } from "../../utils/common.js";
 
 const { STAGE, LIST_CONTAINER, LIST_INNER_CONTAINER } = HTMLAttributesConstants;
 
@@ -47,7 +48,6 @@ export class SubjectController extends Controller {
 		);
 
 		this._subjectAPI = new SubjectAPI();
-		this._subjects = this._subjectAPI.getSubjects();
 		this._currentSubject = null;
 
 		this._addSubjectModalController = new AddSubjectModalController(
@@ -97,15 +97,15 @@ export class SubjectController extends Controller {
 
 	_addSubjectListContainerComponent() {
 		try {
-			this._subjects = this._subjectAPI.getSubjects();
-			const subjectListHTML = this._subjectListContainerView.generateHTML(
-				this._subjects,
-			);
+			const subjects = this._subjectAPI.getSubjects();
+			const subjectListHTML =
+				this._subjectListContainerView.generateHTML(subjects);
 			const subjectListContainerId = `${SUBJECT}-${LIST_CONTAINER}`;
 			domManipulation.addHTMLStringToDomById(
 				subjectListContainerId,
 				subjectListHTML,
 			);
+			this._subjectEventListener(subjects);
 		} catch (error) {
 			handler.errorWithPopup(error);
 		}
@@ -120,6 +120,24 @@ export class SubjectController extends Controller {
 		}
 	}
 
+	_setNewCurrentSubject(subject) {
+		this._unsetCurrentSubject();
+		this._currentSubject = subject;
+		// load courses
+	}
+
+	_unsetCurrentSubject() {
+		if (isValueNull(this._currentSubject)) {
+			return;
+		}
+		const id = this._currentSubject[DBSubjectConstants.ID];
+		const order = this._currentSubject[DBSubjectConstants.ORDER];
+		const subjectElement = document.getElementById(
+			`${SUBJECT}-${order}__${id}`,
+		);
+		subjectElement.classList.remove("subject-active-list-button");
+	}
+
 	// ////////////////////////////////////////////////////////////////////////////////
 	// ////////////////////////////////////////////////////////////////////////////////
 	// Event Listeners
@@ -129,6 +147,24 @@ export class SubjectController extends Controller {
 	addEventListeners() {
 		try {
 			// ...
+		} catch (error) {
+			handler.errorWithPopup(error);
+		}
+	}
+
+	_subjectEventListener(subjects) {
+		try {
+			for (const subject of subjects) {
+				const id = subject[DBSubjectConstants.ID];
+				const order = subject[DBSubjectConstants.ORDER];
+				const subjectElement = document.getElementById(
+					`${SUBJECT}-${order}__${id}`,
+				);
+				subjectElement.addEventListener("click", () => {
+					subjectElement.classList.add("subject-active-list-button");
+					this._setNewCurrentSubject(subject);
+				});
+			}
 		} catch (error) {
 			handler.errorWithPopup(error);
 		}
