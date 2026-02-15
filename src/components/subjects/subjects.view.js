@@ -37,11 +37,17 @@ export class SubjectSectionView extends View {
 				class="${SUBJECT_CONTAINER} ${SECTION_CONTAINER}"
 			>
 				<div
-					id="${ADD_SUBJECT_BUTTON}"
-					class="${ADD_SUBJECT_BUTTON} ${ADD_BUTTON} ${BUTTON}"
+					id="subject-edit-button-container"
+					class="subject-edit-button-container section-edit-button-container"
 				>
-					${ADD_SUBJECT_BUTTON_TEXT}
+					<div
+						id="${ADD_SUBJECT_BUTTON}"
+						class="${ADD_SUBJECT_BUTTON} ${ADD_BUTTON} ${BUTTON}"
+					>
+						${ADD_SUBJECT_BUTTON_TEXT}
+					</div>
 				</div>
+
 				<div
 					id="${SUBJECT}-${LIST_CONTAINER}"
 					class="${SUBJECT}-${LIST_CONTAINER} ${LIST_CONTAINER}"
@@ -85,10 +91,15 @@ export class SubjectListContainerView extends View {
 		const subjectName = subject[DBSubjectConstants.SUBJECT_NAME] ?? "";
 		const subjectListItemHTML = `
 			<div
-				id="${SUBJECT}-${order}__${id}"
-				class="${SUBJECT_BUTTON} ${LIST_BUTTON} ${BUTTON}"
+				id="subject-list-button-container-${order}"
+				class="subject-list-button-container list-button-container"
 			>
-				${subjectName}
+				<div
+					id="${SUBJECT}-${order}__${id}"
+					class="${SUBJECT_BUTTON} ${LIST_BUTTON}"
+				>
+					${subjectName}
+				</div>
 			</div>
 		`;
 		return subjectListItemHTML;
@@ -108,12 +119,17 @@ export class SubjectListContainerView extends View {
 
 	_generateNoSubjectsMessageHTML() {
 		const noSubjectsInListHTML = `
-            <span
-                id="${NO_SUBJECTS_MESSAGE_ID}"
-                class ="${NO_ITEMS_IN_LIST_MESSAGE}"
-            >
-                ${NO_SUBJECTS_MESSAGE}
-            </span>
+			<div
+				id="no-subjects-in-list-message-container"
+				class="no-items-in-list-message-container"
+			>
+				<span
+					id="${NO_SUBJECTS_MESSAGE_ID}"
+					class ="${NO_ITEMS_IN_LIST_MESSAGE}"
+				>
+					${NO_SUBJECTS_MESSAGE}
+				</span>
+			</div>
         `;
 		return noSubjectsInListHTML;
 	}

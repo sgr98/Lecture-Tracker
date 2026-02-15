@@ -10,13 +10,20 @@ HEADERS
 	box-sizing: border-box;
 }
 
+// .scroll-container {
+// 	/* Hide scrollbar for Chrome, Safari, and newer Edge */
+// 	&::-webkit-scrollbar {
+// 		display: none;
+// 	}
+// 	/* Hide scrollbar for Firefox */
+// 	scrollbar-width: none;
+// 	/* Hide scrollbar for IE and Edge (Legacy) */
+// 	-ms-overflow-style: none;
+// }
+
 /* *, *::before, *::after {
   box-sizing: border-box;
 } */
-
-// &::-webkit-scrollbar {
-//     display: none;
-// }
 
 html {
 	padding: 0;

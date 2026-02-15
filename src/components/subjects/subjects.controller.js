@@ -76,7 +76,7 @@ export class SubjectController extends Controller {
 
 	addNewSubjectComponent(subject) {
 		try {
-			domManipulation.removeElementById(NO_SUBJECTS_MESSAGE_ID);
+			domManipulation.removeElementById("no-subjects-in-list-message-container");
 			domManipulation.removeElementById(
 				`${SUBJECT}-${LIST_INNER_CONTAINER}`,
 			);
