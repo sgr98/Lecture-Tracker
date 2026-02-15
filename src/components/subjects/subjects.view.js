@@ -37,8 +37,8 @@ export class SubjectSectionView extends View {
 				class="${SUBJECT_CONTAINER} ${SECTION_CONTAINER}"
 			>
 				<div
-					id="subject-edit-button-container"
-					class="subject-edit-button-container section-edit-button-container"
+					id="subject-action-container"
+					class="subject-action-container section-action-container"
 				>
 					<div
 						id="${ADD_SUBJECT_BUTTON}"

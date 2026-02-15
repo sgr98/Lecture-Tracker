@@ -5,14 +5,23 @@
   --breadcrumb-crumb-min-width: 120px;
   --sidebar-container-width: 130px;
   --sidebar-item-img-size: 64px;
+  --scrollbar-width: 8px;
+  --scrollbar-track: rgb(245, 245, 245);
+  --scrollbar-thumb: rgb(245, 245, 245);
   --background: rgb(245, 245, 245);
   --primary: rgb(245, 245, 245);
   --secondary: rgb(158, 158, 158);
   --subject-accent: rgb(67, 170, 129);
+  --subject-accent-font: rgb(67, 170, 129);
   --text-primary: rgb(4, 4, 4);
   --text-secondary: rgb(92, 92, 92);
-  --border: 2px solid rgb(24, 24, 24);
-  --border-active: 4px solid rgb(24, 24, 24);
+  --border-black: rgb(24, 24, 24);
+  --border-active: rgb(24, 24, 24);
+  --topbar-height: 13vh;
+  --list-section-action-container: 13vh;
+  --list-section-list-container: calc(
+  	100vh - var(--topbar-height) - var(--section-action-container)
+  );
 }
 
 :root {
@@ -87,14 +96,23 @@ body {
   --breadcrumb-crumb-min-width: 120px;
   --sidebar-container-width: 130px;
   --sidebar-item-img-size: 64px;
+  --scrollbar-width: 8px;
+  --scrollbar-track: rgb(245, 245, 245);
+  --scrollbar-thumb: rgb(245, 245, 245);
   --background: rgb(245, 245, 245);
   --primary: rgb(245, 245, 245);
   --secondary: rgb(158, 158, 158);
   --subject-accent: rgb(67, 170, 129);
+  --subject-accent-font: rgb(67, 170, 129);
   --text-primary: rgb(4, 4, 4);
   --text-secondary: rgb(92, 92, 92);
-  --border: 2px solid rgb(24, 24, 24);
-  --border-active: 4px solid rgb(24, 24, 24);
+  --border-black: rgb(24, 24, 24);
+  --border-active: rgb(24, 24, 24);
+  --topbar-height: 13vh;
+  --list-section-action-container: 13vh;
+  --list-section-list-container: calc(
+  	100vh - var(--topbar-height) - var(--section-action-container)
+  );
 }
 
 :root {
@@ -114,7 +132,7 @@ COMMON
   background: white;
 }
 
-.section-edit-button-container {
+.section-action-container {
   flex-direction: row;
   width: 100%;
   height: 13vh;
@@ -415,14 +433,23 @@ COMMON
   --breadcrumb-crumb-min-width: 120px;
   --sidebar-container-width: 130px;
   --sidebar-item-img-size: 64px;
+  --scrollbar-width: 8px;
+  --scrollbar-track: rgb(245, 245, 245);
+  --scrollbar-thumb: rgb(245, 245, 245);
   --background: rgb(245, 245, 245);
   --primary: rgb(245, 245, 245);
   --secondary: rgb(158, 158, 158);
   --subject-accent: rgb(67, 170, 129);
+  --subject-accent-font: rgb(67, 170, 129);
   --text-primary: rgb(4, 4, 4);
   --text-secondary: rgb(92, 92, 92);
-  --border: 2px solid rgb(24, 24, 24);
-  --border-active: 4px solid rgb(24, 24, 24);
+  --border-black: rgb(24, 24, 24);
+  --border-active: rgb(24, 24, 24);
+  --topbar-height: 13vh;
+  --list-section-action-container: 13vh;
+  --list-section-list-container: calc(
+  	100vh - var(--topbar-height) - var(--section-action-container)
+  );
 }
 
 :root {
@@ -470,7 +497,7 @@ TOPBAR
   height: 100%;
   padding: 5px 20px;
   background: var(--primary);
-  border: var(--border);
+  border: 2px solid var(--border-black);
   border-radius: 10px;
   font-size: 22px;
 }
@@ -516,14 +543,23 @@ STAGE
   --breadcrumb-crumb-min-width: 120px;
   --sidebar-container-width: 130px;
   --sidebar-item-img-size: 64px;
+  --scrollbar-width: 8px;
+  --scrollbar-track: rgb(245, 245, 245);
+  --scrollbar-thumb: rgb(245, 245, 245);
   --background: rgb(245, 245, 245);
   --primary: rgb(245, 245, 245);
   --secondary: rgb(158, 158, 158);
   --subject-accent: rgb(67, 170, 129);
+  --subject-accent-font: rgb(67, 170, 129);
   --text-primary: rgb(4, 4, 4);
   --text-secondary: rgb(92, 92, 92);
-  --border: 2px solid rgb(24, 24, 24);
-  --border-active: 4px solid rgb(24, 24, 24);
+  --border-black: rgb(24, 24, 24);
+  --border-active: rgb(24, 24, 24);
+  --topbar-height: 13vh;
+  --list-section-action-container: 13vh;
+  --list-section-list-container: calc(
+  	100vh - var(--topbar-height) - var(--section-action-container)
+  );
 }
 
 :root {
