@@ -12,17 +12,31 @@ export class TopbarView extends View {
 				class="topbar section-container"
 			>
 				<div
-					id="top-title"
-					class="top-title"
+					id="topbar-inner-container"
+					class="topbar-inner-container"
 				>
-					Lecture Tracker
-				</div>
-
-				<div
-					id="clear-subjects"
-					class="top-title"
-				>
-					Clear Subjects
+					<div
+						id="topbar-title-container"
+						class="topbar-title-container"
+					>
+						<div
+							id="top-title"
+							class="top-title top-button"
+						>
+							Lecture Tracker
+						</div>
+					</div>
+					<div
+						id="topbar-admin-container"
+						class="topbar-admin-container"
+					>
+						<div
+							id="top-admin-clear-subjects"
+							class="top-admin-clear-subjects top-button"
+						>
+							Clear Subjects
+						</div>
+					</div>
 				</div>
 			</section>
 		`;

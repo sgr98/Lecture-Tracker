@@ -4,6 +4,7 @@ import { TopbarView } from "./topbar.view.js";
 import { domManipulation } from "../../utils/domManipulation.js";
 import { handler } from "../../utils/handler.js";
 import { SubjectAPI } from "../subjects/subjects.api.js";
+import { successPopupController } from "../common/popup/popup.controller.js";
 
 const { ROOT } = HTMLAttributesConstants;
 
@@ -33,10 +34,14 @@ export class TopbarController extends Controller {
 
 	_clearSubjectsEventListener() {
 		try {
-			const clearSubjectsButton =
-				document.getElementById("clear-subjects");
+			const clearSubjectsButton = document.getElementById(
+				"top-admin-clear-subjects",
+			);
 			clearSubjectsButton.addEventListener("click", () => {
 				SubjectAPI.deleteAllSubjects();
+				successPopupController.open(
+					"All subjects are successfully cleared",
+				);
 			});
 		} catch (error) {
 			handler.errorWithPopup(error);
