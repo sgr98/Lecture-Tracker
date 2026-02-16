@@ -1,4 +1,21 @@
+import {
+	HTMLAttributesConstants,
+	HTMLTopbarAttributesConstants,
+	DisplayText,
+} from "../../constants/HTMLConstants.js";
 import { View } from "../view.js";
+
+const { LECTURE_TRACKER, CLEAR_SUBJECTS } = DisplayText.topbar;
+const { SECTION_CONTAINER } = HTMLAttributesConstants;
+const {
+	TOPBAR,
+	TOPBAR_INNER_CONTAINER,
+	TOPBAR_TITLE_CONTAINER,
+	TOP_TITLE,
+	TOP_BUTTON,
+	TOPBAR_ADMIN_CONTAINER,
+	TOP_ADMIN_CLEAR_SUBJECTS,
+} = HTMLTopbarAttributesConstants;
 
 export class TopbarView extends View {
 	constructor(moduleName) {
@@ -8,33 +25,33 @@ export class TopbarView extends View {
 	generateHTML() {
 		const topbarHTML = `
 			<section
-				id="topbar"
-				class="topbar section-container"
+				id="${TOPBAR}"
+				class="${TOPBAR} ${SECTION_CONTAINER}"
 			>
 				<div
-					id="topbar-inner-container"
-					class="topbar-inner-container"
+					id="${TOPBAR_INNER_CONTAINER}"
+					class="${TOPBAR_INNER_CONTAINER}"
 				>
 					<div
-						id="topbar-title-container"
-						class="topbar-title-container"
+						id="${TOPBAR_TITLE_CONTAINER}"
+						class="${TOPBAR_TITLE_CONTAINER}"
 					>
 						<div
-							id="top-title"
-							class="top-title top-button"
+							id="${TOP_TITLE}"
+							class="${TOP_TITLE} ${TOP_BUTTON}"
 						>
-							Lecture Tracker
+							${LECTURE_TRACKER}
 						</div>
 					</div>
 					<div
-						id="topbar-admin-container"
-						class="topbar-admin-container"
+						id="${TOPBAR_ADMIN_CONTAINER}"
+						class="${TOPBAR_ADMIN_CONTAINER}"
 					>
 						<div
-							id="top-admin-clear-subjects"
-							class="top-admin-clear-subjects top-button"
+							id="${TOP_ADMIN_CLEAR_SUBJECTS}"
+							class="${TOP_ADMIN_CLEAR_SUBJECTS} ${TOP_BUTTON}"
 						>
-							Clear Subjects
+							${CLEAR_SUBJECTS}
 						</div>
 					</div>
 				</div>

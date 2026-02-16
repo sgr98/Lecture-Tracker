@@ -1,4 +1,8 @@
-import { HTMLAttributesConstants } from "../../constants/HTMLConstants.js";
+import {
+	HTMLAttributesConstants,
+	HTMLTopbarAttributesConstants,
+	DisplayText,
+} from "../../constants/HTMLConstants.js";
 import { Controller } from "../controller.js";
 import { TopbarView } from "./topbar.view.js";
 import { domManipulation } from "../../utils/domManipulation.js";
@@ -6,7 +10,9 @@ import { handler } from "../../utils/handler.js";
 import { SubjectAPI } from "../subjects/subjects.api.js";
 import { successPopupController } from "../common/popup/popup.controller.js";
 
+const { SUBJECTS_CLEARED_MESSAGE } = DisplayText.topbar;
 const { ROOT } = HTMLAttributesConstants;
+const { TOP_ADMIN_CLEAR_SUBJECTS } = HTMLTopbarAttributesConstants;
 
 export class TopbarController extends Controller {
 	constructor(moduleName) {
@@ -35,13 +41,11 @@ export class TopbarController extends Controller {
 	_clearSubjectsEventListener() {
 		try {
 			const clearSubjectsButton = document.getElementById(
-				"top-admin-clear-subjects",
+				TOP_ADMIN_CLEAR_SUBJECTS,
 			);
 			clearSubjectsButton.addEventListener("click", () => {
 				SubjectAPI.deleteAllSubjects();
-				successPopupController.open(
-					"All subjects are successfully cleared",
-				);
+				successPopupController.open(SUBJECTS_CLEARED_MESSAGE);
 			});
 		} catch (error) {
 			handler.errorWithPopup(error);

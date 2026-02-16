@@ -14,6 +14,20 @@ export const HTMLTagsConstants = {
 	CLOSE_TEXTAREA: "</textarea>",
 };
 
+export const DisplayText = {
+	topbar: {
+		LECTURE_TRACKER: "Lecture Tracker",
+		CLEAR_SUBJECTS: "Clear Subjects",
+		SUBJECTS_CLEARED_MESSAGE: "All subjects are successfully cleared",
+	},
+	subject: {},
+	course: {},
+	lectures: {},
+
+	modal: {},
+	popup: {},
+};
+
 export const HTMLAttributesConstants = {
 	ROOT: "root",
 	STAGE: "stage",
@@ -30,6 +44,16 @@ export const HTMLAttributesConstants = {
 	BUTTON: "button",
 	LIST_ADD_BUTTON: "list-add-button",
 	NO_ITEMS_IN_LIST_MESSAGE: "no-items-in-list-message",
+};
+
+export const HTMLTopbarAttributesConstants = {
+	TOPBAR: "topbar",
+	TOPBAR_INNER_CONTAINER: "topbar-inner-container",
+	TOPBAR_TITLE_CONTAINER: "topbar-title-container",
+	TOP_TITLE: "top-title",
+	TOP_BUTTON: "top-button",
+	TOPBAR_ADMIN_CONTAINER: "topbar-admin-container",
+	TOP_ADMIN_CLEAR_SUBJECTS: "top-admin-clear-subjects",
 };
 
 export const HTMLSubjectAttributesConstants = {
@@ -65,11 +89,11 @@ export const HTMLSubjectAttributesConstants = {
 
 export const HTMLCoursesAttributesConstants = {
 	COURSE_CONTAINER: "course-container",
-}
+};
 
 export const HTMLLecturesAttributesConstants = {
 	LECTURE_CONTAINER: "lecture-container",
-}
+};
 
 export const HTMLFieldAttributesConstants = {
 	FIELD: "field",
@@ -137,4 +161,4 @@ export const ElementModuleName = {
 	// a: "",
 	// a: "",
 	// a: "",
-}
+};
