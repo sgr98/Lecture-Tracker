@@ -63,6 +63,14 @@ export const HTMLSubjectAttributesConstants = {
 		"Enter subject description",
 };
 
+export const HTMLCoursesAttributesConstants = {
+	COURSE_CONTAINER: "course-container",
+}
+
+export const HTMLLecturesAttributesConstants = {
+	LECTURE_CONTAINER: "lecture-container",
+}
+
 export const HTMLFieldAttributesConstants = {
 	FIELD: "field",
 	INPUT: "input",

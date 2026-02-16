@@ -1,4 +1,7 @@
+import { HTMLAttributesConstants } from "../../constants/HTMLConstants.js";
 import { View } from "../view.js";
+
+const { STAGE } = HTMLAttributesConstants;
 
 export class StageView extends View {
 	constructor(moduleName) {
@@ -7,7 +10,7 @@ export class StageView extends View {
 
 	generateHTML() {
 		const stageHTML = `
-			<section id="stage" class="stage">
+			<section id="${STAGE}" class="${STAGE}">
 			</section>
 		`;
 		return stageHTML;

@@ -1,4 +1,11 @@
+import {
+	HTMLAttributesConstants,
+	HTMLCoursesAttributesConstants,
+} from "../../constants/HTMLConstants.js";
 import { View } from "../view.js";
+
+const { SECTION_CONTAINER } = HTMLAttributesConstants;
+const { COURSE_CONTAINER } = HTMLCoursesAttributesConstants;
 
 export class CourseView extends View {
 	constructor(moduleName) {
@@ -7,21 +14,10 @@ export class CourseView extends View {
 
 	generateHTML() {
 		const courseHTML = `
-			<section id="course-container" class="course-container section-container">
-				<div id="add-course-button" class="add-course-button add-button button">
-					Add Course
-				</div>
-				<div
-					id="course-list-container"
-					class="course-list-container list-container"
-				>
-					<div id="course1" class="course-button list-button button">
-						Course 1
-					</div>
-					<div id="course2" class="course-button list-button button">
-						Course 2
-					</div>
-				</div>
+			<section
+				id="${COURSE_CONTAINER}"
+				class="${COURSE_CONTAINER} ${SECTION_CONTAINER}"
+			>
 			</section>
 		`;
 		return courseHTML;
