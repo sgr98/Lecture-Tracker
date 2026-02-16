@@ -12,7 +12,7 @@ const {
 	LIST_INNER_CONTAINER,
 	LIST_BUTTON,
 	BUTTON,
-	ADD_BUTTON,
+	LIST_ADD_BUTTON,
 	NO_ITEMS_IN_LIST_MESSAGE,
 } = HTMLAttributesConstants;
 const {
@@ -42,7 +42,7 @@ export class SubjectSectionView extends View {
 				>
 					<div
 						id="${ADD_SUBJECT_BUTTON}"
-						class="${ADD_SUBJECT_BUTTON} ${ADD_BUTTON} ${BUTTON}"
+						class="${ADD_SUBJECT_BUTTON} ${LIST_ADD_BUTTON} ${BUTTON}"
 					>
 						${ADD_SUBJECT_BUTTON_TEXT}
 					</div>

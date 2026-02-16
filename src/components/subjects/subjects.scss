@@ -2,28 +2,45 @@
 
 .subject-container {
 	flex-direction: column;
-	width: 20vw;
+	width: var(--list-section-width);
 	height: 100%;
-	/* background: #FFCDC9; */
-	border-right: 3px solid black;
+	border-right: 3px solid var(--border-black);
 }
 
-.subject-list-container {
-}
-
-.subject-list-inner-container {
-}
+/*
+////////////////////////////////
+////////////////////////////////
+ACTION AREA
+////////////////////////////////
+////////////////////////////////
+*/
 
 .add-subject-button {
 	background: var(--background);
+	border: 2px solid var(--border-black);
 	transition: 0.1s linear;
 }
 
 .add-subject-button:hover,
 .add-subject-button:active,
 .add-subject-button:focus {
-	box-shadow: 5px 5px var(--subject-accent);
-	color: var(--subject-accent);
+	border: 2px solid var(--subject-accent);
+	box-shadow: var(--box-shadow-medium-size) var(--subject-accent);
+	color: var(--subject-accent-font);
+}
+
+/*
+////////////////////////////////
+////////////////////////////////
+LIST CONTAINER
+////////////////////////////////
+////////////////////////////////
+*/
+
+.subject-list-container {
+}
+
+.subject-list-inner-container {
 }
 
 .subject-button {
@@ -33,25 +50,16 @@
 .subject-button:hover,
 .subject-button:active,
 .subject-button:focus {
-	color: var(--subject-accent);
+	color: var(--subject-accent-font);
 }
 
 .subject-active-list-button {
-	color: black;
+	color: var(--text-primary);
 	background: var(--subject-accent);
-	// border: 2px solid black;
 }
 
 .subject-active-list-button:hover,
 .subject-active-list-button:active,
 .subject-active-list-button:focus {
-	color: black;
+	color: var(--text-primary);
 }
-
-/* .add-subject-modal {
-
-}
-
-.add-subject-modal-form {
-
-} */

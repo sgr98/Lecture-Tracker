@@ -12,6 +12,7 @@ const {
 	MODAL_TITLEBAR,
 	MODAL_TITLE,
 	MODAL_CLOSE_BUTTON,
+	MODAL_CONTENT,
 	MODAL_DESCRIPTION,
 	MODAL_FORM,
 	MODAL_ADD_BUTTON,
@@ -58,8 +59,14 @@ export class ModalView extends View {
                             &times;
                         </span>
                     </div>
-                    ${descriptionHTML}
-                    ${formHTML}
+
+					<div
+						id="${moduleName}-${MODAL_CONTENT}"
+						class="${MODAL_CONTENT}"
+					>
+						${descriptionHTML}
+						${formHTML}
+					</div>
                 </div>
             </section>
 

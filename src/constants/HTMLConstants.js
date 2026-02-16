@@ -25,7 +25,7 @@ export const HTMLAttributesConstants = {
 	LIST_INNER_CONTAINER: "list-inner-container",
 	LIST_BUTTON: "list-button",
 	BUTTON: "button",
-	ADD_BUTTON: "add-button",
+	LIST_ADD_BUTTON: "list-add-button",
 	NO_ITEMS_IN_LIST_MESSAGE: "no-items-in-list-message",
 };
 
@@ -73,6 +73,7 @@ export const HTMLModalAttributesConstants = {
 	MODAL_TITLEBAR: "modal-titlebar",
 	MODAL_TITLE: "modal-title",
 	MODAL_CLOSE_BUTTON: "modal-close-button",
+	MODAL_CONTENT: "modal-content",
 	MODAL_DESCRIPTION: "modal-description",
 	MODAL_FORM: "modal-form",
 	MODAL_ADD_BUTTON: "modal-add-button",

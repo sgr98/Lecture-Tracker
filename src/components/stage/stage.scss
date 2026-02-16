@@ -1,4 +1,4 @@
-/* 
+/*
 ////////////////////////////////
 ////////////////////////////////
 STAGE
@@ -10,7 +10,7 @@ STAGE
 	flex-direction: row;
 	margin: 0;
 	width: 100vw;
-	height: 87vh;
+	height: var(--section-container-height);
 	padding: 0;
-	background: darkblue;
+	background: var(--background);
 }
