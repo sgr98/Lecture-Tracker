@@ -1,4 +1,5 @@
 import { HTMLPopupTypeEnum } from "./utils/enum.js";
+import { ElementModuleName } from "./constants/HTMLConstants.js";
 import {
 	alertPopupController,
 	infoPopupController,
@@ -13,13 +14,21 @@ import { SubjectController } from "./components/subjects/subjects.controller.js"
 import { CourseController } from "./components/courses/courses.controller.js";
 import { LectureController } from "./components/lectures/lectures.controller.js";
 
+const {
+	TOPBAR_MODULE,
+	STAGE_MODULE,
+	SUBJECT_MODULE,
+	COURSE_MODULE,
+	LECTURE_MODULE,
+} = ElementModuleName;
+
 export class App {
 	constructor() {
-		this._topbarController = new TopbarController("topbar");
-		this._stageController = new StageController("stage");
-		this._subjectController = new SubjectController("subject");
-		this._courseController = new CourseController("course");
-		this._lectureController = new LectureController("lecture");
+		this._topbarController = new TopbarController(TOPBAR_MODULE);
+		this._stageController = new StageController(STAGE_MODULE);
+		this._subjectController = new SubjectController(SUBJECT_MODULE);
+		this._courseController = new CourseController(COURSE_MODULE);
+		this._lectureController = new LectureController(LECTURE_MODULE);
 	}
 
 	start() {

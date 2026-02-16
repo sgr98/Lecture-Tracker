@@ -87,7 +87,6 @@ export const HTMLSubjectAttributesConstants = {
 	SUBJECT_BUTTON: `subject-button`,
 	SUBJECT_LIST_BUTTON_CONTAINER: "subject-list-button-container",
 	SUBJECT_ACTIVE_LIST_BUTTON: "subject-active-list-button",
-	ADD_SUBJECT: "add-subject",
 	ADD_SUBJECT_BUTTON: `add-subject-button`,
 	NO_SUBJECTS_IN_LIST_MESSAGE_CONTAINER:
 		"no-subjects-in-list-message-container",
@@ -154,15 +153,11 @@ export const HTMLPopupAttributesConstants = {
 };
 
 export const ElementModuleName = {
-	ADD_SUBJECT_MODAL: "AddSubjectModal",
-	a: "",
-	// a: "",
-	// a: "",
-	// a: "",
-	// a: "",
-	// a: "",
-	// a: "",
-	// a: "",
-	// a: "",
-	// a: "",
+	ADD_SUBJECT_MODULE: "add-subject",
+	ADD_SUBJECT_MODAL_MODULE: "add-subject-modal",
+	TOPBAR_MODULE: "topbar",
+	STAGE_MODULE: "stage",
+	SUBJECT_MODULE: "subject",
+	COURSE_MODULE: "course",
+	LECTURE_MODULE: "lecture",
 };

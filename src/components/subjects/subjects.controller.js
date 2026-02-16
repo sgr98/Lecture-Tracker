@@ -23,7 +23,6 @@ const { STAGE, LIST_CONTAINER, LIST_INNER_CONTAINER } = HTMLAttributesConstants;
 const {
 	SUBJECT,
 	SUBJECT_ACTIVE_LIST_BUTTON,
-	ADD_SUBJECT,
 	ADD_SUBJECT_BUTTON,
 	ADD_SUBJECT_MODAL_SUBJECT_NAME_FIELD,
 	ADD_SUBJECT_MODAL_SUBJECT_CODE_FIELD,
@@ -31,7 +30,7 @@ const {
 	NO_SUBJECTS_IN_LIST_MESSAGE_CONTAINER,
 } = HTMLSubjectAttributesConstants;
 const { MODAL } = HTMLModalAttributesConstants;
-const { ADD_SUBJECT_MODAL } = ElementModuleName;
+const { ADD_SUBJECT_MODULE, ADD_SUBJECT_MODAL_MODULE } = ElementModuleName;
 const {
 	ADD_SUBJECT_MODAL_TITLE,
 	ADD_SUBJECT_MODAL_DESCRIPTION,
@@ -55,7 +54,7 @@ export class SubjectController extends Controller {
 		this._currentSubject = null;
 
 		this._addSubjectModalController = new AddSubjectModalController(
-			ADD_SUBJECT_MODAL,
+			ADD_SUBJECT_MODAL_MODULE,
 			(subject) => {
 				this._addSubjectCallback(subject);
 			},
@@ -224,7 +223,7 @@ class AddSubjectModalController extends Controller {
 				},
 			];
 			const modalController = new ModalController(
-				ADD_SUBJECT,
+				ADD_SUBJECT_MODULE,
 				ADD_SUBJECT_MODAL_TITLE,
 				ADD_SUBJECT_MODAL_DESCRIPTION,
 				addSubjectModalFields,
@@ -272,7 +271,7 @@ class AddSubjectModalController extends Controller {
 			const addSubjectButton =
 				document.getElementById(ADD_SUBJECT_BUTTON);
 			const addSubjectModal = document.getElementById(
-				`${ADD_SUBJECT}-${MODAL}`,
+				`${ADD_SUBJECT_MODULE}-${MODAL}`,
 			);
 			addSubjectButton.addEventListener("click", () => {
 				addSubjectModal.style.display = "flex";
