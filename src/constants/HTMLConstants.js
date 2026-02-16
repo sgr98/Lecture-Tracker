@@ -21,9 +21,12 @@ export const HTMLAttributesConstants = {
 	TOP_TITLE: "top-title",
 	CONTAINER: "container",
 	SECTION_CONTAINER: "section-container",
+	SECTION_ACTION_CONTAINER: "section-action-container",
+	LIST_BUTTON_CONTAINER: "list-button-container",
 	LIST_CONTAINER: "list-container",
 	LIST_INNER_CONTAINER: "list-inner-container",
 	LIST_BUTTON: "list-button",
+	NO_ITEMS_IN_LIST_MESSAGE_CONTAINER: "no-items-in-list-message-container",
 	BUTTON: "button",
 	LIST_ADD_BUTTON: "list-add-button",
 	NO_ITEMS_IN_LIST_MESSAGE: "no-items-in-list-message",
@@ -32,12 +35,18 @@ export const HTMLAttributesConstants = {
 export const HTMLSubjectAttributesConstants = {
 	SUBJECT: "subject",
 	SUBJECT_CONTAINER: `subject-${HTMLAttributesConstants.CONTAINER}`,
+	SUBJECT_ACTION_CONTAINER: `subject-action-${HTMLAttributesConstants.CONTAINER}`,
 	SUBJECT_BUTTON: `subject-${HTMLAttributesConstants.BUTTON}`,
+	SUBJECT_LIST_BUTTON_CONTAINER: "subject-list-button-container",
+	SUBJECT_ACTIVE_LIST_BUTTON: "subject-active-list-button",
 	ADD_SUBJECT: "add-subject",
 	ADD_SUBJECT_BUTTON: `add-subject-${HTMLAttributesConstants.BUTTON}`,
 	ADD_SUBJECT_BUTTON_TEXT: "Add Subject",
+	NO_SUBJECTS_IN_LIST_MESSAGE_CONTAINER:
+		"no-subjects-in-list-message-container",
 	NO_SUBJECTS_MESSAGE_ID: "no-subjects-in-list-message",
 	NO_SUBJECTS_MESSAGE: "No Subjects Added Yet",
+
 	ADD_SUBJECT_MODAL_TITLE: "Add New Subject",
 	ADD_SUBJECT_MODAL_DESCRIPTION:
 		"Placeholder description for adding a new subject. Please fill in the required fields and any additional information as needed.",
@@ -65,7 +74,7 @@ export const HTMLFieldAttributesConstants = {
 	TEXTAREA: "textarea",
 	DEFAULT: "default",
 	SYSTEM_DEFAULT: "system-default",
-}
+};
 
 export const HTMLModalAttributesConstants = {
 	MODAL: "modal",
@@ -107,3 +116,17 @@ export const HTMLPopupAttributesConstants = {
 	SUCCESS: "success",
 	SUCCESS_TEXT: "&#9989; Success",
 };
+
+export const ElementModuleName = {
+	ADD_SUBJECT_MODAL: "AddSubjectModal",
+	a: "",
+	// a: "",
+	// a: "",
+	// a: "",
+	// a: "",
+	// a: "",
+	// a: "",
+	// a: "",
+	// a: "",
+	// a: "",
+}

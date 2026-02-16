@@ -2,6 +2,7 @@ import {
 	HTMLAttributesConstants,
 	HTMLSubjectAttributesConstants,
 	HTMLModalAttributesConstants,
+	ElementModuleName,
 } from "../../constants/HTMLConstants.js";
 import { DBSubjectConstants } from "../../constants/DBConstants.js";
 import { HTMLInputTagEnum, HTMLInputTypeEnum } from "../../utils/enum.js";
@@ -17,10 +18,11 @@ import { handler } from "../../utils/handler.js";
 import { Controller } from "../controller.js";
 import { isValueNull } from "../../utils/common.js";
 
+const { ADD_SUBJECT_MODAL } = ElementModuleName;
 const { STAGE, LIST_CONTAINER, LIST_INNER_CONTAINER } = HTMLAttributesConstants;
-
 const {
 	SUBJECT,
+	SUBJECT_ACTIVE_LIST_BUTTON,
 	ADD_SUBJECT,
 	ADD_SUBJECT_MODAL_TITLE,
 	ADD_SUBJECT_MODAL_DESCRIPTION,
@@ -34,7 +36,7 @@ const {
 	ADD_SUBJECT_MODAL_SUBJECT_CODE_FIELD_PLACEHOLDER,
 	ADD_SUBJECT_MODAL_SUBJECT_DESCRIPTION_FIELD_LABEL,
 	ADD_SUBJECT_MODAL_SUBJECT_DESCRIPTION_FIELD_PLACEHOLDER,
-	NO_SUBJECTS_MESSAGE_ID,
+	NO_SUBJECTS_IN_LIST_MESSAGE_CONTAINER,
 } = HTMLSubjectAttributesConstants;
 
 const { MODAL } = HTMLModalAttributesConstants;
@@ -51,7 +53,7 @@ export class SubjectController extends Controller {
 		this._currentSubject = null;
 
 		this._addSubjectModalController = new AddSubjectModalController(
-			"AddSubjectModal",
+			ADD_SUBJECT_MODAL,
 			(subject) => {
 				this._addSubjectCallback(subject);
 			},
@@ -76,7 +78,9 @@ export class SubjectController extends Controller {
 
 	addNewSubjectComponent(subject) {
 		try {
-			domManipulation.removeElementById("no-subjects-in-list-message-container");
+			domManipulation.removeElementById(
+				NO_SUBJECTS_IN_LIST_MESSAGE_CONTAINER,
+			);
 			domManipulation.removeElementById(
 				`${SUBJECT}-${LIST_INNER_CONTAINER}`,
 			);
@@ -135,7 +139,7 @@ export class SubjectController extends Controller {
 		const subjectElement = document.getElementById(
 			`${SUBJECT}-${order}__${id}`,
 		);
-		subjectElement.classList.remove("subject-active-list-button");
+		subjectElement.classList.remove(SUBJECT_ACTIVE_LIST_BUTTON);
 	}
 
 	// ////////////////////////////////////////////////////////////////////////////////
@@ -161,7 +165,7 @@ export class SubjectController extends Controller {
 					`${SUBJECT}-${order}__${id}`,
 				);
 				subjectElement.addEventListener("click", () => {
-					subjectElement.classList.add("subject-active-list-button");
+					subjectElement.classList.add(SUBJECT_ACTIVE_LIST_BUTTON);
 					this._setNewCurrentSubject(subject);
 				});
 			}

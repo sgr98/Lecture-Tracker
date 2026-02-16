@@ -8,19 +8,25 @@ import { View } from "../view.js";
 
 const {
 	SECTION_CONTAINER,
+	SECTION_ACTION_CONTAINER,
+	LIST_BUTTON_CONTAINER,
 	LIST_CONTAINER,
 	LIST_INNER_CONTAINER,
 	LIST_BUTTON,
 	BUTTON,
 	LIST_ADD_BUTTON,
+	NO_ITEMS_IN_LIST_MESSAGE_CONTAINER,
 	NO_ITEMS_IN_LIST_MESSAGE,
 } = HTMLAttributesConstants;
 const {
 	SUBJECT,
 	SUBJECT_CONTAINER,
+	SUBJECT_ACTION_CONTAINER,
+	SUBJECT_LIST_BUTTON_CONTAINER,
 	SUBJECT_BUTTON,
 	ADD_SUBJECT_BUTTON,
 	ADD_SUBJECT_BUTTON_TEXT,
+	NO_SUBJECTS_IN_LIST_MESSAGE_CONTAINER,
 	NO_SUBJECTS_MESSAGE_ID,
 	NO_SUBJECTS_MESSAGE,
 } = HTMLSubjectAttributesConstants;
@@ -37,8 +43,8 @@ export class SubjectSectionView extends View {
 				class="${SUBJECT_CONTAINER} ${SECTION_CONTAINER}"
 			>
 				<div
-					id="subject-action-container"
-					class="subject-action-container section-action-container"
+					id="${SUBJECT_ACTION_CONTAINER}"
+					class="${SUBJECT_ACTION_CONTAINER} ${SECTION_ACTION_CONTAINER}"
 				>
 					<div
 						id="${ADD_SUBJECT_BUTTON}"
@@ -91,8 +97,8 @@ export class SubjectListContainerView extends View {
 		const subjectName = subject[DBSubjectConstants.SUBJECT_NAME] ?? "";
 		const subjectListItemHTML = `
 			<div
-				id="subject-list-button-container-${order}"
-				class="subject-list-button-container list-button-container"
+				id="${SUBJECT_LIST_BUTTON_CONTAINER}-${order}"
+				class="${SUBJECT_LIST_BUTTON_CONTAINER} ${LIST_BUTTON_CONTAINER}"
 			>
 				<div
 					id="${SUBJECT}-${order}__${id}"
@@ -120,8 +126,8 @@ export class SubjectListContainerView extends View {
 	_generateNoSubjectsMessageHTML() {
 		const noSubjectsInListHTML = `
 			<div
-				id="no-subjects-in-list-message-container"
-				class="no-items-in-list-message-container"
+				id="${NO_SUBJECTS_IN_LIST_MESSAGE_CONTAINER}"
+				class="${NO_ITEMS_IN_LIST_MESSAGE_CONTAINER}"
 			>
 				<span
 					id="${NO_SUBJECTS_MESSAGE_ID}"
