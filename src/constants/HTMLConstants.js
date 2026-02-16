@@ -20,7 +20,22 @@ export const DisplayText = {
 		CLEAR_SUBJECTS: "Clear Subjects",
 		SUBJECTS_CLEARED_MESSAGE: "All subjects are successfully cleared",
 	},
-	subject: {},
+	subject: {
+		ADD_SUBJECT_BUTTON_TEXT: "Add Subject",
+		NO_SUBJECTS_MESSAGE: "No Subjects Added Yet",
+		ADD_SUBJECT_MODAL_TITLE: "Add New Subject",
+		ADD_SUBJECT_MODAL_DESCRIPTION:
+			"Placeholder description for adding a new subject. Please fill in the required fields and any additional information as needed.",
+		ADD_SUBJECT_MODAL_SUBJECT_NAME_FIELD_LABEL: "Subject Name",
+		ADD_SUBJECT_MODAL_SUBJECT_NAME_FIELD_PLACEHOLDER:
+			"Enter name of the subject",
+		ADD_SUBJECT_MODAL_SUBJECT_CODE_FIELD_LABEL: "Subject Code",
+		ADD_SUBJECT_MODAL_SUBJECT_CODE_FIELD_PLACEHOLDER: "Enter subject code",
+		ADD_SUBJECT_MODAL_SUBJECT_DESCRIPTION_FIELD_LABEL:
+			"Subject Description",
+		ADD_SUBJECT_MODAL_SUBJECT_DESCRIPTION_FIELD_PLACEHOLDER:
+			"Enter subject description",
+	},
 	course: {},
 	lectures: {},
 
@@ -67,33 +82,19 @@ export const HTMLTopbarAttributesConstants = {
 
 export const HTMLSubjectAttributesConstants = {
 	SUBJECT: "subject",
-	SUBJECT_CONTAINER: `subject-${HTMLAttributesConstants.CONTAINER}`,
-	SUBJECT_ACTION_CONTAINER: `subject-action-${HTMLAttributesConstants.CONTAINER}`,
-	SUBJECT_BUTTON: `subject-${HTMLAttributesConstants.BUTTON}`,
+	SUBJECT_CONTAINER: `subject-container`,
+	SUBJECT_ACTION_CONTAINER: `subject-action-container`,
+	SUBJECT_BUTTON: `subject-button`,
 	SUBJECT_LIST_BUTTON_CONTAINER: "subject-list-button-container",
 	SUBJECT_ACTIVE_LIST_BUTTON: "subject-active-list-button",
 	ADD_SUBJECT: "add-subject",
-	ADD_SUBJECT_BUTTON: `add-subject-${HTMLAttributesConstants.BUTTON}`,
-	ADD_SUBJECT_BUTTON_TEXT: "Add Subject",
+	ADD_SUBJECT_BUTTON: `add-subject-button`,
 	NO_SUBJECTS_IN_LIST_MESSAGE_CONTAINER:
 		"no-subjects-in-list-message-container",
 	NO_SUBJECTS_MESSAGE_ID: "no-subjects-in-list-message",
-	NO_SUBJECTS_MESSAGE: "No Subjects Added Yet",
-
-	ADD_SUBJECT_MODAL_TITLE: "Add New Subject",
-	ADD_SUBJECT_MODAL_DESCRIPTION:
-		"Placeholder description for adding a new subject. Please fill in the required fields and any additional information as needed.",
 	ADD_SUBJECT_MODAL_SUBJECT_NAME_FIELD: "subject-name",
-	ADD_SUBJECT_MODAL_SUBJECT_NAME_FIELD_LABEL: "Subject Name",
-	ADD_SUBJECT_MODAL_SUBJECT_NAME_FIELD_PLACEHOLDER:
-		"Enter name of the subject",
 	ADD_SUBJECT_MODAL_SUBJECT_CODE_FIELD: "subject-code",
-	ADD_SUBJECT_MODAL_SUBJECT_CODE_FIELD_LABEL: "Subject Code",
-	ADD_SUBJECT_MODAL_SUBJECT_CODE_FIELD_PLACEHOLDER: "Enter subject code",
 	ADD_SUBJECT_MODAL_SUBJECT_DESCRIPTION_FIELD: "subject-description",
-	ADD_SUBJECT_MODAL_SUBJECT_DESCRIPTION_FIELD_LABEL: "Subject Description",
-	ADD_SUBJECT_MODAL_SUBJECT_DESCRIPTION_FIELD_PLACEHOLDER:
-		"Enter subject description",
 };
 
 export const HTMLCoursesAttributesConstants = {

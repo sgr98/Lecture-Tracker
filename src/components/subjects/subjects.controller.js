@@ -3,6 +3,7 @@ import {
 	HTMLSubjectAttributesConstants,
 	HTMLModalAttributesConstants,
 	ElementModuleName,
+	DisplayText,
 } from "../../constants/HTMLConstants.js";
 import { DBSubjectConstants } from "../../constants/DBConstants.js";
 import { HTMLInputTagEnum, HTMLInputTypeEnum } from "../../utils/enum.js";
@@ -18,28 +19,29 @@ import { handler } from "../../utils/handler.js";
 import { Controller } from "../controller.js";
 import { isValueNull } from "../../utils/common.js";
 
-const { ADD_SUBJECT_MODAL } = ElementModuleName;
 const { STAGE, LIST_CONTAINER, LIST_INNER_CONTAINER } = HTMLAttributesConstants;
 const {
 	SUBJECT,
 	SUBJECT_ACTIVE_LIST_BUTTON,
 	ADD_SUBJECT,
-	ADD_SUBJECT_MODAL_TITLE,
-	ADD_SUBJECT_MODAL_DESCRIPTION,
 	ADD_SUBJECT_BUTTON,
 	ADD_SUBJECT_MODAL_SUBJECT_NAME_FIELD,
 	ADD_SUBJECT_MODAL_SUBJECT_CODE_FIELD,
 	ADD_SUBJECT_MODAL_SUBJECT_DESCRIPTION_FIELD,
+	NO_SUBJECTS_IN_LIST_MESSAGE_CONTAINER,
+} = HTMLSubjectAttributesConstants;
+const { MODAL } = HTMLModalAttributesConstants;
+const { ADD_SUBJECT_MODAL } = ElementModuleName;
+const {
+	ADD_SUBJECT_MODAL_TITLE,
+	ADD_SUBJECT_MODAL_DESCRIPTION,
 	ADD_SUBJECT_MODAL_SUBJECT_NAME_FIELD_LABEL,
 	ADD_SUBJECT_MODAL_SUBJECT_NAME_FIELD_PLACEHOLDER,
 	ADD_SUBJECT_MODAL_SUBJECT_CODE_FIELD_LABEL,
 	ADD_SUBJECT_MODAL_SUBJECT_CODE_FIELD_PLACEHOLDER,
 	ADD_SUBJECT_MODAL_SUBJECT_DESCRIPTION_FIELD_LABEL,
 	ADD_SUBJECT_MODAL_SUBJECT_DESCRIPTION_FIELD_PLACEHOLDER,
-	NO_SUBJECTS_IN_LIST_MESSAGE_CONTAINER,
-} = HTMLSubjectAttributesConstants;
-
-const { MODAL } = HTMLModalAttributesConstants;
+} = DisplayText.subject;
 
 export class SubjectController extends Controller {
 	constructor(moduleName) {

@@ -1,6 +1,7 @@
 import {
 	HTMLAttributesConstants,
 	HTMLSubjectAttributesConstants,
+	DisplayText,
 } from "../../constants/HTMLConstants.js";
 import { isArrayNullOrEmpty } from "../../utils/common.js";
 import { DBSubjectConstants } from "../../constants/DBConstants.js";
@@ -25,11 +26,10 @@ const {
 	SUBJECT_LIST_BUTTON_CONTAINER,
 	SUBJECT_BUTTON,
 	ADD_SUBJECT_BUTTON,
-	ADD_SUBJECT_BUTTON_TEXT,
 	NO_SUBJECTS_IN_LIST_MESSAGE_CONTAINER,
 	NO_SUBJECTS_MESSAGE_ID,
-	NO_SUBJECTS_MESSAGE,
 } = HTMLSubjectAttributesConstants;
+const { ADD_SUBJECT_BUTTON_TEXT, NO_SUBJECTS_MESSAGE } = DisplayText.subject;
 
 export class SubjectSectionView extends View {
 	constructor(modulueName) {
