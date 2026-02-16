@@ -1,10 +1,10 @@
 import {
 	HTMLAttributesConstants,
 	HTMLPopupAttributesConstants,
+	DisplayText,
 } from "../../../constants/HTMLConstants.js";
 
 const { BUTTON } = HTMLAttributesConstants;
-
 const {
 	POPUP,
 	POPUP_CONTAINER,
@@ -13,8 +13,8 @@ const {
 	POPUP_DESCRIPTION,
 	CLOSE,
 	POPUP_CLOSE_BUTTON,
-	CLOSE_TEXT,
 } = HTMLPopupAttributesConstants;
+const { CLOSE_TEXT } = DisplayText.popup;
 
 const generatePopupHTML = (moduleName, index, title, description) => {
 	const popupHTML = `

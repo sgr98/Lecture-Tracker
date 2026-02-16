@@ -24,8 +24,17 @@ export const DisplayText = {
 	course: {},
 	lectures: {},
 
-	modal: {},
-	popup: {},
+	modal: {
+		FORM_FIELDS_NOT_FILLED: "Some of the required fields are empty.",
+	},
+	popup: {
+		CLOSE_TEXT: "Close",
+		ALERT_TEXT: "Alert",
+		INFO_TEXT: "&#9432; Info",
+		WARNING_TEXT: "&#9888; Warning",
+		ERROR_TEXT: "&#8252; Error",
+		SUCCESS_TEXT: "&#9989; Success",
+	},
 };
 
 export const HTMLAttributesConstants = {
@@ -135,18 +144,12 @@ export const HTMLPopupAttributesConstants = {
 	POPUP_TITLE: "popup-title",
 	POPUP_DESCRIPTION: "popup-description",
 	CLOSE: "close",
-	CLOSE_TEXT: "Close",
 	POPUP_CLOSE_BUTTON: "popup-close-button",
 	ALERT: "alert",
-	ALERT_TEXT: "Alert",
 	INFO: "info",
-	INFO_TEXT: "&#9432; Info",
 	WARNING: "warning",
-	WARNING_TEXT: "&#9888; Warning",
 	ERROR: "error",
-	ERROR_TEXT: "&#8252; Error",
 	SUCCESS: "success",
-	SUCCESS_TEXT: "&#9989; Success",
 };
 
 export const ElementModuleName = {

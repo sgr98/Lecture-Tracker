@@ -1,6 +1,7 @@
 import {
 	HTMLAttributesConstants,
 	HTMLModalAttributesConstants,
+	DisplayText,
 } from "../../../constants/HTMLConstants.js";
 import { ModalView } from "./modal.view.js";
 import { Controller } from "../../controller.js";
@@ -13,6 +14,7 @@ import {
 
 const { MODAL, MODAL_FORM, CLOSE, INPUT } = HTMLModalAttributesConstants;
 const { ROOT } = HTMLAttributesConstants;
+const { FORM_FIELDS_NOT_FILLED } = DisplayText.modal;
 
 export class ModalController extends Controller {
 	constructor(moduleName, title, description, fields, formSubmitCallback) {
@@ -103,7 +105,7 @@ export class ModalController extends Controller {
 
 			let value = fieldElement?.value;
 			if (isRequired && isInputValueNullOrEmpty(value, inputType)) {
-				throw new Error("Some of the required fields are empty.");
+				throw new Error(FORM_FIELDS_NOT_FILLED);
 			}
 			value = value ?? getDefaultInputValue(inputType);
 

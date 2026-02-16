@@ -1,6 +1,7 @@
 import {
 	HTMLAttributesConstants,
 	HTMLPopupAttributesConstants,
+	DisplayText,
 } from "../../../constants/HTMLConstants.js";
 import { HTMLPopupTypeEnum } from "../../../utils/enum.js";
 import { domManipulation } from "../../../utils/domManipulation.js";
@@ -8,21 +9,15 @@ import { handler } from "../../../utils/handler.js";
 import { popupView } from "./popup.view.js";
 
 const { ROOT } = HTMLAttributesConstants;
-
+const { POPUP, CLOSE, ALERT, INFO, WARNING, ERROR, SUCCESS } =
+	HTMLPopupAttributesConstants;
 const {
-	POPUP,
-	CLOSE,
-	ALERT,
 	ALERT_TEXT,
-	INFO,
 	INFO_TEXT,
-	WARNING,
 	WARNING_TEXT,
-	ERROR,
 	ERROR_TEXT,
-	SUCCESS,
 	SUCCESS_TEXT,
-} = HTMLPopupAttributesConstants;
+} = DisplayText.popup;
 
 export const popupController = {
 	open: (moduleName, title, description, index = "") => {
