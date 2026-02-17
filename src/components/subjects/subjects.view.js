@@ -9,6 +9,8 @@ import { View } from "../view.js";
 
 const {
 	SECTION_CONTAINER,
+	SECTION_TITLE_CONTAINER,
+	SECTION_TITLE,
 	SECTION_ACTION_CONTAINER,
 	LIST_BUTTON_CONTAINER,
 	LIST_CONTAINER,
@@ -22,6 +24,8 @@ const {
 const {
 	SUBJECT,
 	SUBJECT_CONTAINER,
+	SUBJECT_TITLE_CONTAINER,
+	SUBJECT_TITLE,
 	SUBJECT_ACTION_CONTAINER,
 	SUBJECT_LIST_BUTTON_CONTAINER,
 	SUBJECT_BUTTON,
@@ -29,7 +33,8 @@ const {
 	NO_SUBJECTS_IN_LIST_MESSAGE_CONTAINER,
 	NO_SUBJECTS_MESSAGE_ID,
 } = HTMLSubjectAttributesConstants;
-const { ADD_SUBJECT_BUTTON_TEXT, NO_SUBJECTS_MESSAGE } = DisplayText.subject;
+const { SUBJECT_SECTION_TITLE, ADD_SUBJECT_BUTTON_TEXT, NO_SUBJECTS_MESSAGE } =
+	DisplayText.subject;
 
 export class SubjectSectionView extends View {
 	constructor(modulueName) {
@@ -42,6 +47,18 @@ export class SubjectSectionView extends View {
 				id="${SUBJECT_CONTAINER}"
 				class="${SUBJECT_CONTAINER} ${SECTION_CONTAINER}"
 			>
+				<div
+					id="${SUBJECT_TITLE_CONTAINER}"
+					class="${SUBJECT_TITLE_CONTAINER} ${SECTION_TITLE_CONTAINER}"
+				>
+					<span
+						id="${SUBJECT_TITLE}"
+						class="${SUBJECT_TITLE} ${SECTION_TITLE}"
+					>
+						${SUBJECT_SECTION_TITLE}
+					</span>
+				</div>
+
 				<div
 					id="${SUBJECT_ACTION_CONTAINER}"
 					class="${SUBJECT_ACTION_CONTAINER} ${SECTION_ACTION_CONTAINER}"

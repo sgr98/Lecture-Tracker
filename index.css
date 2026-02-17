@@ -15,6 +15,7 @@
   --blue-button-hover: rgb(5, 83, 201);
   --red-button-hover: rgb(237, 34, 51);
   --subject-accent: rgb(67, 170, 129);
+  --subject-accent-dark: rgb(67, 170, 129);
   --subject-accent-font: rgb(67, 170, 129);
   --text-primary: rgb(4, 4, 4);
   --text-secondary: rgb(60, 60, 60);
@@ -29,14 +30,16 @@
   --popup-backdrop: rgba(0, 0, 0, 0.3);
   --topbar-height: 13vh;
   --section-container-height: calc(100vh - var(--topbar-height));
-  --list-section-action-container-height: 13vh;
+  --section-title-container-height: 5vh;
+  --section-action-container-height: 8vh;
   --list-section-list-container-height: calc(
-  	100vh - var(--topbar-height) - var(
-  			--list-section-action-container-height
-  		)
+  	var(--section-container-height) - var(
+  			--section-title-container-height
+  		) - var(--section-action-container-height)
   );
-  --list-button-height: 8vh;
+  --list-section-button-height: 7vh;
   --list-section-width: 20vw;
+  --list-section-collapsed-width: 8vw;
   --very-big-text-size: 40px;
   --big-text-size: 26px;
   --light-big-text-size: 22px;
@@ -69,6 +72,7 @@
   --blue-button-hover: rgb(5, 83, 201);
   --red-button-hover: rgb(237, 34, 51);
   --subject-accent: rgb(67, 170, 129);
+  --subject-accent-dark: rgb(67, 170, 129);
   --subject-accent-font: rgb(67, 170, 129);
   --text-primary: rgb(4, 4, 4);
   --text-secondary: rgb(60, 60, 60);
@@ -83,14 +87,16 @@
   --popup-backdrop: rgba(0, 0, 0, 0.3);
   --topbar-height: 13vh;
   --section-container-height: calc(100vh - var(--topbar-height));
-  --list-section-action-container-height: 13vh;
+  --section-title-container-height: 5vh;
+  --section-action-container-height: 8vh;
   --list-section-list-container-height: calc(
-  	100vh - var(--topbar-height) - var(
-  			--list-section-action-container-height
-  		)
+  	var(--section-container-height) - var(
+  			--section-title-container-height
+  		) - var(--section-action-container-height)
   );
-  --list-button-height: 8vh;
+  --list-section-button-height: 7vh;
   --list-section-width: 20vw;
+  --list-section-collapsed-width: 8vw;
   --very-big-text-size: 40px;
   --big-text-size: 26px;
   --light-big-text-size: 22px;
@@ -184,6 +190,7 @@ body {
   --blue-button-hover: rgb(5, 83, 201);
   --red-button-hover: rgb(237, 34, 51);
   --subject-accent: rgb(67, 170, 129);
+  --subject-accent-dark: rgb(67, 170, 129);
   --subject-accent-font: rgb(67, 170, 129);
   --text-primary: rgb(4, 4, 4);
   --text-secondary: rgb(60, 60, 60);
@@ -198,14 +205,16 @@ body {
   --popup-backdrop: rgba(0, 0, 0, 0.3);
   --topbar-height: 13vh;
   --section-container-height: calc(100vh - var(--topbar-height));
-  --list-section-action-container-height: 13vh;
+  --section-title-container-height: 5vh;
+  --section-action-container-height: 8vh;
   --list-section-list-container-height: calc(
-  	100vh - var(--topbar-height) - var(
-  			--list-section-action-container-height
-  		)
+  	var(--section-container-height) - var(
+  			--section-title-container-height
+  		) - var(--section-action-container-height)
   );
-  --list-button-height: 8vh;
+  --list-section-button-height: 7vh;
   --list-section-width: 20vw;
+  --list-section-collapsed-width: 8vw;
   --very-big-text-size: 40px;
   --big-text-size: 26px;
   --light-big-text-size: 22px;
@@ -249,6 +258,7 @@ body {
   --blue-button-hover: rgb(5, 83, 201);
   --red-button-hover: rgb(237, 34, 51);
   --subject-accent: rgb(67, 170, 129);
+  --subject-accent-dark: rgb(67, 170, 129);
   --subject-accent-font: rgb(67, 170, 129);
   --text-primary: rgb(4, 4, 4);
   --text-secondary: rgb(60, 60, 60);
@@ -263,14 +273,16 @@ body {
   --popup-backdrop: rgba(0, 0, 0, 0.3);
   --topbar-height: 13vh;
   --section-container-height: calc(100vh - var(--topbar-height));
-  --list-section-action-container-height: 13vh;
+  --section-title-container-height: 5vh;
+  --section-action-container-height: 8vh;
   --list-section-list-container-height: calc(
-  	100vh - var(--topbar-height) - var(
-  			--list-section-action-container-height
-  		)
+  	var(--section-container-height) - var(
+  			--section-title-container-height
+  		) - var(--section-action-container-height)
   );
-  --list-button-height: 8vh;
+  --list-section-button-height: 7vh;
   --list-section-width: 20vw;
+  --list-section-collapsed-width: 8vw;
   --very-big-text-size: 40px;
   --big-text-size: 26px;
   --light-big-text-size: 22px;
@@ -298,12 +310,25 @@ SECTION
   background: var(--background);
 }
 
-.section-action-container {
+/*
+////////////////////////////////
+////////////////////////////////
+SECTION TITLE AREA
+////////////////////////////////
+////////////////////////////////
+*/
+.section-title-container {
   flex-direction: row;
   width: 100%;
-  height: var(--list-section-action-container-height);
-  padding: 12px 10px;
-  border-bottom: 4px solid var(--border-black);
+  height: var(--section-title-container-height);
+  border-bottom: 3px solid var(--border-black);
+}
+
+.section-title {
+  width: 100%;
+  height: 100%;
+  font-size: var(--big-text-size);
+  font-weight: var(--font-weight-light-bold);
 }
 
 /*
@@ -313,6 +338,14 @@ SECTION ACTION AREA
 ////////////////////////////////
 ////////////////////////////////
 */
+.section-action-container {
+  flex-direction: row;
+  width: 100%;
+  height: var(--section-action-container-height);
+  padding: 12px 10px;
+  border-bottom: 3px dotted var(--border-black);
+}
+
 .button {
   width: 100%;
   height: 100%;
@@ -354,7 +387,7 @@ SECTION LIST AREA
 
 .list-button {
   width: 100%;
-  height: var(--list-button-height);
+  height: var(--list-section-button-height);
   text-align: center;
   border-bottom: 2px solid var(--border-black);
   background: var(--background);
@@ -404,6 +437,7 @@ NO ITEMS IN LIST
   --blue-button-hover: rgb(5, 83, 201);
   --red-button-hover: rgb(237, 34, 51);
   --subject-accent: rgb(67, 170, 129);
+  --subject-accent-dark: rgb(67, 170, 129);
   --subject-accent-font: rgb(67, 170, 129);
   --text-primary: rgb(4, 4, 4);
   --text-secondary: rgb(60, 60, 60);
@@ -418,14 +452,16 @@ NO ITEMS IN LIST
   --popup-backdrop: rgba(0, 0, 0, 0.3);
   --topbar-height: 13vh;
   --section-container-height: calc(100vh - var(--topbar-height));
-  --list-section-action-container-height: 13vh;
+  --section-title-container-height: 5vh;
+  --section-action-container-height: 8vh;
   --list-section-list-container-height: calc(
-  	100vh - var(--topbar-height) - var(
-  			--list-section-action-container-height
-  		)
+  	var(--section-container-height) - var(
+  			--section-title-container-height
+  		) - var(--section-action-container-height)
   );
-  --list-button-height: 8vh;
+  --list-section-button-height: 7vh;
   --list-section-width: 20vw;
+  --list-section-collapsed-width: 8vw;
   --very-big-text-size: 40px;
   --big-text-size: 26px;
   --light-big-text-size: 22px;
@@ -604,6 +640,7 @@ CONTENT
   --blue-button-hover: rgb(5, 83, 201);
   --red-button-hover: rgb(237, 34, 51);
   --subject-accent: rgb(67, 170, 129);
+  --subject-accent-dark: rgb(67, 170, 129);
   --subject-accent-font: rgb(67, 170, 129);
   --text-primary: rgb(4, 4, 4);
   --text-secondary: rgb(60, 60, 60);
@@ -618,14 +655,16 @@ CONTENT
   --popup-backdrop: rgba(0, 0, 0, 0.3);
   --topbar-height: 13vh;
   --section-container-height: calc(100vh - var(--topbar-height));
-  --list-section-action-container-height: 13vh;
+  --section-title-container-height: 5vh;
+  --section-action-container-height: 8vh;
   --list-section-list-container-height: calc(
-  	100vh - var(--topbar-height) - var(
-  			--list-section-action-container-height
-  		)
+  	var(--section-container-height) - var(
+  			--section-title-container-height
+  		) - var(--section-action-container-height)
   );
-  --list-button-height: 8vh;
+  --list-section-button-height: 7vh;
   --list-section-width: 20vw;
+  --list-section-collapsed-width: 8vw;
   --very-big-text-size: 40px;
   --big-text-size: 26px;
   --light-big-text-size: 22px;
@@ -749,6 +788,7 @@ CONTENT
   --blue-button-hover: rgb(5, 83, 201);
   --red-button-hover: rgb(237, 34, 51);
   --subject-accent: rgb(67, 170, 129);
+  --subject-accent-dark: rgb(67, 170, 129);
   --subject-accent-font: rgb(67, 170, 129);
   --text-primary: rgb(4, 4, 4);
   --text-secondary: rgb(60, 60, 60);
@@ -763,14 +803,16 @@ CONTENT
   --popup-backdrop: rgba(0, 0, 0, 0.3);
   --topbar-height: 13vh;
   --section-container-height: calc(100vh - var(--topbar-height));
-  --list-section-action-container-height: 13vh;
+  --section-title-container-height: 5vh;
+  --section-action-container-height: 8vh;
   --list-section-list-container-height: calc(
-  	100vh - var(--topbar-height) - var(
-  			--list-section-action-container-height
-  		)
+  	var(--section-container-height) - var(
+  			--section-title-container-height
+  		) - var(--section-action-container-height)
   );
-  --list-button-height: 8vh;
+  --list-section-button-height: 7vh;
   --list-section-width: 20vw;
+  --list-section-collapsed-width: 8vw;
   --very-big-text-size: 40px;
   --big-text-size: 26px;
   --light-big-text-size: 22px;
@@ -895,6 +937,7 @@ STAGE
   --blue-button-hover: rgb(5, 83, 201);
   --red-button-hover: rgb(237, 34, 51);
   --subject-accent: rgb(67, 170, 129);
+  --subject-accent-dark: rgb(67, 170, 129);
   --subject-accent-font: rgb(67, 170, 129);
   --text-primary: rgb(4, 4, 4);
   --text-secondary: rgb(60, 60, 60);
@@ -909,14 +952,16 @@ STAGE
   --popup-backdrop: rgba(0, 0, 0, 0.3);
   --topbar-height: 13vh;
   --section-container-height: calc(100vh - var(--topbar-height));
-  --list-section-action-container-height: 13vh;
+  --section-title-container-height: 5vh;
+  --section-action-container-height: 8vh;
   --list-section-list-container-height: calc(
-  	100vh - var(--topbar-height) - var(
-  			--list-section-action-container-height
-  		)
+  	var(--section-container-height) - var(
+  			--section-title-container-height
+  		) - var(--section-action-container-height)
   );
-  --list-button-height: 8vh;
+  --list-section-button-height: 7vh;
   --list-section-width: 20vw;
+  --list-section-collapsed-width: 8vw;
   --very-big-text-size: 40px;
   --big-text-size: 26px;
   --light-big-text-size: 22px;
@@ -937,6 +982,17 @@ STAGE
   width: var(--list-section-width);
   height: 100%;
   border-right: 3px solid var(--border-black);
+}
+
+/*
+////////////////////////////////
+////////////////////////////////
+TITLE AREA
+////////////////////////////////
+////////////////////////////////
+*/
+.subject-title {
+  color: var(--subject-accent-font);
 }
 
 /*

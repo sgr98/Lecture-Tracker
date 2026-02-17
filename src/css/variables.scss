@@ -22,6 +22,7 @@
 	--red-button-hover: rgb(237, 34, 51);
 
 	--subject-accent: rgb(67, 170, 129);
+	--subject-accent-dark: rgb(67, 170, 129);
 	--subject-accent-font: rgb(67, 170, 129);
 
 	--text-primary: rgb(4, 4, 4);
@@ -42,14 +43,17 @@
 	// DISTANCE
 	--topbar-height: 13vh;
 	--section-container-height: calc(100vh - var(--topbar-height));
-	--list-section-action-container-height: 13vh;
+	--section-title-container-height: 5vh;
+	--section-action-container-height: 8vh;
 	--list-section-list-container-height: calc(
-		100vh - var(--topbar-height) - var(
-				--list-section-action-container-height
-			)
+		var(--section-container-height) - var(
+				--section-title-container-height
+			) - var(--section-action-container-height)
 	);
-	--list-button-height: 8vh;
+	--list-section-button-height: 7vh;
+
 	--list-section-width: 20vw;
+	--list-section-collapsed-width: 8vw;
 
 	// FONT
 	--very-big-text-size: 40px;

@@ -21,6 +21,7 @@ export const DisplayText = {
 		SUBJECTS_CLEARED_MESSAGE: "All subjects are successfully cleared",
 	},
 	subject: {
+		SUBJECT_SECTION_TITLE: "Subject",
 		ADD_SUBJECT_BUTTON_TEXT: "Add Subject",
 		NO_SUBJECTS_MESSAGE: "No Subjects Added Yet",
 		ADD_SUBJECT_MODAL_TITLE: "Add New Subject",
@@ -59,6 +60,8 @@ export const HTMLAttributesConstants = {
 	TOP_TITLE: "top-title",
 	CONTAINER: "container",
 	SECTION_CONTAINER: "section-container",
+	SECTION_TITLE_CONTAINER: "section-title-container",
+	SECTION_TITLE: "section-title",
 	SECTION_ACTION_CONTAINER: "section-action-container",
 	LIST_BUTTON_CONTAINER: "list-button-container",
 	LIST_CONTAINER: "list-container",
@@ -83,6 +86,8 @@ export const HTMLTopbarAttributesConstants = {
 export const HTMLSubjectAttributesConstants = {
 	SUBJECT: "subject",
 	SUBJECT_CONTAINER: `subject-container`,
+	SUBJECT_TITLE_CONTAINER: "subject-title-container",
+	SUBJECT_TITLE: "subject-title",
 	SUBJECT_ACTION_CONTAINER: `subject-action-container`,
 	SUBJECT_BUTTON: `subject-button`,
 	SUBJECT_LIST_BUTTON_CONTAINER: "subject-list-button-container",
