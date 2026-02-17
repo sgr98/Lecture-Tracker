@@ -37,8 +37,8 @@ export class SubjectController extends Controller {
 
 		this._addSubjectModalController = new AddSubjectModalController(
 			ADD_SUBJECT_MODAL_MODULE,
-			(subject) => {
-				this._addSubjectCallback(subject);
+			(newSubject) => {
+				this._addSubjectCallback(newSubject);
 			},
 		);
 	}
@@ -59,7 +59,7 @@ export class SubjectController extends Controller {
 		}
 	}
 
-	addNewSubjectComponent(subject) {
+	addNewSubjectComponent(newSubject) {
 		try {
 			domManipulation.removeElementById(
 				NO_SUBJECTS_IN_LIST_MESSAGE_CONTAINER,
