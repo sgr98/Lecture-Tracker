@@ -1,46 +1,28 @@
 import {
 	HTMLAttributesConstants,
 	HTMLSubjectAttributesConstants,
-	HTMLModalAttributesConstants,
 	ElementModuleName,
-	DisplayText,
 } from "../../constants/HTMLConstants.js";
 import { DBSubjectConstants } from "../../constants/DBConstants.js";
-import { HTMLInputTagEnum, HTMLInputTypeEnum } from "../../utils/enum.js";
 import { domManipulation } from "../../utils/domManipulation.js";
-import { ModalController } from "../common/modal/modal.controller.js";
+import { AddSubjectModalController } from "./addSubjectModal/addSubjectModal.controller.js";
 
 import { SubjectAPI } from "./subjects.api.js";
 import {
 	SubjectSectionView,
 	SubjectListContainerView,
 } from "./subjects.view.js";
-import { handler } from "../../utils/handler.js";
 import { Controller } from "../controller.js";
+import { handler } from "../../utils/handler.js";
 import { isValueNull } from "../../utils/common.js";
 
 const { STAGE, LIST_CONTAINER, LIST_INNER_CONTAINER } = HTMLAttributesConstants;
 const {
 	SUBJECT,
 	SUBJECT_ACTIVE_LIST_BUTTON,
-	ADD_SUBJECT_BUTTON,
-	ADD_SUBJECT_MODAL_SUBJECT_NAME_FIELD,
-	ADD_SUBJECT_MODAL_SUBJECT_CODE_FIELD,
-	ADD_SUBJECT_MODAL_SUBJECT_DESCRIPTION_FIELD,
 	NO_SUBJECTS_IN_LIST_MESSAGE_CONTAINER,
 } = HTMLSubjectAttributesConstants;
-const { MODAL } = HTMLModalAttributesConstants;
-const { ADD_SUBJECT_MODULE, ADD_SUBJECT_MODAL_MODULE } = ElementModuleName;
-const {
-	ADD_SUBJECT_MODAL_TITLE,
-	ADD_SUBJECT_MODAL_DESCRIPTION,
-	ADD_SUBJECT_MODAL_SUBJECT_NAME_FIELD_LABEL,
-	ADD_SUBJECT_MODAL_SUBJECT_NAME_FIELD_PLACEHOLDER,
-	ADD_SUBJECT_MODAL_SUBJECT_CODE_FIELD_LABEL,
-	ADD_SUBJECT_MODAL_SUBJECT_CODE_FIELD_PLACEHOLDER,
-	ADD_SUBJECT_MODAL_SUBJECT_DESCRIPTION_FIELD_LABEL,
-	ADD_SUBJECT_MODAL_SUBJECT_DESCRIPTION_FIELD_PLACEHOLDER,
-} = DisplayText.subject;
+const { ADD_SUBJECT_MODAL_MODULE } = ElementModuleName;
 
 export class SubjectController extends Controller {
 	constructor(moduleName) {
@@ -170,112 +152,6 @@ export class SubjectController extends Controller {
 					this._setNewCurrentSubject(subject);
 				});
 			}
-		} catch (error) {
-			handler.errorWithPopup(error);
-		}
-	}
-}
-
-class AddSubjectModalController extends Controller {
-	constructor(moduleName, addSubjectCallback) {
-		super(moduleName);
-		this._addSubjectCallback = addSubjectCallback;
-	}
-
-	// ////////////////////////////////////////////////////////////////////////////////
-	// ////////////////////////////////////////////////////////////////////////////////
-	// Components
-	// ////////////////////////////////////////////////////////////////////////////////
-	// ////////////////////////////////////////////////////////////////////////////////
-
-	addComponent() {
-		try {
-			const addSubjectModalFields = [
-				{
-					name: ADD_SUBJECT_MODAL_SUBJECT_NAME_FIELD,
-					label: ADD_SUBJECT_MODAL_SUBJECT_NAME_FIELD_LABEL,
-					placeholder:
-						ADD_SUBJECT_MODAL_SUBJECT_NAME_FIELD_PLACEHOLDER,
-					inputTag: HTMLInputTagEnum.Input,
-					inputType: HTMLInputTypeEnum.Text,
-					isRequired: true,
-					mapTo: DBSubjectConstants.SUBJECT_NAME,
-				},
-				{
-					name: ADD_SUBJECT_MODAL_SUBJECT_CODE_FIELD,
-					label: ADD_SUBJECT_MODAL_SUBJECT_CODE_FIELD_LABEL,
-					placeholder:
-						ADD_SUBJECT_MODAL_SUBJECT_CODE_FIELD_PLACEHOLDER,
-					inputTag: HTMLInputTagEnum.Input,
-					inputType: HTMLInputTypeEnum.Text,
-					isRequired: true,
-					mapTo: DBSubjectConstants.SUBJECT_CODE,
-				},
-				{
-					name: ADD_SUBJECT_MODAL_SUBJECT_DESCRIPTION_FIELD,
-					label: ADD_SUBJECT_MODAL_SUBJECT_DESCRIPTION_FIELD_LABEL,
-					placeholder:
-						ADD_SUBJECT_MODAL_SUBJECT_DESCRIPTION_FIELD_PLACEHOLDER,
-					inputTag: HTMLInputTagEnum.Textarea,
-					inputType: HTMLInputTypeEnum.Text,
-					isRequired: false,
-					mapTo: DBSubjectConstants.SUBJECT_DESCRIPTION,
-				},
-			];
-			const modalController = new ModalController(
-				ADD_SUBJECT_MODULE,
-				ADD_SUBJECT_MODAL_TITLE,
-				ADD_SUBJECT_MODAL_DESCRIPTION,
-				addSubjectModalFields,
-				(fields) => {
-					this._addSubjectModalCallback(fields);
-				},
-			);
-			modalController.addComponent();
-			this.addEventListeners();
-		} catch (error) {
-			handler.errorWithPopup(error);
-		}
-	}
-
-	_addSubjectModalCallback(formFields) {
-		try {
-			let newSubject = {};
-			formFields.forEach((field) => {
-				const { value, mapTo } = field;
-				newSubject[mapTo] = value;
-			});
-			newSubject[DBSubjectConstants.COURSE_LIST] = [];
-			this._addSubjectCallback(newSubject);
-		} catch (error) {
-			handler.errorWithPopup(error);
-		}
-	}
-
-	// ////////////////////////////////////////////////////////////////////////////////
-	// ////////////////////////////////////////////////////////////////////////////////
-	// Event Listeners
-	// ////////////////////////////////////////////////////////////////////////////////
-	// ////////////////////////////////////////////////////////////////////////////////
-
-	addEventListeners() {
-		try {
-			this._openAddSubjectModalEventListener();
-		} catch (error) {
-			handler.errorWithPopup(error);
-		}
-	}
-
-	_openAddSubjectModalEventListener() {
-		try {
-			const addSubjectButton =
-				document.getElementById(ADD_SUBJECT_BUTTON);
-			const addSubjectModal = document.getElementById(
-				`${ADD_SUBJECT_MODULE}-${MODAL}`,
-			);
-			addSubjectButton.addEventListener("click", () => {
-				addSubjectModal.style.display = "flex";
-			});
 		} catch (error) {
 			handler.errorWithPopup(error);
 		}
