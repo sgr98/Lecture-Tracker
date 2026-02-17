@@ -37,34 +37,34 @@ export class App {
 		this._courseController.addComponent();
 		this._lectureController.addComponent();
 
-		const alertPopupController = new AlertPopupController(
-			"Placeholder test description added here for testing 1",
-		);
-		alertPopupController.addComponent();
+		// const alertPopupController = new AlertPopupController(
+		// 	"Placeholder test description added here for testing 1",
+		// );
+		// alertPopupController.addComponent();
 
-		const infoPopupController = new InfoPopupController(
-			"Placeholder test description added here for testing 1",
-		);
-		infoPopupController.addComponent();
+		// const infoPopupController = new InfoPopupController(
+		// 	"Placeholder test description added here for testing 1",
+		// );
+		// infoPopupController.addComponent();
 
-		const warningPopupController = new WarningPopupController(
-			"Placeholder test description added here for testing 1",
-		);
-		warningPopupController.addComponent();
+		// const warningPopupController = new WarningPopupController(
+		// 	"Placeholder test description added here for testing 1",
+		// );
+		// warningPopupController.addComponent();
 
-		const errorPopupController = new ErrorPopupController(
-			"Placeholder test description added here for testing 1",
-		);
-		errorPopupController.addComponent();
+		// const errorPopupController = new ErrorPopupController(
+		// 	"Placeholder test description added here for testing 1",
+		// );
+		// errorPopupController.addComponent();
 
-		const successPopupController = new SuccessPopupController(
-			"Placeholder test description added here for testing 1",
-		);
-		successPopupController.addComponent();
+		// const successPopupController = new SuccessPopupController(
+		// 	"Placeholder test description added here for testing 1",
+		// );
+		// successPopupController.addComponent();
 
-		const successPopupController2 = new SuccessPopupController(
-			"Placeholder test description added here for testing 2",
-		);
-		successPopupController2.addComponent();
+		// const successPopupController2 = new SuccessPopupController(
+		// 	"Placeholder test description added here for testing 2",
+		// );
+		// successPopupController2.addComponent();
 	}
 }
