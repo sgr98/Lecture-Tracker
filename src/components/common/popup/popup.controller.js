@@ -3,56 +3,66 @@ import {
 	HTMLPopupAttributesConstants,
 	DisplayText,
 } from "../../../constants/HTMLConstants.js";
-import { HTMLPopupTypeEnum } from "../../../utils/enum.js";
 import { domManipulation } from "../../../utils/domManipulation.js";
+import { Controller } from "../../controller.js";
 import { handler } from "../../../utils/handler.js";
-import { popupView } from "./popup.view.js";
+import { PopupView } from "./popup.view.js";
 
 const { ROOT } = HTMLAttributesConstants;
 const { POPUP, CLOSE, ALERT, INFO, WARNING, ERROR, SUCCESS } =
 	HTMLPopupAttributesConstants;
-const {
-	ALERT_TEXT,
-	INFO_TEXT,
-	WARNING_TEXT,
-	ERROR_TEXT,
-	SUCCESS_TEXT,
-} = DisplayText.popup;
+const { ALERT_TEXT, INFO_TEXT, WARNING_TEXT, ERROR_TEXT, SUCCESS_TEXT } =
+	DisplayText.popup;
 
-export const popupController = {
-	open: (moduleName, title, description, index = "") => {
+class PopupController extends Controller {
+	constructor(moduleName, title, description) {
+		super(moduleName);
+		this._moduleName = moduleName ?? ALERT;
+		this._title = title ?? ALERT_TEXT;
+		this._description = description ?? "";
+		this._index = "1";
+	}
+
+	addComponent() {
 		try {
-			index = index ?? "";
-			popupController.addPopupToRootDOM(
-				moduleName,
-				index,
-				title,
-				description,
+			this._popupView = new PopupView(
+				this._moduleName,
+				this._title,
+				this._description,
+				this._index,
 			);
-			popupController.addPopupCloseEventListener(moduleName, index);
+			const popupHTML = this._popupView.generateHTML();
+			domManipulation.addHTMLStringToDomById(ROOT, popupHTML);
+			this.addEventListeners();
 		} catch (error) {
-			handler.error(error);
+			handler.errorWithPopup(error);
 		}
-	},
+	}
 
-	addPopupToRootDOM: (moduleName, index, title, description) => {
+	_getPopupIndex() {
+		const moduleName = this._moduleName;
+		const popups = document.getElementsByClassName(
+			`${moduleName}-${POPUP}`,
+		);
+		let popupsCount = popups.length ?? 0;
+		popupsCount += 1;
+		return popupsCount.toString();
+	}
+
+	addEventListeners() {
 		try {
-			const alertPopupHTML = popupView.generatePopupHTML(
-				moduleName,
-				index,
-				title,
-				description,
-			);
-			domManipulation.addHTMLStringToDomById(ROOT, alertPopupHTML);
+			this._addPopupCloseEventListener();
 		} catch (error) {
-			handler.error(error);
+			handler.errorWithPopup(error);
 		}
-	},
+	}
 
-	addPopupCloseEventListener: (moduleName, index) => {
+	_addPopupCloseEventListener() {
 		try {
+			const moduleName = this._moduleName;
+			const index = this._index;
 			const popup = document.getElementById(
-				`${moduleName}-${index}-${POPUP}`,
+				`${moduleName}-${POPUP}-${index}`,
 			);
 			const popupCloseButton = document.getElementById(
 				`${CLOSE}-${moduleName}-${index}-${POPUP}`,
@@ -69,56 +79,40 @@ export const popupController = {
 		} catch (error) {
 			handler.error(error);
 		}
-	},
-};
+	}
+}
 
-export const alertPopupController = {
-	open: (description, index = "") => {
-		popupController.open(ALERT, ALERT_TEXT, description, index);
-	},
-};
+export class AlertPopupController extends PopupController {
+	constructor(description) {
+		super(ALERT, ALERT_TEXT, description);
+		this._index = super._getPopupIndex() ?? "1";
+	}
+}
 
-export const infoPopupController = {
-	open: (description, index = "") => {
-		popupController.open(INFO, INFO_TEXT, description, index);
-	},
-};
+export class InfoPopupController extends PopupController {
+	constructor(description) {
+		super(INFO, INFO_TEXT, description);
+		this._index = super._getPopupIndex() ?? "1";
+	}
+}
 
-export const warningPopupController = {
-	open: (description, index = "") => {
-		popupController.open(WARNING, WARNING_TEXT, description, index);
-	},
-};
+export class WarningPopupController extends PopupController {
+	constructor(description) {
+		super(WARNING, WARNING_TEXT, description);
+		this._index = super._getPopupIndex() ?? "1";
+	}
+}
 
-export const errorPopupController = {
-	open: (description, index = "") => {
-		popupController.open(ERROR, ERROR_TEXT, description, index);
-	},
-};
+export class ErrorPopupController extends PopupController {
+	constructor(description) {
+		super(ERROR, ERROR_TEXT, description);
+		this._index = super._getPopupIndex() ?? "1";
+	}
+}
 
-export const successPopupController = {
-	open: (description, index = "") => {
-		popupController.open(SUCCESS, SUCCESS_TEXT, description, index);
-	},
-};
-
-export const multiplePopupsController = {
-	open: (popupDetails) => {
-		popupDetails = popupDetails ?? [];
-		popupDetails.forEach((popup, index) => {
-			const { popupType, description } = popup;
-			const id = (index + 1).toString();
-			if (popupType === HTMLPopupTypeEnum.Alert) {
-				alertPopupController.open(description, id);
-			} else if (popupType === HTMLPopupTypeEnum.Info) {
-				infoPopupController.open(description, id);
-			} else if (popupType === HTMLPopupTypeEnum.Warning) {
-				warningPopupController.open(description, id);
-			} else if (popupType === HTMLPopupTypeEnum.Error) {
-				errorPopupController.open(description, id);
-			} else if (popupType === HTMLPopupTypeEnum.Success) {
-				successPopupController.open(description, id);
-			}
-		});
-	},
-};
+export class SuccessPopupController extends PopupController {
+	constructor(description) {
+		super(SUCCESS, SUCCESS_TEXT, description);
+		this._index = super._getPopupIndex() ?? "1";
+	}
+}

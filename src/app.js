@@ -1,12 +1,10 @@
-import { HTMLPopupTypeEnum } from "./utils/enum.js";
 import { ElementModuleName } from "./constants/HTMLConstants.js";
 import {
-	alertPopupController,
-	infoPopupController,
-	warningPopupController,
-	errorPopupController,
-	successPopupController,
-	multiplePopupsController,
+	AlertPopupController,
+	InfoPopupController,
+	WarningPopupController,
+	ErrorPopupController,
+	SuccessPopupController,
 } from "./components/common/popup/popup.controller.js";
 import { TopbarController } from "./components/topbar/topbar.controller.js";
 import { StageController } from "./components/stage/stage.controller.js";
@@ -39,48 +37,34 @@ export class App {
 		this._courseController.addComponent();
 		this._lectureController.addComponent();
 
-		// alertPopupController.open(
-		//     "Placeholder test description added here for testing 1",
-		// );
-		// infoPopupController.open(
-		//     "Placeholder test description added here for testing 2",
-		// );
-		// warningPopupController.open(
-		//     "Placeholder test description added here for testing 3",
-		// );
-		// errorPopupController.open(
-		//     "Placeholder test description added here for testing 4",
-		// );
-		// successPopupController.open(
-		//     "Placeholder test description added here for testing 5",
-		// );
+		const alertPopupController = new AlertPopupController(
+			"Placeholder test description added here for testing 1",
+		);
+		alertPopupController.addComponent();
 
-		// multiplePopupsController.open([
-		//     {
-		//         popupType: HTMLPopupTypeEnum.Alert,
-		//         description:
-		//             "Placeholder test description added here for testing 1",
-		//     },
-		//     {
-		//         popupType: HTMLPopupTypeEnum.Info,
-		//         description:
-		//             "Placeholder test description added here for testing 2",
-		//     },
-		//     {
-		//         popupType: HTMLPopupTypeEnum.Warning,
-		//         description:
-		//             "Placeholder test description added here for testing 3",
-		//     },
-		//     {
-		//         popupType: HTMLPopupTypeEnum.Error,
-		//         description:
-		//             "Placeholder test description added here for testing 4",
-		//     },
-		//     {
-		//         popupType: HTMLPopupTypeEnum.Success,
-		//         description:
-		//             "Placeholder test description added here for testing 5",
-		//     },
-		// ]);
+		const infoPopupController = new InfoPopupController(
+			"Placeholder test description added here for testing 1",
+		);
+		infoPopupController.addComponent();
+
+		const warningPopupController = new WarningPopupController(
+			"Placeholder test description added here for testing 1",
+		);
+		warningPopupController.addComponent();
+
+		const errorPopupController = new ErrorPopupController(
+			"Placeholder test description added here for testing 1",
+		);
+		errorPopupController.addComponent();
+
+		const successPopupController = new SuccessPopupController(
+			"Placeholder test description added here for testing 1",
+		);
+		successPopupController.addComponent();
+
+		const successPopupController2 = new SuccessPopupController(
+			"Placeholder test description added here for testing 2",
+		);
+		successPopupController2.addComponent();
 	}
 }

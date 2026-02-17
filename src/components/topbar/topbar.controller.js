@@ -8,7 +8,7 @@ import { TopbarView } from "./topbar.view.js";
 import { domManipulation } from "../../utils/domManipulation.js";
 import { handler } from "../../utils/handler.js";
 import { SubjectAPI } from "../subjects/subjects.api.js";
-import { successPopupController } from "../common/popup/popup.controller.js";
+import { SuccessPopupController } from "../common/popup/popup.controller.js";
 
 const { SUBJECTS_CLEARED_MESSAGE } = DisplayText.topbar;
 const { ROOT } = HTMLAttributesConstants;
@@ -45,7 +45,10 @@ export class TopbarController extends Controller {
 			);
 			clearSubjectsButton.addEventListener("click", () => {
 				SubjectAPI.deleteAllSubjects();
-				successPopupController.open(SUBJECTS_CLEARED_MESSAGE);
+				const successPopupController = new SuccessPopupController(
+					SUBJECTS_CLEARED_MESSAGE,
+				);
+				successPopupController.addComponent();
 			});
 		} catch (error) {
 			handler.errorWithPopup(error);

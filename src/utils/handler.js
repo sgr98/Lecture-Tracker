@@ -1,4 +1,4 @@
-import { errorPopupController } from "../components/common/popup/popup.controller.js";
+import { ErrorPopupController } from "../components/common/popup/popup.controller.js";
 
 const STACK_TRACE = "Current stack trace:";
 
@@ -12,7 +12,8 @@ export const handler = {
 		try {
 			console.error(err);
 			console.trace(STACK_TRACE);
-			errorPopupController.open(err);
+			const errorPopupController = new ErrorPopupController(err);
+			errorPopupController.addComponent();
 		} catch (e) {
 			console.error(e);
 		}
