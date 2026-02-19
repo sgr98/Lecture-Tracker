@@ -40,6 +40,7 @@ class PopupController extends Controller {
 	}
 
 	_getPopupIndex() {
+		try {
 		const moduleName = this._moduleName;
 		const popups = document.getElementsByClassName(
 			`${moduleName}-${POPUP}`,
@@ -47,6 +48,9 @@ class PopupController extends Controller {
 		let popupsCount = popups.length ?? 0;
 		popupsCount += 1;
 		return popupsCount.toString();
+		} catch (error) {
+			handler.error(error);
+		}
 	}
 
 	addEventListeners() {

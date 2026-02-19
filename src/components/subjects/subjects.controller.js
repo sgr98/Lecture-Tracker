@@ -108,12 +108,17 @@ export class SubjectController extends Controller {
 	}
 
 	_setNewCurrentSubject(subject) {
+		try {
 		this._unsetCurrentSubject();
 		this._currentSubject = subject;
 		// load courses
+		} catch (error) {
+			handler.errorWithPopup(error);
+		}
 	}
 
 	_unsetCurrentSubject() {
+		try {
 		if (isValueNull(this._currentSubject)) {
 			return;
 		}
@@ -123,6 +128,9 @@ export class SubjectController extends Controller {
 			`${SUBJECT}-${order}__${id}`,
 		);
 		subjectElement.classList.remove(SUBJECT_ACTIVE_LIST_BUTTON);
+		} catch (error) {
+			handler.errorWithPopup(error);
+		}
 	}
 
 	// ////////////////////////////////////////////////////////////////////////////////
