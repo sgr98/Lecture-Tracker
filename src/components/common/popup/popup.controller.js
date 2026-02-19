@@ -35,19 +35,19 @@ class PopupController extends Controller {
 			domManipulation.addHTMLStringToDomById(ROOT, popupHTML);
 			this.addEventListeners();
 		} catch (error) {
-			handler.errorWithPopup(error);
+			handler.error(error);
 		}
 	}
 
 	_getPopupIndex() {
 		try {
-		const moduleName = this._moduleName;
-		const popups = document.getElementsByClassName(
-			`${moduleName}-${POPUP}`,
-		);
-		let popupsCount = popups.length ?? 0;
-		popupsCount += 1;
-		return popupsCount.toString();
+			const moduleName = this._moduleName;
+			const popups = document.getElementsByClassName(
+				`${moduleName}-${POPUP}`,
+			);
+			let popupsCount = popups.length ?? 0;
+			popupsCount += 1;
+			return popupsCount.toString();
 		} catch (error) {
 			handler.error(error);
 		}
@@ -57,7 +57,7 @@ class PopupController extends Controller {
 		try {
 			this._addPopupCloseEventListener();
 		} catch (error) {
-			handler.errorWithPopup(error);
+			handler.error(error);
 		}
 	}
 
