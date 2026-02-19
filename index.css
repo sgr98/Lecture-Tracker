@@ -14,66 +14,9 @@
   --blue-button: rgb(46, 122, 236);
   --blue-button-hover: rgb(5, 83, 201);
   --red-button-hover: rgb(237, 34, 51);
-  --subject-accent: rgb(67, 170, 129);
-  --subject-accent-dark: rgb(67, 170, 129);
-  --subject-accent-font: rgb(67, 170, 129);
-  --text-primary: rgb(4, 4, 4);
-  --text-secondary: rgb(60, 60, 60);
-  --text-primary-reverse: rgb(251, 251, 251);
-  --text-secondary-reverse: rgb(195, 195, 195);
-  --border-black: rgb(24, 24, 24);
-  --border-grey: rgb(171, 171, 171);
-  --border-active: rgb(24, 24, 24);
-  --box-shadow-big-size: 7px 7px;
-  --box-shadow-medium-size: 5px 5px;
-  --box-shadow-black: rgb(12, 12, 12);
-  --popup-backdrop: rgba(0, 0, 0, 0.3);
-  --topbar-height: 13vh;
-  --section-container-height: calc(100vh - var(--topbar-height));
-  --section-title-container-height: 5vh;
-  --section-action-container-height: 8vh;
-  --list-section-list-container-height: calc(
-  	var(--section-container-height) - var(
-  			--section-title-container-height
-  		) - var(--section-action-container-height)
-  );
-  --list-section-button-height: 7vh;
-  --list-section-width: 20vw;
-  --list-section-collapsed-width: 8vw;
-  --very-big-text-size: 40px;
-  --big-text-size: 26px;
-  --light-big-text-size: 22px;
-  --medium-text-size: 18px;
-  --light-small-text-size: 16px;
-  --small-text-size: 14px;
-  --very-small-text-size: 10px;
-  --section-action-button-size: 20px;
-  --section-list-button-size: 18px;
-  --font-weight-bold: 600;
-  --font-weight-light-bold: 500;
-  --font-weight-normal: 450;
-  --font-weight-light: 300;
-}
-
-:root {
-  --breadcrumb-container-height: 12vh;
-  --breadcrumb-container-min-height: 46px;
-  --breadcrumb-container-max-height: 72px;
-  --breadcrumb-crumb-min-width: 120px;
-  --sidebar-container-width: 130px;
-  --sidebar-item-img-size: 64px;
-  --scrollbar-width: 8px;
-  --scrollbar-track: rgb(245, 245, 245);
-  --scrollbar-thumb: rgb(245, 245, 245);
-  --background: rgb(245, 245, 245);
-  --primary: rgb(245, 245, 245);
-  --secondary: rgb(158, 158, 158);
-  --blue-button: rgb(46, 122, 236);
-  --blue-button-hover: rgb(5, 83, 201);
-  --red-button-hover: rgb(237, 34, 51);
-  --subject-accent: rgb(67, 170, 129);
-  --subject-accent-dark: rgb(67, 170, 129);
-  --subject-accent-font: rgb(67, 170, 129);
+  --subject-accent: #489062;
+  --subject-accent-dark: #376e4b;
+  --subject-accent-font: #407f57;
   --text-primary: rgb(4, 4, 4);
   --text-secondary: rgb(60, 60, 60);
   --text-primary-reverse: rgb(251, 251, 251);
@@ -173,63 +116,6 @@ body {
   background: darkred;
 }
 
-:root {
-  --breadcrumb-container-height: 12vh;
-  --breadcrumb-container-min-height: 46px;
-  --breadcrumb-container-max-height: 72px;
-  --breadcrumb-crumb-min-width: 120px;
-  --sidebar-container-width: 130px;
-  --sidebar-item-img-size: 64px;
-  --scrollbar-width: 8px;
-  --scrollbar-track: rgb(245, 245, 245);
-  --scrollbar-thumb: rgb(245, 245, 245);
-  --background: rgb(245, 245, 245);
-  --primary: rgb(245, 245, 245);
-  --secondary: rgb(158, 158, 158);
-  --blue-button: rgb(46, 122, 236);
-  --blue-button-hover: rgb(5, 83, 201);
-  --red-button-hover: rgb(237, 34, 51);
-  --subject-accent: rgb(67, 170, 129);
-  --subject-accent-dark: rgb(67, 170, 129);
-  --subject-accent-font: rgb(67, 170, 129);
-  --text-primary: rgb(4, 4, 4);
-  --text-secondary: rgb(60, 60, 60);
-  --text-primary-reverse: rgb(251, 251, 251);
-  --text-secondary-reverse: rgb(195, 195, 195);
-  --border-black: rgb(24, 24, 24);
-  --border-grey: rgb(171, 171, 171);
-  --border-active: rgb(24, 24, 24);
-  --box-shadow-big-size: 7px 7px;
-  --box-shadow-medium-size: 5px 5px;
-  --box-shadow-black: rgb(12, 12, 12);
-  --popup-backdrop: rgba(0, 0, 0, 0.3);
-  --topbar-height: 13vh;
-  --section-container-height: calc(100vh - var(--topbar-height));
-  --section-title-container-height: 5vh;
-  --section-action-container-height: 8vh;
-  --list-section-list-container-height: calc(
-  	var(--section-container-height) - var(
-  			--section-title-container-height
-  		) - var(--section-action-container-height)
-  );
-  --list-section-button-height: 7vh;
-  --list-section-width: 20vw;
-  --list-section-collapsed-width: 8vw;
-  --very-big-text-size: 40px;
-  --big-text-size: 26px;
-  --light-big-text-size: 22px;
-  --medium-text-size: 18px;
-  --light-small-text-size: 16px;
-  --small-text-size: 14px;
-  --very-small-text-size: 10px;
-  --section-action-button-size: 20px;
-  --section-list-button-size: 18px;
-  --font-weight-bold: 600;
-  --font-weight-light-bold: 500;
-  --font-weight-normal: 450;
-  --font-weight-light: 300;
-}
-
 .list-inner-container {
   overflow-y: overlay;
 }
@@ -239,63 +125,6 @@ body {
 .list-inner-container::-webkit-scrollbar-thumb {
   background: rgba(20, 20, 20, 0.2);
   border-radius: 10px;
-}
-
-:root {
-  --breadcrumb-container-height: 12vh;
-  --breadcrumb-container-min-height: 46px;
-  --breadcrumb-container-max-height: 72px;
-  --breadcrumb-crumb-min-width: 120px;
-  --sidebar-container-width: 130px;
-  --sidebar-item-img-size: 64px;
-  --scrollbar-width: 8px;
-  --scrollbar-track: rgb(245, 245, 245);
-  --scrollbar-thumb: rgb(245, 245, 245);
-  --background: rgb(245, 245, 245);
-  --primary: rgb(245, 245, 245);
-  --secondary: rgb(158, 158, 158);
-  --blue-button: rgb(46, 122, 236);
-  --blue-button-hover: rgb(5, 83, 201);
-  --red-button-hover: rgb(237, 34, 51);
-  --subject-accent: rgb(67, 170, 129);
-  --subject-accent-dark: rgb(67, 170, 129);
-  --subject-accent-font: rgb(67, 170, 129);
-  --text-primary: rgb(4, 4, 4);
-  --text-secondary: rgb(60, 60, 60);
-  --text-primary-reverse: rgb(251, 251, 251);
-  --text-secondary-reverse: rgb(195, 195, 195);
-  --border-black: rgb(24, 24, 24);
-  --border-grey: rgb(171, 171, 171);
-  --border-active: rgb(24, 24, 24);
-  --box-shadow-big-size: 7px 7px;
-  --box-shadow-medium-size: 5px 5px;
-  --box-shadow-black: rgb(12, 12, 12);
-  --popup-backdrop: rgba(0, 0, 0, 0.3);
-  --topbar-height: 13vh;
-  --section-container-height: calc(100vh - var(--topbar-height));
-  --section-title-container-height: 5vh;
-  --section-action-container-height: 8vh;
-  --list-section-list-container-height: calc(
-  	var(--section-container-height) - var(
-  			--section-title-container-height
-  		) - var(--section-action-container-height)
-  );
-  --list-section-button-height: 7vh;
-  --list-section-width: 20vw;
-  --list-section-collapsed-width: 8vw;
-  --very-big-text-size: 40px;
-  --big-text-size: 26px;
-  --light-big-text-size: 22px;
-  --medium-text-size: 18px;
-  --light-small-text-size: 16px;
-  --small-text-size: 14px;
-  --very-small-text-size: 10px;
-  --section-action-button-size: 20px;
-  --section-list-button-size: 18px;
-  --font-weight-bold: 600;
-  --font-weight-light-bold: 500;
-  --font-weight-normal: 450;
-  --font-weight-light: 300;
 }
 
 /*
@@ -418,63 +247,6 @@ NO ITEMS IN LIST
   font-weight: var(--font-weight-light);
   font-style: italic;
   text-align: center;
-}
-
-:root {
-  --breadcrumb-container-height: 12vh;
-  --breadcrumb-container-min-height: 46px;
-  --breadcrumb-container-max-height: 72px;
-  --breadcrumb-crumb-min-width: 120px;
-  --sidebar-container-width: 130px;
-  --sidebar-item-img-size: 64px;
-  --scrollbar-width: 8px;
-  --scrollbar-track: rgb(245, 245, 245);
-  --scrollbar-thumb: rgb(245, 245, 245);
-  --background: rgb(245, 245, 245);
-  --primary: rgb(245, 245, 245);
-  --secondary: rgb(158, 158, 158);
-  --blue-button: rgb(46, 122, 236);
-  --blue-button-hover: rgb(5, 83, 201);
-  --red-button-hover: rgb(237, 34, 51);
-  --subject-accent: rgb(67, 170, 129);
-  --subject-accent-dark: rgb(67, 170, 129);
-  --subject-accent-font: rgb(67, 170, 129);
-  --text-primary: rgb(4, 4, 4);
-  --text-secondary: rgb(60, 60, 60);
-  --text-primary-reverse: rgb(251, 251, 251);
-  --text-secondary-reverse: rgb(195, 195, 195);
-  --border-black: rgb(24, 24, 24);
-  --border-grey: rgb(171, 171, 171);
-  --border-active: rgb(24, 24, 24);
-  --box-shadow-big-size: 7px 7px;
-  --box-shadow-medium-size: 5px 5px;
-  --box-shadow-black: rgb(12, 12, 12);
-  --popup-backdrop: rgba(0, 0, 0, 0.3);
-  --topbar-height: 13vh;
-  --section-container-height: calc(100vh - var(--topbar-height));
-  --section-title-container-height: 5vh;
-  --section-action-container-height: 8vh;
-  --list-section-list-container-height: calc(
-  	var(--section-container-height) - var(
-  			--section-title-container-height
-  		) - var(--section-action-container-height)
-  );
-  --list-section-button-height: 7vh;
-  --list-section-width: 20vw;
-  --list-section-collapsed-width: 8vw;
-  --very-big-text-size: 40px;
-  --big-text-size: 26px;
-  --light-big-text-size: 22px;
-  --medium-text-size: 18px;
-  --light-small-text-size: 16px;
-  --small-text-size: 14px;
-  --very-small-text-size: 10px;
-  --section-action-button-size: 20px;
-  --section-list-button-size: 18px;
-  --font-weight-bold: 600;
-  --font-weight-light-bold: 500;
-  --font-weight-normal: 450;
-  --font-weight-light: 300;
 }
 
 .modal {
@@ -623,63 +395,6 @@ CONTENT
   background: var(--blue-button-hover);
 }
 
-:root {
-  --breadcrumb-container-height: 12vh;
-  --breadcrumb-container-min-height: 46px;
-  --breadcrumb-container-max-height: 72px;
-  --breadcrumb-crumb-min-width: 120px;
-  --sidebar-container-width: 130px;
-  --sidebar-item-img-size: 64px;
-  --scrollbar-width: 8px;
-  --scrollbar-track: rgb(245, 245, 245);
-  --scrollbar-thumb: rgb(245, 245, 245);
-  --background: rgb(245, 245, 245);
-  --primary: rgb(245, 245, 245);
-  --secondary: rgb(158, 158, 158);
-  --blue-button: rgb(46, 122, 236);
-  --blue-button-hover: rgb(5, 83, 201);
-  --red-button-hover: rgb(237, 34, 51);
-  --subject-accent: rgb(67, 170, 129);
-  --subject-accent-dark: rgb(67, 170, 129);
-  --subject-accent-font: rgb(67, 170, 129);
-  --text-primary: rgb(4, 4, 4);
-  --text-secondary: rgb(60, 60, 60);
-  --text-primary-reverse: rgb(251, 251, 251);
-  --text-secondary-reverse: rgb(195, 195, 195);
-  --border-black: rgb(24, 24, 24);
-  --border-grey: rgb(171, 171, 171);
-  --border-active: rgb(24, 24, 24);
-  --box-shadow-big-size: 7px 7px;
-  --box-shadow-medium-size: 5px 5px;
-  --box-shadow-black: rgb(12, 12, 12);
-  --popup-backdrop: rgba(0, 0, 0, 0.3);
-  --topbar-height: 13vh;
-  --section-container-height: calc(100vh - var(--topbar-height));
-  --section-title-container-height: 5vh;
-  --section-action-container-height: 8vh;
-  --list-section-list-container-height: calc(
-  	var(--section-container-height) - var(
-  			--section-title-container-height
-  		) - var(--section-action-container-height)
-  );
-  --list-section-button-height: 7vh;
-  --list-section-width: 20vw;
-  --list-section-collapsed-width: 8vw;
-  --very-big-text-size: 40px;
-  --big-text-size: 26px;
-  --light-big-text-size: 22px;
-  --medium-text-size: 18px;
-  --light-small-text-size: 16px;
-  --small-text-size: 14px;
-  --very-small-text-size: 10px;
-  --section-action-button-size: 20px;
-  --section-list-button-size: 18px;
-  --font-weight-bold: 600;
-  --font-weight-light-bold: 500;
-  --font-weight-normal: 450;
-  --font-weight-light: 300;
-}
-
 .popup {
   position: fixed;
   top: 0;
@@ -769,63 +484,6 @@ CONTENT
 .success-popup-titlebar {
   background: rgb(220, 255, 219);
   border-bottom-color: rgb(6, 158, 0);
-}
-
-:root {
-  --breadcrumb-container-height: 12vh;
-  --breadcrumb-container-min-height: 46px;
-  --breadcrumb-container-max-height: 72px;
-  --breadcrumb-crumb-min-width: 120px;
-  --sidebar-container-width: 130px;
-  --sidebar-item-img-size: 64px;
-  --scrollbar-width: 8px;
-  --scrollbar-track: rgb(245, 245, 245);
-  --scrollbar-thumb: rgb(245, 245, 245);
-  --background: rgb(245, 245, 245);
-  --primary: rgb(245, 245, 245);
-  --secondary: rgb(158, 158, 158);
-  --blue-button: rgb(46, 122, 236);
-  --blue-button-hover: rgb(5, 83, 201);
-  --red-button-hover: rgb(237, 34, 51);
-  --subject-accent: rgb(67, 170, 129);
-  --subject-accent-dark: rgb(67, 170, 129);
-  --subject-accent-font: rgb(67, 170, 129);
-  --text-primary: rgb(4, 4, 4);
-  --text-secondary: rgb(60, 60, 60);
-  --text-primary-reverse: rgb(251, 251, 251);
-  --text-secondary-reverse: rgb(195, 195, 195);
-  --border-black: rgb(24, 24, 24);
-  --border-grey: rgb(171, 171, 171);
-  --border-active: rgb(24, 24, 24);
-  --box-shadow-big-size: 7px 7px;
-  --box-shadow-medium-size: 5px 5px;
-  --box-shadow-black: rgb(12, 12, 12);
-  --popup-backdrop: rgba(0, 0, 0, 0.3);
-  --topbar-height: 13vh;
-  --section-container-height: calc(100vh - var(--topbar-height));
-  --section-title-container-height: 5vh;
-  --section-action-container-height: 8vh;
-  --list-section-list-container-height: calc(
-  	var(--section-container-height) - var(
-  			--section-title-container-height
-  		) - var(--section-action-container-height)
-  );
-  --list-section-button-height: 7vh;
-  --list-section-width: 20vw;
-  --list-section-collapsed-width: 8vw;
-  --very-big-text-size: 40px;
-  --big-text-size: 26px;
-  --light-big-text-size: 22px;
-  --medium-text-size: 18px;
-  --light-small-text-size: 16px;
-  --small-text-size: 14px;
-  --very-small-text-size: 10px;
-  --section-action-button-size: 20px;
-  --section-list-button-size: 18px;
-  --font-weight-bold: 600;
-  --font-weight-light-bold: 500;
-  --font-weight-normal: 450;
-  --font-weight-light: 300;
 }
 
 .topbar {
@@ -918,63 +576,6 @@ STAGE
   height: var(--section-container-height);
   padding: 0;
   background: var(--background);
-}
-
-:root {
-  --breadcrumb-container-height: 12vh;
-  --breadcrumb-container-min-height: 46px;
-  --breadcrumb-container-max-height: 72px;
-  --breadcrumb-crumb-min-width: 120px;
-  --sidebar-container-width: 130px;
-  --sidebar-item-img-size: 64px;
-  --scrollbar-width: 8px;
-  --scrollbar-track: rgb(245, 245, 245);
-  --scrollbar-thumb: rgb(245, 245, 245);
-  --background: rgb(245, 245, 245);
-  --primary: rgb(245, 245, 245);
-  --secondary: rgb(158, 158, 158);
-  --blue-button: rgb(46, 122, 236);
-  --blue-button-hover: rgb(5, 83, 201);
-  --red-button-hover: rgb(237, 34, 51);
-  --subject-accent: rgb(67, 170, 129);
-  --subject-accent-dark: rgb(67, 170, 129);
-  --subject-accent-font: rgb(67, 170, 129);
-  --text-primary: rgb(4, 4, 4);
-  --text-secondary: rgb(60, 60, 60);
-  --text-primary-reverse: rgb(251, 251, 251);
-  --text-secondary-reverse: rgb(195, 195, 195);
-  --border-black: rgb(24, 24, 24);
-  --border-grey: rgb(171, 171, 171);
-  --border-active: rgb(24, 24, 24);
-  --box-shadow-big-size: 7px 7px;
-  --box-shadow-medium-size: 5px 5px;
-  --box-shadow-black: rgb(12, 12, 12);
-  --popup-backdrop: rgba(0, 0, 0, 0.3);
-  --topbar-height: 13vh;
-  --section-container-height: calc(100vh - var(--topbar-height));
-  --section-title-container-height: 5vh;
-  --section-action-container-height: 8vh;
-  --list-section-list-container-height: calc(
-  	var(--section-container-height) - var(
-  			--section-title-container-height
-  		) - var(--section-action-container-height)
-  );
-  --list-section-button-height: 7vh;
-  --list-section-width: 20vw;
-  --list-section-collapsed-width: 8vw;
-  --very-big-text-size: 40px;
-  --big-text-size: 26px;
-  --light-big-text-size: 22px;
-  --medium-text-size: 18px;
-  --light-small-text-size: 16px;
-  --small-text-size: 14px;
-  --very-small-text-size: 10px;
-  --section-action-button-size: 20px;
-  --section-list-button-size: 18px;
-  --font-weight-bold: 600;
-  --font-weight-light-bold: 500;
-  --font-weight-normal: 450;
-  --font-weight-light: 300;
 }
 
 .subject-container {
