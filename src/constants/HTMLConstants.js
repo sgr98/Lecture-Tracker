@@ -41,6 +41,7 @@ export const DisplayText = {
 	lectures: {},
 
 	modal: {
+		MODAL_SUBMIT_BUTTON_TEXT: "Add &#x2b;",
 		FORM_FIELDS_NOT_FILLED: "Some of the required fields are empty.",
 	},
 	popup: {
@@ -135,7 +136,6 @@ export const HTMLModalAttributesConstants = {
 	MODAL_FIELD: "modal-field",
 	MODAL_FIELD_LABEL: "modal-field-label",
 	MODAL_FIELD_TEXT_TEXTAREA: "modal-field-text-textarea",
-	MODAL_SUBMIT_BUTTON_TEXT: "Add &#x2b;",
 	FIELD: "field",
 	INPUT: "input",
 	LABEL: "label",

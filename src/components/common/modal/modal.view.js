@@ -1,4 +1,7 @@
-import { HTMLModalAttributesConstants } from "../../../constants/HTMLConstants.js";
+import {
+	HTMLModalAttributesConstants,
+	DisplayText,
+} from "../../../constants/HTMLConstants.js";
 import {
 	isArrayNullOrEmpty,
 	isStringNullOrEmpty,
@@ -17,8 +20,8 @@ const {
 	MODAL_FORM,
 	MODAL_ADD_BUTTON,
 	CLOSE,
-	MODAL_SUBMIT_BUTTON_TEXT,
 } = HTMLModalAttributesConstants;
+const { MODAL_SUBMIT_BUTTON_TEXT } = DisplayText.modal;
 
 export class ModalView extends View {
 	constructor(moduleName, title, description, fields) {
