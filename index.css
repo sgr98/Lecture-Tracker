@@ -173,7 +173,7 @@ SECTION ACTION AREA
   flex-direction: row;
   width: 100%;
   height: var(--section-action-container-height);
-  border-bottom: 3px dotted var(--border-black);
+  border-bottom: 3px solid var(--border-black);
 }
 
 .section-action-inner-container {
@@ -233,13 +233,16 @@ SECTION LIST AREA
 .list-button-container {
   width: 100%;
   height: fit-content;
+  border-bottom: 2px dashed var(--border-black);
+}
+.list-button-container:last-child {
+  border-bottom: 3px solid var(--border-black);
 }
 
 .list-button {
   width: 100%;
   height: var(--list-section-button-height);
   text-align: center;
-  border-bottom: 2px solid var(--border-black);
   background: var(--background);
   font-size: var(--medium-text-size);
   font-weight: var(--font-weight-normal);
