@@ -31,6 +31,7 @@ export class SubjectAPI {
 
 	addSubject(subject) {
 		try {
+			// NOTE: CHECK IF THE SUBJECT IS VALID
 			const isValidSubject = this._validateSubject(subject);
 			const { subjectName, subjectCode, subjectDescription, courseList } =
 				subject;

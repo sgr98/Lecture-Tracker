@@ -10,6 +10,7 @@ import { Controller } from "../controller.js";
 
 import { SubjectActionView } from "./subjects.view.js";
 import { AddSubjectModalController } from "./addSubjectModal/addSubjectModal.controller.js";
+import { isValueNull } from "../../utils/common.js";
 
 const { SUBJECT_ACTION_CONTAINER, ADD_SUBJECT_BUTTON } =
 	HTMLSubjectAttributesConstants;
@@ -66,15 +67,19 @@ export class SubjectActionController extends Controller {
 
 	_openAddSubjectModalEventListener() {
 		try {
-			// NOTE: ADD LOGIC TO CHECK IF MODAL IS ADDED OR NOT
 			const addSubjectButton =
 				document.getElementById(ADD_SUBJECT_BUTTON);
 			const addSubjectModal = document.getElementById(
 				`${ADD_SUBJECT_MODULE}-${MODAL}`,
 			);
-			addSubjectButton.addEventListener("click", () => {
-				addSubjectModal.style.display = "flex";
-			});
+			if (
+				!isValueNull(addSubjectButton) &&
+				!isValueNull(addSubjectModal)
+			) {
+				addSubjectButton.addEventListener("click", () => {
+					addSubjectModal.style.display = "flex";
+				});
+			}
 		} catch (error) {
 			handler.errorWithPopup(error);
 		}

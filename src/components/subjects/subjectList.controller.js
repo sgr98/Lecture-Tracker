@@ -76,8 +76,13 @@ export class SubjectListContainerController extends Controller {
 					newSubjectHTML,
 				);
 			}
-			// NOTE: Check if the subject is added
-			this._subjectEventListener(newSubject);
+
+			const id = newSubject[DBSubjectConstants.ID];
+			const order = newSubject[DBSubjectConstants.ORDER];
+			const subjectElementId = `${SUBJECT}-${order}__${id}`;
+			if (domManipulation.isElementInDOM(subjectElementId)) {
+				this._subjectEventListener(newSubject);
+			}
 		} catch (error) {
 			handler.errorWithPopup(error);
 		}
@@ -125,7 +130,13 @@ export class SubjectListContainerController extends Controller {
 
 	_setNewCurrentSubject(subject) {
 		try {
-			// NOTE: Add logic to check if the new current subject is same as old current subejct
+			if (
+				!isValueNull(this._currentSubject) &&
+				subject[DBSubjectConstants.ID] ===
+					this._currentSubject[DBSubjectConstants.ID]
+			) {
+				return;
+			}
 			this._unsetCurrentSubject();
 			this._currentSubject = subject;
 			// NOTE: load courses
