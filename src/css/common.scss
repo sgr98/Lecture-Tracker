@@ -45,8 +45,29 @@ SECTION ACTION AREA
 	flex-direction: row;
 	width: 100%;
 	height: var(--section-action-container-height);
-	padding: 12px 10px;
+	// padding: 4px;
 	border-bottom: 3px dotted var(--border-black);
+}
+
+.section-action-inner-container {
+	flex-direction: column;
+	width: 100%;
+	height: 100%;
+}
+
+.section-action-row {
+	justify-content: space-around;
+	flex-direction: row;
+	width: 100%;
+	height: 100%;
+}
+
+.section-action-row-1 {
+}
+
+.section-action-row-2 {
+	height: 0;
+	transition: 0.1s linear;
 }
 
 .button {
@@ -55,8 +76,9 @@ SECTION ACTION AREA
 	text-align: center;
 }
 
-.list-add-button {
-	// height: 6vh;
+.section-action-button {
+	width: var(--section-action-button-width);
+	height: var(--section-action-button-height);
 	border: 2px solid var(--border-black);
 	border-radius: 10px;
 	font-size: var(--light-big-text-size);

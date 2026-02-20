@@ -22,7 +22,8 @@ export const DisplayText = {
 	},
 	subject: {
 		SUBJECT_SECTION_TITLE: "Subject",
-		ADD_SUBJECT_BUTTON_TEXT: "Add Subject",
+		ADD_SUBJECT_BUTTON_TEXT: "Add &#x2b;",
+		EDIT_SUBJECT_BUTTON_TEXT: "Edit &#x270E;",
 		NO_SUBJECTS_MESSAGE: "No Subjects Added Yet",
 		ADD_SUBJECT_MODAL_TITLE: "Add New Subject",
 		ADD_SUBJECT_MODAL_DESCRIPTION:
@@ -64,6 +65,10 @@ export const HTMLAttributesConstants = {
 	SECTION_TITLE_CONTAINER: "section-title-container",
 	SECTION_TITLE: "section-title",
 	SECTION_ACTION_CONTAINER: "section-action-container",
+	SECTION_ACTION_INNER_CONTAINER: "section-action-inner-container",
+	SECTION_ACTION_ROW: "section-action-row",
+	SECTION_ACTION_ROW_1: "section-action-row-1",
+	SECTION_ACTION_ROW_2: "section-action-row-2",
 	LIST_BUTTON_CONTAINER: "list-button-container",
 	LIST_CONTAINER: "list-container",
 	LIST_INNER_CONTAINER: "list-inner-container",
@@ -71,6 +76,7 @@ export const HTMLAttributesConstants = {
 	NO_ITEMS_IN_LIST_MESSAGE_CONTAINER: "no-items-in-list-message-container",
 	BUTTON: "button",
 	LIST_ADD_BUTTON: "list-add-button",
+	SECTION_ACTION_BUTTON: "section-action-button",
 	NO_ITEMS_IN_LIST_MESSAGE: "no-items-in-list-message",
 };
 
@@ -90,10 +96,14 @@ export const HTMLSubjectAttributesConstants = {
 	SUBJECT_TITLE_CONTAINER: "subject-title-container",
 	SUBJECT_TITLE: "subject-title",
 	SUBJECT_ACTION_CONTAINER: `subject-action-container`,
+	SUBJECT_ACTION_INNER_CONTAINER: `subject-action-inner-container`,
+	SUBJECT_ACTION_ROW_1: "subject-action-row-1",
+	SUBJECT_ACTION_ROW_2: "subject-action-row-2",
 	SUBJECT_BUTTON: `subject-button`,
 	SUBJECT_LIST_BUTTON_CONTAINER: "subject-list-button-container",
 	SUBJECT_ACTIVE_LIST_BUTTON: "subject-active-list-button",
 	ADD_SUBJECT_BUTTON: `add-subject-button`,
+	EDIT_SUBJECT_BUTTON: `edit-subject-button`,
 	NO_SUBJECTS_IN_LIST_MESSAGE_CONTAINER:
 		"no-subjects-in-list-message-container",
 	NO_SUBJECTS_MESSAGE_ID: "no-subjects-in-list-message",

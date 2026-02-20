@@ -51,10 +51,12 @@
 				--section-title-container-height
 			) - var(--section-action-container-height)
 	);
+	--section-action-button-height: 70%;
 	--list-section-button-height: 7vh;
 
-	--list-section-width: 20vw;
+	--list-section-width: 25vw;
 	--list-section-collapsed-width: 8vw;
+	--section-action-button-width: 40%;
 
 	// FONT
 	--very-big-text-size: 40px;

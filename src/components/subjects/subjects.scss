@@ -28,7 +28,19 @@ ACTION AREA
 ////////////////////////////////
 */
 
-.add-subject-button {
+.subject-action-container {
+}
+
+.subject-action-inner-container {
+}
+
+.subject-action-row-1 {
+}
+
+.subject-action-row-2 {
+}
+
+.add-subject-button, .edit-subject-button {
 	background: var(--background);
 	border: 2px solid var(--border-black);
 	transition: 0.1s linear;
@@ -36,7 +48,10 @@ ACTION AREA
 
 .add-subject-button:hover,
 .add-subject-button:active,
-.add-subject-button:focus {
+.add-subject-button:focus,
+.edit-subject-button:hover,
+.edit-subject-button:active,
+.edit-subject-button:focus {
 	border: 2px solid var(--subject-accent);
 	box-shadow: var(--box-shadow-medium-size) var(--subject-accent);
 	color: var(--subject-accent-font);

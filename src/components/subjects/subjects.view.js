@@ -12,12 +12,16 @@ const {
 	SECTION_TITLE_CONTAINER,
 	SECTION_TITLE,
 	SECTION_ACTION_CONTAINER,
+	SECTION_ACTION_INNER_CONTAINER,
+	SECTION_ACTION_ROW,
+	SECTION_ACTION_ROW_1,
+	SECTION_ACTION_ROW_2,
 	LIST_BUTTON_CONTAINER,
 	LIST_CONTAINER,
 	LIST_INNER_CONTAINER,
 	LIST_BUTTON,
 	BUTTON,
-	LIST_ADD_BUTTON,
+	SECTION_ACTION_BUTTON,
 	NO_ITEMS_IN_LIST_MESSAGE_CONTAINER,
 	NO_ITEMS_IN_LIST_MESSAGE,
 } = HTMLAttributesConstants;
@@ -27,14 +31,22 @@ const {
 	SUBJECT_TITLE_CONTAINER,
 	SUBJECT_TITLE,
 	SUBJECT_ACTION_CONTAINER,
+	SUBJECT_ACTION_INNER_CONTAINER,
+	SUBJECT_ACTION_ROW_1,
+	SUBJECT_ACTION_ROW_2,
 	SUBJECT_LIST_BUTTON_CONTAINER,
 	SUBJECT_BUTTON,
 	ADD_SUBJECT_BUTTON,
+	EDIT_SUBJECT_BUTTON,
 	NO_SUBJECTS_IN_LIST_MESSAGE_CONTAINER,
 	NO_SUBJECTS_MESSAGE_ID,
 } = HTMLSubjectAttributesConstants;
-const { SUBJECT_SECTION_TITLE, ADD_SUBJECT_BUTTON_TEXT, NO_SUBJECTS_MESSAGE } =
-	DisplayText.subject;
+const {
+	SUBJECT_SECTION_TITLE,
+	ADD_SUBJECT_BUTTON_TEXT,
+	EDIT_SUBJECT_BUTTON_TEXT,
+	NO_SUBJECTS_MESSAGE,
+} = DisplayText.subject;
 
 export class SubjectSectionView extends View {
 	constructor(modulueName) {
@@ -63,12 +75,6 @@ export class SubjectSectionView extends View {
 					id="${SUBJECT_ACTION_CONTAINER}"
 					class="${SUBJECT_ACTION_CONTAINER} ${SECTION_ACTION_CONTAINER}"
 				>
-					<div
-						id="${ADD_SUBJECT_BUTTON}"
-						class="${ADD_SUBJECT_BUTTON} ${LIST_ADD_BUTTON} ${BUTTON}"
-					>
-						${ADD_SUBJECT_BUTTON_TEXT}
-					</div>
 				</div>
 
 				<div
@@ -79,6 +85,45 @@ export class SubjectSectionView extends View {
 			</section>
 		`;
 		return subjectSectionHTML;
+	}
+}
+
+export class SubjectActionView extends View {
+	constructor(modulueName) {
+		super(modulueName);
+	}
+
+	generateHTML() {
+		const subjectActionHTML = `
+			<div
+				id="${SUBJECT_ACTION_INNER_CONTAINER}"
+				class="${SUBJECT_ACTION_INNER_CONTAINER} ${SECTION_ACTION_INNER_CONTAINER}"
+			>
+				<div
+					id="${SUBJECT_ACTION_ROW_1}"
+					class="${SUBJECT_ACTION_ROW_1} ${SECTION_ACTION_ROW_1} ${SECTION_ACTION_ROW}"
+				>
+					<div
+						id="${ADD_SUBJECT_BUTTON}"
+						class="${ADD_SUBJECT_BUTTON} ${SECTION_ACTION_BUTTON} ${BUTTON}"
+					>
+						${ADD_SUBJECT_BUTTON_TEXT}
+					</div>
+					<div
+						id="${EDIT_SUBJECT_BUTTON}"
+						class="${EDIT_SUBJECT_BUTTON} ${SECTION_ACTION_BUTTON} ${BUTTON}"
+					>
+						${EDIT_SUBJECT_BUTTON_TEXT}
+					</div>
+				</div>
+				<div
+					id="${SUBJECT_ACTION_ROW_2}"
+					class="${SUBJECT_ACTION_ROW_2} ${SECTION_ACTION_ROW_2} ${SECTION_ACTION_ROW}"
+				>
+				</div>
+			</div>
+		`;
+		return subjectActionHTML;
 	}
 }
 
@@ -97,8 +142,12 @@ export class SubjectListContainerView extends View {
 	}
 
 	// NOT BEING USED CURRENTLY
-	generateNewSubjectItemHTML(newSubject) {
-		return this._generateSubjectListItemHTML(newSubject);
+	generateNewSubjectHTML(newSubject, isFirstSubject) {
+		const newSubjectHTML = this._generateSubjectListItemHTML(newSubject);
+		if (isFirstSubject) {
+			return this._generateSubjectListHTML(newSubjectHTML);
+		}
+		return newSubjectHTML;
 	}
 
 	_generateSubjectItemsHTML(subjects) {

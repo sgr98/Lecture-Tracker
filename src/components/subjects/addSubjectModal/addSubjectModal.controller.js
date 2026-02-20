@@ -1,6 +1,5 @@
 import {
 	HTMLSubjectAttributesConstants,
-	HTMLModalAttributesConstants,
 	ElementModuleName,
 	DisplayText,
 } from "../../../constants/HTMLConstants.js";
@@ -11,12 +10,10 @@ import { handler } from "../../../utils/handler.js";
 import { ModalController } from "../../common/modal/modal.controller.js";
 
 const {
-	ADD_SUBJECT_BUTTON,
 	ADD_SUBJECT_MODAL_SUBJECT_NAME_FIELD,
 	ADD_SUBJECT_MODAL_SUBJECT_CODE_FIELD,
 	ADD_SUBJECT_MODAL_SUBJECT_DESCRIPTION_FIELD,
 } = HTMLSubjectAttributesConstants;
-const { MODAL } = HTMLModalAttributesConstants;
 const { ADD_SUBJECT_MODULE } = ElementModuleName;
 const {
 	ADD_SUBJECT_MODAL_TITLE,
@@ -113,22 +110,7 @@ export class AddSubjectModalController extends Controller {
 
 	addEventListeners() {
 		try {
-			this._openAddSubjectModalEventListener();
-		} catch (error) {
-			handler.errorWithPopup(error);
-		}
-	}
-
-	_openAddSubjectModalEventListener() {
-		try {
-			const addSubjectButton =
-				document.getElementById(ADD_SUBJECT_BUTTON);
-			const addSubjectModal = document.getElementById(
-				`${ADD_SUBJECT_MODULE}-${MODAL}`,
-			);
-			addSubjectButton.addEventListener("click", () => {
-				addSubjectModal.style.display = "flex";
-			});
+			// ...
 		} catch (error) {
 			handler.errorWithPopup(error);
 		}
