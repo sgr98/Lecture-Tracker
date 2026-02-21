@@ -29,9 +29,6 @@ ACTION AREA
 */
 
 .subject-action-container {
-	// position: relative;
-	// top: -8vh;
-	// z-index: -3;
 }
 
 .subject-action-inner-container {
@@ -43,7 +40,8 @@ ACTION AREA
 .subject-action-row-2 {
 }
 
-.add-subject-button, .edit-subject-button {
+.add-subject-button,
+.edit-subject-button {
 	background: var(--background);
 	border: 2px solid var(--border-black);
 	transition: 0.1s linear;

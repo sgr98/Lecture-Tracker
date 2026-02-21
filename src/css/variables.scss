@@ -45,11 +45,9 @@
 	--topbar-height: 13vh;
 	--section-container-height: calc(100vh - var(--topbar-height));
 	--section-title-container-height: 5vh;
-	--section-action-container-height: 8vh;
+	--section-action-container-height: 16vh;
 	--list-section-list-container-height: calc(
-		var(--section-container-height) - var(
-				--section-title-container-height
-			) - var(--section-action-container-height)
+		var(--section-container-height) - 5vh - 8vh
 	);
 	--section-action-button-height: 70%;
 	--list-section-button-height: 7vh;

@@ -21,9 +21,12 @@ SECTION TITLE AREA
 
 .section-title-container {
 	flex-direction: row;
+	flex-shrink: 0;
 	width: 100%;
 	height: var(--section-title-container-height);
+	background: var(--background);
 	border-bottom: 3px solid var(--border-black);
+	z-index: 1;
 }
 
 .section-title {
@@ -42,11 +45,14 @@ SECTION ACTION AREA
 */
 
 .section-action-container {
+	position: relative;
+	top: 0;
+	// top: -8vh;
 	flex-direction: row;
+	flex-shrink: 0;
 	width: 100%;
 	height: var(--section-action-container-height);
-	// padding: 4px;
-	border-bottom: 3px solid var(--border-black);
+	transition: 0.1s linear;
 }
 
 .section-action-inner-container {
@@ -60,15 +66,15 @@ SECTION ACTION AREA
 	flex-direction: row;
 	width: 100%;
 	height: 100%;
+	border-bottom: 3px solid var(--border-black);
 }
 
 .section-action-row-1 {
-	// background: lightcoral;
+	background: lightcoral;
 }
 
 .section-action-row-2 {
-	height: 0;
-	// background: cyan;
+	background: cyan;
 	transition: 0.1s linear;
 }
 
@@ -96,9 +102,13 @@ SECTION LIST AREA
 */
 
 .list-container {
+	position: relative;
+	top: -8vh;
+	flex-shrink: 0;
 	width: 100%;
 	height: var(--list-section-list-container-height);
 	background: var(--background);
+	z-index: 1;
 }
 
 .list-inner-container {
