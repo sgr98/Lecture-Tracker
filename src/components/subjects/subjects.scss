@@ -40,19 +40,19 @@ ACTION AREA
 .subject-action-row-2 {
 }
 
-.add-subject-button,
-.edit-subject-button {
+.subject-add-action-button,
+.subject-edit-action-button {
 	background: var(--background);
 	border: 2px solid var(--border-black);
 	transition: 0.1s linear;
 }
 
-.add-subject-button:hover,
-.add-subject-button:active,
-.add-subject-button:focus,
-.edit-subject-button:hover,
-.edit-subject-button:active,
-.edit-subject-button:focus {
+.subject-add-action-button:hover,
+.subject-add-action-button:active,
+.subject-add-action-button:focus,
+.subject-edit-action-button:hover,
+.subject-edit-action-button:active,
+.subject-edit-action-button:focus {
 	border: 2px solid var(--subject-accent);
 	box-shadow: var(--box-shadow-medium-size) var(--subject-accent);
 	color: var(--subject-accent-font);

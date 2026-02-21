@@ -24,6 +24,8 @@ export const DisplayText = {
 		SUBJECT_SECTION_TITLE: "Subject",
 		ADD_SUBJECT_BUTTON_TEXT: "Add &#x2b;",
 		EDIT_SUBJECT_BUTTON_TEXT: "Edit &#x270E;",
+		CANCEL_SUBJECT_BUTTON_TEXT: "Cancel",
+		SAVE_SUBJECT_BUTTON_TEXT: "Save",
 		NO_SUBJECTS_MESSAGE: "No Subjects Added Yet",
 		ADD_SUBJECT_MODAL_TITLE: "Add New Subject",
 		ADD_SUBJECT_MODAL_DESCRIPTION:
@@ -69,6 +71,10 @@ export const HTMLAttributesConstants = {
 	SECTION_ACTION_ROW: "section-action-row",
 	SECTION_ACTION_ROW_1: "section-action-row-1",
 	SECTION_ACTION_ROW_2: "section-action-row-2",
+	ADD_ACTION_BUTTON: `add-action-button`,
+	EDIT_ACTION_BUTTON: `edit-action-button`,
+	CANCEL_ACTION_BUTTON: `cancel-action-button`,
+	SAVE_ACTION_BUTTON: `save-action-button`,
 	LIST_BUTTON_CONTAINER: "list-button-container",
 	LIST_CONTAINER: "list-container",
 	LIST_INNER_CONTAINER: "list-inner-container",
@@ -102,8 +108,6 @@ export const HTMLSubjectAttributesConstants = {
 	SUBJECT_BUTTON: `subject-button`,
 	SUBJECT_LIST_BUTTON_CONTAINER: "subject-list-button-container",
 	SUBJECT_ACTIVE_LIST_BUTTON: "subject-active-list-button",
-	ADD_SUBJECT_BUTTON: `add-subject-button`,
-	EDIT_SUBJECT_BUTTON: `edit-subject-button`,
 	NO_SUBJECTS_IN_LIST_MESSAGE_CONTAINER:
 		"no-subjects-in-list-message-container",
 	NO_SUBJECTS_MESSAGE_ID: "no-subjects-in-list-message",

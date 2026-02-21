@@ -1,4 +1,5 @@
 import {
+	HTMLAttributesConstants,
 	HTMLSubjectAttributesConstants,
 	HTMLModalAttributesConstants,
 	ElementModuleName,
@@ -12,9 +13,9 @@ import { SubjectActionView } from "./subjects.view.js";
 import { AddSubjectModalController } from "./addSubjectModal/addSubjectModal.controller.js";
 import { isValueNull } from "../../utils/common.js";
 
-const { SUBJECT_ACTION_CONTAINER, ADD_SUBJECT_BUTTON } =
-	HTMLSubjectAttributesConstants;
+const { SUBJECT, SUBJECT_ACTION_CONTAINER } = HTMLSubjectAttributesConstants;
 const { MODAL } = HTMLModalAttributesConstants;
+const { ADD_ACTION_BUTTON, EDIT_ACTION_BUTTON } = HTMLAttributesConstants;
 const { ADD_SUBJECT_MODAL_MODULE, ADD_SUBJECT_MODULE } = ElementModuleName;
 
 export class SubjectActionController extends Controller {
@@ -67,8 +68,9 @@ export class SubjectActionController extends Controller {
 
 	_openAddSubjectModalEventListener() {
 		try {
-			const addSubjectButton =
-				document.getElementById(ADD_SUBJECT_BUTTON);
+			const addSubjectButton = document.getElementById(
+				`${SUBJECT}-${ADD_ACTION_BUTTON}`,
+			);
 			const addSubjectModal = document.getElementById(
 				`${ADD_SUBJECT_MODULE}-${MODAL}`,
 			);
