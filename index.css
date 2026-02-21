@@ -177,7 +177,7 @@ SECTION ACTION AREA
   flex-shrink: 0;
   width: 100%;
   height: var(--section-action-container-height);
-  transition: 0.1s linear;
+  transition: 0.25s ease-in-out;
 }
 
 .section-action-inner-container {
@@ -194,15 +194,6 @@ SECTION ACTION AREA
   border-bottom: 3px solid var(--border-black);
 }
 
-.section-action-row-1 {
-  background: lightcoral;
-}
-
-.section-action-row-2 {
-  background: cyan;
-  transition: 0.1s linear;
-}
-
 .button {
   width: 100%;
   height: 100%;
@@ -212,6 +203,7 @@ SECTION ACTION AREA
 .section-action-button {
   width: var(--section-action-button-width);
   height: var(--section-action-button-height);
+  background: var(--background);
   border: 2px solid var(--border-black);
   border-radius: 10px;
   font-size: var(--light-big-text-size);
@@ -644,8 +636,6 @@ ACTION AREA
 */
 .subject-add-action-button,
 .subject-edit-action-button {
-  background: var(--background);
-  border: 2px solid var(--border-black);
   transition: 0.1s linear;
 }
 
@@ -658,6 +648,25 @@ ACTION AREA
   border: 2px solid var(--subject-accent);
   box-shadow: var(--box-shadow-medium-size) var(--subject-accent);
   color: var(--subject-accent-font);
+}
+
+.subject-cancel-action-button,
+.subject-save-action-button {
+  transition: 0.1s linear;
+}
+
+.subject-cancel-action-button:hover,
+.subject-cancel-action-button:active,
+.subject-cancel-action-button:focus {
+  color: var(--text-primary-reverse);
+  background: var(--red-button-hover);
+}
+
+.subject-save-action-button:hover,
+.subject-save-action-button:active,
+.subject-save-action-button:focus {
+  color: var(--text-primary-reverse);
+  background: var(--blue-button-hover);
 }
 
 /*

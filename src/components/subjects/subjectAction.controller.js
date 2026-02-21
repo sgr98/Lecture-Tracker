@@ -11,11 +11,15 @@ import { Controller } from "../controller.js";
 
 import { SubjectActionView } from "./subjects.view.js";
 import { AddSubjectModalController } from "./addSubjectModal/addSubjectModal.controller.js";
-import { isValueNull } from "../../utils/common.js";
 
 const { SUBJECT, SUBJECT_ACTION_CONTAINER } = HTMLSubjectAttributesConstants;
 const { MODAL } = HTMLModalAttributesConstants;
-const { ADD_ACTION_BUTTON, EDIT_ACTION_BUTTON } = HTMLAttributesConstants;
+const {
+	ADD_ACTION_BUTTON,
+	EDIT_ACTION_BUTTON,
+	CANCEL_ACTION_BUTTON,
+	SAVE_ACTION_BUTTON,
+} = HTMLAttributesConstants;
 const { ADD_SUBJECT_MODAL_MODULE, ADD_SUBJECT_MODULE } = ElementModuleName;
 
 export class SubjectActionController extends Controller {
@@ -61,6 +65,8 @@ export class SubjectActionController extends Controller {
 	addEventListeners() {
 		try {
 			this._openAddSubjectModalEventListener();
+			this._editSubjectEventListener();
+			this._cancelSaveActionEventListener();
 		} catch (error) {
 			handler.errorWithPopup(error);
 		}
@@ -75,8 +81,10 @@ export class SubjectActionController extends Controller {
 				`${ADD_SUBJECT_MODULE}-${MODAL}`,
 			);
 			if (
-				!isValueNull(addSubjectButton) &&
-				!isValueNull(addSubjectModal)
+				domManipulation.areAllElementsInDOM(
+					addSubjectButton,
+					addSubjectModal,
+				)
 			) {
 				addSubjectButton.addEventListener("click", () => {
 					addSubjectModal.style.display = "flex";
@@ -100,6 +108,81 @@ export class SubjectActionController extends Controller {
 		try {
 			const subject = this._subjectAPI.addSubject(newSubject);
 			return subject;
+		} catch (error) {
+			handler.errorWithPopup(error);
+		}
+	}
+
+	_editSubjectEventListener() {
+		try {
+			const editSubjectButton = document.getElementById(
+				`${SUBJECT}-${EDIT_ACTION_BUTTON}`,
+			);
+			const subjectActionArea = document.getElementById(
+				SUBJECT_ACTION_CONTAINER,
+			);
+			if (
+				domManipulation.areAllElementsInDOM(
+					editSubjectButton,
+					subjectActionArea,
+				)
+			) {
+				editSubjectButton.addEventListener("click", () => {
+					this._enterEditMode();
+				});
+			}
+		} catch (error) {
+			handler.errorWithPopup(error);
+		}
+	}
+
+	_cancelSaveActionEventListener() {
+		try {
+			const cancelActionButton = document.getElementById(
+				`${SUBJECT}-${CANCEL_ACTION_BUTTON}`,
+			);
+			const saveActionButton = document.getElementById(
+				`${SUBJECT}-${SAVE_ACTION_BUTTON}`,
+			);
+			const subjectActionArea = document.getElementById(
+				SUBJECT_ACTION_CONTAINER,
+			);
+			if (
+				domManipulation.areAllElementsInDOM(
+					cancelActionButton,
+					saveActionButton,
+					subjectActionArea,
+				)
+			) {
+				cancelActionButton.addEventListener("click", () => {
+					this._exitEditMode();
+				});
+				saveActionButton.addEventListener("click", () => {
+					this._exitEditMode();
+				});
+			}
+		} catch (error) {
+			handler.errorWithPopup(error);
+		}
+	}
+
+	_enterEditMode() {
+		try {
+			const subjectActionArea = document.getElementById(
+				SUBJECT_ACTION_CONTAINER,
+			);
+			subjectActionArea.style.top = "-8vh";
+		} catch (error) {
+			handler.errorWithPopup(error);
+		}
+	}
+
+	_exitEditMode() {
+		try {
+			const subjectActionArea = document.getElementById(
+				SUBJECT_ACTION_CONTAINER,
+			);
+			subjectActionArea.style.top = "0";
 		} catch (error) {
 			handler.errorWithPopup(error);
 		}

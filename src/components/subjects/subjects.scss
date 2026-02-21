@@ -42,8 +42,6 @@ ACTION AREA
 
 .subject-add-action-button,
 .subject-edit-action-button {
-	background: var(--background);
-	border: 2px solid var(--border-black);
 	transition: 0.1s linear;
 }
 
@@ -56,6 +54,25 @@ ACTION AREA
 	border: 2px solid var(--subject-accent);
 	box-shadow: var(--box-shadow-medium-size) var(--subject-accent);
 	color: var(--subject-accent-font);
+}
+
+.subject-cancel-action-button,
+.subject-save-action-button {
+	transition: 0.1s linear;
+}
+
+.subject-cancel-action-button:hover,
+.subject-cancel-action-button:active,
+.subject-cancel-action-button:focus {
+	color: var(--text-primary-reverse);
+	background: var(--red-button-hover);
+}
+
+.subject-save-action-button:hover,
+.subject-save-action-button:active,
+.subject-save-action-button:focus {
+	color: var(--text-primary-reverse);
+	background: var(--blue-button-hover);
 }
 
 /*

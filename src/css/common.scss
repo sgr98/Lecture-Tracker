@@ -52,7 +52,7 @@ SECTION ACTION AREA
 	flex-shrink: 0;
 	width: 100%;
 	height: var(--section-action-container-height);
-	transition: 0.1s linear;
+	transition: 0.25s ease-in-out;
 }
 
 .section-action-inner-container {
@@ -70,12 +70,9 @@ SECTION ACTION AREA
 }
 
 .section-action-row-1 {
-	background: lightcoral;
 }
 
 .section-action-row-2 {
-	background: cyan;
-	transition: 0.1s linear;
 }
 
 .button {
@@ -87,6 +84,7 @@ SECTION ACTION AREA
 .section-action-button {
 	width: var(--section-action-button-width);
 	height: var(--section-action-button-height);
+	background: var(--background);
 	border: 2px solid var(--border-black);
 	border-radius: 10px;
 	font-size: var(--light-big-text-size);

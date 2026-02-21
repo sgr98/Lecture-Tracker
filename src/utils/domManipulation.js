@@ -31,8 +31,30 @@ export const addHTMLStringToDomById = (sourceElementId, htmlString) => {
 
 export const isElementInDOM = (elementId) => {
 	try {
-		const element = document.getElementById(elementId);
+		let element;
+		if (typeof elementId === 'string') {
+			element = document.getElementById(elementId);
+		} else if (typeof elementId === 'object') {
+			element = elementId;
+		} else {
+			return false;
+		}
 		return !isValueNull(element);
+	} catch (error) {
+		handler.errorWithPopup(error);
+		return false;
+	}
+};
+
+export const areAllElementsInDOM = (...elements) => {
+	try {
+		elements = elements ?? [];
+		for (let elem of elements) {
+			if (!isElementInDOM(elem)) {
+				return false;
+			}
+		}
+		return true;
 	} catch (error) {
 		handler.errorWithPopup(error);
 		return false;
@@ -53,5 +75,6 @@ export const removeElementById = (elementId) => {
 export const domManipulation = {
 	addHTMLStringToDomById,
 	isElementInDOM,
+	areAllElementsInDOM,
 	removeElementById,
 };
