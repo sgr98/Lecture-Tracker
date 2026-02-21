@@ -101,7 +101,7 @@ SECTION LIST AREA
 
 .list-container {
 	position: relative;
-	top: -8vh;
+	top: calc(0vh - var(--section-action-row-height));
 	flex-shrink: 0;
 	width: 100%;
 	height: var(--list-section-list-container-height);

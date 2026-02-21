@@ -171,7 +171,7 @@ export class SubjectActionController extends Controller {
 			const subjectActionArea = document.getElementById(
 				SUBJECT_ACTION_CONTAINER,
 			);
-			subjectActionArea.style.top = "-8vh";
+			subjectActionArea.style.top = "calc(0vh - var(--section-action-row-height))";
 		} catch (error) {
 			handler.errorWithPopup(error);
 		}

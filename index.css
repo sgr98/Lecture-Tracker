@@ -31,9 +31,14 @@
   --topbar-height: 13vh;
   --section-container-height: calc(100vh - var(--topbar-height));
   --section-title-container-height: 5vh;
-  --section-action-container-height: 16vh;
+  --section-action-row-height: 10vh;
+  --section-action-container-height: calc(
+  	var(--section-action-row-height) * 2
+  );
   --list-section-list-container-height: calc(
-  	var(--section-container-height) - 5vh - 8vh
+  	var(--section-container-height) - var(
+  			--section-title-container-height
+  		) - var(--section-action-row-height)
   );
   --section-action-button-height: 70%;
   --list-section-button-height: 7vh;
@@ -219,7 +224,7 @@ SECTION LIST AREA
 */
 .list-container {
   position: relative;
-  top: -8vh;
+  top: calc(0vh - var(--section-action-row-height));
   flex-shrink: 0;
   width: 100%;
   height: var(--list-section-list-container-height);
