@@ -16,8 +16,8 @@ export const HTMLTagsConstants = {
 
 export const DisplayText = {
 	general: {
-		DRAG_ICON: "&#9552;",
-		DELETE_ICON: "&#x1F5D1;",
+		DRAG_ICON: "\u2550",
+		DELETE_ICON: "🗑",
 	},
 
 	topbar: {

@@ -19,8 +19,13 @@ export class SubjectController extends Controller {
 		this._subjectActionController = new SubjectActionController(
 			moduleName,
 			this._subjectAPI,
-			(newSubject) => {
-				this._addNewSubjectToListCallback(newSubject);
+			{
+				addNewSubjectToListCallback: (newSubject) => {
+					this._addNewSubjectToListCallback(newSubject);
+				},
+				subjectListEditModeCallback: (toEnter) => {
+					this._subjectListEditModeCallback(toEnter);
+				},
 			},
 		);
 		this._subjectListContainerController =
@@ -69,6 +74,14 @@ export class SubjectController extends Controller {
 	_addNewSubjectToListCallback(newSubject) {
 		try {
 			this._subjectListContainerController.addItemComponent(newSubject);
+		} catch (error) {
+			handler.errorWithPopup(error);
+		}
+	}
+
+	_subjectListEditModeCallback(toEnter) {
+		try {
+			this._subjectListContainerController.enterExitEditMode(toEnter);
 		} catch (error) {
 			handler.errorWithPopup(error);
 		}

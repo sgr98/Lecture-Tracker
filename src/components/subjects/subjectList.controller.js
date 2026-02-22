@@ -1,6 +1,7 @@
 import {
 	HTMLAttributesConstants,
 	HTMLSubjectAttributesConstants,
+	DisplayText,
 } from "../../constants/HTMLConstants.js";
 import { DBSubjectConstants } from "../../constants/DBConstants.js";
 
@@ -11,12 +12,18 @@ import { Controller } from "../controller.js";
 
 import { SubjectListContainerView } from "./subjects.view.js";
 
-const { LIST_CONTAINER, LIST_INNER_CONTAINER } = HTMLAttributesConstants;
+const {
+	LIST_CONTAINER,
+	LIST_INNER_CONTAINER,
+	LIST_DRAG_BUTTON,
+	LIST_DELETE_BUTTON,
+} = HTMLAttributesConstants;
 const {
 	SUBJECT,
 	SUBJECT_ACTIVE_LIST_BUTTON,
 	NO_SUBJECTS_IN_LIST_MESSAGE_CONTAINER,
 } = HTMLSubjectAttributesConstants;
+const { DRAG_ICON, DELETE_ICON } = DisplayText.general;
 
 export class SubjectListContainerController extends Controller {
 	constructor(moduleName, subjectAPI) {
@@ -156,6 +163,36 @@ export class SubjectListContainerController extends Controller {
 				`${SUBJECT}-${order}__${id}`,
 			);
 			subjectElement.classList.remove(SUBJECT_ACTIVE_LIST_BUTTON);
+		} catch (error) {
+			handler.errorWithPopup(error);
+		}
+	}
+
+	enterExitEditMode(toEnter) {
+		try {
+			toEnter = toEnter ?? false;
+			const buttonWidth = toEnter
+				? "var(--list-section-edit-buttons-width)"
+				: "0";
+			const dragButtonText = toEnter ? DRAG_ICON : "";
+			const deleteButtonText = toEnter ? DELETE_ICON : "";
+
+			const subjects = this._subjectAPI.getSubjects();
+			for (const subject of subjects) {
+				const id = subject[DBSubjectConstants.ID];
+				const order = subject[DBSubjectConstants.ORDER];
+				const subjectListDragButton = document.getElementById(
+					`${SUBJECT}-${LIST_DRAG_BUTTON}-${order}__${id}`,
+				);
+				const subjectListDeleteButton = document.getElementById(
+					`${SUBJECT}-${LIST_DELETE_BUTTON}-${order}__${id}`,
+				);
+
+				subjectListDragButton.style.width = buttonWidth;
+				subjectListDeleteButton.style.width = buttonWidth;
+				subjectListDragButton.children[0].textContent = dragButtonText;
+				subjectListDeleteButton.children[0].textContent = deleteButtonText;
+			}
 		} catch (error) {
 			handler.errorWithPopup(error);
 		}

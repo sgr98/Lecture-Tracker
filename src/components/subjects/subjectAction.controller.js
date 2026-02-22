@@ -23,11 +23,12 @@ const {
 const { ADD_SUBJECT_MODAL_MODULE, ADD_SUBJECT_MODULE } = ElementModuleName;
 
 export class SubjectActionController extends Controller {
-	constructor(moduleName, subjectAPI, addNewSubjectToListCallback) {
+	constructor(moduleName, subjectAPI, subjectListCallbacks) {
 		super(moduleName);
 		this._subjectActionView = new SubjectActionView(moduleName);
 		this._subjectAPI = subjectAPI;
-		this._addNewSubjectToListCallback = addNewSubjectToListCallback;
+		// _subjectListCallbacks = { addNewSubjectToListCallback, subjectListEditModeCallback }
+		this._subjectListCallbacks = subjectListCallbacks;
 		this._addSubjectModalController = new AddSubjectModalController(
 			ADD_SUBJECT_MODAL_MODULE,
 			(newSubject) => {
@@ -98,7 +99,7 @@ export class SubjectActionController extends Controller {
 	_addSubjectCallback(newSubject) {
 		try {
 			const subject = this._addSubjectToDB(newSubject);
-			this._addNewSubjectToListCallback(subject);
+			this._subjectListCallbacks.addNewSubjectToListCallback(subject);
 		} catch (error) {
 			handler.errorWithPopup(error);
 		}
@@ -128,7 +129,7 @@ export class SubjectActionController extends Controller {
 				)
 			) {
 				editSubjectButton.addEventListener("click", () => {
-					this._enterEditMode();
+					this._enterExitEditMode(true);
 				});
 			}
 		} catch (error) {
@@ -155,10 +156,10 @@ export class SubjectActionController extends Controller {
 				)
 			) {
 				cancelActionButton.addEventListener("click", () => {
-					this._exitEditMode();
+					this._enterExitEditMode(false);
 				});
 				saveActionButton.addEventListener("click", () => {
-					this._exitEditMode();
+					this._enterExitEditMode(false);
 				});
 			}
 		} catch (error) {
@@ -166,23 +167,18 @@ export class SubjectActionController extends Controller {
 		}
 	}
 
-	_enterEditMode() {
+	_enterExitEditMode(toEnter) {
 		try {
-			const subjectActionArea = document.getElementById(
-				SUBJECT_ACTION_CONTAINER,
-			);
-			subjectActionArea.style.top = "calc(0vh - var(--section-action-row-height))";
-		} catch (error) {
-			handler.errorWithPopup(error);
-		}
-	}
+			toEnter = toEnter ?? false;
+			const subjectActionAreaTopSlide = toEnter
+				? "calc(0vh - var(--section-action-row-height))"
+				: "0";
 
-	_exitEditMode() {
-		try {
 			const subjectActionArea = document.getElementById(
 				SUBJECT_ACTION_CONTAINER,
 			);
-			subjectActionArea.style.top = "0";
+			subjectActionArea.style.top = subjectActionAreaTopSlide;
+			this._subjectListCallbacks.subjectListEditModeCallback(toEnter);
 		} catch (error) {
 			handler.errorWithPopup(error);
 		}

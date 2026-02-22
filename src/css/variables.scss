@@ -64,6 +64,7 @@
 	--list-section-width: 25vw;
 	--list-section-collapsed-width: 8vw;
 	--section-action-button-width: 40%;
+	--list-section-edit-buttons-width: 15%;
 
 	// FONT
 	--very-big-text-size: 40px;
@@ -80,6 +81,10 @@
 	--font-weight-light-bold: 500;
 	--font-weight-normal: 450;
 	--font-weight-light: 300;
+
+	// TRANSITIONS
+	--standard-transition: 0.1s linear;
+	--list-section-action-transition: 0.25s ease-in-out;
 }
 
 // :root[screen-res='large'] {

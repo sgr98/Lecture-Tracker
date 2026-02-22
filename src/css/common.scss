@@ -54,12 +54,11 @@ SECTION ACTION AREA
 .section-action-container {
 	position: relative;
 	top: 0;
-	// top: -8vh;
 	flex-direction: row;
 	flex-shrink: 0;
 	width: 100%;
 	height: var(--section-action-container-height);
-	transition: 0.25s ease-in-out;
+	transition: var(--list-section-action-transition);
 }
 
 .section-action-inner-container {
@@ -145,9 +144,12 @@ SECTION LIST AREA
 }
 
 .list-section-edit-buttons {
-	width: 15%;
+	// width: var(--list-section-edit-buttons-width);
+	width: 0;
 	height: 100%;
 	background: lightgray;
+	font-size: var(--light-big-text-size);
+	transition: var(--list-section-action-transition);
 }
 
 .list-drag-button {
