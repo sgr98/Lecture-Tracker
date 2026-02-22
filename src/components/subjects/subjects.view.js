@@ -9,6 +9,7 @@ import { View } from "../view.js";
 
 const {
 	SECTION_CONTAINER,
+	LIST_SECTION_CONTAINER,
 	SECTION_TITLE_CONTAINER,
 	SECTION_TITLE,
 	SECTION_ACTION_CONTAINER,
@@ -24,6 +25,9 @@ const {
 	LIST_CONTAINER,
 	LIST_INNER_CONTAINER,
 	LIST_BUTTON,
+	LIST_SECTION_EDIT_BUTTONS,
+	LIST_DRAG_BUTTON,
+	LIST_DELETE_BUTTON,
 	BUTTON,
 	SECTION_ACTION_BUTTON,
 	NO_ITEMS_IN_LIST_MESSAGE_CONTAINER,
@@ -43,6 +47,7 @@ const {
 	NO_SUBJECTS_IN_LIST_MESSAGE_CONTAINER,
 	NO_SUBJECTS_MESSAGE_ID,
 } = HTMLSubjectAttributesConstants;
+const { DRAG_ICON, DELETE_ICON } = DisplayText.general;
 const {
 	SUBJECT_SECTION_TITLE,
 	ADD_SUBJECT_BUTTON_TEXT,
@@ -61,7 +66,7 @@ export class SubjectSectionView extends View {
 		const subjectSectionHTML = `
 			<section
 				id="${SUBJECT_CONTAINER}"
-				class="${SUBJECT_CONTAINER} ${SECTION_CONTAINER}"
+				class="${SUBJECT_CONTAINER} ${LIST_SECTION_CONTAINER} ${SECTION_CONTAINER}"
 			>
 				<div
 					id="${SUBJECT_TITLE_CONTAINER}"
@@ -183,10 +188,22 @@ export class SubjectListContainerView extends View {
 				class="${SUBJECT_LIST_BUTTON_CONTAINER} ${LIST_BUTTON_CONTAINER}"
 			>
 				<div
+					id="${SUBJECT}-${LIST_DRAG_BUTTON}"
+					class="${SUBJECT}-${LIST_DRAG_BUTTON} ${LIST_DRAG_BUTTON} ${LIST_SECTION_EDIT_BUTTONS}"
+				>
+					<span>${DRAG_ICON}</span>
+				</div>
+				<div
 					id="${SUBJECT}-${order}__${id}"
 					class="${SUBJECT_BUTTON} ${LIST_BUTTON}"
 				>
-					${subjectName}
+					<span>${subjectName}</span>
+				</div>
+				<div
+					id="${SUBJECT}-${LIST_DELETE_BUTTON}"
+					class="${SUBJECT}-${LIST_DELETE_BUTTON} ${LIST_DELETE_BUTTON} ${LIST_SECTION_EDIT_BUTTONS}"
+				>
+					<span>${DELETE_ICON}</span>
 				</div>
 			</div>
 		`;

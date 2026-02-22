@@ -144,6 +144,13 @@ SECTION
   background: var(--background);
 }
 
+.list-section-container {
+  flex-direction: column;
+  width: var(--list-section-width);
+  height: 100%;
+  border-right: 3px solid var(--border-black);
+}
+
 /*
 ////////////////////////////////
 ////////////////////////////////
@@ -242,7 +249,7 @@ SECTION LIST AREA
 
 .list-button-container {
   width: 100%;
-  height: fit-content;
+  height: var(--list-section-button-height);
   border-bottom: 2px dashed var(--border-black);
 }
 .list-button-container:last-child {
@@ -251,11 +258,26 @@ SECTION LIST AREA
 
 .list-button {
   width: 100%;
-  height: var(--list-section-button-height);
+  height: 100%;
   text-align: center;
+  text-wrap: break-word;
   background: var(--background);
   font-size: var(--medium-text-size);
   font-weight: var(--font-weight-normal);
+}
+
+.list-section-edit-buttons {
+  width: 15%;
+  height: 100%;
+  background: lightgray;
+}
+
+.list-drag-button {
+  border-right: 1px solid var(--border-black);
+}
+
+.list-delete-button {
+  border-left: 1px solid var(--border-black);
 }
 
 /*
@@ -614,13 +636,6 @@ STAGE
   background: var(--background);
 }
 
-.subject-container {
-  flex-direction: column;
-  width: var(--list-section-width);
-  height: 100%;
-  border-right: 3px solid var(--border-black);
-}
-
 /*
 ////////////////////////////////
 ////////////////////////////////
@@ -709,15 +724,6 @@ COURSES
 ////////////////////////////////
 ////////////////////////////////
 */
-.course-container {
-  flex-direction: column;
-  width: var(--list-section-width);
-  height: 100%;
-  padding: 5px;
-  /* background: #C3EDC0; */
-  border-right: 3px solid var(--border-black);
-}
-
 .add-course-button {
   background: #c3edc0;
   transition: 0.1s linear;

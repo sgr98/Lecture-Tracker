@@ -15,6 +15,11 @@ export const HTMLTagsConstants = {
 };
 
 export const DisplayText = {
+	general: {
+		DRAG_ICON: "&#9552;",
+		DELETE_ICON: "&#x1F5D1;",
+	},
+
 	topbar: {
 		LECTURE_TRACKER: "Lecture Tracker",
 		CLEAR_SUBJECTS: "Clear Subjects",
@@ -64,6 +69,7 @@ export const HTMLAttributesConstants = {
 	TOP_TITLE: "top-title",
 	CONTAINER: "container",
 	SECTION_CONTAINER: "section-container",
+	LIST_SECTION_CONTAINER: "list-section-container",
 	SECTION_TITLE_CONTAINER: "section-title-container",
 	SECTION_TITLE: "section-title",
 	SECTION_ACTION_CONTAINER: "section-action-container",
@@ -79,6 +85,9 @@ export const HTMLAttributesConstants = {
 	LIST_CONTAINER: "list-container",
 	LIST_INNER_CONTAINER: "list-inner-container",
 	LIST_BUTTON: "list-button",
+	LIST_SECTION_EDIT_BUTTONS: "list-section-edit-buttons",
+	LIST_DRAG_BUTTON: "list-drag-button",
+	LIST_DELETE_BUTTON: "list-delete-button",
 	NO_ITEMS_IN_LIST_MESSAGE_CONTAINER: "no-items-in-list-message-container",
 	BUTTON: "button",
 	LIST_ADD_BUTTON: "list-add-button",

@@ -1,8 +1,4 @@
 .subject-container {
-	flex-direction: column;
-	width: var(--list-section-width);
-	height: 100%;
-	border-right: 3px solid var(--border-black);
 }
 
 /*
@@ -108,4 +104,10 @@ LIST CONTAINER
 .subject-active-list-button:active,
 .subject-active-list-button:focus {
 	color: var(--text-primary);
+}
+
+.subject-list-drag-button {
+}
+
+.subject-list-delete-button {
 }

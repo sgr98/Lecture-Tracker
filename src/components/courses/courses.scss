@@ -7,14 +7,6 @@ COURSES
 */
 
 .course-container {
-	flex-direction: column;
-	width: var(--list-section-width);
-	height: 100%;
-	padding: 5px;
-	/* background: #C3EDC0; */
-	border-right: 3px solid var(--border-black);
-	// overflow-y: auto;
-	// overflow-wrap: normal;
 }
 
 .add-course-button {
