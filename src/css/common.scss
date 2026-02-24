@@ -124,6 +124,7 @@ SECTION LIST AREA
 }
 
 .list-button-container {
+	flex-shrink: 0;
 	width: 100%;
 	height: var(--list-section-button-height);
 	border-bottom: 2px dashed var(--border-black);
@@ -153,11 +154,13 @@ SECTION LIST AREA
 }
 
 .list-drag-button {
-	border-right: 1px solid var(--border-black);
+	border-right: none;
+	// border-right: 1px solid var(--border-black);
 }
 
 .list-delete-button {
-	border-left: 1px solid var(--border-black);
+	border-left: none;
+	// border-left: 1px solid var(--border-black);
 }
 
 /*

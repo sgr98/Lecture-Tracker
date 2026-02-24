@@ -174,6 +174,9 @@ export class SubjectListContainerController extends Controller {
 			const buttonWidth = toEnter
 				? "var(--list-section-edit-buttons-width)"
 				: "0";
+			const buttonBorder = toEnter
+				? "1px solid var(--border-black)"
+				: "none";
 			const dragButtonText = toEnter ? DRAG_ICON : "";
 			const deleteButtonText = toEnter ? DELETE_ICON : "";
 
@@ -190,8 +193,11 @@ export class SubjectListContainerController extends Controller {
 
 				subjectListDragButton.style.width = buttonWidth;
 				subjectListDeleteButton.style.width = buttonWidth;
+				subjectListDragButton.style.borderRight = buttonBorder;
+				subjectListDeleteButton.style.borderLeft = buttonBorder;
 				subjectListDragButton.children[0].textContent = dragButtonText;
-				subjectListDeleteButton.children[0].textContent = deleteButtonText;
+				subjectListDeleteButton.children[0].textContent =
+					deleteButtonText;
 			}
 		} catch (error) {
 			handler.errorWithPopup(error);
