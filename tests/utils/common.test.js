@@ -1,4 +1,4 @@
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, vi } from "vitest";
 import {
 	isValueNull,
 	isStringNullOrEmpty,
@@ -446,20 +446,29 @@ describe("UTILS - COMMMON - getDefaultInputValue Function", () => {
 	});
 
 	it("should check if default value for inputType: Date is ''", () => {
+		const mockDate = new Date(2022, 0, 1);
+		vi.setSystemTime(mockDate);
 		expect(getDefaultInputValue(HTMLInputTypeEnum.Date)).toEqual(
 			new Date(),
 		);
+		vi.useRealTimers();
 	});
 
 	it("should check if default value for inputType: Datetime_Local is ''", () => {
+		const mockDate = new Date(2022, 0, 1);
+		vi.setSystemTime(mockDate);
 		expect(getDefaultInputValue(HTMLInputTypeEnum.Datetime_Local)).toEqual(
 			new Date(),
 		);
+		vi.useRealTimers();
 	});
 
 	it("should check if default value for inputType: Time is ''", () => {
+		const mockDate = new Date(2022, 0, 1);
+		vi.setSystemTime(mockDate);
 		expect(getDefaultInputValue(HTMLInputTypeEnum.Time)).toEqual(
 			new Date(),
 		);
+		vi.useRealTimers();
 	});
 });
