@@ -67,7 +67,6 @@ export class SubjectAPI {
 			localStorageDB.deleteKeys([DBSubjectConstants.SUBJECT_LIST]);
 		} catch (error) {
 			handler.errorWithPopup(error);
-			return [];
 		}
 	}
 
