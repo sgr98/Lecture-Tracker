@@ -1,3 +1,5 @@
+// @vitest-environment node
+
 import { DBSubjectConstants } from "../../src/constants/DBConstants.js";
 import { vi, describe, it, expect, beforeEach } from "vitest";
 import { SubjectAPI } from "../../src/components/subjects/subjects.api.js";
