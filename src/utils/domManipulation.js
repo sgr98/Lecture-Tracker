@@ -7,7 +7,8 @@ const generateElementFromHTMLString = (htmlString) => {
 		template.insertAdjacentHTML("beforeend", htmlString.trim());
 		return template.firstElementChild;
 	} catch (error) {
-		handler.errorWithPopup(error);
+		handler.error(error);
+		throw error;
 	}
 };
 
@@ -16,7 +17,8 @@ const addHTMLElementToDomById = (sourceElementId, element) => {
 		const sourceElement = document.getElementById(sourceElementId);
 		sourceElement.appendChild(element);
 	} catch (error) {
-		handler.errorWithPopup(error);
+		handler.error(error);
+		throw error;
 	}
 };
 
@@ -25,7 +27,8 @@ export const addHTMLStringToDomById = (sourceElementId, htmlString) => {
 		const elementToAdd = generateElementFromHTMLString(htmlString);
 		addHTMLElementToDomById(sourceElementId, elementToAdd);
 	} catch (error) {
-		handler.errorWithPopup(error);
+		handler.error(error);
+		throw error;
 	}
 };
 
@@ -42,7 +45,7 @@ export const isElementInDOM = (elementId) => {
 		const isElementInBody = !isValueNull(element) && element.isConnected;
 		return isElementInBody;
 	} catch (error) {
-		handler.errorWithPopup(error);
+		handler.error(error);
 		return false;
 	}
 };
@@ -57,7 +60,7 @@ export const areAllElementsInDOM = (...elements) => {
 		}
 		return true;
 	} catch (error) {
-		handler.errorWithPopup(error);
+		handler.error(error);
 		return false;
 	}
 };
@@ -69,7 +72,8 @@ export const removeElementById = (elementId) => {
 			element.remove();
 		}
 	} catch (error) {
-		handler.errorWithPopup(error);
+		handler.error(error);
+		throw error;
 	}
 };
 
