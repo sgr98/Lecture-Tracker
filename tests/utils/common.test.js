@@ -4,6 +4,7 @@ import { describe, it, expect, vi } from "vitest";
 import {
 	isValueNull,
 	isStringNullOrEmpty,
+	isStringNullOrWhiteSpace,
 	isArrayNullOrEmpty,
 	isObjectNullOrEmpty,
 	getStringValueOrDefault,
@@ -87,8 +88,38 @@ describe("UTILS - COMMMON - isStringNullOrEmpty Function", () => {
 		expect(isStringNullOrEmpty("")).toBe(true);
 	});
 
+	it("should check if '    	' is not null or empty", () => {
+		expect(isStringNullOrEmpty("    	")).toBe(false);
+	});
+
 	it("should check if 'abcd' is not null or empty", () => {
 		expect(isStringNullOrEmpty("abcd")).toBe(false);
+	});
+});
+
+describe("UTILS - COMMMON - isStringNullOrWhiteSpace Function", () => {
+	it("should check if blank is null or white space", () => {
+		expect(isStringNullOrWhiteSpace()).toBe(true);
+	});
+
+	it("should check if null is null or white space", () => {
+		expect(isStringNullOrWhiteSpace(null)).toBe(true);
+	});
+
+	it("should check if undefined is null or white space", () => {
+		expect(isStringNullOrWhiteSpace(undefined)).toBe(true);
+	});
+
+	it("should check if '' is null or white space", () => {
+		expect(isStringNullOrWhiteSpace("")).toBe(true);
+	});
+
+	it("should check if '    	' is null or white space", () => {
+		expect(isStringNullOrWhiteSpace("    	")).toBe(true);
+	});
+
+	it("should check if 'abcd' is not null or white space", () => {
+		expect(isStringNullOrWhiteSpace("abcd")).toBe(false);
 	});
 });
 

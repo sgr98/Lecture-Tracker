@@ -4,7 +4,7 @@ import {
 } from "../../../constants/HTMLConstants.js";
 import {
 	isArrayNullOrEmpty,
-	isStringNullOrEmpty,
+	isStringNullOrWhiteSpace,
 } from "../../../utils/common.js";
 import { FieldView } from "../field/field.view.js";
 import { View } from "../../view.js";
@@ -80,7 +80,7 @@ export class ModalView extends View {
 	_generateModalDescriptionHTML() {
 		const moduleName = this._moduleName;
 		const description = this._description;
-		if (isStringNullOrEmpty(description)) {
+		if (isStringNullOrWhiteSpace(description)) {
 			return "";
 		}
 		const descriptionHTML = `

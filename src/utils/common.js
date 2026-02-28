@@ -5,6 +5,10 @@ export const isValueNull = (value) => {
 };
 
 export const isStringNullOrEmpty = (str) => {
+	return str === null || str === undefined || str === "";
+};
+
+export const isStringNullOrWhiteSpace = (str) => {
 	return str === null || str === undefined || str.trim() === "";
 };
 
@@ -23,7 +27,7 @@ const DEFAULT_ARRAY = [];
 const DEFAULT_OBJECT = {};
 
 export const getStringValueOrDefault = (str) => {
-	return isStringNullOrEmpty(str) ? DEFAULT_STRING : str;
+	return isStringNullOrWhiteSpace(str) ? DEFAULT_STRING : str;
 };
 
 export const getNumberValueOrDefault = (num) => {

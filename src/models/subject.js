@@ -1,5 +1,5 @@
 import { DBSubjectConstants } from "../constants/DBConstants.js";
-import { isStringNullOrEmpty } from "../utils/common.js";
+import { isStringNullOrWhiteSpace } from "../utils/common.js";
 
 // id
 // subjectName
@@ -18,7 +18,7 @@ export class Subject {
 			courseList,
 			order,
 		} = sub;
-		this[DBSubjectConstants.ID] = isStringNullOrEmpty(id)
+		this[DBSubjectConstants.ID] = isStringNullOrWhiteSpace(id)
 			? crypto.randomUUID()
 			: id;
 		this[DBSubjectConstants.SUBJECT_NAME] = subjectName ?? "";
