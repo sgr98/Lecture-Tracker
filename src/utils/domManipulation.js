@@ -32,14 +32,15 @@ export const addHTMLStringToDomById = (sourceElementId, htmlString) => {
 export const isElementInDOM = (elementId) => {
 	try {
 		let element;
-		if (typeof elementId === 'string') {
+		if (typeof elementId === "string") {
 			element = document.getElementById(elementId);
-		} else if (typeof elementId === 'object') {
+		} else if (typeof elementId === "object") {
 			element = elementId;
 		} else {
 			return false;
 		}
-		return !isValueNull(element);
+		const isElementInBody = !isValueNull(element) && element.isConnected;
+		return isElementInBody;
 	} catch (error) {
 		handler.errorWithPopup(error);
 		return false;
