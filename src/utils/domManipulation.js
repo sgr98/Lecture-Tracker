@@ -1,8 +1,12 @@
-import { isValueNull } from "./common.js";
+import { ConsoleText } from "../constants/internalConstants.js";
+import { isStringNullOrWhiteSpace, isValueNull } from "./common.js";
 import { handler } from "./handler.js";
 
 const generateElementFromHTMLString = (htmlString) => {
 	try {
+		if (isStringNullOrWhiteSpace(htmlString)) {
+			throw new Error(ConsoleText.HTML_STRING_IS_EMPTY);
+		}
 		const template = document.createElement("template");
 		template.insertAdjacentHTML("beforeend", htmlString.trim());
 		return template.firstElementChild;
