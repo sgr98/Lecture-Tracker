@@ -1,5 +1,9 @@
 import { ConsoleText } from "../constants/internalConstants.js";
-import { isStringNullOrWhiteSpace, isValueNull } from "./common.js";
+import {
+	isArrayNullOrEmpty,
+	isStringNullOrWhiteSpace,
+	isValueNull,
+} from "./common.js";
 import { handler } from "./handler.js";
 
 const generateElementFromHTMLString = (htmlString) => {
@@ -18,6 +22,9 @@ const generateElementFromHTMLString = (htmlString) => {
 
 const addHTMLElementToDomById = (sourceElementId, element) => {
 	try {
+		if (isStringNullOrWhiteSpace(sourceElementId)) {
+			throw new Error(ConsoleText.HTML_STRING_IS_EMPTY);
+		}
 		const sourceElement = document.getElementById(sourceElementId);
 		sourceElement.appendChild(element);
 	} catch (error) {
@@ -56,7 +63,9 @@ export const isElementInDOM = (elementId) => {
 
 export const areAllElementsInDOM = (...elements) => {
 	try {
-		elements = elements ?? [];
+		if (isArrayNullOrEmpty(elements)) {
+			return false;
+		}
 		for (let elem of elements) {
 			if (!isElementInDOM(elem)) {
 				return false;
