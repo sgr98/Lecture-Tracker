@@ -23,6 +23,38 @@ const FIELD1_PLACEHOLDER = `${FIELD1}-placeholder`;
 const FIELD2 = `${FIELD}-2`;
 const FIELD2_LABEL = `${FIELD2}-${LABEL}`;
 const FIELD2_PLACEHOLDER = `${FIELD2}-placeholder`;
+const FIELD3 = `${FIELD}-3`;
+const FIELD3_LABEL = `${FIELD3}-${LABEL}`;
+const FIELD3_PLACEHOLDER = `${FIELD3}-placeholder`;
+const FIELDS = [
+	{
+		name: FIELD1,
+		label: FIELD1_LABEL,
+		placeholder: FIELD1_PLACEHOLDER,
+		inputTag: HTMLInputTagEnum.Input,
+		inputType: HTMLInputTypeEnum.Text,
+		isRequired: false,
+		mapTo: FIELD1,
+	},
+	{
+		name: FIELD2,
+		label: FIELD2_LABEL,
+		placeholder: FIELD2_PLACEHOLDER,
+		inputTag: HTMLInputTagEnum.Textarea,
+		inputType: HTMLInputTypeEnum.Text,
+		isRequired: true,
+		mapTo: FIELD2,
+	},
+	{
+		name: FIELD3,
+		label: FIELD3_LABEL,
+		placeholder: FIELD3_PLACEHOLDER,
+		inputTag: HTMLInputTagEnum.Input,
+		inputType: HTMLInputTypeEnum.Password,
+		isRequired: true,
+		mapTo: FIELD3,
+	},
+];
 const SIMULATED_DOM_FAILURE = "Simulated DOM Failure";
 
 vi.mock("../../src/utils/handler.js", () => ({
@@ -47,26 +79,7 @@ describe("COMPONENTS - MODAL CONTROLLER - ModalController", () => {
 			MODULE,
 			MODULE_TITLE,
 			MODULE_DESCRIOPTION,
-			[
-				{
-					name: FIELD1,
-					label: FIELD1_LABEL,
-					placeholder: FIELD1_PLACEHOLDER,
-					inputTag: HTMLInputTagEnum.Input,
-					inputType: HTMLInputTypeEnum.Text,
-					isRequired: false,
-					mapTo: FIELD1,
-				},
-				{
-					name: FIELD2,
-					label: FIELD2_LABEL,
-					placeholder: FIELD2_PLACEHOLDER,
-					inputTag: HTMLInputTagEnum.Textarea,
-					inputType: HTMLInputTypeEnum.Text,
-					isRequired: true,
-					mapTo: FIELD2,
-				},
-			],
+			FIELDS,
 			(fields) => {},
 		);
 	});
@@ -108,6 +121,15 @@ describe("COMPONENTS - MODAL CONTROLLER - ModalController", () => {
 		);
 		const modalFormField2InputComponent = document.getElementById(
 			`${MODULE}-${MODAL}-${FIELD2}-${INPUT}`,
+		);
+		const modalFormField3Component = document.getElementById(
+			`${MODULE}-${MODAL}-${FIELD3}-${FIELD}`,
+		);
+		const modalFormField3LabelComponent = document.getElementById(
+			`${MODULE}-${MODAL}-${FIELD3}-${LABEL}`,
+		);
+		const modalFormField3InputComponent = document.getElementById(
+			`${MODULE}-${MODAL}-${FIELD3}-${INPUT}`,
 		);
 		const modalFormSubmitComponent = document.getElementById(
 			`${MODULE}-${MODAL_ADD_BUTTON}`,
@@ -169,6 +191,26 @@ describe("COMPONENTS - MODAL CONTROLLER - ModalController", () => {
 			FIELD2_PLACEHOLDER,
 		);
 		// expect(modalFormField2InputComponent.required).toBe(true);
+
+		expect(modalFormField3Component).not.toBe(null);
+		expect(modalFormField3Component).not.toBe(undefined);
+		expect(modalFormField3LabelComponent).not.toBe(null);
+		expect(modalFormField3LabelComponent).not.toBe(undefined);
+		expect(modalFormField3LabelComponent.textContent.trim()).toBe(
+			`${FIELD3_LABEL}*`,
+		);
+		expect(modalFormField3InputComponent).not.toBe(null);
+		expect(modalFormField3InputComponent).not.toBe(undefined);
+		expect(modalFormField3InputComponent.tagName.toLowerCase()).toBe(
+			"input",
+		);
+		expect(modalFormField3InputComponent.type.toLowerCase()).toBe(
+			"password",
+		);
+		expect(modalFormField3InputComponent.placeholder).toBe(
+			FIELD3_PLACEHOLDER,
+		);
+		expect(modalFormField3InputComponent.required).toBe(true);
 
 		expect(modalFormSubmitComponent).not.toBe(null);
 		expect(modalFormSubmitComponent).not.toBe(undefined);
