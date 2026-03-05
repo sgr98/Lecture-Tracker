@@ -1,5 +1,5 @@
 import { HTMLFieldAttributesConstants } from "../../../constants/HTMLConstants.js";
-import { HTMLInputTagEnum } from "../../../utils/enum.js";
+import { HTMLInputTagEnum, HTMLInputTypeEnum } from "../../../utils/enum.js";
 import { View } from "../../view.js";
 
 const { FIELD, INPUT, TEXT, TEXTAREA, SYSTEM_DEFAULT } =
@@ -10,6 +10,8 @@ export class InputView extends View {
 		super(moduleName);
 		this._componentName = componentName;
 
+		this._DEFAULT_INPUT_TAG = HTMLInputTagEnum.Input;
+		this._DEFAULT_INPUT_TYPE = HTMLInputTypeEnum.Text;
 		this._DEFAULT_TEXT_AREA_ROWS = 5;
 		this._DEFAULT_TEXT_AREA_MAX_LENGTH = 400;
 
