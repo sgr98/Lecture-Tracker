@@ -15,6 +15,10 @@ export class InputView extends View {
 		this._DEFAULT_TEXT_AREA_ROWS = 5;
 		this._DEFAULT_TEXT_AREA_MAX_LENGTH = 400;
 
+		if (field.inputTag === HTMLInputTagEnum.Textarea) {
+			field.inputType = HTMLInputTypeEnum.Textarea;
+		}
+
 		const { name, placeholder, inputTag, inputType, isRequired } = field;
 		this._field = {
 			name: name ?? SYSTEM_DEFAULT,
@@ -57,7 +61,8 @@ export class InputView extends View {
 	}
 
 	_generateTextAreaTypeHTML() {
-		const { name, placeholder } = this._field;
+		const { name, placeholder, isRequired } = this._field;
+		const requiredInput = this._getRequiredInput(isRequired);
 		const rows = this._DEFAULT_TEXT_AREA_ROWS;
 		const maxlength = this._DEFAULT_TEXT_AREA_MAX_LENGTH;
 		const moduleName = this._moduleName;
@@ -68,6 +73,7 @@ export class InputView extends View {
 				name="${moduleName}-${componentName}-${name}-${INPUT}"
 				rows="${rows}"
 				maxlength="${maxlength}"
+				${requiredInput}
 				placeholder="${placeholder}"
 				class="${componentName}-${FIELD}-${TEXT}-${TEXTAREA}"
 			></textarea>

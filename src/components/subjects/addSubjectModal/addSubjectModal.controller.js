@@ -67,7 +67,7 @@ export class AddSubjectModalController extends Controller {
 					placeholder:
 						ADD_SUBJECT_MODAL_SUBJECT_DESCRIPTION_FIELD_PLACEHOLDER,
 					inputTag: HTMLInputTagEnum.Textarea,
-					inputType: HTMLInputTypeEnum.Text,
+					inputType: HTMLInputTypeEnum.Textarea,
 					isRequired: false,
 					mapTo: DBSubjectConstants.SUBJECT_DESCRIPTION,
 				},

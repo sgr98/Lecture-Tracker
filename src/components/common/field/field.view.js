@@ -13,6 +13,10 @@ export class FieldView extends View {
 		this._DEFAULT_INPUT_TAG = HTMLInputTagEnum.Input;
 		this._DEFAULT_INPUT_TYPE = HTMLInputTypeEnum.Text;
 
+		if (field.inputTag === HTMLInputTagEnum.Textarea) {
+			field.inputType = HTMLInputTypeEnum.Textarea;
+		}
+
 		const { name, label, placeholder, inputTag, inputType, isRequired } =
 			field;
 		this._field = {

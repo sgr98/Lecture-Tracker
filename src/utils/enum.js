@@ -5,6 +5,7 @@ export const HTMLInputTagEnum = Object.freeze({
 
 export const HTMLInputTypeEnum = Object.freeze({
 	Text: "text",
+	Textarea: "textarea",
 	Password: "password",
 	Email: "email",
 	Number: "number",

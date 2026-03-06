@@ -52,6 +52,7 @@ export const isInputValueNullOrEmpty = (value, inputType) => {
 	if (isValueNull(value)) return true;
 	switch (inputType) {
 		case HTMLInputTypeEnum.Text:
+		case HTMLInputTypeEnum.Textarea:
 		case HTMLInputTypeEnum.Password:
 		case HTMLInputTypeEnum.Email:
 		case HTMLInputTypeEnum.Month:
@@ -69,6 +70,7 @@ export const isInputValueNullOrEmpty = (value, inputType) => {
 export const getDefaultInputValue = (inputType) => {
 	switch (inputType) {
 		case HTMLInputTypeEnum.Text:
+		case HTMLInputTypeEnum.Textarea:
 		case HTMLInputTypeEnum.Password:
 		case HTMLInputTypeEnum.Email:
 		case HTMLInputTypeEnum.Month:

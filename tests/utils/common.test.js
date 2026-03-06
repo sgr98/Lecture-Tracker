@@ -325,6 +325,24 @@ describe("UTILS - COMMMON - isInputValueNullOrEmpty Function", () => {
 		);
 	});
 
+	it("should check if default value for null is true when inputType is Textarea", () => {
+		expect(isInputValueNullOrEmpty(null, HTMLInputTypeEnum.Textarea)).toEqual(
+			true,
+		);
+	});
+
+	it("should check if default value for undefined is true when inputType is Textarea", () => {
+		expect(
+			isInputValueNullOrEmpty(undefined, HTMLInputTypeEnum.Textarea),
+		).toEqual(true);
+	});
+
+	it("should check if default value for '' is true when inputType is Textarea", () => {
+		expect(isInputValueNullOrEmpty("", HTMLInputTypeEnum.Textarea)).toEqual(
+			true,
+		);
+	});
+
 	it("should check if default value for null is true when inputType is Password", () => {
 		expect(
 			isInputValueNullOrEmpty(null, HTMLInputTypeEnum.Password),
@@ -440,6 +458,10 @@ describe("UTILS - COMMMON - getDefaultInputValue Function", () => {
 
 	it("should check if default value for inputType: Text is ''", () => {
 		expect(getDefaultInputValue(HTMLInputTypeEnum.Text)).toEqual("");
+	});
+
+	it("should check if default value for inputType: Text is ''", () => {
+		expect(getDefaultInputValue(HTMLInputTypeEnum.Textarea)).toEqual("");
 	});
 
 	it("should check if default value for inputType: Password is ''", () => {
