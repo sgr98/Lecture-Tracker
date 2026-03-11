@@ -7,6 +7,8 @@ import { subjects0, subjects1, subjects2 } from "../data/subjects.js";
 import { localStorageDB } from "../../src/utils/localStorageDB.js";
 import { handler } from "../../src/utils/handler.js";
 
+const TEST_ERROR = "Test Error";
+
 vi.mock("../../src/utils/handler.js", () => ({
 	handler: {
 		errorWithPopup: vi.fn(),
@@ -47,12 +49,14 @@ describe("SUBJECT API - getSubjects", () => {
 		const getCustomSpy = vi
 			.spyOn(localStorageDB, "getCustom")
 			.mockImplementation(() => {
-				throw new Error("Test Error");
+				throw new Error(TEST_ERROR);
 			});
 
 		const result = subjectAPI.getSubjects();
 
-		expect(handler.errorWithPopup).toHaveBeenCalled("Test Error");
+		expect(handler.errorWithPopup).toHaveBeenCalledWith(
+			new Error(TEST_ERROR),
+		);
 		expect(result).toEqual([]);
 		getCustomSpy.mockRestore();
 	});
@@ -126,12 +130,14 @@ describe("SUBJECT API - addSubject", () => {
 		const saveSubjectsSpy = vi
 			.spyOn(subjectAPI, "_saveSubjects")
 			.mockImplementation(() => {
-				throw new Error("Test Error");
+				throw new Error(TEST_ERROR);
 			});
 
 		const result = subjectAPI.addSubject(newSubject);
 
-		expect(handler.errorWithPopup).toHaveBeenCalled("Test Error");
+		expect(handler.errorWithPopup).toHaveBeenCalledWith(
+			new Error(TEST_ERROR),
+		);
 		expect(result).toEqual(null);
 		getCustomSpy.mockRestore();
 		saveSubjectsSpy.mockRestore();
@@ -158,12 +164,14 @@ describe("SUBJECT API - deleteAllSubjects", () => {
 		const deleteKeysSpy = vi
 			.spyOn(localStorageDB, "deleteKeys")
 			.mockImplementation(() => {
-				throw new Error("Test Error");
+				throw new Error(TEST_ERROR);
 			});
 
 		SubjectAPI.deleteAllSubjects();
 
-		expect(handler.errorWithPopup).toHaveBeenCalled("Test Error");
+		expect(handler.errorWithPopup).toHaveBeenCalledWith(
+			new Error(TEST_ERROR),
+		);
 		deleteKeysSpy.mockRestore();
 	});
 });

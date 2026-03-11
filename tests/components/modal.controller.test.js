@@ -228,7 +228,9 @@ describe("COMPONENTS - MODAL CONTROLLER - ModalController", () => {
 		const rootComponent = document.getElementById(elementId);
 		const modalComponent = document.getElementById(`${MODULE}-${MODAL}`);
 
-		expect(handler.errorWithPopup).toHaveBeenCalled(SIMULATED_DOM_FAILURE);
+		expect(handler.errorWithPopup).toHaveBeenCalledWith(
+			new Error(SIMULATED_DOM_FAILURE),
+		);
 		expect(rootComponent).not.toBe(null);
 		expect(rootComponent).not.toBe(undefined);
 		expect(modalComponent).toBe(null);

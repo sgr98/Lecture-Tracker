@@ -60,27 +60,35 @@ describe("UTILS - DOM MANIPULATION - addHTMLStringToDomById Function", () => {
 	it("throws error when inputs are blank, blank", () => {
 		const act = () => domManipulation.addHTMLStringToDomById();
 		expect(act).toThrow(ConsoleText.HTML_STRING_IS_EMPTY);
-		expect(handler.error).toHaveBeenCalled(ConsoleText.HTML_STRING_IS_EMPTY);
+		expect(handler.error).toHaveBeenCalledWith(
+			new Error(ConsoleText.HTML_STRING_IS_EMPTY),
+		);
 	});
 
 	it("throws error when inputs are null, null", () => {
 		const act = () => domManipulation.addHTMLStringToDomById(null, null);
 		expect(act).toThrow(ConsoleText.HTML_STRING_IS_EMPTY);
-		expect(handler.error).toHaveBeenCalled(ConsoleText.HTML_STRING_IS_EMPTY);
+		expect(handler.error).toHaveBeenCalledWith(
+			new Error(ConsoleText.HTML_STRING_IS_EMPTY),
+		);
 	});
 
 	it("throws error when inputs are elementId, null", () => {
 		const act = () =>
 			domManipulation.addHTMLStringToDomById(elementId, null);
 		expect(act).toThrow(ConsoleText.HTML_STRING_IS_EMPTY);
-		expect(handler.error).toHaveBeenCalled(ConsoleText.HTML_STRING_IS_EMPTY);
+		expect(handler.error).toHaveBeenCalledWith(
+			new Error(ConsoleText.HTML_STRING_IS_EMPTY),
+		);
 	});
 
 	it("throws error when inputs are null, newElementStr", () => {
 		const act = () =>
 			domManipulation.addHTMLStringToDomById(null, newElementStr);
 		expect(act).toThrow(ConsoleText.HTML_STRING_IS_EMPTY);
-		expect(handler.error).toHaveBeenCalled(ConsoleText.HTML_STRING_IS_EMPTY);
+		expect(handler.error).toHaveBeenCalledWith(
+			new Error(ConsoleText.HTML_STRING_IS_EMPTY),
+		);
 	});
 
 	it("should add the element to the DOM", () => {
@@ -189,7 +197,9 @@ describe("UTILS - DOM MANIPULATION - isElementInDOM Function", () => {
 
 		const result = domManipulation.isElementInDOM(elementId);
 
-		expect(handler.error).toHaveBeenCalled(SIMULATED_DOM_FAILURE);
+		expect(handler.error).toHaveBeenCalledWith(
+			new Error(SIMULATED_DOM_FAILURE),
+		);
 		expect(result).toEqual(false);
 		domSpy.mockRestore();
 	});
@@ -256,7 +266,9 @@ describe("UTILS - DOM MANIPULATION - areAllElementsInDOM Function", () => {
 
 		const result = domManipulation.areAllElementsInDOM(elementId);
 
-		expect(handler.error).toHaveBeenCalled(SIMULATED_DOM_FAILURE);
+		expect(handler.error).toHaveBeenCalledWith(
+			new Error(SIMULATED_DOM_FAILURE),
+		);
 		expect(result).toEqual(false);
 		domSpy.mockRestore();
 	});
@@ -340,7 +352,9 @@ describe("UTILS - DOM MANIPULATION - removeElementById Function", () => {
 		const act = () => domManipulation.removeElementById(elementId);
 
 		expect(act).toThrow(SIMULATED_DOM_FAILURE);
-		expect(handler.error).toHaveBeenCalled(SIMULATED_DOM_FAILURE);
+		expect(handler.error).toHaveBeenCalledWith(
+			new Error(SIMULATED_DOM_FAILURE),
+		);
 		domSpy.mockRestore();
 	});
 });
