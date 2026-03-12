@@ -23,6 +23,51 @@ const { POPUP, CLOSE, ALERT, INFO, WARNING, ERROR, SUCCESS, CUSTOM } =
 const { ALERT_TEXT } = DisplayText.popup;
 const { POPUP_TITLE, POPUP_DESCRIPTION } = HTMLPopupAttributesConstants;
 
+const popups = [
+	{
+		moduleName: ALERT,
+		moduleTitle: ALERT_TEXT,
+		AnyController: AlertPopupController,
+		description:
+			"Laboris Lorem aliquip dolor deserunt labore fugiat nisi exercitation.",
+	},
+	{
+		moduleName: INFO,
+		moduleTitle: "ⓘ Info",
+		AnyController: InfoPopupController,
+		description:
+			"Laboris Lorem aliquip dolor deserunt labore fugiat nisi exercitation.",
+	},
+	{
+		moduleName: WARNING,
+		moduleTitle: "⚠ Warning",
+		AnyController: WarningPopupController,
+		description:
+			"Laboris Lorem aliquip dolor deserunt labore fugiat nisi exercitation.",
+	},
+	{
+		moduleName: ERROR,
+		moduleTitle: "‼ Error",
+		AnyController: ErrorPopupController,
+		description:
+			"Laboris Lorem aliquip dolor deserunt labore fugiat nisi exercitation.",
+	},
+	{
+		moduleName: SUCCESS,
+		moduleTitle: "✅ Success",
+		AnyController: SuccessPopupController,
+		description:
+			"Laboris Lorem aliquip dolor deserunt labore fugiat nisi exercitation.",
+	},
+	{
+		moduleName: CUSTOM,
+		moduleTitle: "Test Title",
+		AnyController: CustomPopupController,
+		description:
+			"Laboris Lorem aliquip dolor deserunt labore fugiat nisi exercitation.",
+	},
+];
+
 vi.mock("../../src/utils/handler.js", () => ({
 	handler: {
 		errorWithPopup: vi.fn(),
@@ -46,50 +91,7 @@ describe("COMPONENTS - POPUP CONTROLLER - PopupController", () => {
 		element = null;
 	});
 
-	it.each([
-		{
-			moduleName: ALERT,
-			moduleTitle: ALERT_TEXT,
-			AnyController: AlertPopupController,
-			description:
-				"Laboris Lorem aliquip dolor deserunt labore fugiat nisi exercitation.",
-		},
-		{
-			moduleName: INFO,
-			moduleTitle: "ⓘ Info",
-			AnyController: InfoPopupController,
-			description:
-				"Laboris Lorem aliquip dolor deserunt labore fugiat nisi exercitation.",
-		},
-		{
-			moduleName: WARNING,
-			moduleTitle: "⚠ Warning",
-			AnyController: WarningPopupController,
-			description:
-				"Laboris Lorem aliquip dolor deserunt labore fugiat nisi exercitation.",
-		},
-		{
-			moduleName: ERROR,
-			moduleTitle: "‼ Error",
-			AnyController: ErrorPopupController,
-			description:
-				"Laboris Lorem aliquip dolor deserunt labore fugiat nisi exercitation.",
-		},
-		{
-			moduleName: SUCCESS,
-			moduleTitle: "✅ Success",
-			AnyController: SuccessPopupController,
-			description:
-				"Laboris Lorem aliquip dolor deserunt labore fugiat nisi exercitation.",
-		},
-		{
-			moduleName: CUSTOM,
-			moduleTitle: "Test Title",
-			AnyController: CustomPopupController,
-			description:
-				"Laboris Lorem aliquip dolor deserunt labore fugiat nisi exercitation.",
-		},
-	])(
+	it.each(popups)(
 		"should add a $moduleName popup as defined",
 		({ moduleName, moduleTitle, AnyController, description }) => {
 			let anyController;
@@ -135,45 +137,72 @@ describe("COMPONENTS - POPUP CONTROLLER - PopupController", () => {
 		},
 	);
 
-	it.each([
-		{
-			moduleName: ALERT,
-			AnyController: AlertPopupController,
-			description:
-				"Laboris Lorem aliquip dolor deserunt labore fugiat nisi exercitation.",
-		},
-		{
-			moduleName: INFO,
-			AnyController: InfoPopupController,
-			description:
-				"Laboris Lorem aliquip dolor deserunt labore fugiat nisi exercitation.",
-		},
-		{
-			moduleName: WARNING,
-			AnyController: WarningPopupController,
-			description:
-				"Laboris Lorem aliquip dolor deserunt labore fugiat nisi exercitation.",
-		},
-		{
-			moduleName: ERROR,
-			AnyController: ErrorPopupController,
-			description:
-				"Laboris Lorem aliquip dolor deserunt labore fugiat nisi exercitation.",
-		},
-		{
-			moduleName: SUCCESS,
-			AnyController: SuccessPopupController,
-			description:
-				"Laboris Lorem aliquip dolor deserunt labore fugiat nisi exercitation.",
-		},
-		{
-			moduleName: CUSTOM,
-			moduleTitle: "Test Title",
-			AnyController: CustomPopupController,
-			description:
-				"Laboris Lorem aliquip dolor deserunt labore fugiat nisi exercitation.",
-		},
-	])(
+	it("should be able to add multiple popups", () => {
+		popups.push(
+			{
+				moduleName: ALERT,
+				moduleTitle: ALERT_TEXT,
+				AnyController: AlertPopupController,
+				description:
+					"Magna dolor elit non ad veniam enim irure nisi incididunt.",
+			},
+			{
+				moduleName: INFO,
+				moduleTitle: "ⓘ Info",
+				AnyController: InfoPopupController,
+				description:
+					"Exercitation aliqua nisi do commodo excepteur occaecat proident sit minim labore aliquip anim.",
+			},
+			{
+				moduleName: WARNING,
+				moduleTitle: "⚠ Warning",
+				AnyController: WarningPopupController,
+				description: "In tempor elit proident fugiat.",
+			},
+			{
+				moduleName: ERROR,
+				moduleTitle: "‼ Error",
+				AnyController: ErrorPopupController,
+				description:
+					"Excepteur ad sunt nisi ea qui irure nulla excepteur est sit adipisicing commodo.",
+			},
+			{
+				moduleName: SUCCESS,
+				moduleTitle: "✅ Success",
+				AnyController: SuccessPopupController,
+				description:
+					"Eiusmod dolor exercitation occaecat ad aliquip eiusmod ex eu officia cillum reprehenderit.",
+			},
+			{
+				moduleName: CUSTOM,
+				moduleTitle: "Test Title",
+				AnyController: CustomPopupController,
+				description: "Officia eiusmod voluptate veniam deserunt.",
+			},
+		);
+		popups.forEach((popup) => {
+			const anyController = new popup.AnyController(popup.description);
+			anyController.addComponent();
+		});
+
+		const rootComponent = document.getElementById(elementId);
+		const halfPopupsLength = popups.length / 2;
+		popups.forEach((popup, index) => {
+			const popupIndex = index < halfPopupsLength ? "1" : "2";
+			const moduleName = popup.moduleName;
+			const popupComponent = document.getElementById(
+				`${moduleName}-${POPUP}-${popupIndex}`,
+			);
+
+			expect(popupComponent).not.toBe(null);
+			expect(popupComponent).not.toBe(undefined);
+		});
+
+		expect(rootComponent).not.toBe(null);
+		expect(rootComponent).not.toBe(undefined);
+	});
+
+	it.each(popups)(
 		"should throw an error - $moduleName popup",
 		({ moduleName, moduleTitle, AnyController, description }) => {
 			const domSpy = vi
