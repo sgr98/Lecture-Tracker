@@ -184,23 +184,23 @@ export class SubjectListContainerView extends View {
 		const subjectName = subject[DBSubjectConstants.SUBJECT_NAME] ?? "";
 		const subjectListItemHTML = `
 			<div
-				id="${SUBJECT_LIST_BUTTON_CONTAINER}-${order}__${id}"
+				id="${SUBJECT_LIST_BUTTON_CONTAINER}-${order}"
 				class="${SUBJECT_LIST_BUTTON_CONTAINER} ${LIST_BUTTON_CONTAINER}"
 			>
 				<div
-					id="${SUBJECT}-${LIST_DRAG_BUTTON}-${order}__${id}"
+					id="${SUBJECT}-${LIST_DRAG_BUTTON}-${order}"
 					class="${SUBJECT}-${LIST_DRAG_BUTTON} ${LIST_DRAG_BUTTON} ${LIST_SECTION_EDIT_BUTTONS}"
 				>
 					<span></span>
 				</div>
 				<div
-					id="${SUBJECT}-${order}__${id}"
+					id="${SUBJECT}-${order}"
 					class="${SUBJECT_BUTTON} ${LIST_BUTTON}"
 				>
 					<span>${subjectName}</span>
 				</div>
 				<div
-					id="${SUBJECT}-${LIST_DELETE_BUTTON}-${order}__${id}"
+					id="${SUBJECT}-${LIST_DELETE_BUTTON}-${order}"
 					class="${SUBJECT}-${LIST_DELETE_BUTTON} ${LIST_DELETE_BUTTON} ${LIST_SECTION_EDIT_BUTTONS}"
 				>
 					<span></span>

@@ -7,7 +7,7 @@ import { DBSubjectConstants } from "../../constants/DBConstants.js";
 
 import { domManipulation } from "../../utils/domManipulation.js";
 import { handler } from "../../utils/handler.js";
-import { isValueNull } from "../../utils/common.js";
+import { isStringNullOrWhiteSpace, isValueNull } from "../../utils/common.js";
 import { Controller } from "../controller.js";
 
 import { SubjectListContainerView } from "./subjects.view.js";
@@ -86,7 +86,7 @@ export class SubjectListContainerController extends Controller {
 
 			const id = newSubject[DBSubjectConstants.ID];
 			const order = newSubject[DBSubjectConstants.ORDER];
-			const subjectElementId = `${SUBJECT}-${order}__${id}`;
+			const subjectElementId = this._getSubjectDomId(null, order, id);
 			if (domManipulation.isElementInDOM(subjectElementId)) {
 				this._subjectEventListener(newSubject);
 			}
@@ -124,7 +124,7 @@ export class SubjectListContainerController extends Controller {
 			const id = subject[DBSubjectConstants.ID];
 			const order = subject[DBSubjectConstants.ORDER];
 			const subjectElement = document.getElementById(
-				`${SUBJECT}-${order}__${id}`,
+				this._getSubjectDomId(null, order, id),
 			);
 			subjectElement.addEventListener("click", () => {
 				subjectElement.classList.add(SUBJECT_ACTIVE_LIST_BUTTON);
@@ -160,7 +160,7 @@ export class SubjectListContainerController extends Controller {
 			const id = this._currentSubject[DBSubjectConstants.ID];
 			const order = this._currentSubject[DBSubjectConstants.ORDER];
 			const subjectElement = document.getElementById(
-				`${SUBJECT}-${order}__${id}`,
+				this._getSubjectDomId(null, order, id),
 			);
 			subjectElement.classList.remove(SUBJECT_ACTIVE_LIST_BUTTON);
 		} catch (error) {
@@ -185,10 +185,10 @@ export class SubjectListContainerController extends Controller {
 				const id = subject[DBSubjectConstants.ID];
 				const order = subject[DBSubjectConstants.ORDER];
 				const subjectListDragButton = document.getElementById(
-					`${SUBJECT}-${LIST_DRAG_BUTTON}-${order}__${id}`,
+					this._getSubjectDomId(LIST_DRAG_BUTTON, order, id),
 				);
 				const subjectListDeleteButton = document.getElementById(
-					`${SUBJECT}-${LIST_DELETE_BUTTON}-${order}__${id}`,
+					this._getSubjectDomId(LIST_DELETE_BUTTON, order, id),
 				);
 
 				subjectListDragButton.style.width = buttonWidth;
@@ -201,6 +201,14 @@ export class SubjectListContainerController extends Controller {
 			}
 		} catch (error) {
 			handler.errorWithPopup(error);
+		}
+	}
+
+	_getSubjectDomId(component, order, id) {
+		if (isStringNullOrWhiteSpace(component)) {
+			return `${SUBJECT}-${order}`;
+		} else {
+			return `${SUBJECT}-${component}-${order}`;
 		}
 	}
 }
