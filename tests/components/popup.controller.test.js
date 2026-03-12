@@ -13,11 +13,12 @@ import {
 	WarningPopupController,
 	ErrorPopupController,
 	SuccessPopupController,
+	CustomPopupController,
 } from "../../src/components/common/popup/popup.controller.js";
 
 const SIMULATED_DOM_FAILURE = "Simulated DOM Failure";
 
-const { POPUP, CLOSE, ALERT, INFO, WARNING, ERROR, SUCCESS } =
+const { POPUP, CLOSE, ALERT, INFO, WARNING, ERROR, SUCCESS, CUSTOM } =
 	HTMLPopupAttributesConstants;
 const { ALERT_TEXT } = DisplayText.popup;
 const { POPUP_TITLE, POPUP_DESCRIPTION } = HTMLPopupAttributesConstants;
@@ -81,10 +82,22 @@ describe("COMPONENTS - POPUP CONTROLLER - PopupController", () => {
 			description:
 				"Laboris Lorem aliquip dolor deserunt labore fugiat nisi exercitation.",
 		},
+		{
+			moduleName: CUSTOM,
+			moduleTitle: "Test Title",
+			AnyController: CustomPopupController,
+			description:
+				"Laboris Lorem aliquip dolor deserunt labore fugiat nisi exercitation.",
+		},
 	])(
 		"should add a $moduleName popup as defined",
 		({ moduleName, moduleTitle, AnyController, description }) => {
-			const anyController = new AnyController(description);
+			let anyController;
+			if (AnyController === CustomPopupController) {
+				anyController = new AnyController(description, moduleTitle);
+			} else {
+				anyController = new AnyController(description);
+			}
 			anyController.addComponent();
 
 			const rootComponent = document.getElementById(elementId);
@@ -150,6 +163,13 @@ describe("COMPONENTS - POPUP CONTROLLER - PopupController", () => {
 		{
 			moduleName: SUCCESS,
 			AnyController: SuccessPopupController,
+			description:
+				"Laboris Lorem aliquip dolor deserunt labore fugiat nisi exercitation.",
+		},
+		{
+			moduleName: CUSTOM,
+			moduleTitle: "Test Title",
+			AnyController: CustomPopupController,
 			description:
 				"Laboris Lorem aliquip dolor deserunt labore fugiat nisi exercitation.",
 		},

@@ -178,6 +178,7 @@ export const HTMLPopupAttributesConstants = {
 	WARNING: "warning",
 	ERROR: "error",
 	SUCCESS: "success",
+	CUSTOM: "custom",
 };
 
 export const ElementModuleName = {

@@ -9,7 +9,7 @@ import { handler } from "../../../utils/handler.js";
 import { PopupView } from "./popup.view.js";
 
 const { ROOT } = HTMLAttributesConstants;
-const { POPUP, CLOSE, ALERT, INFO, WARNING, ERROR, SUCCESS } =
+const { POPUP, CLOSE, ALERT, INFO, WARNING, ERROR, SUCCESS, CUSTOM } =
 	HTMLPopupAttributesConstants;
 const { ALERT_TEXT, INFO_TEXT, WARNING_TEXT, ERROR_TEXT, SUCCESS_TEXT } =
 	DisplayText.popup;
@@ -117,6 +117,13 @@ export class ErrorPopupController extends PopupController {
 export class SuccessPopupController extends PopupController {
 	constructor(description) {
 		super(SUCCESS, SUCCESS_TEXT, description);
+		this._index = super._getPopupIndex() ?? "1";
+	}
+}
+
+export class CustomPopupController extends PopupController {
+	constructor(description, title) {
+		super(CUSTOM, title, description);
 		this._index = super._getPopupIndex() ?? "1";
 	}
 }

@@ -5,6 +5,7 @@ import {
 	WarningPopupController,
 	ErrorPopupController,
 	SuccessPopupController,
+	CustomPopupController,
 } from "./components/common/popup/popup.controller.js";
 import { TopbarController } from "./components/topbar/topbar.controller.js";
 import { StageController } from "./components/stage/stage.controller.js";
@@ -66,5 +67,11 @@ export class App {
 		// 	"Placeholder test description added here for testing 2",
 		// );
 		// successPopupController2.addComponent();
+
+		// const customPopupController = new CustomPopupController(
+		// 	"Placeholder test description added here for testing 2",
+		// 	"Placeholder test",
+		// );
+		// customPopupController.addComponent();
 	}
 }
