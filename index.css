@@ -703,12 +703,16 @@ LIST CONTAINER
 ////////////////////////////////
 */
 .subject-button {
-  transition: 0.1s linear;
+  transition: 0.2s ease-in-out;
 }
 
-.subject-button:hover,
-.subject-button:active,
-.subject-button:focus {
+.subject-button span {
+  transition: 0.2s ease-in-out;
+}
+
+.subject-button:hover span,
+.subject-button:active span,
+.subject-button:focus span {
   color: var(--subject-accent-font);
 }
 
@@ -717,9 +721,9 @@ LIST CONTAINER
   background: var(--subject-accent);
 }
 
-.subject-active-list-button:hover,
-.subject-active-list-button:active,
-.subject-active-list-button:focus {
+.subject-active-list-button:hover span,
+.subject-active-list-button:active span,
+.subject-active-list-button:focus span {
   color: var(--text-primary);
 }
 
