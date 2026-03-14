@@ -6,7 +6,8 @@
 	"scripts": {
 		"test": "vitest",
 		"devcss": "sass --watch src/index.scss index.css",
-		"buildcss": "sass src/index.scss index.css"
+		"buildcss": "sass src/index.scss index.css",
+		"lint": "npx eslint src"
 	},
 	"author": "Sagar Singh",
 	"license": "MIT",
