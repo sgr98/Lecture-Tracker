@@ -1,4 +1,4 @@
-import { ConsoleText } from "../constants/internalConstants.js";
+import { ConsoleText } from "../constants/InternalConstants.js";
 import {
 	isArrayNullOrEmpty,
 	isStringNullOrWhiteSpace,

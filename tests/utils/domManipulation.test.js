@@ -1,6 +1,6 @@
 // @vitest-environment jsdom
 
-import { ConsoleText } from "../../src/constants/internalConstants.js";
+import { ConsoleText } from "../../src/constants/InternalConstants.js";
 import { vi, describe, it, expect, beforeEach, afterEach } from "vitest";
 import { domManipulation } from "../../src/utils/domManipulation.js";
 import { handler } from "../../src/utils/handler.js";
