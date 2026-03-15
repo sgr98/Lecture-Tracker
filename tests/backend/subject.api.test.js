@@ -2,7 +2,7 @@
 
 import { DBSubjectConstants } from "../../src/constants/DBConstants.js";
 import { vi, describe, it, expect, beforeEach } from "vitest";
-import { SubjectAPI } from "../../src/components/subjects/subjects.api.js";
+import { SubjectAPI } from "../../src/backend/apis/subjects.api.js";
 import { subjects0, subjects1, subjects2 } from "../data/subjects.js";
 import { localStorageDB } from "../../src/utils/localStorageDB.js";
 import { handler } from "../../src/utils/handler.js";

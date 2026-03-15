@@ -4,7 +4,7 @@ import { domManipulation } from "../../utils/domManipulation.js";
 import { handler } from "../../utils/handler.js";
 import { Controller } from "../controller.js";
 
-import { SubjectAPI } from "./subjects.api.js";
+import { SubjectAPI } from "../../backend/apis/subjects.api.js";
 import { SubjectSectionView } from "./subjects.view.js";
 import { SubjectActionController } from "./subjectAction.controller.js";
 import { SubjectListContainerController } from "./subjectList.controller.js";

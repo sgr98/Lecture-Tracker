@@ -2,7 +2,7 @@ import { DBSubjectConstants } from "../../constants/DBConstants.js";
 import { handler } from "../../utils/handler.js";
 import { isArrayNullOrEmpty } from "../../utils/common.js";
 import { localStorageDB } from "../../utils/localStorageDB.js";
-import { Subject } from "../../backend/models/subject.js";
+import { Subject } from "../models/subject.js";
 
 export class SubjectAPI {
 	constructor() {

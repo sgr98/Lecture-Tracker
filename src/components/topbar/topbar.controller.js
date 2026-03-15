@@ -7,7 +7,7 @@ import { Controller } from "../controller.js";
 import { TopbarView } from "./topbar.view.js";
 import { domManipulation } from "../../utils/domManipulation.js";
 import { handler } from "../../utils/handler.js";
-import { SubjectAPI } from "../subjects/subjects.api.js";
+import { SubjectAPI } from "../../backend/apis/subjects.api.js";
 import { SuccessPopupController } from "../common/popup/popup.controller.js";
 
 const { SUBJECTS_CLEARED_MESSAGE } = DisplayText.topbar;
