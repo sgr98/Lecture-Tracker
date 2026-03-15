@@ -113,6 +113,7 @@ SECTION LIST AREA
 	height: var(--list-section-list-container-height);
 	background: var(--background);
 	z-index: 1;
+	transition: 0.2s ease-in;
 }
 
 .list-inner-container {
@@ -144,6 +145,10 @@ SECTION LIST AREA
 	font-weight: var(--font-weight-normal);
 }
 
+.list-button-deletion-selected {
+	background: var(--red-transparent-button-selected);
+}
+
 .list-section-edit-buttons {
 	// width: var(--list-section-edit-buttons-width);
 	width: 0;
@@ -158,9 +163,20 @@ SECTION LIST AREA
 	// border-right: 1px solid var(--border-black);
 }
 
+.list-delete-button-selected {
+	background: var(--red-button-hover);
+}
+
 .list-delete-button {
-	border-left: none;
-	// border-left: 1px solid var(--border-black);
+	border-right: none;
+	// border-right: 1px solid var(--border-black);
+	transition: 0.2s ease-in-out;
+}
+
+.list-delete-button:hover,
+.list-delete-button:active,
+.list-delete-button:focus {
+	background: var(--red-button-hover);
 }
 
 /*

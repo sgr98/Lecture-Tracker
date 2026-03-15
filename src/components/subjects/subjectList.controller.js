@@ -17,6 +17,8 @@ const {
 	LIST_INNER_CONTAINER,
 	LIST_DRAG_BUTTON,
 	LIST_DELETE_BUTTON,
+	LIST_BUTTON_DELETION_SELECTED,
+	LIST_DELETE_BUTTON_SELECTED,
 } = HTMLAttributesConstants;
 const {
 	SUBJECT,
@@ -29,6 +31,7 @@ export class SubjectListContainerController extends Controller {
 	constructor(moduleName, subjectAPI) {
 		super(moduleName);
 		this._currentSubject = null;
+		this._editMode = false;
 		this._subjectAPI = subjectAPI;
 		this._subjectListContainerView = new SubjectListContainerView(
 			moduleName,
@@ -113,6 +116,7 @@ export class SubjectListContainerController extends Controller {
 		try {
 			for (const subject of subjects) {
 				this._subjectEventListener(subject);
+				this._setSubjectDeleteEventListener(subject);
 			}
 		} catch (error) {
 			handler.errorWithPopup(error);
@@ -127,8 +131,10 @@ export class SubjectListContainerController extends Controller {
 				this._getSubjectDomId(null, order, id),
 			);
 			subjectElement.addEventListener("click", () => {
-				subjectElement.classList.add(SUBJECT_ACTIVE_LIST_BUTTON);
-				this._setNewCurrentSubject(subject);
+				if (!this._editMode) {
+					subjectElement.classList.add(SUBJECT_ACTIVE_LIST_BUTTON);
+					this._setNewCurrentSubject(subject);
+				}
 			});
 		} catch (error) {
 			handler.errorWithPopup(error);
@@ -163,6 +169,29 @@ export class SubjectListContainerController extends Controller {
 				this._getSubjectDomId(null, order, id),
 			);
 			subjectElement.classList.remove(SUBJECT_ACTIVE_LIST_BUTTON);
+			this._currentSubject = null;
+			// NOTE: Unload courses section
+		} catch (error) {
+			handler.errorWithPopup(error);
+		}
+	}
+
+	_setSubjectDeleteEventListener(subject) {
+		try {
+			const id = subject[DBSubjectConstants.ID];
+			const order = subject[DBSubjectConstants.ORDER];
+			const subjectDeleteButton = document.getElementById(
+				this._getSubjectDomId(LIST_DELETE_BUTTON, order, id),
+			);
+			subjectDeleteButton.addEventListener("click", () => {
+				const subjectElement = document.getElementById(
+					this._getSubjectDomId(null, order, id),
+				);
+				subjectElement.classList.toggle(LIST_BUTTON_DELETION_SELECTED);
+				subjectDeleteButton.classList.toggle(
+					LIST_DELETE_BUTTON_SELECTED,
+				);
+			});
 		} catch (error) {
 			handler.errorWithPopup(error);
 		}
@@ -171,6 +200,9 @@ export class SubjectListContainerController extends Controller {
 	enterExitEditMode(toEnter) {
 		try {
 			toEnter = toEnter ?? false;
+			this._editMode = toEnter;
+			this._unsetCurrentSubject();
+
 			const buttonWidth = toEnter
 				? "var(--list-section-edit-buttons-width)"
 				: "0";

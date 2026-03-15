@@ -42,7 +42,6 @@ const {
 	SUBJECT_ACTION_INNER_CONTAINER,
 	SUBJECT_ACTION_ROW_1,
 	SUBJECT_ACTION_ROW_2,
-	SUBJECT_LIST_BUTTON_CONTAINER,
 	SUBJECT_BUTTON,
 	NO_SUBJECTS_IN_LIST_MESSAGE_CONTAINER,
 	NO_SUBJECTS_MESSAGE_ID,
@@ -184,8 +183,8 @@ export class SubjectListContainerView extends View {
 		const subjectName = subject[DBSubjectConstants.SUBJECT_NAME] ?? "";
 		const subjectListItemHTML = `
 			<div
-				id="${SUBJECT_LIST_BUTTON_CONTAINER}-${order}"
-				class="${SUBJECT_LIST_BUTTON_CONTAINER} ${LIST_BUTTON_CONTAINER}"
+				id="${SUBJECT}-${LIST_BUTTON_CONTAINER}-${order}"
+				class="${SUBJECT}-${LIST_BUTTON_CONTAINER} ${LIST_BUTTON_CONTAINER}"
 			>
 				<div
 					id="${SUBJECT}-${LIST_DRAG_BUTTON}-${order}"

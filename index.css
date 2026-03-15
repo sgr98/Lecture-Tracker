@@ -14,6 +14,7 @@
   --blue-button: rgb(46, 122, 236);
   --blue-button-hover: rgb(5, 83, 201);
   --red-button-hover: rgb(237, 34, 51);
+  --red-transparent-button-selected: rgba(239, 57, 72, 0.5);
   --subject-accent: #489062;
   --subject-accent-dark: #376e4b;
   --subject-accent-font: #407f57;
@@ -240,6 +241,7 @@ SECTION LIST AREA
   height: var(--list-section-list-container-height);
   background: var(--background);
   z-index: 1;
+  transition: 0.2s ease-in;
 }
 
 .list-inner-container {
@@ -270,6 +272,10 @@ SECTION LIST AREA
   font-weight: var(--font-weight-normal);
 }
 
+.list-button-deletion-selected {
+  background: var(--red-transparent-button-selected);
+}
+
 .list-section-edit-buttons {
   width: 0;
   height: 100%;
@@ -282,8 +288,19 @@ SECTION LIST AREA
   border-right: none;
 }
 
+.list-delete-button-selected {
+  background: var(--red-button-hover);
+}
+
 .list-delete-button {
-  border-left: none;
+  border-right: none;
+  transition: 0.2s ease-in-out;
+}
+
+.list-delete-button:hover,
+.list-delete-button:active,
+.list-delete-button:focus {
+  background: var(--red-button-hover);
 }
 
 /*

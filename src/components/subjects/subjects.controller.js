@@ -14,6 +14,7 @@ const { STAGE } = HTMLAttributesConstants;
 export class SubjectController extends Controller {
 	constructor(moduleName) {
 		super(moduleName);
+		this._inEditMode = false;
 		this._subjectAPI = new SubjectAPI();
 		this._subjectSectionView = new SubjectSectionView(moduleName);
 		this._subjectActionController = new SubjectActionController(
@@ -81,6 +82,7 @@ export class SubjectController extends Controller {
 
 	_subjectListEditModeCallback(toEnter) {
 		try {
+			this._inEditMode = toEnter;
 			this._subjectListContainerController.enterExitEditMode(toEnter);
 		} catch (error) {
 			handler.errorWithPopup(error);
