@@ -1,5 +1,5 @@
-import { DBSubjectConstants } from "../constants/DBConstants.js";
-import { isStringNullOrWhiteSpace } from "../utils/common.js";
+import { DBSubjectConstants } from "../../constants/DBConstants.js";
+import { isStringNullOrWhiteSpace } from "../../utils/common.js";
 
 // id
 // subjectName
