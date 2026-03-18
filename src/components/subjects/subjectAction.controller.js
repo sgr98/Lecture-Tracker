@@ -23,10 +23,10 @@ const {
 const { ADD_SUBJECT_MODAL_MODULE, ADD_SUBJECT_MODULE } = ElementModuleName;
 
 export class SubjectActionController extends Controller {
-	constructor(moduleName, subjectAPI, subjectListCallbacks) {
+	constructor(moduleName, subjectData, subjectListCallbacks) {
 		super(moduleName);
 		this._subjectActionView = new SubjectActionView(moduleName);
-		this._subjectAPI = subjectAPI;
+		this._subjectData = subjectData;
 		// _subjectListCallbacks = { addNewSubjectToListCallback, subjectListEditModeCallback }
 		this._subjectListCallbacks = subjectListCallbacks;
 		this._addSubjectModalController = new AddSubjectModalController(
@@ -107,7 +107,7 @@ export class SubjectActionController extends Controller {
 
 	_addSubjectToDB(newSubject) {
 		try {
-			const subject = this._subjectAPI.addSubject(newSubject);
+			const subject = this._subjectData.addSubject(newSubject);
 			return subject;
 		} catch (error) {
 			handler.errorWithPopup(error);

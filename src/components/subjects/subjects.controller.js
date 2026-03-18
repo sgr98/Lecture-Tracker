@@ -4,7 +4,7 @@ import { domManipulation } from "../../utils/domManipulation.js";
 import { handler } from "../../utils/handler.js";
 import { Controller } from "../controller.js";
 
-import { SubjectAPI } from "../../backend/apis/subjects.api.js";
+import { SubjectData } from "./subjects.data.js";
 import { SubjectSectionView } from "./subjects.view.js";
 import { SubjectActionController } from "./subjectAction.controller.js";
 import { SubjectListContainerController } from "./subjectList.controller.js";
@@ -15,11 +15,11 @@ export class SubjectController extends Controller {
 	constructor(moduleName) {
 		super(moduleName);
 		this._inEditMode = false;
-		this._subjectAPI = new SubjectAPI();
+		this._subjectData = new SubjectData();
 		this._subjectSectionView = new SubjectSectionView(moduleName);
 		this._subjectActionController = new SubjectActionController(
 			moduleName,
-			this._subjectAPI,
+			this._subjectData,
 			{
 				addNewSubjectToListCallback: (newSubject) => {
 					this._addNewSubjectToListCallback(newSubject);
@@ -30,7 +30,7 @@ export class SubjectController extends Controller {
 			},
 		);
 		this._subjectListContainerController =
-			new SubjectListContainerController(moduleName, this._subjectAPI);
+			new SubjectListContainerController(moduleName, this._subjectData);
 	}
 
 	// ////////////////////////////////////////////////////////////////////////////////

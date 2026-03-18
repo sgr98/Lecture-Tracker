@@ -28,11 +28,11 @@ const {
 const { DRAG_ICON, DELETE_ICON } = DisplayText.general;
 
 export class SubjectListContainerController extends Controller {
-	constructor(moduleName, subjectAPI) {
+	constructor(moduleName, subjectData) {
 		super(moduleName);
 		this._currentSubject = null;
 		this._editMode = false;
-		this._subjectAPI = subjectAPI;
+		this._subjectData = subjectData;
 		this._subjectListContainerView = new SubjectListContainerView(
 			moduleName,
 		);
@@ -46,7 +46,7 @@ export class SubjectListContainerController extends Controller {
 
 	addComponent() {
 		try {
-			const subjects = this._subjectAPI.getSubjects();
+			const subjects = this._subjectData.subjects;
 			const subjectListHTML =
 				this._subjectListContainerView.generateHTML(subjects);
 			const subjectListContainerId = `${SUBJECT}-${LIST_CONTAINER}`;
@@ -212,7 +212,7 @@ export class SubjectListContainerController extends Controller {
 			const dragButtonText = toEnter ? DRAG_ICON : "";
 			const deleteButtonText = toEnter ? DELETE_ICON : "";
 
-			const subjects = this._subjectAPI.getSubjects();
+			const subjects = this._subjectData.subjects;
 			for (const subject of subjects) {
 				const id = subject[DBSubjectConstants.ID];
 				const order = subject[DBSubjectConstants.ORDER];

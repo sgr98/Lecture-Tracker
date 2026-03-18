@@ -7,7 +7,6 @@ export const subjects1 = [
 		subjectCode: "MA-101",
 		subjectDescription: "",
 		courseList: [],
-		order: 0,
 	},
 	{
 		id: "ba2d2a25-4ba0-4cc1-8c73-5bf2d2185624",
@@ -15,7 +14,6 @@ export const subjects1 = [
 		subjectCode: "CS-100",
 		subjectDescription: "",
 		courseList: [],
-		order: 1,
 	},
 	{
 		id: "1b540e30-2e7b-489e-9ac5-28046ab85739",
@@ -23,7 +21,6 @@ export const subjects1 = [
 		subjectCode: "MA-101",
 		subjectDescription: "",
 		courseList: [],
-		order: 2,
 	},
 	{
 		id: "2f3e0ce8-a162-492c-8342-bf37295641e6",
@@ -31,7 +28,6 @@ export const subjects1 = [
 		subjectCode: "MA-101",
 		subjectDescription: "",
 		courseList: [],
-		order: 3,
 	},
 	{
 		id: "63e752b9-7059-406f-9f21-3bf7bc35a166",
@@ -39,7 +35,6 @@ export const subjects1 = [
 		subjectCode: "MA-101",
 		subjectDescription: "",
 		courseList: [],
-		order: 4,
 	},
 ];
 
@@ -50,7 +45,6 @@ export const subjects2 = [
 		subjectCode: "MA-101",
 		subjectDescription: "",
 		courseList: [],
-		order: 0,
 	},
 	{
 		id: "4cbece53-2fcc-44cc-9586-e36399126115",
@@ -58,7 +52,6 @@ export const subjects2 = [
 		subjectCode: "CS-100",
 		subjectDescription: "",
 		courseList: [],
-		order: 1,
 	},
 	{
 		id: "7a2e59a9-d9e0-4968-8e78-16fdb22468fc",
@@ -66,7 +59,6 @@ export const subjects2 = [
 		subjectCode: "MA-101",
 		subjectDescription: "",
 		courseList: [],
-		order: 2,
 	},
 	{
 		id: "af0b2ae3-7ba8-49e2-b957-980a504624ff",
@@ -74,7 +66,6 @@ export const subjects2 = [
 		subjectCode: "MA-101",
 		subjectDescription: "",
 		courseList: [],
-		order: 3,
 	},
 	{
 		id: "15d9eab6-1f93-49dd-8611-e30843e38eb3",
@@ -82,7 +73,6 @@ export const subjects2 = [
 		subjectCode: "MA-101",
 		subjectDescription: "",
 		courseList: [],
-		order: 4,
 	},
 	{
 		id: "d7095396-0bf1-4acf-bded-0925f709c8f8",
@@ -90,7 +80,6 @@ export const subjects2 = [
 		subjectCode: "MA-101",
 		subjectDescription: "",
 		courseList: [],
-		order: 5,
 	},
 	{
 		id: "b565d1b5-cba5-4195-afd3-240a0bce3247",
@@ -98,7 +87,6 @@ export const subjects2 = [
 		subjectCode: "MA-101",
 		subjectDescription: "",
 		courseList: [],
-		order: 6,
 	},
 	{
 		id: "79498d94-83c1-447e-96d0-8172a025a81f",
@@ -106,7 +94,6 @@ export const subjects2 = [
 		subjectCode: "MA-101",
 		subjectDescription: "",
 		courseList: [],
-		order: 7,
 	},
 	{
 		id: "c2b853a0-9b28-4240-9b77-5ff56c651b20",
@@ -114,7 +101,6 @@ export const subjects2 = [
 		subjectCode: "ECO-50",
 		subjectDescription: "",
 		courseList: [],
-		order: 8,
 	},
 	{
 		id: "47a920e1-a23c-4f07-af79-52dc5e900250",
@@ -122,7 +108,6 @@ export const subjects2 = [
 		subjectCode: "ECO-50",
 		subjectDescription: "",
 		courseList: [],
-		order: 9,
 	},
 	{
 		id: "daef5eb1-0c89-4ee1-888e-9467051c63af",
@@ -130,7 +115,6 @@ export const subjects2 = [
 		subjectCode: "ECO-50",
 		subjectDescription: "",
 		courseList: [],
-		order: 10,
 	},
 	{
 		id: "d02d2b87-2113-471c-b0d4-9ec80d9ca9db",
@@ -138,7 +122,6 @@ export const subjects2 = [
 		subjectCode: "ECO-50",
 		subjectDescription: "",
 		courseList: [],
-		order: 11,
 	},
 	{
 		id: "07794eec-56a7-4126-a4af-faa783070e03",
@@ -146,6 +129,5 @@ export const subjects2 = [
 		subjectCode: "MA-101",
 		subjectDescription: "",
 		courseList: [],
-		order: 12,
 	},
 ];
