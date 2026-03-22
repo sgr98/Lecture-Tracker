@@ -13,7 +13,7 @@ import {
 	afterAll,
 	beforeAll,
 } from "vitest";
-import { localStorageDB } from "../../src/utils/localStorageDB.js";
+import { localStorageService } from "../../src/backend/services/localStorage.service.js";
 import { handler } from "../../src/utils/handler.js";
 
 // vi.mock("../../src/utils/handler.js", () => ({
@@ -46,7 +46,7 @@ import { handler } from "../../src/utils/handler.js";
 // 			.spyOn(Storage.prototype, "getItem")
 // 			.mockReturnValue(TestValue);
 
-// 		const result = localStorageDB.getNumberOrString(TestKey);
+// 		const result = localStorageService.getNumberOrString(TestKey);
 
 // 		expect(localStorage.getItem).toHaveBeenCalledWith(TestKey);
 // 		expect(result).toEqual(TestValue);

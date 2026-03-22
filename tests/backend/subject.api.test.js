@@ -4,7 +4,7 @@ import { DBSubjectConstants } from "../../src/constants/DBConstants.js";
 import { vi, describe, it, expect, beforeEach } from "vitest";
 import { subjectAPI } from "../../src/backend/apis/subjects.api.js";
 import { subjects0, subjects1, subjects2 } from "../data/subjects.js";
-import { localStorageDB } from "../../src/utils/localStorageDB.js";
+import { localStorageService } from "../../src/backend/services/localStorage.service.js";
 import { handler } from "../../src/utils/handler.js";
 
 const TEST_ERROR = "Test Error";
@@ -28,12 +28,12 @@ describe("SUBJECT API - getSubjects", () => {
 		"gets Subjects from Local Storage when storage has $name",
 		({ name, subjects }) => {
 			const getCustomSpy = vi
-				.spyOn(localStorageDB, "getCustom")
+				.spyOn(localStorageService, "getCustom")
 				.mockReturnValue(subjects);
 
 			const result = subjectAPI.getSubjects();
 
-			expect(localStorageDB.getCustom).toHaveBeenCalled();
+			expect(localStorageService.getCustom).toHaveBeenCalled();
 			expect(result).toEqual(subjects);
 			getCustomSpy.mockRestore();
 		},
@@ -41,7 +41,7 @@ describe("SUBJECT API - getSubjects", () => {
 
 	it("handles an error and returns an empty array", () => {
 		const getCustomSpy = vi
-			.spyOn(localStorageDB, "getCustom")
+			.spyOn(localStorageService, "getCustom")
 			.mockImplementation(() => {
 				throw new Error(TEST_ERROR);
 			});
@@ -83,14 +83,14 @@ describe("SUBJECT API - addSubject", () => {
 				courseList: [],
 			};
 			const getCustomSpy = vi
-				.spyOn(localStorageDB, "getCustom")
+				.spyOn(localStorageService, "getCustom")
 				.mockReturnValue(subjects);
-			const setJSONSpy = vi.spyOn(localStorageDB, "setJSON");
+			const setJSONSpy = vi.spyOn(localStorageService, "setJSON");
 
 			const result = subjectAPI.addSubject(newSubject);
 
-			expect(localStorageDB.getCustom).toHaveBeenCalled();
-			// expect(localStorageDB.setJSON).toHaveBeenCalledWith(
+			expect(localStorageService.getCustom).toHaveBeenCalled();
+			// expect(localStorageService.setJSON).toHaveBeenCalledWith(
 			// 	DBSubjectConstants.SUBJECT_LIST,
 			// 	subjects,
 			// );
@@ -113,7 +113,7 @@ describe("SUBJECT API - addSubject", () => {
 	// 		courseList: [],
 	// 	};
 	// 	const getCustomSpy = vi
-	// 		.spyOn(localStorageDB, "getCustom")
+	// 		.spyOn(localStorageService, "getCustom")
 	// 		.mockReturnValue(subjects1);
 	// 	const saveSubjectsSpy = vi
 	// 		.spyOn(subjectAPI, "_saveSubjects")
@@ -138,11 +138,11 @@ describe("SUBJECT API - deleteAllSubjects", () => {
 	});
 
 	it("deletes all subjects from Local Storage", () => {
-		const deleteKeysSpy = vi.spyOn(localStorageDB, "deleteKeys");
+		const deleteKeysSpy = vi.spyOn(localStorageService, "deleteKeys");
 
 		subjectAPI.deleteAllSubjects();
 
-		expect(localStorageDB.deleteKeys).toHaveBeenCalledWith([
+		expect(localStorageService.deleteKeys).toHaveBeenCalledWith([
 			DBSubjectConstants.SUBJECT_LIST,
 		]);
 		deleteKeysSpy.mockRestore();
@@ -150,7 +150,7 @@ describe("SUBJECT API - deleteAllSubjects", () => {
 
 	it("handles an error and returns null", () => {
 		const deleteKeysSpy = vi
-			.spyOn(localStorageDB, "deleteKeys")
+			.spyOn(localStorageService, "deleteKeys")
 			.mockImplementation(() => {
 				throw new Error(TEST_ERROR);
 			});

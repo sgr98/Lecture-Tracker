@@ -1,10 +1,10 @@
-import { handler } from "./handler.js";
+import { handler } from "../../utils/handler.js";
 
 // NOTE: Will not add getValueOrDefault functions here because
 // getting the actual values is much important and getting null
 // should be handled properly by the caller by having errors thrown to
 // console or UI. Thereby forcing intent of software to caller.
-export const localStorageDB = {
+export const localStorageService = {
 	getNumberOrString: (key) => {
 		try {
 			const value = window.localStorage.getItem(key);

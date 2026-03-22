@@ -1,7 +1,7 @@
 import { DBSubjectConstants } from "../../constants/DBConstants.js";
 import { handler } from "../../utils/handler.js";
 import { isArrayNullOrEmpty, isObjectNullOrEmpty } from "../../utils/common.js";
-import { localStorageDB } from "../../utils/localStorageDB.js";
+import { localStorageService } from "../services/localStorage.service.js";
 import { Subject } from "../models/subject.model.js";
 
 const validateSubject = (subject) => {
@@ -21,7 +21,7 @@ const filterSubjects = (subjects, filterIds) => {
 
 const saveSubjectsToDB = (subjects) => {
 	try {
-		localStorageDB.setJSON(DBSubjectConstants.SUBJECT_LIST, subjects);
+		localStorageService.setJSON(DBSubjectConstants.SUBJECT_LIST, subjects);
 	} catch (error) {
 		handler.error(error);
 		return [];
@@ -45,7 +45,7 @@ const convertDBtoObj = (subjectsStr) => {
 export const subjectAPI = {
 	getSubjects: () => {
 		try {
-			let subjectList = localStorageDB.getCustom(
+			let subjectList = localStorageService.getCustom(
 				DBSubjectConstants.SUBJECT_LIST,
 				convertDBtoObj,
 			);
@@ -131,7 +131,7 @@ export const subjectAPI = {
 
 	deleteAllSubjects() {
 		try {
-			localStorageDB.deleteKeys([DBSubjectConstants.SUBJECT_LIST]);
+			localStorageService.deleteKeys([DBSubjectConstants.SUBJECT_LIST]);
 		} catch (error) {
 			handler.errorWithPopup(error);
 		}

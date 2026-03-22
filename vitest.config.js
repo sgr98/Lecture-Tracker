@@ -3,6 +3,6 @@ import { defineConfig } from "vitest/config";
 export default defineConfig({
 	test: {
 		include: ["./tests/**/*.test.js"],
-		exclude: ["./tests/utils/localStorageDB.test.js"],
+		exclude: ["./tests/backend/localStorage.service.test.js"],
 	},
 });
