@@ -4,12 +4,14 @@ import {
 	isStringNullOrEmpty,
 	isStringNullOrWhiteSpace,
 	convertJSONToCustomArray,
+	isValueNull,
 } from "../../utils/common.js";
 import { localStorageService } from "./localStorage.service.js";
 import { Subject } from "../models/subject.model.js";
 import { Result } from "../result.js";
 
 const {
+	SUBJECT_NOT_FOUND,
 	INVALID_SUBJECT_ID,
 	INVALID_SUBJECT_NAME,
 	INVALID_SUBJECT_CODE,
@@ -29,10 +31,10 @@ const isSubjectValid = ({
 }) => {
 	let errorMessage = "";
 	const isSubjectNameInvalid =
-		typeof subjectName !== "string" &&
+		typeof subjectName !== "string" ||
 		isStringNullOrWhiteSpace(subjectName);
 	const isSubjectCodeInvalid =
-		typeof subjectCode !== "string" &&
+		typeof subjectCode !== "string" ||
 		isStringNullOrWhiteSpace(subjectCode);
 	const isSubjectDescriptionInvalid = typeof subjectDescription !== "string";
 	const isCourseListInvalid = !Array.isArray(courseList);
@@ -49,6 +51,7 @@ const isSubjectValid = ({
 	if (isCourseListInvalid) {
 		errorMessage += INVALID_COURSE_LIST + " ";
 	}
+	errorMessage = errorMessage.trim();
 	if (!isStringNullOrEmpty(errorMessage)) {
 		return Result.fail(errorMessage, 400);
 	}
@@ -97,6 +100,9 @@ export const subjectService = {
 		const subject = subjects.find(
 			(subject) => subject[DBSubjectConstants.ID] === subjectId,
 		);
+		if (isValueNull(subject)) {
+			return Result.fail(SUBJECT_NOT_FOUND, 400);
+		}
 		return Result.success(subject, 200);
 	},
 
