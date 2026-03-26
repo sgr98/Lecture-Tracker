@@ -1,139 +1,85 @@
-import { DBSubjectConstants } from "../../constants/DBConstants.js";
-import { handler } from "../../utils/handler.js";
-import { isArrayNullOrEmpty, isObjectNullOrEmpty } from "../../utils/common.js";
-import { localStorageService } from "../services/localStorage.service.js";
-import { Subject } from "../models/subject.model.js";
+import { BackendErrorConstants } from "../../constants/ErrorConstants.js";
+import { Result } from "../result.js";
+import { subjectService } from "../services/subject.service.js";
 
-const validateSubject = (subject) => {
-	try {
-		// ...
-	} catch (error) {
-		handler.errorWithPopup(error);
-		return [];
-	}
-};
-
-const filterSubjects = (subjects, filterIds) => {
-	return subjects.filter((subject) => {
-		return !filterIds.includes(subject[DBSubjectConstants.ID]);
-	});
-};
-
-const saveSubjectsToDB = (subjects) => {
-	try {
-		localStorageService.setJSON(DBSubjectConstants.SUBJECT_LIST, subjects);
-	} catch (error) {
-		handler.error(error);
-		return [];
-	}
-};
-
-const convertDBtoObj = (subjectsStr) => {
-	try {
-		subjectsStr = subjectsStr ?? "[]";
-		const subjDBArray = JSON.parse(subjectsStr) ?? [];
-		let subjects = subjDBArray.map((subDB) => {
-			return new Subject(subDB);
-		});
-		return subjects;
-	} catch (error) {
-		handler.error(error);
-		return [];
-	}
-};
+const { UNEXPECTED_ERROR } = BackendErrorConstants;
 
 export const subjectAPI = {
 	getSubjects: () => {
 		try {
-			let subjectList = localStorageService.getCustom(
-				DBSubjectConstants.SUBJECT_LIST,
-				convertDBtoObj,
-			);
-			// subjectList.sort(
-			// 	(a, b) =>
-			// 		a[DBSubjectConstants.ORDER] - b[DBSubjectConstants.ORDER],
-			// );
-			// subjectList.forEach((subject, index) => {
-			// 	subject[DBSubjectConstants.ORDER] = index;
-			// });
-			return [...subjectList];
+			const subjectsResult = subjectService.getSubjects();
+			return subjectsResult;
 		} catch (error) {
-			handler.errorWithPopup(error);
-			return [];
+			return Result.fail(
+				`${UNEXPECTED_ERROR}: ${error.message}`,
+				500,
+				[],
+			);
 		}
 	},
 
 	getSubjectById: (subjectId) => {
 		try {
-			const subjects = subjectAPI.getSubjects();
-			const subject = subjects.find(
-				(subject) => subject[DBSubjectConstants.ID] === subjectId,
-			);
-			return subject;
+			const subjectResult = subjectService.getSubjectById(subjectId);
+			return subjectResult;
 		} catch (error) {
-			handler.errorWithPopup(error);
-			return null;
+			return Result.fail(
+				`${UNEXPECTED_ERROR}: ${error.message}`,
+				500,
+				null,
+			);
 		}
 	},
 
 	addSubject: (subject) => {
 		try {
-			// NOTE: CHECK IF THE SUBJECT IS VALID
-			// const isValidSubject = this._validateSubject(subject);
-			const { subjectName, subjectCode, subjectDescription, courseList } =
-				subject;
-			const subjects = subjectAPI.getSubjects();
-			// const numberOfExistingSubjects = subjects.length;
-			const newSubject = new Subject({
-				id: null,
-				subjectName,
-				subjectCode,
-				subjectDescription,
-				courseList,
-				// order: numberOfExistingSubjects,
-			});
-
-			subjects.push(newSubject);
-			saveSubjectsToDB(subjects);
-			return newSubject;
+			const addSubjectResult = subjectService.addSubject(subject);
+			return addSubjectResult;
 		} catch (error) {
-			handler.errorWithPopup(error);
-			return null;
+			return Result.fail(
+				`${UNEXPECTED_ERROR}: ${error.message}`,
+				500,
+				null,
+			);
 		}
 	},
 
 	editSubjectById(subjectId, newSubject) {
 		try {
-			// ...
+			return Result.fail(`Not Implemented yet`, 501, null);
 		} catch (error) {
-			handler.errorWithPopup(error);
-			return null;
+			return Result.fail(
+				`${UNEXPECTED_ERROR}: ${error.message}`,
+				500,
+				null,
+			);
 		}
 	},
 
 	deleteSubjectByIds(subjectIds) {
 		try {
-			const subjects = subjectAPI.getSubjects();
-			// const subject = subjects.find(
-			// 	(subject) => subject[DBSubjectConstants.ID] === subjectId,
-			// );
-			// if (isObjectNullOrEmpty(subject)) {
-			// 	return null;
-			// }
-			const newSubjects = filterSubjects(subjects, subjectIds);
-			saveSubjectsToDB(newSubjects);
-			return true;
+			const deleteSubjectResult =
+				subjectService.deleteSubjectByIds(subjectIds);
+			return deleteSubjectResult;
 		} catch (error) {
-			handler.errorWithPopup(error);
-			return null;
+			return Result.fail(
+				`${UNEXPECTED_ERROR}: ${error.message}`,
+				500,
+				null,
+			);
 		}
 	},
 
 	deleteAllSubjects() {
 		try {
-			localStorageService.deleteKeys([DBSubjectConstants.SUBJECT_LIST]);
+			const deleteSubjectsResult = subjectService.deleteAllSubjects();
+			return deleteSubjectsResult;
 		} catch (error) {
-			handler.errorWithPopup(error);
+			return Result.fail(
+				`${UNEXPECTED_ERROR}: ${error.message}`,
+				500,
+				null,
+			);
 		}
 	},
 };

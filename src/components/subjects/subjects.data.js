@@ -32,8 +32,11 @@ export class SubjectData {
 
 	_getSubjects() {
 		try {
-			const subjectsDB = subjectAPI.getSubjects();
-			const subjects = this._mapSubjectsFromDB(subjectsDB);
+			const subjectsAPIResponse = subjectAPI.getSubjects();
+			if (!subjectsAPIResponse.success) {
+				// NOTE: HANDLE FAILURE
+			}
+			const subjects = this._mapSubjectsFromDB(subjectsAPIResponse.value);
 			return subjects;
 		} catch (error) {
 			handler.errorWithPopup(error);
@@ -44,7 +47,11 @@ export class SubjectData {
 	addSubject(subject) {
 		try {
 			// NOTE: Can check if subject is valid or not
-			const newSubject = subjectAPI.addSubject(subject);
+			const newSubjecAPIResponse = subjectAPI.addSubject(subject);
+			if (!newSubjecAPIResponse.success) {
+				// NOTE: HANDLE FAILURE
+			}
+			const newSubject = newSubjecAPIResponse.value;
 
 			const numberOfExistingSubjects = this.subjects.length;
 			const newSubjectViewModel = new SubjectViewModel(
