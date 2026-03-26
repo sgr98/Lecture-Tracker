@@ -90,3 +90,17 @@ export const getDefaultInputValue = (inputType) => {
 			return "";
 	}
 };
+
+export const convertJSONToCustomObject = (json, CustomClass) => {
+	json = json ?? {};
+	let obj = new CustomClass(json);
+	return obj;
+};
+
+export const convertJSONToCustomArray = (json, CustomClass) => {
+	json = json ?? [];
+	let objs = json.map((jsonDB) => {
+		return convertJSONToCustomObject(jsonDB, CustomClass);
+	});
+	return objs;
+};

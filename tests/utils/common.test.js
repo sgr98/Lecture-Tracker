@@ -1,5 +1,6 @@
 // @vitest-environment node
 
+import { DBSubjectConstants } from "../../src/constants/DBConstants.js";
 import { describe, it, expect, vi } from "vitest";
 import {
 	isValueNull,
@@ -14,8 +15,12 @@ import {
 	getObjectValueOrDefault,
 	isInputValueNullOrEmpty,
 	getDefaultInputValue,
+	convertJSONToCustomObject,
+	convertJSONToCustomArray,
 } from "../../src/utils/common.js";
 import { HTMLInputTypeEnum } from "../../src/utils/enum.js";
+import { subjects0, subjects1, subjects2 } from "../data/subjects.js";
+import { Subject } from "../../src/backend/models/subject.model.js";
 
 describe("UTILS - COMMMON - isValueNull Function", () => {
 	it("should check if blank is null", () => {
@@ -326,9 +331,9 @@ describe("UTILS - COMMMON - isInputValueNullOrEmpty Function", () => {
 	});
 
 	it("should check if default value for null is true when inputType is Textarea", () => {
-		expect(isInputValueNullOrEmpty(null, HTMLInputTypeEnum.Textarea)).toEqual(
-			true,
-		);
+		expect(
+			isInputValueNullOrEmpty(null, HTMLInputTypeEnum.Textarea),
+		).toEqual(true);
 	});
 
 	it("should check if default value for undefined is true when inputType is Textarea", () => {
@@ -526,4 +531,113 @@ describe("UTILS - COMMMON - getDefaultInputValue Function", () => {
 		);
 		vi.useRealTimers();
 	});
+});
+
+describe("UTILS - COMMMON - convertJSONToCustomObject Function", () => {
+	it.each([
+		{ input: null, customClass: Subject },
+		{ input: undefined, customClass: Subject },
+	])(
+		"should check if function returs empty object when provided $input input and Subject",
+		({ input, customClass }) => {
+			const expectedOutput = new Subject({});
+			const actualOutput = convertJSONToCustomObject(input, customClass);
+
+			expect(actualOutput[DBSubjectConstants.ID].length).toEqual(
+				expectedOutput[DBSubjectConstants.ID].length,
+			);
+			expect(actualOutput[DBSubjectConstants.SUBJECT_NAME]).toEqual(
+				expectedOutput[DBSubjectConstants.SUBJECT_NAME],
+			);
+			expect(actualOutput[DBSubjectConstants.SUBJECT_CODE]).toEqual(
+				expectedOutput[DBSubjectConstants.SUBJECT_CODE],
+			);
+			expect(
+				actualOutput[DBSubjectConstants.SUBJECT_DESCRIPTION],
+			).toEqual(expectedOutput[DBSubjectConstants.SUBJECT_DESCRIPTION]);
+			expect(actualOutput[DBSubjectConstants.COURSE_LIST]).toEqual(
+				expectedOutput[DBSubjectConstants.COURSE_LIST],
+			);
+		},
+	);
+
+	it.each([
+		{ input: subjects1[0], customClass: Subject },
+		{ input: subjects1[1], customClass: Subject },
+		{ input: subjects1[2], customClass: Subject },
+		{ input: subjects1[3], customClass: Subject },
+		{ input: subjects1[4], customClass: Subject },
+		{ input: subjects2[0], customClass: Subject },
+		{ input: subjects2[1], customClass: Subject },
+		{ input: subjects2[2], customClass: Subject },
+	])(
+		"should check if function returs correct object when provided right input and Subject",
+		({ input, customClass }) => {
+			const expectedOutput = new Subject(input);
+			const actualOutput = convertJSONToCustomObject(input, customClass);
+
+			expect(actualOutput[DBSubjectConstants.ID].length).toEqual(
+				expectedOutput[DBSubjectConstants.ID].length,
+			);
+			expect(actualOutput[DBSubjectConstants.SUBJECT_NAME]).toEqual(
+				expectedOutput[DBSubjectConstants.SUBJECT_NAME],
+			);
+			expect(actualOutput[DBSubjectConstants.SUBJECT_CODE]).toEqual(
+				expectedOutput[DBSubjectConstants.SUBJECT_CODE],
+			);
+			expect(
+				actualOutput[DBSubjectConstants.SUBJECT_DESCRIPTION],
+			).toEqual(expectedOutput[DBSubjectConstants.SUBJECT_DESCRIPTION]);
+			expect(actualOutput[DBSubjectConstants.COURSE_LIST]).toEqual(
+				expectedOutput[DBSubjectConstants.COURSE_LIST],
+			);
+		},
+	);
+});
+
+describe("UTILS - COMMMON - convertJSONToCustomArray Function", () => {
+	it.each([
+		{ input: null, customClass: Subject },
+		{ input: undefined, customClass: Subject },
+	])(
+		"should check if function returs empty array when provided $input input and Subject",
+		({ input, customClass }) => {
+			const expectedOutput = [];
+			const actualOutput = convertJSONToCustomArray(input, customClass);
+			expect(actualOutput).toEqual(expectedOutput);
+		},
+	);
+
+	it.each([
+		{ input: subjects0, customClass: Subject },
+		{ input: subjects1, customClass: Subject },
+		{ input: subjects2, customClass: Subject },
+	])(
+		"should check if function returs correct array of objects when provided right input and Subject",
+		({ input, customClass }) => {
+			const expectedOutput = input.map((inp) => new Subject(inp));
+			const actualOutput = convertJSONToCustomArray(input, customClass);
+
+			const n = expectedOutput.length;
+			for (let i = 0; i < n; i++) {
+				expect(actualOutput[i][DBSubjectConstants.ID].length).toEqual(
+					expectedOutput[i][DBSubjectConstants.ID].length,
+				);
+				expect(
+					actualOutput[i][DBSubjectConstants.SUBJECT_NAME],
+				).toEqual(expectedOutput[i][DBSubjectConstants.SUBJECT_NAME]);
+				expect(
+					actualOutput[i][DBSubjectConstants.SUBJECT_CODE],
+				).toEqual(expectedOutput[i][DBSubjectConstants.SUBJECT_CODE]);
+				expect(
+					actualOutput[i][DBSubjectConstants.SUBJECT_DESCRIPTION],
+				).toEqual(
+					expectedOutput[i][DBSubjectConstants.SUBJECT_DESCRIPTION],
+				);
+				expect(actualOutput[i][DBSubjectConstants.COURSE_LIST]).toEqual(
+					expectedOutput[i][DBSubjectConstants.COURSE_LIST],
+				);
+			}
+		},
+	);
 });
