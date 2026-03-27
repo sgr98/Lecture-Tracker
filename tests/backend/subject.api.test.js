@@ -1,17 +1,33 @@
 // @vitest-environment node
 
 import { DBSubjectConstants } from "../../src/constants/DBConstants.js";
+import { BackendErrorConstants } from "../../src/constants/ErrorConstants.js";
 import { vi, describe, it, expect, beforeEach } from "vitest";
 import { subjectAPI } from "../../src/backend/apis/subjects.api.js";
 import { subjects0, subjects1, subjects2 } from "../data/subjects.js";
-import { localStorageService } from "../../src/backend/services/localStorage.service.js";
+import { subjectService } from "../../src/backend/services/subject.service.js";
 import { handler } from "../../src/utils/handler.js";
+import { Result } from "../../src/backend/result.js";
+import { Subject } from "../../src/backend/models/subject.model.js";
+
+const { UNEXPECTED_ERROR } = BackendErrorConstants;
 
 const TEST_ERROR = "Test Error";
+
+const convertToSubjectsObj = (subjectObj) => {
+	return new Subject(subjectObj);
+};
+
+const convertToSubjectsArray = (subjectsObj) => {
+	return subjectsObj.map((sub) => {
+		return new Subject(sub);
+	});
+};
 
 vi.mock("../../src/utils/handler.js", () => ({
 	handler: {
 		errorWithPopup: vi.fn(),
+		error: vi.fn(),
 	},
 }));
 
@@ -25,111 +41,258 @@ describe("SUBJECT API - getSubjects", () => {
 		{ name: "subjects 1", subjects: subjects1 },
 		{ name: "subjects 2", subjects: subjects2 },
 	])(
-		"gets Subjects from Local Storage when storage has $name",
-		({ name, subjects }) => {
-			const getCustomSpy = vi
-				.spyOn(localStorageService, "getCustom")
-				.mockReturnValue(subjects);
+		"gets subjects from subjec t service when storage has $name",
+		({ subjects }) => {
+			const expectedResult = convertToSubjectsArray(subjects);
+			const getSubjectsSpy = vi
+				.spyOn(subjectService, "getSubjects")
+				.mockReturnValue(Result.success(subjects, 200));
 
 			const result = subjectAPI.getSubjects();
 
-			expect(localStorageService.getCustom).toHaveBeenCalled();
-			expect(result).toEqual(subjects);
-			getCustomSpy.mockRestore();
+			expect(subjectService.getSubjects).toHaveBeenCalled();
+			expect(result.success).toEqual(true);
+			expect(result.error).toEqual(null);
+			expect(result.statusCode).toEqual(200);
+			expect(result.value).toEqual(expectedResult);
+			getSubjectsSpy.mockRestore();
 		},
 	);
 
-	it("handles an error and returns an empty array", () => {
-		const getCustomSpy = vi
-			.spyOn(localStorageService, "getCustom")
+	it("handles failed result from the service", () => {
+		const getSubjectsSpy = vi
+			.spyOn(subjectService, "getSubjects")
+			.mockReturnValue(Result.fail(TEST_ERROR, 400));
+
+		const result = subjectAPI.getSubjects();
+
+		expect(subjectService.getSubjects).toHaveBeenCalled();
+		expect(result.success).toEqual(false);
+		expect(result.error).toEqual(TEST_ERROR);
+		expect(result.statusCode).toEqual(400);
+		expect(result.value).toEqual(null);
+		getSubjectsSpy.mockRestore();
+	});
+
+	it("handles an unexpected error", () => {
+		const getSubjectsSpy = vi
+			.spyOn(subjectService, "getSubjects")
 			.mockImplementation(() => {
 				throw new Error(TEST_ERROR);
 			});
 
 		const result = subjectAPI.getSubjects();
 
-		expect(handler.errorWithPopup).toHaveBeenCalledWith(
-			new Error(TEST_ERROR),
-		);
-		expect(result).toEqual([]);
-		getCustomSpy.mockRestore();
+		expect(subjectService.getSubjects).toHaveBeenCalled();
+		expect(result.success).toEqual(false);
+		expect(result.error).toEqual(`${UNEXPECTED_ERROR}: ${TEST_ERROR}`);
+		expect(result.statusCode).toEqual(500);
+		expect(result.value).toEqual([]);
+		getSubjectsSpy.mockRestore();
 	});
 });
 
-// describe("SUBJECT API - getSubjectById", () => {
-// 	let subjectAPI;
-
-// 	beforeEach(() => {
-// 		vi.clearAllMocks();
-// 		subjectAPI = new SubjectAPI();
-// 	});
-// });
-
-describe("SUBJECT API - addSubject", () => {
+describe("SUBJECT API - getSubjectById", () => {
 	beforeEach(() => {
 		vi.clearAllMocks();
 	});
 
 	it.each([
-		{ name: "empty array", subjects: subjects0 },
-		{ name: "subjects 1", subjects: subjects1 },
+		{ name: "subjects 1", subjects: subjects1, ind: 2 },
+		{ name: "subjects 2", subjects: subjects2, ind: 4 },
 	])(
-		"add a subject to Local Storage when storage has $name",
-		({ name, subjects }) => {
-			const newSubject = {
-				subjectName: "Subject 1",
-				subjectCode: "Subject Code",
-				subjectDescription: "Subject Description",
-				courseList: [],
-			};
-			const getCustomSpy = vi
-				.spyOn(localStorageService, "getCustom")
-				.mockReturnValue(subjects);
-			const setJSONSpy = vi.spyOn(localStorageService, "setJSON");
+		"get subject by id (with $ind) from subjects service when storage has $name",
+		({ subjects, ind }) => {
+			const id = subjects[ind].id;
+			const expectedResult = convertToSubjectsObj(subjects[ind]);
+			const getSubjectByIdSpy = vi
+				.spyOn(subjectService, "getSubjectById")
+				.mockReturnValue(Result.success(subjects[ind], 200));
 
-			const result = subjectAPI.addSubject(newSubject);
+			const result = subjectAPI.getSubjectById(id);
 
-			expect(localStorageService.getCustom).toHaveBeenCalled();
-			// expect(localStorageService.setJSON).toHaveBeenCalledWith(
-			// 	DBSubjectConstants.SUBJECT_LIST,
-			// 	subjects,
-			// );
-			expect(result.subjectName).toEqual(newSubject.subjectName);
-			expect(result.subjectCode).toEqual(newSubject.subjectCode);
-			expect(result.subjectDescription).toEqual(
-				newSubject.subjectDescription,
-			);
-			expect(result.courseList).toEqual(newSubject.courseList);
-			// expect(result.order).toEqual(subjects.length);
-			getCustomSpy.mockRestore();
+			expect(subjectService.getSubjectById).toHaveBeenCalledWith(id);
+			expect(result.success).toEqual(true);
+			expect(result.error).toEqual(null);
+			expect(result.statusCode).toEqual(200);
+			expect(result.value).toEqual(expectedResult);
+			getSubjectByIdSpy.mockRestore();
 		},
 	);
 
-	// it("handles an error and returns null", () => {
-	// 	const newSubject = {
-	// 		subjectName: "Subject 1",
-	// 		subjectCode: "Subject Code",
-	// 		subjectDescription: "Subject Description",
-	// 		courseList: [],
-	// 	};
-	// 	const getCustomSpy = vi
-	// 		.spyOn(localStorageService, "getCustom")
-	// 		.mockReturnValue(subjects1);
-	// 	const saveSubjectsSpy = vi
-	// 		.spyOn(subjectAPI, "_saveSubjects")
-	// 		.mockImplementation(() => {
-	// 			throw new Error(TEST_ERROR);
-	// 		});
+	it("handles failed result from the service", () => {
+		const id = "any id";
+		const getSubjectByIdSpy = vi
+			.spyOn(subjectService, "getSubjectById")
+			.mockReturnValue(Result.fail(TEST_ERROR, 400));
 
-	// 	const result = subjectAPI.addSubject(newSubject);
+		const result = subjectAPI.getSubjectById(id);
 
-	// 	expect(handler.errorWithPopup).toHaveBeenCalledWith(
-	// 		new Error(TEST_ERROR),
-	// 	);
-	// 	expect(result).toEqual(null);
-	// 	getCustomSpy.mockRestore();
-	// 	saveSubjectsSpy.mockRestore();
-	// });
+		expect(subjectService.getSubjectById).toHaveBeenCalledWith(id);
+		expect(result.success).toEqual(false);
+		expect(result.error).toEqual(TEST_ERROR);
+		expect(result.statusCode).toEqual(400);
+		expect(result.value).toEqual(null);
+		getSubjectByIdSpy.mockRestore();
+	});
+
+	it("handles an unexpected error", () => {
+		const id = "any id";
+		const getSubjectByIdSpy = vi
+			.spyOn(subjectService, "getSubjectById")
+			.mockImplementation(() => {
+				throw new Error(TEST_ERROR);
+			});
+
+		const result = subjectAPI.getSubjectById(id);
+
+		expect(subjectService.getSubjectById).toHaveBeenCalledWith(id);
+		expect(result.success).toEqual(false);
+		expect(result.error).toEqual(`${UNEXPECTED_ERROR}: ${TEST_ERROR}`);
+		expect(result.statusCode).toEqual(500);
+		expect(result.value).toEqual(null);
+		getSubjectByIdSpy.mockRestore();
+	});
+});
+
+describe("SUBJECT API - addSubject", () => {
+	const sampleSubject = {
+		subjectName: "Subject 1",
+		subjectCode: "Subject Code",
+		subjectDescription: "Subject Description",
+		courseList: [],
+	};
+
+	beforeEach(() => {
+		vi.clearAllMocks();
+	});
+
+	it("add sample subject to subjects service when storage has $name", () => {
+		const mockResult = new Subject(sampleSubject);
+		const addSubjectSpy = vi
+			.spyOn(subjectService, "addSubject")
+			.mockReturnValue(Result.success(mockResult, 201));
+
+		const result = subjectAPI.addSubject(sampleSubject);
+
+		expect(subjectService.addSubject).toHaveBeenCalledWith(sampleSubject);
+		expect(result.success).toEqual(true);
+		expect(result.error).toEqual(null);
+		expect(result.statusCode).toEqual(201);
+		expect(result.value.subjectName).toEqual(mockResult.subjectName);
+		expect(result.value.subjectCode).toEqual(mockResult.subjectCode);
+		expect(result.value.subjectDescription).toEqual(
+			mockResult.subjectDescription,
+		);
+		expect(result.value.courseList).toEqual(mockResult.courseList);
+		addSubjectSpy.mockRestore();
+	});
+
+	it("handles failed result from the service", () => {
+		const addSubjectSpy = vi
+			.spyOn(subjectService, "addSubject")
+			.mockReturnValue(Result.fail(TEST_ERROR, 400));
+
+		const result = subjectAPI.addSubject(sampleSubject);
+
+		expect(subjectService.addSubject).toHaveBeenCalledWith(sampleSubject);
+		expect(result.success).toEqual(false);
+		expect(result.error).toEqual(TEST_ERROR);
+		expect(result.statusCode).toEqual(400);
+		expect(result.value).toEqual(null);
+		addSubjectSpy.mockRestore();
+	});
+
+	it("handles an unexpected error", () => {
+		const addSubjectSpy = vi
+			.spyOn(subjectService, "addSubject")
+			.mockImplementation(() => {
+				throw new Error(TEST_ERROR);
+			});
+
+		const result = subjectAPI.addSubject(sampleSubject);
+
+		expect(subjectService.addSubject).toHaveBeenCalledWith(sampleSubject);
+		expect(result.success).toEqual(false);
+		expect(result.error).toEqual(`${UNEXPECTED_ERROR}: ${TEST_ERROR}`);
+		expect(result.statusCode).toEqual(500);
+		expect(result.value).toEqual(null);
+		addSubjectSpy.mockRestore();
+	});
+});
+
+describe("SUBJECT API - deleteSubjectByIds", () => {
+	beforeEach(() => {
+		vi.clearAllMocks();
+	});
+
+	it.each([
+		{ name: "subjects 1", subjects: subjects1 },
+		{ name: "subjects 2", subjects: subjects2 },
+	])(
+		"deletes subjects of given ids from subjects service when storage has $name",
+		({ subjects }) => {
+			const ids = [
+				"4cbece53-2fcc-44cc-9586-e36399126115",
+				"ba2d2a25-4ba0-4cc1-8c73-5bf2d2185624",
+			];
+			const expectedResult = subjects.filter((subject) => {
+				return !ids.includes(subject.id);
+			});
+			const deleteSubjectByIdsSpy = vi
+				.spyOn(subjectService, "deleteSubjectByIds")
+				.mockReturnValue(Result.success(expectedResult, 200));
+
+			const result = subjectAPI.deleteSubjectByIds(ids);
+
+			expect(subjectService.deleteSubjectByIds).toHaveBeenCalledWith(ids);
+			expect(result.success).toEqual(true);
+			expect(result.error).toEqual(null);
+			expect(result.statusCode).toEqual(200);
+			expect(result.value).toEqual(expectedResult);
+			deleteSubjectByIdsSpy.mockRestore();
+		},
+	);
+
+	it("handles failed result from the service", () => {
+		const ids = [
+			"4cbece53-2fcc-44cc-9586-e36399126115",
+			"ba2d2a25-4ba0-4cc1-8c73-5bf2d2185624",
+		];
+		const deleteSubjectByIdsSpy = vi
+			.spyOn(subjectService, "deleteSubjectByIds")
+			.mockReturnValue(Result.fail(TEST_ERROR, 400));
+
+		const result = subjectAPI.deleteSubjectByIds(ids);
+
+		expect(subjectService.deleteSubjectByIds).toHaveBeenCalledWith(ids);
+		expect(result.success).toEqual(false);
+		expect(result.error).toEqual(TEST_ERROR);
+		expect(result.statusCode).toEqual(400);
+		expect(result.value).toEqual(null);
+		deleteSubjectByIdsSpy.mockRestore();
+	});
+
+	it("handles an unexpected error", () => {
+		const ids = [
+			"4cbece53-2fcc-44cc-9586-e36399126115",
+			"ba2d2a25-4ba0-4cc1-8c73-5bf2d2185624",
+		];
+		const deleteSubjectByIdsSpy = vi
+			.spyOn(subjectService, "deleteSubjectByIds")
+			.mockImplementation(() => {
+				throw new Error(TEST_ERROR);
+			});
+
+		const result = subjectAPI.deleteSubjectByIds(ids);
+
+		expect(subjectService.deleteSubjectByIds).toHaveBeenCalledWith(ids);
+		expect(result.success).toEqual(false);
+		expect(result.error).toEqual(`${UNEXPECTED_ERROR}: ${TEST_ERROR}`);
+		expect(result.statusCode).toEqual(500);
+		expect(result.value).toEqual(null);
+		deleteSubjectByIdsSpy.mockRestore();
+	});
 });
 
 describe("SUBJECT API - deleteAllSubjects", () => {
@@ -137,29 +300,51 @@ describe("SUBJECT API - deleteAllSubjects", () => {
 		vi.clearAllMocks();
 	});
 
-	it("deletes all subjects from Local Storage", () => {
-		const deleteKeysSpy = vi.spyOn(localStorageService, "deleteKeys");
+	it.each("deletes all subjects from subjects service", () => {
+		const keys = [DBSubjectConstants.SUBJECT_LIST];
+		const deleteAllSubjectsSpy = vi
+			.spyOn(subjectService, "deleteAllSubjects")
+			.mockReturnValue(Result.success(keys, 201));
 
-		subjectAPI.deleteAllSubjects();
+		const result = subjectAPI.deleteAllSubjects();
 
-		expect(localStorageService.deleteKeys).toHaveBeenCalledWith([
-			DBSubjectConstants.SUBJECT_LIST,
-		]);
-		deleteKeysSpy.mockRestore();
+		expect(subjectService.deleteAllSubjects).toHaveBeenCalled();
+		expect(result.success).toEqual(true);
+		expect(result.error).toEqual(null);
+		expect(result.statusCode).toEqual(201);
+		expect(result.value).toEqual(keys);
+		deleteAllSubjectsSpy.mockRestore();
 	});
 
-	it("handles an error and returns null", () => {
-		const deleteKeysSpy = vi
-			.spyOn(localStorageService, "deleteKeys")
+	it("handles failed result from the service", () => {
+		const deleteAllSubjectsSpy = vi
+			.spyOn(subjectService, "deleteAllSubjects")
+			.mockReturnValue(Result.fail(TEST_ERROR, 400));
+
+		const result = subjectAPI.deleteAllSubjects();
+
+		expect(subjectService.deleteAllSubjects).toHaveBeenCalled();
+		expect(result.success).toEqual(false);
+		expect(result.error).toEqual(TEST_ERROR);
+		expect(result.statusCode).toEqual(400);
+		expect(result.value).toEqual(null);
+		deleteAllSubjectsSpy.mockRestore();
+	});
+
+	it("handles an unexpected error", () => {
+		const deleteAllSubjectsSpy = vi
+			.spyOn(subjectService, "deleteAllSubjects")
 			.mockImplementation(() => {
 				throw new Error(TEST_ERROR);
 			});
 
-		subjectAPI.deleteAllSubjects();
+		const result = subjectAPI.deleteAllSubjects();
 
-		expect(handler.errorWithPopup).toHaveBeenCalledWith(
-			new Error(TEST_ERROR),
-		);
-		deleteKeysSpy.mockRestore();
+		expect(subjectService.deleteAllSubjects).toHaveBeenCalled();
+		expect(result.success).toEqual(false);
+		expect(result.error).toEqual(`${UNEXPECTED_ERROR}: ${TEST_ERROR}`);
+		expect(result.statusCode).toEqual(500);
+		expect(result.value).toEqual(null);
+		deleteAllSubjectsSpy.mockRestore();
 	});
 });

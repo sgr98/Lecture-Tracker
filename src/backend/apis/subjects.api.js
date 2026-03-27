@@ -4,6 +4,7 @@ import { subjectService } from "../services/subject.service.js";
 
 const { UNEXPECTED_ERROR } = BackendErrorConstants;
 
+// NOTE: Handle default value for Result.fail
 export const subjectAPI = {
 	getSubjects: () => {
 		try {
