@@ -152,7 +152,7 @@ export class SubjectListContainerController extends Controller {
 			}
 			this._unsetCurrentSubject();
 			this._currentSubject = subject;
-			// NOTE: load courses
+			// TODO: load courses
 		} catch (error) {
 			handler.errorWithPopup(error);
 		}
@@ -170,7 +170,7 @@ export class SubjectListContainerController extends Controller {
 			);
 			subjectElement.classList.remove(SUBJECT_ACTIVE_LIST_BUTTON);
 			this._currentSubject = null;
-			// NOTE: Unload courses section
+			// TODO: Unload courses section
 		} catch (error) {
 			handler.errorWithPopup(error);
 		}

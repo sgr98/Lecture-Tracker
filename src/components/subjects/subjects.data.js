@@ -34,7 +34,7 @@ export class SubjectData {
 		try {
 			const subjectsAPIResponse = subjectAPI.getSubjects();
 			if (!subjectsAPIResponse.success) {
-				// NOTE: HANDLE FAILURE
+				// TODO: HANDLE FAILURE
 			}
 			const subjects = this._mapSubjectsFromDB(subjectsAPIResponse.value);
 			return subjects;
@@ -46,10 +46,10 @@ export class SubjectData {
 
 	addSubject(subject) {
 		try {
-			// NOTE: Can check if subject is valid or not
+			// TODO: Can check if subject is valid or not
 			const newSubjecAPIResponse = subjectAPI.addSubject(subject);
 			if (!newSubjecAPIResponse.success) {
-				// NOTE: HANDLE FAILURE
+				// TODO: HANDLE FAILURE
 			}
 			const newSubject = newSubjecAPIResponse.value;
 
