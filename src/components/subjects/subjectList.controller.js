@@ -86,13 +86,7 @@ export class SubjectListContainerController extends Controller {
 					newSubjectHTML,
 				);
 			}
-
-			const id = newSubject[DBSubjectConstants.ID];
-			const order = newSubject[DBSubjectConstants.ORDER];
-			const subjectElementId = this._getSubjectDomId(null, order, id);
-			if (domManipulation.isElementInDOM(subjectElementId)) {
-				this._subjectEventListener(newSubject);
-			}
+			this._subjectEventListener(newSubject);
 		} catch (error) {
 			handler.errorWithPopup(error);
 		}
@@ -130,12 +124,16 @@ export class SubjectListContainerController extends Controller {
 			const subjectElement = document.getElementById(
 				this._getSubjectDomId(null, order, id),
 			);
-			subjectElement.addEventListener("click", () => {
-				if (!this._editMode) {
-					subjectElement.classList.add(SUBJECT_ACTIVE_LIST_BUTTON);
-					this._setNewCurrentSubject(subject);
-				}
-			});
+			if (domManipulation.isElementInDOM(subjectElement)) {
+				subjectElement.addEventListener("click", () => {
+					if (!this._editMode) {
+						subjectElement.classList.add(
+							SUBJECT_ACTIVE_LIST_BUTTON,
+						);
+						this._setNewCurrentSubject(subject);
+					}
+				});
+			}
 		} catch (error) {
 			handler.errorWithPopup(error);
 		}
