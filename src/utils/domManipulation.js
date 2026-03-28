@@ -33,7 +33,7 @@ const addHTMLElementToDomById = (sourceElementId, element) => {
 	}
 };
 
-export const addHTMLStringToDomById = (sourceElementId, htmlString) => {
+const addHTMLStringToDomById = (sourceElementId, htmlString) => {
 	try {
 		const elementToAdd = generateElementFromHTMLString(htmlString);
 		addHTMLElementToDomById(sourceElementId, elementToAdd);
@@ -43,7 +43,7 @@ export const addHTMLStringToDomById = (sourceElementId, htmlString) => {
 	}
 };
 
-export const isElementInDOM = (elementId) => {
+const isElementInDOM = (elementId) => {
 	try {
 		let element;
 		if (typeof elementId === "string") {
@@ -61,7 +61,7 @@ export const isElementInDOM = (elementId) => {
 	}
 };
 
-export const areAllElementsInDOM = (...elements) => {
+const areAllElementsInDOM = (...elements) => {
 	try {
 		if (isArrayNullOrEmpty(elements)) {
 			return false;
@@ -78,7 +78,7 @@ export const areAllElementsInDOM = (...elements) => {
 	}
 };
 
-export const removeElementById = (elementId) => {
+const removeElementById = (elementId) => {
 	try {
 		const element = document.getElementById(elementId);
 		if (!isValueNull(element)) {
