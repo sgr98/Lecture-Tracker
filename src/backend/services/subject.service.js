@@ -6,6 +6,7 @@ import {
 	convertJSONToCustomArray,
 	isValueNull,
 } from "../../utils/common.js";
+import { isInvalidSubject } from "../../utils/valid.js";
 import { localStorageService } from "./localStorage.service.js";
 import { Subject } from "../models/subject.model.js";
 import { Result } from "../result.js";
@@ -19,10 +20,6 @@ const {
 	INVALID_COURSE_LIST,
 } = BackendErrorConstants;
 
-const isSubjectIdInvalid = (subjectId) => {
-	return isStringNullOrWhiteSpace(subjectId);
-};
-
 const isSubjectValid = ({
 	subjectName,
 	subjectCode,
@@ -30,14 +27,11 @@ const isSubjectValid = ({
 	courseList,
 }) => {
 	let errorMessage = "";
-	const isSubjectNameInvalid =
-		typeof subjectName !== "string" ||
-		isStringNullOrWhiteSpace(subjectName);
-	const isSubjectCodeInvalid =
-		typeof subjectCode !== "string" ||
-		isStringNullOrWhiteSpace(subjectCode);
-	const isSubjectDescriptionInvalid = typeof subjectDescription !== "string";
-	const isCourseListInvalid = !Array.isArray(courseList);
+	const isSubjectNameInvalid = isInvalidSubject.name(subjectName);
+	const isSubjectCodeInvalid = isInvalidSubject.code(subjectCode);
+	const isSubjectDescriptionInvalid =
+		isInvalidSubject.description(subjectDescription);
+	const isCourseListInvalid = isInvalidSubject.courseList(courseList);
 
 	if (isSubjectNameInvalid) {
 		errorMessage += INVALID_SUBJECT_NAME + " ";
@@ -87,7 +81,7 @@ export const subjectService = {
 	},
 
 	getSubjectById: (subjectId) => {
-		if (isSubjectIdInvalid(subjectId)) {
+		if (isInvalidSubject.id(subjectId)) {
 			return Result.fail(INVALID_SUBJECT_ID, 400);
 		}
 
