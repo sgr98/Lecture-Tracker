@@ -4,6 +4,7 @@ import {
 	HTMLModalAttributesConstants,
 	ElementModuleName,
 } from "../../constants/HTMLConstants.js";
+import { FrontendErrorConstants } from "../../constants/ErrorConstants.js";
 
 import { domManipulation } from "../../utils/domManipulation.js";
 import { handler } from "../../utils/handler.js";
@@ -11,6 +12,7 @@ import { Controller } from "../controller.js";
 
 import { SubjectActionView } from "./subjects.view.js";
 import { AddSubjectModalController } from "./addSubjectModal/addSubjectModal.controller.js";
+import { isInvalidSubject } from "../../utils/valid.js";
 
 const { SUBJECT, SUBJECT_ACTION_CONTAINER } = HTMLSubjectAttributesConstants;
 const { MODAL } = HTMLModalAttributesConstants;
@@ -21,6 +23,7 @@ const {
 	SAVE_ACTION_BUTTON,
 } = HTMLAttributesConstants;
 const { ADD_SUBJECT_MODAL_MODULE, ADD_SUBJECT_MODULE } = ElementModuleName;
+const { INVALID_SUBJECT_ENTERED } = FrontendErrorConstants;
 
 export class SubjectActionController extends Controller {
 	constructor(moduleName, subjectData, subjectListCallbacks) {
@@ -98,6 +101,9 @@ export class SubjectActionController extends Controller {
 
 	_addSubjectCallback(newSubject) {
 		try {
+			if (isInvalidSubject.fullWithoutId(newSubject)) {
+				throw new Error(INVALID_SUBJECT_ENTERED);
+			}
 			const subject = this._addSubjectToDB(newSubject);
 			this._subjectListCallbacks.addNewSubjectToListCallback(subject);
 		} catch (error) {

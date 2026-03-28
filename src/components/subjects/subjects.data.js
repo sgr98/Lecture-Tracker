@@ -1,8 +1,12 @@
+import { FrontendErrorConstants } from "../../constants/ErrorConstants.js";
 import { isValueNull } from "../../utils/common.js";
 import { subjectAPI } from "../../backend/apis/subjects.api.js";
 import { Subject } from "../../backend/models/subject.model.js";
 import { SubjectViewModel } from "./subjectView.model.js";
 import { handler } from "../../utils/handler.js";
+
+const { FAILED_WHILE_FETCHING_SUBJECTS, FAILED_WHILE_ADDING_SUBJECTS } =
+	FrontendErrorConstants;
 
 export class SubjectData {
 	constructor() {
@@ -34,7 +38,7 @@ export class SubjectData {
 		try {
 			const subjectsAPIResponse = subjectAPI.getSubjects();
 			if (!subjectsAPIResponse.success) {
-				// TODO: HANDLE FAILURE
+				throw new Error(FAILED_WHILE_FETCHING_SUBJECTS);
 			}
 			const subjects = this._mapSubjectsFromDB(subjectsAPIResponse.value);
 			return subjects;
@@ -46,10 +50,9 @@ export class SubjectData {
 
 	addSubject(subject) {
 		try {
-			// TODO: Can check if subject is valid or not
 			const newSubjecAPIResponse = subjectAPI.addSubject(subject);
 			if (!newSubjecAPIResponse.success) {
-				// TODO: HANDLE FAILURE
+				throw new Error(FAILED_WHILE_ADDING_SUBJECTS);
 			}
 			const newSubject = newSubjecAPIResponse.value;
 

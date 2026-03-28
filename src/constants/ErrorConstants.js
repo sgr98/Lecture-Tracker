@@ -12,4 +12,8 @@ export const BackendErrorConstants = {
 	INVALID_COURSE_LIST: "Invalid course list",
 };
 
-export const FrontendErrorConstants = {};
+export const FrontendErrorConstants = {
+	FAILED_WHILE_FETCHING_SUBJECTS: "Failed while fetching subjects",
+	FAILED_WHILE_ADDING_SUBJECTS: "Failed while adding subject",
+	INVALID_SUBJECT_ENTERED: "Invalid subject entered",
+};
