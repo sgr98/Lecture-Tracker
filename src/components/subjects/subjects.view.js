@@ -46,7 +46,6 @@ const {
 	NO_SUBJECTS_IN_LIST_MESSAGE_CONTAINER,
 	NO_SUBJECTS_MESSAGE_ID,
 } = HTMLSubjectAttributesConstants;
-const { DRAG_ICON, DELETE_ICON } = DisplayText.general;
 const {
 	SUBJECT_SECTION_TITLE,
 	ADD_SUBJECT_BUTTON_TEXT,
@@ -178,7 +177,7 @@ export class SubjectListContainerView extends View {
 	}
 
 	_generateSubjectListItemHTML(subject) {
-		const id = subject[DBSubjectConstants.ID] ?? "";
+		// const id = subject[DBSubjectConstants.ID] ?? "";
 		const order = subject[DBSubjectConstants.ORDER] ?? 0;
 		const subjectName = subject[DBSubjectConstants.SUBJECT_NAME] ?? "";
 		const subjectListItemHTML = `

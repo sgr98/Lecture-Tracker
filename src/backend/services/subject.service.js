@@ -2,7 +2,6 @@ import { DBSubjectConstants } from "../../constants/DBConstants.js";
 import { BackendErrorConstants } from "../../constants/ErrorConstants.js";
 import {
 	isStringNullOrEmpty,
-	isStringNullOrWhiteSpace,
 	convertJSONToCustomArray,
 	isValueNull,
 } from "../../utils/common.js";
@@ -132,7 +131,7 @@ export const subjectService = {
 	},
 
 	editSubjectById(subjectId, newSubject) {
-		// ...
+		// TODO: IMPLEMENT THIS
 	},
 
 	deleteSubjectByIds(subjectIds) {
