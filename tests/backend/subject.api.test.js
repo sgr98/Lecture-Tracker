@@ -70,7 +70,7 @@ describe("SUBJECT API - getSubjects", () => {
 		expect(result.success).toEqual(false);
 		expect(result.error).toEqual(TEST_ERROR);
 		expect(result.statusCode).toEqual(400);
-		expect(result.value).toEqual(null);
+		expect(result.value).toEqual([]);
 		getSubjectsSpy.mockRestore();
 	});
 

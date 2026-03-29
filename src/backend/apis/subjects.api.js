@@ -9,8 +9,11 @@ export const subjectAPI = {
 		try {
 			const subjectsResult = subjectService.getSubjects();
 			if (!subjectsResult.success) {
-				subjectsResult.value = [];
-				return subjectsResult;
+				return Result.fail(
+					subjectsResult.error,
+					subjectsResult.statusCode,
+					[],
+				);
 			}
 			return subjectsResult;
 		} catch (error) {
