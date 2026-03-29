@@ -241,6 +241,8 @@ export class SubjectListContainerController extends Controller {
 		}
 	}
 
+	// NOTE: In a previous version, id was used in element Id,
+	// not going to remove it right away as it can be used again in the future
 	_getSubjectDomId(component, order, id) {
 		if (isStringNullOrWhiteSpace(component)) {
 			return `${SUBJECT}-${order}`;
