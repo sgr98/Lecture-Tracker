@@ -1,22 +1,29 @@
-import { HTMLAttributesConstants } from "../../constants/HTMLConstants.js";
+import {
+	HTMLAttributesConstants,
+	DisplayText,
+} from "../../constants/HTMLConstants.js";
 
 import { domManipulation } from "../../utils/domManipulation.js";
 import { handler } from "../../utils/handler.js";
 import { Controller } from "../controller.js";
 
 import { SubjectData } from "./subjects.data.js";
-import { SubjectSectionView } from "./subjects.view.js";
+import { ListSectionView } from "../common/listSection/listSection.view.js";
 import { SubjectActionController } from "./subjectAction.controller.js";
 import { SubjectListContainerController } from "./subjectList.controller.js";
 
 const { STAGE } = HTMLAttributesConstants;
+const { SUBJECT_SECTION_TITLE } = DisplayText.subject;
 
 export class SubjectController extends Controller {
 	constructor(moduleName) {
 		super(moduleName);
 		this._inEditMode = false;
 		this._subjectData = new SubjectData();
-		this._subjectSectionView = new SubjectSectionView(moduleName);
+		this._subjectSectionView = new ListSectionView(
+			moduleName,
+			SUBJECT_SECTION_TITLE,
+		);
 		this._subjectActionController = new SubjectActionController(
 			moduleName,
 			this._subjectData,

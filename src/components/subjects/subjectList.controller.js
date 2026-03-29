@@ -10,7 +10,7 @@ import { handler } from "../../utils/handler.js";
 import { isStringNullOrWhiteSpace, isValueNull } from "../../utils/common.js";
 import { Controller } from "../controller.js";
 
-import { SubjectListContainerView } from "./subjects.view.js";
+import { ListSectionListContainerView } from "../common/listSection/listSection.view.js";
 
 const {
 	LIST_CONTAINER,
@@ -26,6 +26,7 @@ const {
 	NO_SUBJECTS_IN_LIST_MESSAGE_CONTAINER,
 } = HTMLSubjectAttributesConstants;
 const { DRAG_ICON, DELETE_ICON } = DisplayText.general;
+const { NO_SUBJECTS_MESSAGE } = DisplayText.subject;
 
 export class SubjectListContainerController extends Controller {
 	constructor(moduleName, subjectData) {
@@ -33,8 +34,14 @@ export class SubjectListContainerController extends Controller {
 		this._currentSubject = null;
 		this._editMode = false;
 		this._subjectData = subjectData;
-		this._subjectListContainerView = new SubjectListContainerView(
+		this._subjectListContainerView = new ListSectionListContainerView(
 			moduleName,
+			NO_SUBJECTS_MESSAGE,
+			{
+				id: DBSubjectConstants.ID,
+				name: DBSubjectConstants.SUBJECT_NAME,
+				order: DBSubjectConstants.ORDER,
+			},
 		);
 	}
 
@@ -66,7 +73,7 @@ export class SubjectListContainerController extends Controller {
 				NO_SUBJECTS_IN_LIST_MESSAGE_CONTAINER,
 			);
 			const newSubjectHTML =
-				this._subjectListContainerView.generateNewSubjectHTML(
+				this._subjectListContainerView.generateNewItemHTML(
 					newSubject,
 					isListEmpty,
 				);

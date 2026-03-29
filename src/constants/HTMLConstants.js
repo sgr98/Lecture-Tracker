@@ -68,13 +68,20 @@ export const HTMLAttributesConstants = {
 	TOPBAR: "topbar",
 	TOP_TITLE: "top-title",
 	CONTAINER: "container",
+	TITLE: "title",
+	ITEM: "item",
+	TITLE_CONTAINER: "title-container",
 	SECTION_CONTAINER: "section-container",
 	LIST_SECTION_CONTAINER: "list-section-container",
 	SECTION_TITLE_CONTAINER: "section-title-container",
 	SECTION_TITLE: "section-title",
+	ACTION_CONTAINER: "action-container",
 	SECTION_ACTION_CONTAINER: "section-action-container",
+	ACTION_INNER_CONTAINER: "action-inner-container",
 	SECTION_ACTION_INNER_CONTAINER: "section-action-inner-container",
 	SECTION_ACTION_ROW: "section-action-row",
+	ACTION_ROW_1: "action-row-1",
+	ACTION_ROW_2: "action-row-2",
 	SECTION_ACTION_ROW_1: "section-action-row-1",
 	SECTION_ACTION_ROW_2: "section-action-row-2",
 	ADD_ACTION_BUTTON: `add-action-button`,
@@ -91,10 +98,10 @@ export const HTMLAttributesConstants = {
 	LIST_DELETE_BUTTON: "list-delete-button",
 	LIST_DELETE_BUTTON_SELECTED: "list-delete-button-selected",
 	NO_ITEMS_IN_LIST_MESSAGE_CONTAINER: "no-items-in-list-message-container",
+	NO_ITEMS_IN_LIST_MESSAGE: "no-items-in-list-message",
 	BUTTON: "button",
 	LIST_ADD_BUTTON: "list-add-button",
 	SECTION_ACTION_BUTTON: "section-action-button",
-	NO_ITEMS_IN_LIST_MESSAGE: "no-items-in-list-message",
 };
 
 export const HTMLTopbarAttributesConstants = {
@@ -106,6 +113,9 @@ export const HTMLTopbarAttributesConstants = {
 	TOPBAR_ADMIN_CONTAINER: "topbar-admin-container",
 	TOP_ADMIN_CLEAR_SUBJECTS: "top-admin-clear-subjects",
 };
+
+	// NO_SUBJECTS_IN_LIST_MESSAGE_CONTAINER,
+	// NO_SUBJECTS_MESSAGE_ID,
 
 export const HTMLSubjectAttributesConstants = {
 	SUBJECT: "subject",

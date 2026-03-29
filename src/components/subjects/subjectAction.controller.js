@@ -3,6 +3,7 @@ import {
 	HTMLSubjectAttributesConstants,
 	HTMLModalAttributesConstants,
 	ElementModuleName,
+	DisplayText,
 } from "../../constants/HTMLConstants.js";
 import { FrontendErrorConstants } from "../../constants/ErrorConstants.js";
 
@@ -10,7 +11,7 @@ import { domManipulation } from "../../utils/domManipulation.js";
 import { handler } from "../../utils/handler.js";
 import { Controller } from "../controller.js";
 
-import { SubjectActionView } from "./subjects.view.js";
+import { ListSectionActionView } from "../common/listSection/listSection.view.js";
 import { AddSubjectModalController } from "./addSubjectModal/addSubjectModal.controller.js";
 import { isInvalidSubject } from "../../utils/valid.js";
 
@@ -24,11 +25,22 @@ const {
 } = HTMLAttributesConstants;
 const { ADD_SUBJECT_MODAL_MODULE, ADD_SUBJECT_MODULE } = ElementModuleName;
 const { INVALID_SUBJECT_ENTERED } = FrontendErrorConstants;
+const {
+	ADD_SUBJECT_BUTTON_TEXT,
+	EDIT_SUBJECT_BUTTON_TEXT,
+	CANCEL_SUBJECT_BUTTON_TEXT,
+	SAVE_SUBJECT_BUTTON_TEXT,
+} = DisplayText.subject;
 
 export class SubjectActionController extends Controller {
 	constructor(moduleName, subjectData, subjectListCallbacks) {
 		super(moduleName);
-		this._subjectActionView = new SubjectActionView(moduleName);
+		this._subjectActionView = new ListSectionActionView(moduleName, {
+			addItemButtonText: ADD_SUBJECT_BUTTON_TEXT,
+			editItemButtonText: EDIT_SUBJECT_BUTTON_TEXT,
+			cancelItemButtonText: CANCEL_SUBJECT_BUTTON_TEXT,
+			saveItemButtonText: SAVE_SUBJECT_BUTTON_TEXT,
+		});
 		this._subjectData = subjectData;
 		// _subjectListCallbacks = { addNewSubjectToListCallback, subjectListEditModeCallback }
 		this._subjectListCallbacks = subjectListCallbacks;
