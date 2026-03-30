@@ -8,6 +8,7 @@ STAGE
 
 .stage {
 	flex-direction: row;
+	justify-content: flex-start;
 	margin: 0;
 	width: 100vw;
 	height: var(--section-container-height);
