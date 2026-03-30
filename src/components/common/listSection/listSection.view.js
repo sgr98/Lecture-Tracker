@@ -1,4 +1,7 @@
-import { HTMLAttributesConstants } from "../../../constants/HTMLConstants.js";
+import {
+	HTMLAttributesConstants,
+	DisplayText,
+} from "../../../constants/HTMLConstants.js";
 import { isArrayNullOrEmpty } from "../../../utils/common.js";
 import { View } from "../../view.js";
 
@@ -9,6 +12,7 @@ const {
 	ITEM,
 	TITLE_CONTAINER,
 	LIST_SECTION_CONTAINER,
+	LIST_LOADING_OVERLAY,
 	SECTION_TITLE_CONTAINER,
 	SECTION_TITLE,
 	ACTION_CONTAINER,
@@ -36,6 +40,7 @@ const {
 	NO_ITEMS_IN_LIST_MESSAGE_CONTAINER,
 	NO_ITEMS_IN_LIST_MESSAGE,
 } = HTMLAttributesConstants;
+const { LOADING } = DisplayText.general;
 
 export class ListSectionView extends View {
 	constructor(moduleName, sectionTitle) {
@@ -161,6 +166,21 @@ export class ListSectionListContainerView extends View {
 			return this._generateItemListContainerHTML(newItemHTML);
 		}
 		return newItemHTML;
+	}
+
+	generateLoadingOverlayHTML() {
+		const moduleName = this._moduleName;
+		const loadingOverlayHTML = `
+			<div
+				id="${moduleName}-${LIST_LOADING_OVERLAY}"
+				class="${moduleName}-${LIST_LOADING_OVERLAY} ${LIST_LOADING_OVERLAY}"
+			>
+				<span>
+					${LOADING}
+				</span>
+			</div>
+		`;
+		return loadingOverlayHTML;
 	}
 
 	_generateItemsHTML(items) {

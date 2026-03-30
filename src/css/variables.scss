@@ -1,11 +1,4 @@
 :root {
-	--breadcrumb-container-height: 12vh;
-	--breadcrumb-container-min-height: 46px;
-	--breadcrumb-container-max-height: 72px;
-	--breadcrumb-crumb-min-width: 120px;
-	--sidebar-container-width: 130px;
-	--sidebar-item-img-size: 64px;
-
 	// SCROLL BAR
 	--scrollbar-width: 8px;
 	--scrollbar-track: rgb(245, 245, 245);
@@ -50,10 +43,16 @@
 	--section-action-container-height: calc(
 		var(--section-action-row-height) * 2
 	);
+	--section-list-section-start-height: calc(
+		var(--section-title-container-height) + var(--section-action-row-height)
+	);
 	--list-section-list-container-height: calc(
 		var(--section-container-height) - var(
-				--section-title-container-height
-			) - var(--section-action-row-height)
+				--section-list-section-start-height
+			)
+	);
+	--list-section-backdrop-top: calc(
+		var(--topbar-height) + var(--section-list-section-start-height)
 	);
 	// FORMULA: list-section-list-container-height
 	// = section-container-height

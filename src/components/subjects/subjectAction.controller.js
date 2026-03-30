@@ -42,7 +42,11 @@ export class SubjectActionController extends Controller {
 			saveItemButtonText: SAVE_SUBJECT_BUTTON_TEXT,
 		});
 		this._subjectData = subjectData;
-		// _subjectListCallbacks = { addNewSubjectToListCallback, subjectListEditModeCallback }
+		// _subjectListCallbacks = {
+		//     addNewSubjectToListCallback,
+		//     subjectListEditModeCallback,
+		//     refreshSubjectsListSectionCallback,
+		// }
 		this._subjectListCallbacks = subjectListCallbacks;
 		this._addSubjectModalController = new AddSubjectModalController(
 			ADD_SUBJECT_MODAL_MODULE,
@@ -175,8 +179,11 @@ export class SubjectActionController extends Controller {
 			) {
 				cancelActionButton.addEventListener("click", () => {
 					this._enterExitEditMode(false);
+					this._subjectListCallbacks.refreshSubjectsListSectionCallback();
 				});
 				saveActionButton.addEventListener("click", () => {
+					this._subjectData.deleteSelectedSubjects();
+					this._subjectListCallbacks.refreshSubjectsListSectionCallback();
 					this._enterExitEditMode(false);
 				});
 			}

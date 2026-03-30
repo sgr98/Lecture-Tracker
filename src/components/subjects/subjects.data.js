@@ -69,6 +69,32 @@ export class SubjectData {
 		}
 	}
 
+	refreshSubjects() {
+		try {
+			this._subjects = this._getSubjects();
+			return this._subjects;
+		} catch (error) {
+			handler.errorWithPopup(error);
+			return [];
+		}
+	}
+
+	deleteSelectedSubjects() {
+		try {
+			let deleteIds = [];
+			this.subjects.forEach((subject) => {
+				if (subject.isSelectedForDeletion) {
+					deleteIds.push(subject.id);
+				}
+			});
+			subjectAPI.deleteSubjectByIds(deleteIds);
+			return true;
+		} catch (error) {
+			handler.errorWithPopup(error);
+			return false;
+		}
+	}
+
 	_mapSubjectsFromDB(subjectsDB) {
 		try {
 			let subjects = [];

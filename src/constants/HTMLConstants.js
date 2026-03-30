@@ -16,6 +16,7 @@ export const HTMLTagsConstants = {
 
 export const DisplayText = {
 	general: {
+		LOADING: "Loading ...",
 		DRAG_ICON: "\u2550",
 		DELETE_ICON: "🗑",
 	},
@@ -73,6 +74,7 @@ export const HTMLAttributesConstants = {
 	TITLE_CONTAINER: "title-container",
 	SECTION_CONTAINER: "section-container",
 	LIST_SECTION_CONTAINER: "list-section-container",
+	LIST_LOADING_OVERLAY: "list-loading-overlay",
 	SECTION_TITLE_CONTAINER: "section-title-container",
 	SECTION_TITLE: "section-title",
 	ACTION_CONTAINER: "action-container",
@@ -114,8 +116,8 @@ export const HTMLTopbarAttributesConstants = {
 	TOP_ADMIN_CLEAR_SUBJECTS: "top-admin-clear-subjects",
 };
 
-	// NO_SUBJECTS_IN_LIST_MESSAGE_CONTAINER,
-	// NO_SUBJECTS_MESSAGE_ID,
+// NO_SUBJECTS_IN_LIST_MESSAGE_CONTAINER,
+// NO_SUBJECTS_MESSAGE_ID,
 
 export const HTMLSubjectAttributesConstants = {
 	SUBJECT: "subject",

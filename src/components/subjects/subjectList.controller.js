@@ -14,6 +14,7 @@ import { ListSectionListContainerView } from "../common/listSection/listSection.
 
 const {
 	LIST_CONTAINER,
+	LIST_LOADING_OVERLAY,
 	LIST_INNER_CONTAINER,
 	LIST_DRAG_BUTTON,
 	LIST_DELETE_BUTTON,
@@ -53,15 +54,10 @@ export class SubjectListContainerController extends Controller {
 
 	addComponent() {
 		try {
+			this._addLoadingOverlay();
 			const subjects = this._subjectData.subjects;
-			const subjectListHTML =
-				this._subjectListContainerView.generateHTML(subjects);
-			const subjectListContainerId = `${SUBJECT}-${LIST_CONTAINER}`;
-			domManipulation.addHTMLStringToDomById(
-				subjectListContainerId,
-				subjectListHTML,
-			);
-			this._subjectListEventListener(subjects);
+			this._addSubjectsToDom(subjects);
+			this._removeLoadingOverlay();
 		} catch (error) {
 			handler.errorWithPopup(error);
 		}
@@ -93,7 +89,64 @@ export class SubjectListContainerController extends Controller {
 					newSubjectHTML,
 				);
 			}
-			this._subjectEventListener(newSubject);
+			this._addSubjectEventListeners(newSubject);
+		} catch (error) {
+			handler.errorWithPopup(error);
+		}
+	}
+
+	refreshSubjectsListSection() {
+		try {
+			this._addLoadingOverlay();
+			const subjects = this._subjectData.refreshSubjects();
+			domManipulation.removeAllChildrenById(
+				`${SUBJECT}-${LIST_CONTAINER}`,
+			);
+			this._addSubjectsToDom(subjects);
+			this._removeLoadingOverlay();
+		} catch (error) {
+			handler.errorWithPopup(error);
+		}
+	}
+
+	_addSubjectsToDom(subjects) {
+		try {
+			const subjectListHTML =
+				this._subjectListContainerView.generateHTML(subjects);
+			const subjectListContainerId = `${SUBJECT}-${LIST_CONTAINER}`;
+			domManipulation.addHTMLStringToDomById(
+				subjectListContainerId,
+				subjectListHTML,
+			);
+			this._subjectListEventListener(subjects);
+		} catch (error) {
+			handler.errorWithPopup(error);
+		}
+	}
+
+	_addLoadingOverlay() {
+		try {
+			const loadingOverlayId = `${SUBJECT}-${LIST_LOADING_OVERLAY}`;
+			if (domManipulation.isElementInDOM(loadingOverlayId)) {
+				return;
+			}
+
+			const subjectListContainerId = `${SUBJECT}-${LIST_CONTAINER}`;
+			const loadingOverlayHTML =
+				this._subjectListContainerView.generateLoadingOverlayHTML();
+			domManipulation.addHTMLStringToDomById(
+				subjectListContainerId,
+				loadingOverlayHTML,
+			);
+		} catch (error) {
+			handler.errorWithPopup(error);
+		}
+	}
+
+	_removeLoadingOverlay() {
+		try {
+			const loadingOverlayId = `${SUBJECT}-${LIST_LOADING_OVERLAY}`;
+			domManipulation.removeElementById(loadingOverlayId);
 		} catch (error) {
 			handler.errorWithPopup(error);
 		}
@@ -116,12 +169,16 @@ export class SubjectListContainerController extends Controller {
 	_subjectListEventListener(subjects) {
 		try {
 			for (const subject of subjects) {
-				this._subjectEventListener(subject);
-				this._setSubjectDeleteEventListener(subject);
+				this._addSubjectEventListeners(subject);
 			}
 		} catch (error) {
 			handler.errorWithPopup(error);
 		}
+	}
+
+	_addSubjectEventListeners(subject) {
+		this._subjectEventListener(subject);
+		this._setSubjectDeleteEventListener(subject);
 	}
 
 	_subjectEventListener(subject) {
@@ -196,6 +253,7 @@ export class SubjectListContainerController extends Controller {
 				subjectDeleteButton.classList.toggle(
 					LIST_DELETE_BUTTON_SELECTED,
 				);
+				subject.isSelectedForDeletion = !subject.isSelectedForDeletion;
 			});
 		} catch (error) {
 			handler.errorWithPopup(error);

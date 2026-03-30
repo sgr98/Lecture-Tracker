@@ -34,6 +34,9 @@ export class SubjectController extends Controller {
 				subjectListEditModeCallback: (toEnter) => {
 					this._subjectListEditModeCallback(toEnter);
 				},
+				refreshSubjectsListSectionCallback: () => {
+					this._refreshSubjectsListSectionCallback();
+				},
 			},
 		);
 		this._subjectListContainerController =
@@ -91,6 +94,14 @@ export class SubjectController extends Controller {
 		try {
 			this._inEditMode = toEnter;
 			this._subjectListContainerController.enterExitEditMode(toEnter);
+		} catch (error) {
+			handler.errorWithPopup(error);
+		}
+	}
+
+	_refreshSubjectsListSectionCallback() {
+		try {
+			this._subjectListContainerController.refreshSubjectsListSection();
 		} catch (error) {
 			handler.errorWithPopup(error);
 		}

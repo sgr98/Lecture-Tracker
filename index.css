@@ -1,10 +1,4 @@
 :root {
-  --breadcrumb-container-height: 12vh;
-  --breadcrumb-container-min-height: 46px;
-  --breadcrumb-container-max-height: 72px;
-  --breadcrumb-crumb-min-width: 120px;
-  --sidebar-container-width: 130px;
-  --sidebar-item-img-size: 64px;
   --scrollbar-width: 8px;
   --scrollbar-track: rgb(245, 245, 245);
   --scrollbar-thumb: rgb(245, 245, 245);
@@ -36,10 +30,16 @@
   --section-action-container-height: calc(
   	var(--section-action-row-height) * 2
   );
+  --section-list-section-start-height: calc(
+  	var(--section-title-container-height) + var(--section-action-row-height)
+  );
   --list-section-list-container-height: calc(
   	var(--section-container-height) - var(
-  			--section-title-container-height
-  		) - var(--section-action-row-height)
+  			--section-list-section-start-height
+  		)
+  );
+  --list-section-backdrop-top: calc(
+  	var(--topbar-height) + var(--section-list-section-start-height)
   );
   --section-action-button-height: 70%;
   --list-section-button-height: 7vh;
@@ -242,6 +242,22 @@ SECTION LIST AREA
   background: var(--background);
   z-index: 1;
   transition: 0.2s ease-in;
+}
+
+.list-loading-overlay {
+  position: absolute;
+  padding: 10px;
+  width: 100%;
+  height: var(--list-section-list-container-height);
+  background: rgba(56, 56, 56, 0.6);
+  z-index: 100;
+}
+.list-loading-overlay span {
+  text-align: center;
+  color: var(--text-primary-reverse);
+  color: white;
+  font-size: var(--very-big-text-size);
+  font-weight: var(--font-weight-light-bold);
 }
 
 .list-inner-container {
@@ -652,6 +668,7 @@ STAGE
 */
 .stage {
   flex-direction: row;
+  justify-content: flex-start;
   margin: 0;
   width: 100vw;
   height: var(--section-container-height);
