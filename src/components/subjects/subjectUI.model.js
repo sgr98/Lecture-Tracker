@@ -10,7 +10,7 @@ import { DBSubjectConstants } from "../../constants/DBConstants.js";
 // isSelectedForDeletion
 //
 
-export class SubjectViewModel {
+export class SubjectUIModel {
 	constructor(subject, order) {
 		this.subjectDB = subject;
 		this.order = order;

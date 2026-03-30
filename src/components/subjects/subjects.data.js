@@ -2,7 +2,7 @@ import { FrontendErrorConstants } from "../../constants/ErrorConstants.js";
 import { isValueNull } from "../../utils/common.js";
 import { subjectAPI } from "../../backend/apis/subjects.api.js";
 import { Subject } from "../../backend/models/subject.model.js";
-import { SubjectViewModel } from "./subjectView.model.js";
+import { SubjectUIModel } from "./subjectUI.model.js";
 import { handler } from "../../utils/handler.js";
 
 const { FAILED_WHILE_FETCHING_SUBJECTS, FAILED_WHILE_ADDING_SUBJECTS } =
@@ -57,12 +57,12 @@ export class SubjectData {
 			const newSubject = newSubjecAPIResponse.value;
 
 			const numberOfExistingSubjects = this.subjects.length;
-			const newSubjectViewModel = new SubjectViewModel(
+			const newSubjectUI = new SubjectUIModel(
 				newSubject,
 				numberOfExistingSubjects,
 			);
-			this._subjects.push(newSubjectViewModel);
-			return newSubjectViewModel;
+			this._subjects.push(newSubjectUI);
+			return newSubjectUI;
 		} catch (error) {
 			handler.errorWithPopup(error);
 			return null;
@@ -73,8 +73,8 @@ export class SubjectData {
 		try {
 			let subjects = [];
 			subjectsDB.map((subject, index) => {
-				const subjectViewModel = new SubjectViewModel(subject, index);
-				subjects.push(subjectViewModel);
+				const subjectUI = new SubjectUIModel(subject, index);
+				subjects.push(subjectUI);
 			});
 			return subjects;
 		} catch (error) {
@@ -86,9 +86,9 @@ export class SubjectData {
 	_mapSubjectsToDB(subjects) {
 		try {
 			let subjectsDB = [];
-			subjects.map((subject) => {
-				const subjectViewModel = new Subject(subject);
-				subjectsDB.push(subjectViewModel);
+			subjects.map((subjectUI) => {
+				const subject = new Subject(subjectUI);
+				subjectsDB.push(subject);
 			});
 			return subjectsDB;
 		} catch (error) {
