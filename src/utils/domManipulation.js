@@ -90,9 +90,22 @@ const removeElementById = (elementId) => {
 	}
 };
 
+const removeAllChildrenById = (elementId) => {
+	try {
+		const element = document.getElementById(elementId);
+		if (!isValueNull(element)) {
+			element.replaceChildren();
+		}
+	} catch (error) {
+		handler.error(error);
+		throw error;
+	}
+};
+
 export const domManipulation = {
 	addHTMLStringToDomById,
 	isElementInDOM,
 	areAllElementsInDOM,
 	removeElementById,
+	removeAllChildrenById,
 };
