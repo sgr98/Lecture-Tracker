@@ -13,8 +13,8 @@ import { DBSubjectConstants } from "../../constants/DBConstants.js";
 export class SubjectUIModel {
 	constructor(subject, order) {
 		this.subjectDB = subject;
-		this.order = order;
-		this.isSelectedForDeletion = false;
+		this._order = order;
+		this._isSelectedForDeletion = false;
 	}
 
 	get id() {
@@ -55,5 +55,21 @@ export class SubjectUIModel {
 
 	set courseList(courses) {
 		this.subjectDB[DBSubjectConstants.COURSE_LIST] = courses;
+	}
+
+	get order() {
+		return this._order;
+	}
+
+	set order(ord) {
+		this._order = ord;
+	}
+
+	get isSelectedForDeletion() {
+		return this._isSelectedForDeletion;
+	}
+
+	set isSelectedForDeletion(isfd) {
+		this._isSelectedForDeletion = isfd;
 	}
 }
