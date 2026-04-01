@@ -98,12 +98,14 @@ export class SubjectListContainerController extends Controller {
 	refreshSubjectsListSection() {
 		try {
 			this._addLoadingOverlay();
-			const subjects = this._subjectData.refreshSubjects();
-			domManipulation.removeAllChildrenById(
-				`${SUBJECT}-${LIST_CONTAINER}`,
-			);
-			this._addSubjectsToDom(subjects);
-			this._removeLoadingOverlay();
+			setTimeout(() => {
+				const subjects = this._subjectData.refreshSubjects();
+				domManipulation.removeAllChildrenById(
+					`${SUBJECT}-${LIST_CONTAINER}`,
+				);
+				this._addSubjectsToDom(subjects);
+				this._removeLoadingOverlay();
+			}, 500);
 		} catch (error) {
 			handler.errorWithPopup(error);
 		}
