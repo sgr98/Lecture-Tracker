@@ -1,5 +1,6 @@
 import { DBSubjectConstants } from "../../constants/DBConstants.js";
 import { BackendErrorConstants } from "../../constants/ErrorConstants.js";
+import { ActionTypeEnum } from "../../utils/enum.js";
 import {
 	isStringNullOrEmpty,
 	convertJSONToCustomArray,
@@ -19,18 +20,19 @@ const {
 	INVALID_COURSE_LIST,
 } = BackendErrorConstants;
 
-const isSubjectValid = ({
-	subjectName,
-	subjectCode,
-	subjectDescription,
-	courseList,
-}) => {
+const isSubjectValid = (
+	action,
+	{ subjectName, subjectCode, subjectDescription, courseList },
+) => {
 	let errorMessage = "";
+	const checkCourseList = action === ActionTypeEnum.Add;
 	const isSubjectNameInvalid = isInvalidSubject.name(subjectName);
 	const isSubjectCodeInvalid = isInvalidSubject.code(subjectCode);
 	const isSubjectDescriptionInvalid =
 		isInvalidSubject.description(subjectDescription);
-	const isCourseListInvalid = isInvalidSubject.courseList(courseList);
+	const isCourseListInvalid = checkCourseList
+		? isInvalidSubject.courseList(courseList)
+		: false;
 
 	if (isSubjectNameInvalid) {
 		errorMessage += INVALID_SUBJECT_NAME + " ";
@@ -65,6 +67,13 @@ const saveSubjectsToDB = (subjects) => {
 	return saveSubjectsResult;
 };
 
+const findSubjectById = (subjectId, subjects) => {
+	const subject = subjects.find(
+		(subject) => subject[DBSubjectConstants.ID] === subjectId,
+	);
+	return subject;
+};
+
 export const subjectService = {
 	getSubjects: () => {
 		let subjectListResult = localStorageService.getJSON(
@@ -90,9 +99,7 @@ export const subjectService = {
 		}
 		const subjects = subjectsResult.value;
 
-		const subject = subjects.find(
-			(subject) => subject[DBSubjectConstants.ID] === subjectId,
-		);
+		const subject = findSubjectById(subjectId, subjects);
 		if (isValueNull(subject)) {
 			return Result.fail(SUBJECT_NOT_FOUND, 400);
 		}
@@ -100,7 +107,10 @@ export const subjectService = {
 	},
 
 	addSubject: (subject) => {
-		const isSubjectValidResult = isSubjectValid(subject);
+		const isSubjectValidResult = isSubjectValid(
+			ActionTypeEnum.Add,
+			subject,
+		);
 		if (!isSubjectValidResult.success) {
 			return isSubjectValidResult;
 		}
@@ -131,7 +141,36 @@ export const subjectService = {
 	},
 
 	editSubjectById(subjectId, newSubject) {
-		// TODO: IMPLEMENT THIS
+		const isSubjectValidResult = isSubjectValid(
+			ActionTypeEnum.Edit,
+			newSubject,
+		);
+		if (!isSubjectValidResult.success) {
+			return isSubjectValidResult;
+		}
+
+		const subjectsResult = subjectService.getSubjects();
+		if (!subjectsResult.success) {
+			return subjectsResult;
+		}
+		const subjects = subjectsResult.value;
+
+		const subject = findSubjectById(subjectId, subjects);
+		if (isValueNull(subject)) {
+			return Result.fail(SUBJECT_NOT_FOUND, 400);
+		}
+		subject[DBSubjectConstants.SUBJECT_NAME] =
+			newSubject[DBSubjectConstants.SUBJECT_NAME];
+		subject[DBSubjectConstants.SUBJECT_CODE] =
+			newSubject[DBSubjectConstants.SUBJECT_CODE];
+		subject[DBSubjectConstants.SUBJECT_DESCRIPTION] =
+			newSubject[DBSubjectConstants.SUBJECT_DESCRIPTION];
+
+		const saveSubjectResult = saveSubjectsToDB(subjects);
+		if (!saveSubjectResult.success) {
+			return saveSubjectResult;
+		}
+		return Result.success(subject, 201);
 	},
 
 	deleteSubjectByIds(subjectIds) {

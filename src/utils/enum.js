@@ -27,3 +27,8 @@ export const HTMLPopupTypeEnum = Object.freeze({
 	Error: "Error",
 	Success: "Success",
 });
+
+export const ActionTypeEnum = Object.freeze({
+	Add: "add",
+	Edit: "edit",
+});

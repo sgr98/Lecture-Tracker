@@ -315,6 +315,176 @@ describe("SUBJECT Service - addSubject", () => {
 	});
 });
 
+describe("SUBJECT Service - editSubjectById", () => {
+	const sampleSubject = {
+		subjectName: "New Subject 1",
+		subjectCode: "New Subject Code",
+		subjectDescription: "New Subject Description",
+	};
+
+	beforeEach(() => {
+		vi.clearAllMocks();
+	});
+
+	it.each([
+		{ name: "subjects 1", subjects: subjects1, ind: 2 },
+		{ name: "subjects 2", subjects: subjects2, ind: 4 },
+	])(
+		"edit a subject to Local Storage when storage has $name with index: $ind",
+		({ subjects, ind }) => {
+			const subjectId = subjects[ind][DBSubjectConstants.ID];
+			const mockResult = new Subject({
+				id: subjectId,
+				...sampleSubject,
+				courseList: [],
+			});
+			const getJSONSpy = vi
+				.spyOn(localStorageService, "getJSON")
+				.mockReturnValue(Result.success(subjects, 200));
+			subjects[ind] = mockResult;
+			const setJSONSpy = vi
+				.spyOn(localStorageService, "setJSON")
+				.mockReturnValue(Result.success(subjects, 201));
+
+			const result = subjectService.editSubjectById(
+				subjectId,
+				sampleSubject,
+			);
+
+			expect(localStorageService.getJSON).toHaveBeenCalledWith(
+				DBSubjectConstants.SUBJECT_LIST,
+			);
+			expect(localStorageService.setJSON).toHaveBeenCalled();
+			expect(result.success).toEqual(true);
+			expect(result.error).toEqual(null);
+			expect(result.statusCode).toEqual(201);
+			expect(result.value.id).toEqual(mockResult.id);
+			expect(result.value.subjectName).toEqual(mockResult.subjectName);
+			expect(result.value.subjectCode).toEqual(mockResult.subjectCode);
+			expect(result.value.subjectDescription).toEqual(
+				mockResult.subjectDescription,
+			);
+			expect(result.value.courseList).toEqual(mockResult.courseList);
+			getJSONSpy.mockRestore();
+			setJSONSpy.mockRestore();
+		},
+	);
+
+	it.each([
+		{
+			name: INVALID_SUBJECT_NAME,
+			invalidSubject: {
+				...sampleSubject,
+				subjectName: " 		",
+			},
+			subjectId: "any_id",
+			errorMessage: INVALID_SUBJECT_NAME,
+		},
+		{
+			name: INVALID_SUBJECT_CODE,
+			invalidSubject: {
+				...sampleSubject,
+				subjectCode: "",
+			},
+			subjectId: "any_id",
+			errorMessage: INVALID_SUBJECT_CODE,
+		},
+		{
+			name: INVALID_SUBJECT_DESCRIPTION,
+			invalidSubject: {
+				...sampleSubject,
+				subjectDescription: 52522,
+			},
+			subjectId: "any_id",
+			errorMessage: INVALID_SUBJECT_DESCRIPTION,
+		},
+		{
+			name: "Everything Invalid",
+			invalidSubject: {
+				subjectName: " 		",
+				subjectCode: "",
+				subjectDescription: 52522,
+			},
+			subjectId: "any_id",
+			errorMessage: `${INVALID_SUBJECT_NAME} ${INVALID_SUBJECT_CODE} ${INVALID_SUBJECT_DESCRIPTION}`,
+		},
+	])(
+		"handles an invalid subject ($name) by returning a failed result ",
+		({ invalidSubject, subjectId, errorMessage }) => {
+			const result = subjectService.editSubjectById(
+				subjectId,
+				invalidSubject,
+			);
+
+			expect(result.success).toEqual(false);
+			expect(result.error).toEqual(errorMessage);
+			expect(result.statusCode).toEqual(400);
+			expect(result.value).toEqual(null);
+		},
+	);
+
+	it("handles an unsuccessful result from getSubjects and returns it as it is", () => {
+		const getJSONSpy = vi
+			.spyOn(localStorageService, "getJSON")
+			.mockReturnValue(Result.fail(TEST_ERROR, 500));
+
+		const result = subjectService.editSubjectById("any_id", sampleSubject);
+
+		expect(result.success).toEqual(false);
+		expect(result.error).toEqual(TEST_ERROR);
+		expect(result.statusCode).toEqual(500);
+		expect(result.value).toEqual(null);
+		getJSONSpy.mockRestore();
+	});
+
+	it.each([
+		{ name: "Empty array", subjects: subjects0 },
+		{ name: "subjects 1", subjects: subjects1 },
+	])(
+		"edit a subject to Local Storage when storage has $name with index: $ind",
+		({ subjects }) => {
+			const getJSONSpy = vi
+				.spyOn(localStorageService, "getJSON")
+				.mockReturnValue(Result.success(subjects, 200));
+
+			const result = subjectService.editSubjectById(
+				"any_id",
+				sampleSubject,
+			);
+
+			expect(result.success).toEqual(false);
+			expect(result.error).toEqual(SUBJECT_NOT_FOUND);
+			expect(result.statusCode).toEqual(400);
+			expect(result.value).toEqual(null);
+			getJSONSpy.mockRestore();
+		},
+	);
+
+	it("returns a failed result when some problem occurs while saving the subjects to DB", () => {
+		const getJSONSpy = vi
+			.spyOn(localStorageService, "getJSON")
+			.mockReturnValue(Result.success(subjects1, 200));
+		const setJSONSpy = vi
+			.spyOn(localStorageService, "setJSON")
+			.mockReturnValue(Result.fail(TEST_ERROR, 500));
+
+		const result = subjectService.editSubjectById(
+			"ba2d2a25-4ba0-4cc1-8c73-5bf2d2185624",
+			sampleSubject,
+		);
+
+		expect(localStorageService.getJSON).toHaveBeenCalledWith(
+			DBSubjectConstants.SUBJECT_LIST,
+		);
+		expect(result.success).toEqual(false);
+		expect(result.error).toEqual(TEST_ERROR);
+		expect(result.statusCode).toEqual(500);
+		expect(result.value).toEqual(null);
+		getJSONSpy.mockRestore();
+		setJSONSpy.mockRestore();
+	});
+});
+
 describe("SUBJECT Service - deleteSubjectByIds", () => {
 	beforeEach(() => {
 		vi.clearAllMocks();
@@ -448,9 +618,7 @@ describe("SUBJECT Service - deleteAllSubjects", () => {
 		const keys = [DBSubjectConstants.SUBJECT_LIST];
 		const deleteKeysSpy = vi
 			.spyOn(localStorageService, "deleteKeys")
-			.mockReturnValue(
-				Result.success(keys, 201),
-			);
+			.mockReturnValue(Result.success(keys, 201));
 
 		const result = subjectService.deleteAllSubjects();
 
@@ -466,9 +634,7 @@ describe("SUBJECT Service - deleteAllSubjects", () => {
 		const keys = [DBSubjectConstants.SUBJECT_LIST];
 		const deleteKeysSpy = vi
 			.spyOn(localStorageService, "deleteKeys")
-			.mockReturnValue(
-				Result.fail(TEST_ERROR, 500),
-			);
+			.mockReturnValue(Result.fail(TEST_ERROR, 500));
 
 		const result = subjectService.deleteAllSubjects();
 

@@ -221,6 +221,80 @@ describe("SUBJECT API - addSubject", () => {
 	});
 });
 
+describe("SUBJECT API - editSubjectById", () => {
+	const sampleSubject = {
+		subjectName: "New Subject 1",
+		subjectCode: "New Subject Code",
+		subjectDescription: "New Subject Description",
+	};
+
+	beforeEach(() => {
+		vi.clearAllMocks();
+	});
+
+	it("edit sample subject to subjects service when storage has $name", () => {
+		const mockResult = new Subject(sampleSubject);
+		const editSubjectByIdSpy = vi
+			.spyOn(subjectService, "editSubjectById")
+			.mockReturnValue(Result.success(mockResult, 201));
+
+		const result = subjectAPI.editSubjectById("any_id", sampleSubject);
+
+		expect(subjectService.editSubjectById).toHaveBeenCalledWith(
+			"any_id",
+			sampleSubject,
+		);
+		expect(result.success).toEqual(true);
+		expect(result.error).toEqual(null);
+		expect(result.statusCode).toEqual(201);
+		expect(result.value.subjectName).toEqual(mockResult.subjectName);
+		expect(result.value.subjectCode).toEqual(mockResult.subjectCode);
+		expect(result.value.subjectDescription).toEqual(
+			mockResult.subjectDescription,
+		);
+		expect(result.value.courseList).toEqual(mockResult.courseList);
+		editSubjectByIdSpy.mockRestore();
+	});
+
+	it("handles failed result from the service", () => {
+		const editSubjectByIdSpy = vi
+			.spyOn(subjectService, "editSubjectById")
+			.mockReturnValue(Result.fail(TEST_ERROR, 400));
+
+		const result = subjectAPI.editSubjectById("any_id", sampleSubject);
+
+		expect(subjectService.editSubjectById).toHaveBeenCalledWith(
+			"any_id",
+			sampleSubject,
+		);
+		expect(result.success).toEqual(false);
+		expect(result.error).toEqual(TEST_ERROR);
+		expect(result.statusCode).toEqual(400);
+		expect(result.value).toEqual(null);
+		editSubjectByIdSpy.mockRestore();
+	});
+
+	it("handles an unexpected error", () => {
+		const editSubjectByIdSpy = vi
+			.spyOn(subjectService, "editSubjectById")
+			.mockImplementation(() => {
+				throw new Error(TEST_ERROR);
+			});
+
+		const result = subjectAPI.editSubjectById("any_id", sampleSubject);
+
+		expect(subjectService.editSubjectById).toHaveBeenCalledWith(
+			"any_id",
+			sampleSubject,
+		);
+		expect(result.success).toEqual(false);
+		expect(result.error).toEqual(`${UNEXPECTED_ERROR}: ${TEST_ERROR}`);
+		expect(result.statusCode).toEqual(500);
+		expect(result.value).toEqual(null);
+		editSubjectByIdSpy.mockRestore();
+	});
+});
+
 describe("SUBJECT API - deleteSubjectByIds", () => {
 	beforeEach(() => {
 		vi.clearAllMocks();

@@ -51,10 +51,13 @@ export const subjectAPI = {
 		}
 	},
 
-	// TODO: IMPLEMENT THIS
 	editSubjectById(subjectId, newSubject) {
 		try {
-			return Result.fail(`Not Implemented yet`, 501, null);
+			const editSubjectResult = subjectService.editSubjectById(
+				subjectId,
+				newSubject,
+			);
+			return editSubjectResult;
 		} catch (error) {
 			return Result.fail(
 				`${UNEXPECTED_ERROR}: ${error.message}`,
