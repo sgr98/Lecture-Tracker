@@ -147,7 +147,7 @@ export const subjectService = {
 		if (!saveSubjectResult.success) {
 			return saveSubjectResult;
 		}
-		return Result.success(newSubjects, 201);
+		return Result.success(saveSubjectResult.value, 201);
 	},
 
 	deleteAllSubjects() {
