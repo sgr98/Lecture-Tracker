@@ -278,6 +278,7 @@ export class SubjectListContainerController extends Controller {
 			this._editMode = toEnter;
 			this._unsetCurrentSubject();
 
+			const editModeCursor = toEnter ? "grab" : "default";
 			const buttonWidth = toEnter
 				? "var(--list-section-edit-buttons-width)"
 				: "0";
@@ -290,6 +291,9 @@ export class SubjectListContainerController extends Controller {
 			const subjects = this._subjectData.subjects;
 			for (const subject of subjects) {
 				const { id, order } = subject;
+				const subjectContainer = document.getElementById(
+					this._getSubjectDomId(LIST_BUTTON_CONTAINER, order, id),
+				);
 				const subjectListEditButton = document.getElementById(
 					this._getSubjectDomId(LIST_EDIT_BUTTON, order, id),
 				);
@@ -297,6 +301,7 @@ export class SubjectListContainerController extends Controller {
 					this._getSubjectDomId(LIST_DELETE_BUTTON, order, id),
 				);
 
+				subjectContainer.style.cursor = editModeCursor;
 				subjectListEditButton.style.width = buttonWidth;
 				subjectListDeleteButton.style.width = buttonWidth;
 				subjectListEditButton.style.borderRight = buttonBorder;
