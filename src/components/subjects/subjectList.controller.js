@@ -199,8 +199,7 @@ export class SubjectListContainerController extends Controller {
 
 	_subjectEventListener(subject) {
 		try {
-			const id = subject[DBSubjectConstants.ID];
-			const order = subject[DBSubjectConstants.ORDER];
+			const { id, order } = subject;
 			const subjectElement = document.getElementById(
 				this._getSubjectDomId(null, order, id),
 			);
@@ -223,8 +222,7 @@ export class SubjectListContainerController extends Controller {
 		try {
 			if (
 				!isValueNull(this._currentSubject) &&
-				subject[DBSubjectConstants.ID] ===
-					this._currentSubject[DBSubjectConstants.ID]
+				subject.id === this._currentSubjectsubject.id
 			) {
 				return;
 			}
@@ -241,8 +239,7 @@ export class SubjectListContainerController extends Controller {
 			if (isValueNull(this._currentSubject)) {
 				return;
 			}
-			const id = this._currentSubject[DBSubjectConstants.ID];
-			const order = this._currentSubject[DBSubjectConstants.ORDER];
+			const { id, order } = this._currentSubject;
 			const subjectElement = document.getElementById(
 				this._getSubjectDomId(null, order, id),
 			);
@@ -256,8 +253,7 @@ export class SubjectListContainerController extends Controller {
 
 	_setSubjectDeleteEventListener(subject) {
 		try {
-			const id = subject[DBSubjectConstants.ID];
-			const order = subject[DBSubjectConstants.ORDER];
+			const { id, order } = subject;
 			const subjectDeleteButton = document.getElementById(
 				this._getSubjectDomId(LIST_DELETE_BUTTON, order, id),
 			);
@@ -293,8 +289,7 @@ export class SubjectListContainerController extends Controller {
 
 			const subjects = this._subjectData.subjects;
 			for (const subject of subjects) {
-				const id = subject[DBSubjectConstants.ID];
-				const order = subject[DBSubjectConstants.ORDER];
+				const { id, order } = subject;
 				const subjectListEditButton = document.getElementById(
 					this._getSubjectDomId(LIST_EDIT_BUTTON, order, id),
 				);
