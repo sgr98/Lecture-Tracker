@@ -15,6 +15,12 @@ export class SubjectUIModel {
 		this.subjectDB = subject;
 		this._order = order;
 		this._isSelectedForDeletion = false;
+		this._edits = {
+			isEdited: false,
+			subjectName: null,
+			subjectCode: null,
+			subjectDescription: null,
+		};
 	}
 
 	get id() {
@@ -71,5 +77,20 @@ export class SubjectUIModel {
 
 	set isSelectedForDeletion(isfd) {
 		this._isSelectedForDeletion = isfd;
+	}
+
+	get edits() {
+		return this._edits;
+	}
+
+	set edits(subject) {
+		this._edits.isEdited = true;
+		this._edits.subjectName = subject.subjectName;
+		this._edits.subjectCode = subject.subjectCode;
+		this._edits.subjectDescription = subject.subjectDescription;
+	}
+
+	get isEdited() {
+		return this._edits.isEdited;
 	}
 }

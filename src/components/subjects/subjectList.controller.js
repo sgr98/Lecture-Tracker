@@ -195,6 +195,7 @@ export class SubjectListContainerController extends Controller {
 	_addSubjectEventListeners(subject) {
 		this._subjectEventListener(subject);
 		this._setSubjectDeleteEventListener(subject);
+		this._setSubjectEditEventListener(subject);
 	}
 
 	_subjectEventListener(subject) {
@@ -246,6 +247,21 @@ export class SubjectListContainerController extends Controller {
 			subjectElement.classList.remove(SUBJECT_ACTIVE_LIST_BUTTON);
 			this._currentSubject = null;
 			// TODO: Unload courses section
+		} catch (error) {
+			handler.errorWithPopup(error);
+		}
+	}
+
+	_setSubjectEditEventListener(subject) {
+		try {
+			const { id, order } = subject;
+			const subjectEditButton = document.getElementById(
+				this._getSubjectDomId(LIST_EDIT_BUTTON, order, id),
+			);
+			subjectEditButton.addEventListener("click", () => {
+				// TODO: OPEN EDIT SUBJECT MODAL
+				// TODO: ADD CALLBACK TO this.subjectData.edits
+			});
 		} catch (error) {
 			handler.errorWithPopup(error);
 		}

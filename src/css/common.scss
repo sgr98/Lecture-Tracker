@@ -8,7 +8,7 @@ DRAGGING
 
 .list-dragging {
 	opacity: 0.1;
-
+	cursor: grabbing;
 }
 
 /*
@@ -196,6 +196,12 @@ SECTION LIST AREA
 .list-edit-button {
 	border-right: none;
 	// border-right: 1px solid var(--border-black);
+}
+
+.list-edit-button:hover,
+.list-edit-button:active,
+.list-edit-button:focus {
+	background: var(--blue-button-hover);
 }
 
 .list-delete-button-selected {
