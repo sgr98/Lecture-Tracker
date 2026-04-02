@@ -33,7 +33,7 @@ const {
 	LIST_INNER_CONTAINER,
 	LIST_BUTTON,
 	LIST_SECTION_EDIT_BUTTONS,
-	LIST_DRAG_BUTTON,
+	LIST_EDIT_BUTTON,
 	LIST_DELETE_BUTTON,
 	BUTTON,
 	SECTION_ACTION_BUTTON,
@@ -201,10 +201,11 @@ export class ListSectionListContainerView extends View {
 			<div
 				id="${moduleName}-${LIST_BUTTON_CONTAINER}-${order}"
 				class="${moduleName}-${LIST_BUTTON_CONTAINER} ${LIST_BUTTON_CONTAINER}"
+				draggable="true"
 			>
 				<div
-					id="${moduleName}-${LIST_DRAG_BUTTON}-${order}"
-					class="${moduleName}-${LIST_DRAG_BUTTON} ${LIST_DRAG_BUTTON} ${LIST_SECTION_EDIT_BUTTONS}"
+					id="${moduleName}-${LIST_EDIT_BUTTON}-${order}"
+					class="${moduleName}-${LIST_EDIT_BUTTON} ${LIST_EDIT_BUTTON} ${LIST_SECTION_EDIT_BUTTONS}"
 				>
 					<span></span>
 				</div>

@@ -8,6 +8,7 @@ import { DBSubjectConstants } from "../../constants/DBConstants.js";
 import { domManipulation } from "../../utils/domManipulation.js";
 import { handler } from "../../utils/handler.js";
 import { isStringNullOrWhiteSpace, isValueNull } from "../../utils/common.js";
+import { listDragEvent } from "../common/utils/dragEventListeners.js";
 import { Controller } from "../controller.js";
 
 import { ListSectionListContainerView } from "../common/listSection/listSection.view.js";
@@ -16,17 +17,20 @@ const {
 	LIST_CONTAINER,
 	LIST_LOADING_OVERLAY,
 	LIST_INNER_CONTAINER,
-	LIST_DRAG_BUTTON,
+	LIST_BUTTON_CONTAINER,
+	LIST_EDIT_BUTTON,
 	LIST_DELETE_BUTTON,
 	LIST_BUTTON_DELETION_SELECTED,
 	LIST_DELETE_BUTTON_SELECTED,
+	LIST_DRAGGING,
+	LIST_DRAGGING_ACTIVE,
 } = HTMLAttributesConstants;
 const {
 	SUBJECT,
 	SUBJECT_ACTIVE_LIST_BUTTON,
 	NO_SUBJECTS_IN_LIST_MESSAGE_CONTAINER,
 } = HTMLSubjectAttributesConstants;
-const { DRAG_ICON, DELETE_ICON } = DisplayText.general;
+const { EDIT_ICON, DELETE_ICON } = DisplayText.general;
 const { NO_SUBJECTS_MESSAGE } = DisplayText.subject;
 
 export class SubjectListContainerController extends Controller {
@@ -44,6 +48,17 @@ export class SubjectListContainerController extends Controller {
 				order: DBSubjectConstants.ORDER,
 			},
 		);
+	}
+
+	get editMode() {
+		return this._editMode;
+	}
+
+	set editMode(edit) {
+		this._editMode = false;
+		if (typeof edit === "boolean") {
+			this._editMode = edit;
+		}
 	}
 
 	// ////////////////////////////////////////////////////////////////////////////////
@@ -170,6 +185,7 @@ export class SubjectListContainerController extends Controller {
 
 	_subjectListEventListener(subjects) {
 		try {
+			this._subjectDragEventListener();
 			for (const subject of subjects) {
 				this._addSubjectEventListeners(subject);
 			}
@@ -274,25 +290,25 @@ export class SubjectListContainerController extends Controller {
 			const buttonBorder = toEnter
 				? "1px solid var(--border-black)"
 				: "none";
-			const dragButtonText = toEnter ? DRAG_ICON : "";
+			const editButtonText = toEnter ? EDIT_ICON : "";
 			const deleteButtonText = toEnter ? DELETE_ICON : "";
 
 			const subjects = this._subjectData.subjects;
 			for (const subject of subjects) {
 				const id = subject[DBSubjectConstants.ID];
 				const order = subject[DBSubjectConstants.ORDER];
-				const subjectListDragButton = document.getElementById(
-					this._getSubjectDomId(LIST_DRAG_BUTTON, order, id),
+				const subjectListEditButton = document.getElementById(
+					this._getSubjectDomId(LIST_EDIT_BUTTON, order, id),
 				);
 				const subjectListDeleteButton = document.getElementById(
 					this._getSubjectDomId(LIST_DELETE_BUTTON, order, id),
 				);
 
-				subjectListDragButton.style.width = buttonWidth;
+				subjectListEditButton.style.width = buttonWidth;
 				subjectListDeleteButton.style.width = buttonWidth;
-				subjectListDragButton.style.borderRight = buttonBorder;
+				subjectListEditButton.style.borderRight = buttonBorder;
 				subjectListDeleteButton.style.borderLeft = buttonBorder;
-				subjectListDragButton.children[0].textContent = dragButtonText;
+				subjectListEditButton.children[0].textContent = editButtonText;
 				subjectListDeleteButton.children[0].textContent =
 					deleteButtonText;
 			}
@@ -308,6 +324,22 @@ export class SubjectListContainerController extends Controller {
 			return `${SUBJECT}-${order}`;
 		} else {
 			return `${SUBJECT}-${component}-${order}`;
+		}
+	}
+
+	_subjectDragEventListener() {
+		try {
+			const listInnerContainerId = `${SUBJECT}-${LIST_INNER_CONTAINER}`;
+			const itemContainerClass = `${SUBJECT}-${LIST_BUTTON_CONTAINER}`;
+			listDragEvent.addEventListeners(
+				listInnerContainerId,
+				itemContainerClass,
+				() => {
+					return this._editMode;
+				},
+			);
+		} catch (error) {
+			handler.errorWithPopup(error);
 		}
 	}
 }

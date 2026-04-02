@@ -18,6 +18,7 @@ export const DisplayText = {
 	general: {
 		LOADING: "Loading ...",
 		DRAG_ICON: "\u2550",
+		EDIT_ICON: "✎",
 		DELETE_ICON: "🗑",
 	},
 
@@ -97,6 +98,7 @@ export const HTMLAttributesConstants = {
 	LIST_BUTTON_DELETION_SELECTED: "list-button-deletion-selected",
 	LIST_SECTION_EDIT_BUTTONS: "list-section-edit-buttons",
 	LIST_DRAG_BUTTON: "list-drag-button",
+	LIST_EDIT_BUTTON: "list-edit-button",
 	LIST_DELETE_BUTTON: "list-delete-button",
 	LIST_DELETE_BUTTON_SELECTED: "list-delete-button-selected",
 	NO_ITEMS_IN_LIST_MESSAGE_CONTAINER: "no-items-in-list-message-container",
@@ -104,6 +106,8 @@ export const HTMLAttributesConstants = {
 	BUTTON: "button",
 	LIST_ADD_BUTTON: "list-add-button",
 	SECTION_ACTION_BUTTON: "section-action-button",
+	LIST_DRAGGING: "list-dragging",
+	LIST_DRAGGING_ACTIVE: "list-dragging-active",
 };
 
 export const HTMLTopbarAttributesConstants = {
