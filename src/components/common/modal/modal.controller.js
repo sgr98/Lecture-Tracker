@@ -17,11 +17,16 @@ const { ROOT } = HTMLAttributesConstants;
 const { FORM_FIELDS_NOT_FILLED } = DisplayText.modal;
 
 export class ModalController extends Controller {
-	constructor(moduleName, title, description, fields, formSubmitCallback) {
+	constructor(
+		moduleName,
+		content,
+		formSubmitCallback,
+		options = {},
+	) {
 		super(moduleName);
-		this._title = title;
-		this._description = description ?? "";
-		this._fields = fields ?? [];
+		this._title = content.title;
+		this._description = content.description ?? "";
+		this._fields = content.fields ?? [];
 		this._formSubmitCallback = formSubmitCallback;
 		this._elementId = `${moduleName}-${MODAL}`;
 	}

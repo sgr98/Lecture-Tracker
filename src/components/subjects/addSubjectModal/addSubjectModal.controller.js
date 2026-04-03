@@ -74,11 +74,14 @@ export class AddSubjectModalController extends Controller {
 					mapTo: DBSubjectConstants.SUBJECT_DESCRIPTION,
 				},
 			];
+			const modalContent = {
+				title: ADD_SUBJECT_MODAL_TITLE,
+				description: ADD_SUBJECT_MODAL_DESCRIPTION,
+				fields: addSubjectModalFields,
+			};
 			this._modalController = new ModalController(
 				ADD_SUBJECT_MODULE,
-				ADD_SUBJECT_MODAL_TITLE,
-				ADD_SUBJECT_MODAL_DESCRIPTION,
-				addSubjectModalFields,
+				modalContent,
 				(fields) => {
 					this._addSubjectModalCallback(fields);
 				},
