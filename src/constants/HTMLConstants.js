@@ -46,6 +46,7 @@ export const DisplayText = {
 			"Subject Description",
 		ADD_SUBJECT_MODAL_SUBJECT_DESCRIPTION_FIELD_PLACEHOLDER:
 			"Enter subject description",
+		SUBJECT_MODAL_SUBJECT_ID_FIELD_LABEL: "Subject Id",
 	},
 	course: {},
 	lectures: {},
@@ -140,6 +141,7 @@ export const HTMLSubjectAttributesConstants = {
 	ADD_SUBJECT_MODAL_SUBJECT_NAME_FIELD: "subject-name",
 	ADD_SUBJECT_MODAL_SUBJECT_CODE_FIELD: "subject-code",
 	ADD_SUBJECT_MODAL_SUBJECT_DESCRIPTION_FIELD: "subject-description",
+	SUBJECT_MODAL_SUBJECT_ID_FIELD: "subject-id",
 };
 
 export const HTMLCoursesAttributesConstants = {
@@ -161,6 +163,7 @@ export const HTMLFieldAttributesConstants = {
 	TEXTAREA: "textarea",
 	DEFAULT: "default",
 	SYSTEM_DEFAULT: "system-default",
+	READONLY: "readonly",
 };
 
 export const HTMLModalAttributesConstants = {
@@ -200,7 +203,9 @@ export const HTMLPopupAttributesConstants = {
 
 export const ElementModuleName = {
 	ADD_SUBJECT_MODULE: "add-subject",
+	EDIT_SUBJECT_MODULE: "edit-subject",
 	ADD_SUBJECT_MODAL_MODULE: "add-subject-modal",
+	EDIT_SUBJECT_MODAL_MODULE: "edit-subject-modal",
 	TOPBAR_MODULE: "topbar",
 	STAGE_MODULE: "stage",
 	SUBJECT_MODULE: "subject",

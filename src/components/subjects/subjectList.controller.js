@@ -1,6 +1,7 @@
 import {
 	HTMLAttributesConstants,
 	HTMLSubjectAttributesConstants,
+	ElementModuleName,
 	DisplayText,
 } from "../../constants/HTMLConstants.js";
 import { DBSubjectConstants } from "../../constants/DBConstants.js";
@@ -12,6 +13,7 @@ import { listDragEvent } from "../common/utils/dragEventListeners.js";
 import { Controller } from "../controller.js";
 
 import { ListSectionListContainerView } from "../common/listSection/listSection.view.js";
+import { EditSubjectModalController } from "./editSubjectModal/editSubjectModal.controller.js";
 
 const {
 	LIST_CONTAINER,
@@ -28,6 +30,7 @@ const {
 	SUBJECT_ACTIVE_LIST_BUTTON,
 	NO_SUBJECTS_IN_LIST_MESSAGE_CONTAINER,
 } = HTMLSubjectAttributesConstants;
+const { EDIT_SUBJECT_MODAL_MODULE } = ElementModuleName;
 const { EDIT_ICON, DELETE_ICON } = DisplayText.general;
 const { NO_SUBJECTS_MESSAGE } = DisplayText.subject;
 
@@ -258,9 +261,25 @@ export class SubjectListContainerController extends Controller {
 			const subjectEditButton = document.getElementById(
 				this._getSubjectDomId(LIST_EDIT_BUTTON, order, id),
 			);
+			if (!domManipulation.isElementInDOM(subjectEditButton)) {
+				return;
+			}
 			subjectEditButton.addEventListener("click", () => {
-				// TODO: OPEN EDIT SUBJECT MODAL
-				// TODO: ADD CALLBACK TO this.subjectData.edits
+				const editSubjectModalController =
+					new EditSubjectModalController(
+						EDIT_SUBJECT_MODAL_MODULE,
+						subject,
+						(editSubject) => {
+							subject.edits = editSubject;
+							this._updateSubjectNameOfElement(
+								editSubject.subjectName,
+								order,
+							);
+						},
+					);
+				editSubjectModalController.addComponent();
+				editSubjectModalController.open();
+				// TODO: ADD CALLBACK TO CALL this.subjectData.editSubjects()
 			});
 		} catch (error) {
 			handler.errorWithPopup(error);
@@ -331,16 +350,6 @@ export class SubjectListContainerController extends Controller {
 		}
 	}
 
-	// NOTE: In a previous version, id was used in element Id,
-	// not going to remove it right away as it can be used again in the future
-	_getSubjectDomId(component, order, id) {
-		if (isStringNullOrWhiteSpace(component)) {
-			return `${SUBJECT}-${order}`;
-		} else {
-			return `${SUBJECT}-${component}-${order}`;
-		}
-	}
-
 	_subjectDragEventListener() {
 		try {
 			const listInnerContainerId = `${SUBJECT}-${LIST_INNER_CONTAINER}`;
@@ -354,6 +363,40 @@ export class SubjectListContainerController extends Controller {
 			);
 		} catch (error) {
 			handler.errorWithPopup(error);
+		}
+	}
+
+	_updateSubjectNameOfElement(subjectName, order) {
+		try {
+			const subjectElementId = this._getSubjectDomId(null, order);
+			const subjectElement = document.getElementById(subjectElementId);
+			if (!domManipulation.isElementInDOM(subjectElement)) {
+				return;
+			}
+
+			const subjectSpan = subjectElement.querySelector("span");
+			if (!domManipulation.isElementInDOM(subjectSpan)) {
+				return;
+			}
+			subjectSpan.textContent = subjectName;
+		} catch (error) {
+			handler.errorWithPopup(error);
+		}
+	}
+
+	// ////////////////////////////////////////////////////////////////////////////////
+	// ////////////////////////////////////////////////////////////////////////////////
+	// Utilities
+	// ////////////////////////////////////////////////////////////////////////////////
+	// ////////////////////////////////////////////////////////////////////////////////
+
+	// NOTE: In a previous version, id was used in element Id,
+	// not going to remove it right away as it can be used again in the future
+	_getSubjectDomId(component, order, id) {
+		if (isStringNullOrWhiteSpace(component)) {
+			return `${SUBJECT}-${order}`;
+		} else {
+			return `${SUBJECT}-${component}-${order}`;
 		}
 	}
 }

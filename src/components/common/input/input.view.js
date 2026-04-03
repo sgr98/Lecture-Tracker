@@ -1,8 +1,9 @@
 import { HTMLFieldAttributesConstants } from "../../../constants/HTMLConstants.js";
+import { isStringNullOrEmpty } from "../../../utils/common.js";
 import { HTMLInputTagEnum, HTMLInputTypeEnum } from "../../../utils/enum.js";
 import { View } from "../../view.js";
 
-const { FIELD, INPUT, TEXT, TEXTAREA, SYSTEM_DEFAULT } =
+const { FIELD, INPUT, TEXT, TEXTAREA, SYSTEM_DEFAULT, READONLY } =
 	HTMLFieldAttributesConstants;
 
 export class InputView extends View {
@@ -19,13 +20,21 @@ export class InputView extends View {
 			field.inputType = HTMLInputTypeEnum.Textarea;
 		}
 
-		const { name, placeholder, inputTag, inputType, isRequired } = field;
+		const {
+			name,
+			placeholder,
+			inputTag,
+			inputType,
+			isRequired,
+			isReadonly,
+		} = field;
 		this._field = {
 			name: name ?? SYSTEM_DEFAULT,
 			placeholder: placeholder ?? SYSTEM_DEFAULT,
 			inputTag: inputTag ?? this._DEFAULT_INPUT_TAG,
 			inputType: inputType ?? this._DEFAULT_INPUT_TYPE,
 			isRequired: isRequired ?? false,
+			isReadonly: isReadonly ?? false,
 		};
 	}
 
@@ -44,8 +53,11 @@ export class InputView extends View {
 	}
 
 	_generateInputTypeHTML() {
-		const { name, placeholder, inputType, isRequired } = this._field;
+		const { name, placeholder, inputType, isRequired, isReadonly } =
+			this._field;
 		const requiredInput = this._getRequiredInput(isRequired);
+		const readonlyInput = this._getReadonlyInput(isReadonly);
+		const inputClass = this._getInputClassName();
 		const moduleName = this._moduleName;
 		const componentName = this._componentName;
 		const fieldInputHTML = `
@@ -53,16 +65,19 @@ export class InputView extends View {
 				id="${moduleName}-${componentName}-${name}-${INPUT}"
 				type="${inputType}"
 				${requiredInput}
+				${readonlyInput}
 				placeholder="${placeholder}"
-				class="${componentName}-${FIELD}-${inputType}-${INPUT}"
+				class="${inputClass}"
 			/>
 		`;
 		return fieldInputHTML;
 	}
 
 	_generateTextAreaTypeHTML() {
-		const { name, placeholder, isRequired } = this._field;
+		const { name, placeholder, isRequired, isReadonly } = this._field;
 		const requiredInput = this._getRequiredInput(isRequired);
+		const readonlyInput = this._getReadonlyInput(isReadonly);
+		const inputClass = this._getInputClassName();
 		const rows = this._DEFAULT_TEXT_AREA_ROWS;
 		const maxlength = this._DEFAULT_TEXT_AREA_MAX_LENGTH;
 		const moduleName = this._moduleName;
@@ -74,14 +89,50 @@ export class InputView extends View {
 				rows="${rows}"
 				maxlength="${maxlength}"
 				${requiredInput}
+				${readonlyInput}
 				placeholder="${placeholder}"
-				class="${componentName}-${FIELD}-${TEXT}-${TEXTAREA}"
+				class="${inputClass}"
 			></textarea>
 		`;
 		return fieldInputHTML;
 	}
 
+	_getInputClassName() {
+		const { inputTag, inputType, isReadonly } = this._field;
+		const inputTagClassName = this._getInputTagClassName(
+			inputTag,
+			inputType,
+		);
+		const readOnlyClassName = this._getReadonlyClassName(isReadonly);
+		let classNames = [inputTagClassName, readOnlyClassName];
+		classNames = classNames.filter(
+			(className) => !isStringNullOrEmpty(className),
+		);
+		return classNames.join(" ");
+	}
+
+	_getInputTagClassName(inputTag, inputType) {
+		const componentName = this._componentName;
+		switch (inputTag) {
+			case HTMLInputTagEnum.Input:
+				return `${componentName}-${FIELD}-${inputType}-${INPUT}`;
+			case HTMLInputTagEnum.Textarea:
+				return `${componentName}-${FIELD}-${TEXT}-${TEXTAREA}`;
+			default:
+				return "";
+		}
+	}
+
+	_getReadonlyClassName(isReadonly) {
+		return isReadonly ? `${FIELD}-${READONLY}-${INPUT}` : "";
+	}
+
 	_getRequiredInput(isRequired) {
 		return isRequired ? "required" : "";
+	}
+
+	_getReadonlyInput(isReadonly) {
+		isReadonly = isReadonly ?? false;
+		return isReadonly ? "readonly" : "";
 	}
 }

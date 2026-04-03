@@ -16,13 +16,26 @@ const { MODAL, MODAL_FORM, CLOSE, INPUT } = HTMLModalAttributesConstants;
 const { ROOT } = HTMLAttributesConstants;
 const { FORM_FIELDS_NOT_FILLED } = DisplayText.modal;
 
+// NOTE: Currently unused
+const mergeFormFields = (formFieldValues, fields) => {
+	const mergedMap = new Map();
+	fields.forEach((field) => {
+		mergedMap.set(field.name, { ...field });
+	});
+
+	const mergedFormFields = formFieldValues.map((formField) => {
+		if (mergedMap.has(formField.name)) {
+			const field = mergedMap.get(formField.name);
+			formField.inputTag = field.inputTag;
+		}
+		return formField;
+	});
+	return mergedFormFields;
+};
+
+// TODO: MAKE SUBMIT BUTTON TEXT A CLASS PARAMETER
 export class ModalController extends Controller {
-	constructor(
-		moduleName,
-		content,
-		formSubmitCallback,
-		options = {},
-	) {
+	constructor(moduleName, content, formSubmitCallback, options = {}) {
 		super(moduleName);
 		this._title = content.title;
 		this._description = content.description ?? "";
@@ -153,5 +166,21 @@ export class ModalController extends Controller {
 		} catch (error) {
 			handler.errorWithPopup(error);
 		}
+	}
+
+	prefillForm(formFieldValues) {
+		// const formValues = mergeFormFields(formFieldValues, this._fields);
+		formFieldValues.forEach((formField) => {
+			this._setFormFieldValued(formField);
+		});
+	}
+
+	_setFormFieldValued(formField) {
+		const { name, value } = formField;
+		const moduleName = this._moduleName;
+		const inputElement = document.getElementById(
+			`${moduleName}-${MODAL}-${name}-${INPUT}`,
+		);
+		inputElement.value = value;
 	}
 }

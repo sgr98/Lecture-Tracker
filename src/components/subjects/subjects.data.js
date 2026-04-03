@@ -79,6 +79,16 @@ export class SubjectData {
 		}
 	}
 
+	editSubjects() {
+		this.subjects.forEach((subject) => {
+			if (subject.isEdited) {
+				const id = subject.id;
+				const editedSubject = subject.editedSubject;
+				subjectAPI.editSubjectById(id, editedSubject);
+			}
+		});
+	}
+
 	deleteSelectedSubjects() {
 		try {
 			let deleteIds = [];

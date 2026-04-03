@@ -366,6 +366,13 @@ NO ITEMS IN LIST
   text-align: center;
 }
 
+input.field-readonly-input {
+  border: none;
+  outline: none;
+  background: var(--background);
+  color: var(--text-secondary);
+}
+
 .modal {
   position: fixed;
   top: 0;

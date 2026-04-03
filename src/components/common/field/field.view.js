@@ -17,8 +17,15 @@ export class FieldView extends View {
 			field.inputType = HTMLInputTypeEnum.Textarea;
 		}
 
-		const { name, label, placeholder, inputTag, inputType, isRequired } =
-			field;
+		const {
+			name,
+			label,
+			placeholder,
+			inputTag,
+			inputType,
+			isRequired,
+			isReadonly,
+		} = field;
 		this._field = {
 			name: name ?? SYSTEM_DEFAULT,
 			label: label ?? SYSTEM_DEFAULT,
@@ -26,8 +33,9 @@ export class FieldView extends View {
 			inputTag: inputTag ?? this._DEFAULT_INPUT_TAG,
 			inputType: inputType ?? this._DEFAULT_INPUT_TYPE,
 			isRequired: isRequired ?? false,
+			isReadonly: isReadonly ?? false,
 		};
-		this._inputView = new InputView(moduleName, componentName, field);
+		this._inputView = new InputView(moduleName, componentName, this._field);
 	}
 
 	log() {

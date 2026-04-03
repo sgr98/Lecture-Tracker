@@ -12,7 +12,7 @@ import { DBSubjectConstants } from "../../constants/DBConstants.js";
 
 export class SubjectUIModel {
 	constructor(subject, order) {
-		this.subjectDB = subject;
+		this._subjectDB = subject;
 		this._order = order;
 		this._isSelectedForDeletion = false;
 		this._edits = {
@@ -24,43 +24,43 @@ export class SubjectUIModel {
 	}
 
 	get id() {
-		return this.subjectDB[DBSubjectConstants.ID];
+		return this._subjectDB[DBSubjectConstants.ID];
 	}
 
 	set id(iden) {
-		this.subjectDB[DBSubjectConstants.ID] = iden;
+		this._subjectDB[DBSubjectConstants.ID] = iden;
 	}
 
 	get subjectName() {
-		return this.subjectDB[DBSubjectConstants.SUBJECT_NAME];
+		return this._subjectDB[DBSubjectConstants.SUBJECT_NAME];
 	}
 
 	set subjectName(name) {
-		this.subjectDB[DBSubjectConstants.SUBJECT_NAME] = name;
+		this._subjectDB[DBSubjectConstants.SUBJECT_NAME] = name;
 	}
 
 	get subjectCode() {
-		return this.subjectDB[DBSubjectConstants.SUBJECT_CODE];
+		return this._subjectDB[DBSubjectConstants.SUBJECT_CODE];
 	}
 
 	set subjectCode(code) {
-		this.subjectDB[DBSubjectConstants.SUBJECT_CODE] = code;
+		this._subjectDB[DBSubjectConstants.SUBJECT_CODE] = code;
 	}
 
 	get subjectDescription() {
-		return this.subjectDB[DBSubjectConstants.SUBJECT_DESCRIPTION];
+		return this._subjectDB[DBSubjectConstants.SUBJECT_DESCRIPTION];
 	}
 
 	set subjectDescription(description) {
-		this.subjectDB[DBSubjectConstants.SUBJECT_DESCRIPTION] = description;
+		this._subjectDB[DBSubjectConstants.SUBJECT_DESCRIPTION] = description;
 	}
 
 	get courseList() {
-		return this.subjectDB[DBSubjectConstants.COURSE_LIST];
+		return this._subjectDB[DBSubjectConstants.COURSE_LIST];
 	}
 
 	set courseList(courses) {
-		this.subjectDB[DBSubjectConstants.COURSE_LIST] = courses;
+		this._subjectDB[DBSubjectConstants.COURSE_LIST] = courses;
 	}
 
 	get order() {
@@ -92,5 +92,23 @@ export class SubjectUIModel {
 
 	get isEdited() {
 		return this._edits.isEdited;
+	}
+
+	get editedSubject() {
+		return {
+			subjectName: this._edits.subjectName,
+			subjectCode: this._edits.subjectCode,
+			subjectDescription: this._edits.subjectDescription,
+		};
+	}
+
+	getEffectiveSubject() {
+		if (this.isEdited) {
+			return {
+				id: this.id,
+				...this.editedSubject,
+			};
+		}
+		return this._subjectDB;
 	}
 }
