@@ -28,6 +28,10 @@ export class ModalController extends Controller {
 		this._description = content.description ?? "";
 		this._fields = content.fields ?? [];
 		this._formSubmitCallback = formSubmitCallback;
+		this._options = {
+			removeOnClose: false,
+			...options,
+		};
 		this._elementId = `${moduleName}-${MODAL}`;
 	}
 
@@ -58,6 +62,14 @@ export class ModalController extends Controller {
 		}
 	}
 
+	removeComponent() {
+		try {
+			domManipulation.removeElementById(this._elementId);
+		} catch (error) {
+			handler.errorWithPopup(error);
+		}
+	}
+
 	addEventListeners() {
 		try {
 			this._closeModalEventListener();
@@ -77,11 +89,17 @@ export class ModalController extends Controller {
 
 			closeModalButton.addEventListener("click", () => {
 				modal.style.display = "none";
+				if (this._options.removeOnClose) {
+					this.removeComponent();
+				}
 			});
 
 			modal.addEventListener("click", (event) => {
 				if (event.target === modal) {
 					modal.style.display = "none";
+					if (this._options.removeOnClose) {
+						this.removeComponent();
+					}
 				}
 			});
 		} catch (error) {
