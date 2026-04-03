@@ -97,17 +97,9 @@ export class SubjectActionController extends Controller {
 			const addSubjectButton = document.getElementById(
 				`${SUBJECT}-${ADD_ACTION_BUTTON}`,
 			);
-			const addSubjectModal = document.getElementById(
-				`${ADD_SUBJECT_MODULE}-${MODAL}`,
-			);
-			if (
-				domManipulation.areAllElementsInDOM(
-					addSubjectButton,
-					addSubjectModal,
-				)
-			) {
+			if (domManipulation.isElementInDOM(addSubjectButton)) {
 				addSubjectButton.addEventListener("click", () => {
-					addSubjectModal.style.display = "flex";
+					this._addSubjectModalController.open();
 				});
 			}
 		} catch (error) {

@@ -23,6 +23,7 @@ export class ModalController extends Controller {
 		this._description = description ?? "";
 		this._fields = fields ?? [];
 		this._formSubmitCallback = formSubmitCallback;
+		this._elementId = `${moduleName}-${MODAL}`;
 	}
 
 	addComponent() {
@@ -41,6 +42,17 @@ export class ModalController extends Controller {
 		}
 	}
 
+	open() {
+		try {
+			const modal = document.getElementById(this._elementId);
+			if (domManipulation.isElementInDOM(modal)) {
+				modal.style.display = "flex";
+			}
+		} catch (error) {
+			handler.errorWithPopup(error);
+		}
+	}
+
 	addEventListeners() {
 		try {
 			this._closeModalEventListener();
@@ -53,7 +65,7 @@ export class ModalController extends Controller {
 	_closeModalEventListener() {
 		try {
 			const moduleName = this._moduleName;
-			const modal = document.getElementById(`${moduleName}-${MODAL}`);
+			const modal = document.getElementById(this._elementId);
 			const closeModalButton = document.getElementById(
 				`${CLOSE}-${moduleName}-${MODAL}`,
 			);
@@ -75,7 +87,7 @@ export class ModalController extends Controller {
 	_modalFormSubmitEventListeners() {
 		try {
 			const moduleName = this._moduleName;
-			const modal = document.getElementById(`${moduleName}-${MODAL}`);
+			const modal = document.getElementById(this._elementId);
 			const modalForm = document.getElementById(
 				`${moduleName}-${MODAL_FORM}`,
 			);

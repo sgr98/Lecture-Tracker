@@ -5,8 +5,9 @@ import {
 } from "../../../constants/HTMLConstants.js";
 import { DBSubjectConstants } from "../../../constants/DBConstants.js";
 import { HTMLInputTagEnum, HTMLInputTypeEnum } from "../../../utils/enum.js";
-import { Controller } from "../../controller.js";
+import { isValueNull } from "../../../utils/common.js";
 import { handler } from "../../../utils/handler.js";
+import { Controller } from "../../controller.js";
 import { ModalController } from "../../common/modal/modal.controller.js";
 
 const {
@@ -30,6 +31,7 @@ export class AddSubjectModalController extends Controller {
 	constructor(moduleName, addSubjectCallback) {
 		super(moduleName);
 		this._addSubjectCallback = addSubjectCallback;
+		this._modalController = null;
 	}
 
 	// ////////////////////////////////////////////////////////////////////////////////
@@ -72,7 +74,7 @@ export class AddSubjectModalController extends Controller {
 					mapTo: DBSubjectConstants.SUBJECT_DESCRIPTION,
 				},
 			];
-			const modalController = new ModalController(
+			this._modalController = new ModalController(
 				ADD_SUBJECT_MODULE,
 				ADD_SUBJECT_MODAL_TITLE,
 				ADD_SUBJECT_MODAL_DESCRIPTION,
@@ -81,8 +83,19 @@ export class AddSubjectModalController extends Controller {
 					this._addSubjectModalCallback(fields);
 				},
 			);
-			modalController.addComponent();
+			this._modalController.addComponent();
 			this.addEventListeners();
+		} catch (error) {
+			handler.errorWithPopup(error);
+		}
+	}
+
+	open() {
+		try {
+			if (isValueNull(this._modalController)) {
+				return;
+			}
+			this._modalController.open();
 		} catch (error) {
 			handler.errorWithPopup(error);
 		}
