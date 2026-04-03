@@ -46,13 +46,15 @@ export const DisplayText = {
 			"Subject Description",
 		ADD_SUBJECT_MODAL_SUBJECT_DESCRIPTION_FIELD_PLACEHOLDER:
 			"Enter subject description",
+		ADD_SUBJECT_MODAL_SUBMIT_BUTTON_TEXT: "Add &#x2b;",
+		EDIT_SUBJECT_MODAL_SUBMIT_BUTTON_TEXT: "Edit ✎",
 		SUBJECT_MODAL_SUBJECT_ID_FIELD_LABEL: "Subject Id",
 	},
 	course: {},
 	lectures: {},
 
 	modal: {
-		MODAL_SUBMIT_BUTTON_TEXT: "Add &#x2b;",
+		DEFAULT_MODAL_SUBMIT_BUTTON_TEXT: "SUBMIT",
 		FORM_FIELDS_NOT_FILLED: "Some of the required fields are empty.",
 	},
 	popup: {

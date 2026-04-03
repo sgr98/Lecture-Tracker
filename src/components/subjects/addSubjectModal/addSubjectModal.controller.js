@@ -25,6 +25,7 @@ const {
 	ADD_SUBJECT_MODAL_SUBJECT_CODE_FIELD_PLACEHOLDER,
 	ADD_SUBJECT_MODAL_SUBJECT_DESCRIPTION_FIELD_LABEL,
 	ADD_SUBJECT_MODAL_SUBJECT_DESCRIPTION_FIELD_PLACEHOLDER,
+	ADD_SUBJECT_MODAL_SUBMIT_BUTTON_TEXT,
 } = DisplayText.subject;
 
 export class AddSubjectModalController extends Controller {
@@ -77,6 +78,7 @@ export class AddSubjectModalController extends Controller {
 			const modalContent = {
 				title: ADD_SUBJECT_MODAL_TITLE,
 				description: ADD_SUBJECT_MODAL_DESCRIPTION,
+				submitButtonText: ADD_SUBJECT_MODAL_SUBMIT_BUTTON_TEXT,
 				fields: addSubjectModalFields,
 			};
 			this._modalController = new ModalController(

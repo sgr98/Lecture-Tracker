@@ -21,13 +21,17 @@ const {
 	MODAL_ADD_BUTTON,
 	CLOSE,
 } = HTMLModalAttributesConstants;
-const { MODAL_SUBMIT_BUTTON_TEXT } = DisplayText.modal;
+const { DEFAULT_MODAL_SUBMIT_BUTTON_TEXT } = DisplayText.modal;
 
 export class ModalView extends View {
-	constructor(moduleName, title, description, fields) {
+	constructor(moduleName, content) {
 		super(moduleName);
+		const { title, description, submitButtonText, fields } = content;
 		this._title = title;
 		this._description = description ?? "";
+		this._submitButtonText = isStringNullOrWhiteSpace(submitButtonText)
+			? DEFAULT_MODAL_SUBMIT_BUTTON_TEXT
+			: submitButtonText;
 		this._fields = fields ?? [];
 	}
 
@@ -119,7 +123,7 @@ export class ModalView extends View {
                     id="${moduleName}-${MODAL_ADD_BUTTON}"
                     form="${moduleName}-${MODAL_FORM}"
                     type="submit"
-                    value="${MODAL_SUBMIT_BUTTON_TEXT}"
+                    value="${this._submitButtonText}"
                     class="${MODAL_ADD_BUTTON}"
                 />
             </form>

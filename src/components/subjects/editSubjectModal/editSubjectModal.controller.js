@@ -25,6 +25,7 @@ const {
 	ADD_SUBJECT_MODAL_SUBJECT_DESCRIPTION_FIELD_LABEL,
 	ADD_SUBJECT_MODAL_SUBJECT_DESCRIPTION_FIELD_PLACEHOLDER,
 	SUBJECT_MODAL_SUBJECT_ID_FIELD_LABEL,
+	EDIT_SUBJECT_MODAL_SUBMIT_BUTTON_TEXT,
 	ADD_SUBJECT_MODAL_DESCRIPTION,
 } = DisplayText.subject;
 
@@ -96,6 +97,7 @@ export class EditSubjectModalController extends Controller {
 				// FIX: SMALL WIDTH FIELDS IN MODAL WITHOUT DESCRIPTION
 				// description: ADD_SUBJECT_MODAL_DESCRIPTION,
 				description: null,
+				submitButtonText: EDIT_SUBJECT_MODAL_SUBMIT_BUTTON_TEXT,
 				fields: editSubjectModalFields,
 			};
 			const options = {

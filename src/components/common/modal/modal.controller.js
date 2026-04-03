@@ -33,13 +33,12 @@ const mergeFormFields = (formFieldValues, fields) => {
 	return mergedFormFields;
 };
 
-// TODO: MAKE SUBMIT BUTTON TEXT A CLASS PARAMETER
 export class ModalController extends Controller {
 	constructor(moduleName, content, formSubmitCallback, options = {}) {
 		super(moduleName);
-		this._title = content.title;
-		this._description = content.description ?? "";
-		this._fields = content.fields ?? [];
+		const { fields } = content;
+		this._content = content;
+		this._fields = fields ?? [];
 		this._formSubmitCallback = formSubmitCallback;
 		this._options = {
 			removeOnClose: false,
@@ -50,12 +49,11 @@ export class ModalController extends Controller {
 
 	addComponent() {
 		try {
-			const modalView = new ModalView(
-				this._moduleName,
-				this._title,
-				this._description,
-				this._fields,
-			);
+			const modalContent = {
+				...this._content,
+				fields: this._fields,
+			};
+			const modalView = new ModalView(this._moduleName, modalContent);
 			const modalHTML = modalView.generateHTML();
 			domManipulation.addHTMLStringToDomById(ROOT, modalHTML);
 			this.addEventListeners(this._moduleName);
