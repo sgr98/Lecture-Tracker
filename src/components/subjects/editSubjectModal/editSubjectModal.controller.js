@@ -170,6 +170,7 @@ export class EditSubjectModalController extends Controller {
 				newSubject[mapTo] = value;
 			});
 			this._editSubjectCallback(newSubject);
+			this.removeComponent();
 		} catch (error) {
 			handler.errorWithPopup(error);
 		}
