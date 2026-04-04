@@ -169,13 +169,13 @@ export class SubjectActionController extends Controller {
 					subjectActionArea,
 				)
 			) {
-				// TODO: ADD CALLBACK TO CALL this.subjectData.editSubjects()
 				cancelActionButton.addEventListener("click", () => {
 					this._enterExitEditMode(false);
 					this._subjectListCallbacks.refreshSubjectsListSectionCallback();
 				});
 				saveActionButton.addEventListener("click", () => {
 					this._subjectData.deleteSelectedSubjects();
+					this._subjectData.editSubjects();
 					this._subjectListCallbacks.refreshSubjectsListSectionCallback();
 					this._enterExitEditMode(false);
 				});
