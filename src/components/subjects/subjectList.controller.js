@@ -226,7 +226,7 @@ export class SubjectListContainerController extends Controller {
 		try {
 			if (
 				!isValueNull(this._currentSubject) &&
-				subject.id === this._currentSubjectsubject.id
+				subject.id === this._currentSubject.id
 			) {
 				return;
 			}
