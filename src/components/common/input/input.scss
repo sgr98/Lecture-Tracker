@@ -5,3 +5,10 @@ input.field-readonly-input {
 	background: var(--background);
 	color: var(--text-secondary);
 }
+
+textarea.field-readonly-input {
+	border: none;
+	outline: none;
+	background: var(--background);
+	color: var(--text-secondary);
+}

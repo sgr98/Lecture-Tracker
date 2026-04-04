@@ -373,6 +373,13 @@ input.field-readonly-input {
   color: var(--text-secondary);
 }
 
+textarea.field-readonly-input {
+  border: none;
+  outline: none;
+  background: var(--background);
+  color: var(--text-secondary);
+}
+
 .modal {
   position: fixed;
   top: 0;
@@ -443,6 +450,7 @@ CONTENT
 */
 .modal-content {
   flex-direction: column;
+  width: 100%;
   padding: 30px 20px;
   background: var(--background);
   border-radius: 0 0 10px 10px;

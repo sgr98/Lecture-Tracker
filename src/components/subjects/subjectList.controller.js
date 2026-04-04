@@ -279,7 +279,6 @@ export class SubjectListContainerController extends Controller {
 					);
 				editSubjectModalController.addComponent();
 				editSubjectModalController.open();
-				// TODO: ADD CALLBACK TO CALL this.subjectData.editSubjects()
 			});
 		} catch (error) {
 			handler.errorWithPopup(error);
