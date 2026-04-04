@@ -85,7 +85,7 @@ export const listDragEvent = {
 					const boxCentreLine = box.top + box.height / 2;
 					const offset = centreLine - boxCentreLine;
 
-					if (crossoverOffset < 0 && centreLine < boxCentreLine) {
+					if (crossoverOffset < 0 && offset < 0) {
 						afterElement = sibling.nextSibling;
 						break;
 					} else if (crossoverOffset < 0 || offset < 0) {
